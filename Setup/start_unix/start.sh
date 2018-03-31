@@ -63,9 +63,9 @@ elif [[ "$OS" == 'macOS' ]]; then
         -e "tell application \"Terminal\" to do script \"chmod +x *.sh\" in selected tab of the front window" \
         -e "delay 0.05" \
         -e "tell application \"Terminal\" to do script \"./start_service_discovery.sh\" in selected tab of the front window" \
-        -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
-        -e "delay 0.05" \
-        -e "tell application \"Terminal\" to do script \"./start_configuration_service.sh\" in selected tab of the front window" \
+        #-e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
+        #-e "delay 0.05" \
+        #-e "tell application \"Terminal\" to do script \"./start_configuration_service.sh\" in selected tab of the front window" \
         -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
         -e "delay 0.05" \
         -e "tell application \"Terminal\" to do script \"./start_pms.sh\" in selected tab of the front window" \

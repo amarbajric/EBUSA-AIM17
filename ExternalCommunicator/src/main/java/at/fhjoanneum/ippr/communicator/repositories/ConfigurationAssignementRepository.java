@@ -14,7 +14,7 @@ public interface ConfigurationAssignementRepository
   ConfigurationAssignement findByMessageFlowId(Long messageFlowId);
 
   @Query(
-      value = "select * from configuration_assignment where INBOUND_CONFIG_ID = :inboundConfigId",
+      value = "select * from configuration_assignment where inbound_config_id = :inboundConfigId",
       nativeQuery = true)
   ConfigurationAssignement findByInboundConfiguration(
       @Param("inboundConfigId") Long inboundConfigId);
