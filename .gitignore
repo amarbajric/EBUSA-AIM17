@@ -1,4 +1,6 @@
 **/.gradle/
+**/gradlew.bat
+**/gradle-wrapper.properties
 /bin/
 **/build/
 /.metadata/
