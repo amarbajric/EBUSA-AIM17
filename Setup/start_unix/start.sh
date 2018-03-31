@@ -25,7 +25,7 @@ if [[ "$OS" == 'linux' ]]; then
     echo - ServiceDiscovery
     x-terminal-emulator -e bash start_service_discovery.sh
     echo - ConfigurationService
-    x-terminal-emulator -e bash start_configuration_service.sh
+    #x-terminal-emulator -e bash start_configuration_service.sh
     echo - ProcessModelStorage
     x-terminal-emulator -e bash start_pms.sh
     echo - ProcessEngine
