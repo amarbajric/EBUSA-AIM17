@@ -3,10 +3,10 @@
 echo Start IPPR2016
 echo ########################################################## & echo.
 
-echo Start ConfigurationService
-echo ########################################################## & echo.
-start start_configuration_service.bat
-echo. & echo ##########################################################
+REM echo Start ConfigurationService
+REM echo ########################################################## & echo.
+REM start start_configuration_service.bat
+REM echo. & echo ##########################################################
 
 echo Start ServiceDiscovery
 echo ########################################################## & echo.
