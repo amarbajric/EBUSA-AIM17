@@ -10,7 +10,7 @@ import at.fhjoanneum.ippr.persistence.entities.model.state.StateImpl;
 @Repository
 public interface StateRepository extends CrudRepository<StateImpl, Long> {
 
-  @Query(value = "SELECT STATE.* FROM STATE WHERE event_type = 'START' and sm_id = :smId",
+  @Query(value = "SELECT state.* FROM state WHERE event_type = 'START' and sm_id = :smId",
       nativeQuery = true)
   public StateImpl getStartStateOfSubject(@Param("smId") Long smId);
 }

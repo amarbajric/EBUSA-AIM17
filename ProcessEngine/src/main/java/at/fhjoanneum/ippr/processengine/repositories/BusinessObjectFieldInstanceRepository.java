@@ -11,8 +11,8 @@ import at.fhjoanneum.ippr.persistence.entities.engine.businessobject.field.Busin
 public interface BusinessObjectFieldInstanceRepository
     extends JpaRepository<BusinessObjectFieldInstanceImpl, Long> {
 
-  @Query(value = "SELECT * FROM BUSINESS_OBJECT_FIELD_INSTANCE bofi "
-      + "JOIN BUSINESS_OBJECT_INSTANCE boi ON boi.boi_id = bofi.boi_id "
+  @Query(value = "SELECT * FROM business_object_field_instance bofi "
+      + "JOIN business_object_instance boi ON boi.boi_id = bofi.boi_id "
       + "WHERE bofi.bofm_id = :bofmId AND boi.pi_id = :piId", nativeQuery = true)
   BusinessObjectFieldInstanceImpl getBusinessObjectFieldInstanceForModelInProcess(
       @Param("piId") Long piId, @Param("bofmId") Long bofmId);

@@ -11,7 +11,7 @@ import at.fhjoanneum.ippr.persistence.entities.engine.businessobject.BusinessObj
 public interface BusinessObjectInstanceRepository
     extends CrudRepository<BusinessObjectInstanceImpl, Long> {
 
-  @Query(value = "SELECT * FROM BUSINESS_OBJECT_INSTANCE WHERE pi_id = :piId AND bom_id = :bomId",
+  @Query(value = "SELECT * FROM business_object_instance WHERE pi_id = :piId AND bom_id = :bomId",
       nativeQuery = true)
   BusinessObjectInstanceImpl getBusinessObjectInstanceOfModelInProcess(@Param("piId") Long piId,
       @Param("bomId") Long bomId);

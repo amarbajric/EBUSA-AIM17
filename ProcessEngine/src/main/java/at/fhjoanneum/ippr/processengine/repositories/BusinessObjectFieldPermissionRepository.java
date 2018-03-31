@@ -12,7 +12,7 @@ public interface BusinessObjectFieldPermissionRepository
     extends CrudRepository<BusinessObjectFieldPermissionImpl, Long> {
 
   @Query(
-      value = "SELECT * FROM BUSINESS_OBJECT_FIELD_PERMISSION bofp WHERE bofm_id = :bofmId AND s_id = :sId",
+      value = "SELECT * FROM business_object_field_permission bofp WHERE bofm_id = :bofmId AND s_id = :sId",
       nativeQuery = true)
   BusinessObjectFieldPermissionImpl getBusinessObjectFieldPermissionInState(
       @Param("bofmId") Long bofmId, @Param("sId") Long sId);

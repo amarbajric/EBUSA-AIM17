@@ -25,8 +25,8 @@ public interface ProcessInstanceRepository
   Long getAmountOfProcessesInState(@Param("state") String state);
 
   @Query(
-      value = "SELECT count(p.pi_id) FROM process_instance p JOIN PROCESS_SUBJECT_INSTANCE_MAP psm on psm.pi_id = p.pi_id "
-          + "JOIN SUBJECT s on s.s_id = psm.s_id WHERE p.state = :state and s.user_id = :userId",
+      value = "SELECT count(p.pi_id) FROM process_instance p JOIN process_subject_instance_map psm on psm.pi_id = p.pi_id "
+          + "JOIN subject s on s.s_id = psm.s_id WHERE p.state = :state and s.user_id = :userId",
       nativeQuery = true)
   Long getAmountOfProcessesInStatePerUser(@Param("state") String state,
       @Param("userId") Long userId);

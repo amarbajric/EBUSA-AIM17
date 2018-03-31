@@ -14,14 +14,14 @@ public interface SubjectStateRepository extends CrudRepository<SubjectStateImpl,
   @Query(value = "SELECT * FROM subject_state WHERE pi_id = :piId", nativeQuery = true)
   List<SubjectStateImpl> getSubjectStates(@Param("piId") Long piId);
 
-  @Query(value = "SELECT ss.* FROM SUBJECT_STATE ss JOIN SUBJECT s ON s.s_id = ss.s_id "
-      + "JOIN PROCESS_SUBJECT_INSTANCE_MAP psim ON psim.s_id = s.s_id "
+  @Query(value = "SELECT ss.* FROM subject_state ss JOIN subject s ON s.s_id = ss.s_id "
+      + "JOIN process_subject_instance_map psim ON psim.s_id = s.s_id "
       + "WHERE psim.pi_id = :piId AND s.user_id = :userId", nativeQuery = true)
   SubjectStateImpl getSubjectStateOfUser(@Param("piId") Long piId, @Param("userId") Long userId);
 
   @Query(
-      value = "SELECT ss.* FROM SUBJECT_STATE ss JOIN SUBJECT s ON s.s_id = ss.s_id "
-          + "JOIN PROCESS_SUBJECT_INSTANCE_MAP psim ON psim.s_id = s.s_id "
+      value = "SELECT ss.* FROM subject_state ss JOIN subject s ON s.s_id = ss.s_id "
+          + "JOIN process_subject_instance_map psim ON psim.s_id = s.s_id "
           + "WHERE psim.pi_id = :piId AND s.user_id = :userId AND ss.sub_state IN ('TO_RECEIVE', 'RECEIVED')",
       nativeQuery = true)
   SubjectStateImpl getToReceiveSubjectStateOfUser(@Param("piId") Long piId,
