@@ -1,7 +1,7 @@
 
-# S-BPM Modelling and Execution Platform
+# S-BPM (Modelling), Execution and Store Platform
   
-This is a modelling and execution platform for S-BPM processes, based on microservices powered by Spring Boot. The modelling platform is based on Angular 1, the frontend for the execution platform, however, is based on Angular 2.  
+This is a (modelling), execution and store platform for S-BPM processes, based on microservices powered by Spring Boot. The modelling platform is based on Angular 1, the frontend for the execution and store platform, however, is based on Angular 2+.  
 Basically, the platform consists of the following modules:  
  - **ServiceDiscovery:** Automatic detection of devices and services.  
  - **ConfigurationService:** Central repository for configuration files.  
@@ -14,9 +14,15 @@ Basically, the platform consists of the following modules:
  - **GUI-Dev:** Development project for the Angular 2 execution platform frontend (With some dev tools, with node server backend).  
  - **GUI:** Production project for the Angular 2 execution platform frontend (minified, uglified, with Spring Boot backend).  
  - **ModellingPlatform-Dev:** Development project for the Angular 1 modelling platform frontend (with node server backend).  
- - **ModellingPlatform:** Production project for the Angular 1 modelling platform frontend (with Spring Boot backend).  
+ - **ModellingPlatform:** Production project for the Angular 1 modelling platform frontend (with Spring Boot backend).
+ > A new version of the S-BPM modelling platform is available [here](https://github.com/mkolodiy/s-bpm-modeler).
+
+## Further Development - EBUSA AIM17
+The project hosted in this repository is a fork of the original project, where the intention was to build a S-BPM Modelling and Execution Platform.
+This fork however, aims to extend the platform by adding process-store functionality. This should allow for searching, buying, 
+selling, reviewing and executing processes from the store(=market). Furthermore, organizations should be allowed to register and
+invite employees (as users) to the platform, and to give them different roles and rules.
   
-> A new version of the S-BPM modelling platform is available [here](https://github.com/mkolodiy/s-bpm-modeler).  
   
 ## Tutorial Videos
 [ModellingPlatform](https://youtu.be/3gJXmBRKWNo)  
@@ -108,7 +114,7 @@ In this section you will find Master's theses, which provide further information
 	- To enable the [example processes](#enabledisable-example-processes), execute the script with the following argument: `./start.sh -dev=true`.
 	 Also check the section for further configuration details.
 ### Execution Platform
- 1. Start the MySQL Service  
+ 1. Start the MySQL Service or Docker Container
  2. Go to ServiceDiscovery and run in cmd:  
  ```gradlew bootRun```  
  3. Go to ConfigurationService and run in cmd:  
@@ -167,7 +173,7 @@ Basically, the following ports are used:
 |  GUI  |  3000  |  
 |  ModellingPlatform  |  4000  |  
   
-To change the port configuration, change the server port in this file e.g. Gateway: [application.properties] (Gateway/src/main/resources/application.properties)  
+To change the port configuration, change the server port in this file e.g. Gateway: [application.properties](Gateway/src/main/resources/application.properties)  
   
 **Note:** If you change the port of the Gateway, make sure to change the restApi configuration in [processes.service.ts](GUI-Dev/src/app/processes.service.ts) and to rebuild the GUI-Dev and GUI project according to the guide provide [below](#gui).  
   
