@@ -93,18 +93,18 @@ In this section you will find Master's theses, which provide further information
 #### Non-docker:
  1. Ensure that the service is started and up and running. Otherwise start the database service.
 #### Docker:
- 1. Check if the newly created docker container named `ebusa-mysql` is up and running by using the command `docker ps`.
+ 1. Check if the newly created docker container named `ebusa-mysql` is running by using the command `docker ps`.
  2. If the docker container is not running, start it by using the command `docker start ebusa-mysql`.
 ### Start all services on _Windows_  
  1. Go to [Setup/start_windows](Setup/start_windows)  
  2. Execute [start.bat](Setup/start_windows/start.bat) 
-    2.1 To enable the [example processes](#enabling-the-example-processes:), start the `.bat` script and choose `dev mode`. Otherwise you can use the `normal mode`.
+    - To enable the [example processes](#enabledisable-example-processes), start the `.bat` script and choose `dev mode`. Otherwise you can use the `normal mode`.
 ### Start all services on _Linux/macOS_
 1. Go to [Setup/start_unix](Setup/start_unix)
 2. Execute the bash script `start.sh`.
-	2.1 The script will automatically detect if your machine is running _Linux_ or _macOS_.
-	2.2 If the script cannot be executed due to permission rights, set the execution permission for the `start.sh` script with 			the following command: `chmod +x start.sh`.
-	2.3 To enable the [example processes](#enabling-the-example-processes:), execute the script with the following argument: `./start.sh -dev=true`.
+	- The script will automatically detect if your machine is running _Linux_ or _macOS_.
+	- If the script cannot be executed due to permission rights, set the execution permission for the `start.sh` script with 			the following command: `chmod +x start.sh`.
+	- To enable the [example processes](#enabledisable-example-processes), execute the script with the following argument: `./start.sh -dev=true`.
 ### Execution Platform
  1. Start the MySQL Service  
  2. Go to ServiceDiscovery and run in cmd:  
@@ -194,11 +194,11 @@ The following steps are describing the steps mentioned in the thesis:
 #### Enabling the Example Processes:
 - Change the parameter `ippr.insert-examples.enabled` to `true` in the `application.properties` file found in the directory `/ProcessModelStorage/src/main/resources`
 - Change the parameter `spring.jpa.hibernate.ddl-auto` to `create` in the `application.properties` file found in the directory `/ProcessModelStorage/src/main/resources`
-- **Disable** the execution of the `ConfigurationService` microservice to avoid overwriting the configuration file. (See _start all services for_ [Windows](#start-all-services-on-_windows_) or [Linux/macOS](#start-all-services-on-_linux/macos_) how to do it)
+- **Disable** the execution of the `ConfigurationService` microservice to avoid overwriting the configuration file. (See _start all services for_ [Windows](#start-all-services-on-windows) or [Linux/macOS](#start-all-services-on-linuxmacos) how to do it)
 #### Disable the Example Processes:
 - Change the parameter `ippr.insert-examples.enabled` to `false` in the `application.properties` file found in the directory `/ProcessModelStorage/src/main/resources`
 - Change the parameter `spring.jpa.hibernate.ddl-auto` to `update` in the `application.properties` file found in the directory `/ProcessModelStorage/src/main/resources`
-- **Enable** the execution of the `ConfigurationService` microservice. (See _start all services for_ [Windows](#start-all-services-on-_windows_) or [Linux/macOS](#start-all-services-on-_linux/macos_) how to do it)
+- **Enable** the execution of the `ConfigurationService` microservice. (See _start all services for_ [Windows](#start-all-services-on-windows) or [Linux/macOS](#start-all-services-on-linuxmacos) how to do it)
 ### Spring Boot Modules
 Any further development concerning the ServiceDiscovery, the ConfigurationService, the Gateway, the ProcessModelStorage, the ExternalCommunicator or the ProcessEngine can be done directly in java. For further information please use the [Spring Boot Documentation](https://projects.spring.io/spring-boot/)  
   
