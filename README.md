@@ -98,13 +98,15 @@ In this section you will find Master's theses, which provide further information
 ### Start all services on _Windows_  
  1. Go to [Setup/start_windows](Setup/start_windows)  
  2. Execute [start.bat](Setup/start_windows/start.bat) 
-    - To enable the [example processes](#enabledisable-example-processes), start the `.bat` script and choose `dev mode`. Otherwise you can use the `normal mode`.
+    - To enable the [example processes](#enabledisable-example-processes), start the `.bat` script and choose `dev mode`. Otherwise you can use the `normal mode`. 
+    Also check the section for further configuration details.
 ### Start all services on _Linux/macOS_
 1. Go to [Setup/start_unix](Setup/start_unix)
 2. Execute the bash script `start.sh`.
 	- The script will automatically detect if your machine is running _Linux_ or _macOS_.
 	- If the script cannot be executed due to permission rights, set the execution permission for the `start.sh` script with 			the following command: `chmod +x start.sh`.
 	- To enable the [example processes](#enabledisable-example-processes), execute the script with the following argument: `./start.sh -dev=true`.
+	 Also check the section for further configuration details.
 ### Execution Platform
  1. Start the MySQL Service  
  2. Go to ServiceDiscovery and run in cmd:  
