@@ -1,12 +1,31 @@
 @echo off
 
+echo You can start the services by choosing between dev mode and normal mode.
+echo Dev-mode: Will skip the execution of the ConfigurationService
+echo Normal-mode: Will start all services normally.
+echo ########################################################## & echo.
+:MODECHOICE
+echo Choose between normal mode (1) or dev mode (2):
+echo 1 - Normal mode
+echo 2 - Dev mode
+
+set /p mode=
+
 echo Start IPPR2016
 echo ########################################################## & echo.
 
-REM echo Start ConfigurationService
-REM echo ########################################################## & echo.
-REM start start_configuration_service.bat
-REM echo. & echo ##########################################################
+if %mode%==1 (
+echo Start ConfigurationService
+echo ########################################################## & echo.
+start start_configuration_service.bat
+echo. & echo ##########################################################
+) else if %mode%==2 (
+echo Skipping Start ConfigurationService because dev mode is selected
+echo ########################################################## & echo.
+) else (
+echo Bad Input. Input should either be '1' or '2'.
+GOTO MODECHOICE
+)
 
 echo Start ServiceDiscovery
 echo ########################################################## & echo.
