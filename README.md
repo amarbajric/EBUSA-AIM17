@@ -103,8 +103,9 @@ In this section you will find Master's theses, which provide further information
  2. If the docker container is not running, start it by using the command `docker start ebusa-mysql`.
 ### Start all services on _Windows_  
  1. Go to [Setup/start_windows](Setup/start_windows)  
- 2. Execute [start.bat](Setup/start_windows/start.bat) 
-    - To enable the [example processes](#enabledisable-example-processes), start the `.bat` script and choose `dev mode`. Otherwise you can use the `normal mode`. 
+ 2. Execute [start.bat](Setup/start_windows/start.bat)
+    - Do **not** execute the `start.bat` script with administrator privileges, as it will not be able to execute all services.
+    - To enable the [example processes](#enabledisable-example-processes), execute the `start.bat` script and choose `dev mode`. Otherwise you can use the `normal mode`. 
     Also check the section for further configuration details.
 ### Start all services on _Linux/macOS_
 1. Go to [Setup/start_unix](Setup/start_unix)
