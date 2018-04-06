@@ -17,11 +17,11 @@ else
     echo No supported UNIX system detected
 fi
 
-if [[ "$1" == '-dev=true' ]]; then
+if [[ "$@" == '-dev' ]]; then
     devMode='true'
     echo Development mode activated.
     echo The execution of the ConfigurationService will be omitted.
-elif [[ "$1" == '-dev=false' ]]; then
+elif [[ "$@" == '-dev' ]]; then
     devMode='false'
     echo Normal mode activated.
     echo All services will be executed normally.
@@ -62,15 +62,16 @@ if [[ "$OS" == 'linux' ]]; then
 
 
 
-# start on macOS // tested with macOS Sierra (10.12.6)
+# start on macOS // tested with macOS Sierra (10.12.6) & macOS High Sierra (10.13.3)
+# tested with normal bash and zsh
 elif [[ "$OS" == 'macOS' ]]; then
     info_log_cfg_service="Tab3 - ConfigurationService"
-    injectScript_new_tab="tell application \"System Events\" to keystroke \"t\" using {command down}"
-    injectScript_delay="\"delay 0.07\""
-    injectScript_start_config_service="tell application \"Terminal\" to do script \"./start_configuration_service.sh\" in selected tab of the front window"
+    injectCmd_new_tab="tell application \"System Events\" to keystroke \"t\" using {command down}"
+    injectCmd_delay="delay 0.12"
+    injectCmd_start_config_service="tell application \"Terminal\" to do script \"./start_configuration_service.sh\" in selected tab of the front window"
     if [[ "$devMode" == 'true' ]]; then
-        info_log_cfg_service="Tab3 - ConfigurationService (disabled in dev mode)"
-        injectScript_start_config_service="tell application \"Terminal\" to do script \"ConfigurationService was not executed because the dev mode was selected!\" in selected tab of front window"
+        info_log_cfg_service="Tab3 - EMPTY (ConfigurationService disabled in dev mode)"
+        injectCmd_start_config_service="tell application \"Terminal\" to do script \"ConfigurationService was not executed because the dev mode was selected!\" in selected tab of front window"
     fi
     echo Running AppleScript.
     echo New Terminal window will open to run scripts.
@@ -81,36 +82,38 @@ elif [[ "$OS" == 'macOS' ]]; then
     echo ======================================
     osascript \
         -e "tell application \"Terminal\" to activate" \
+        -e "tell application \"Terminal\" to set bounds of front window to {500, 200, 1700, 750}" \
+        -e "${injectCmd_delay}" \
         -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
-        -e "delay 0.07" \
+        -e "${injectCmd_delay}" \
         -e "tell application \"Terminal\" to do script \"cd $(PWD)\" in selected tab of the front window" \
-        -e "delay 0.07" \
+        -e "${injectCmd_delay}" \
         -e "tell application \"Terminal\" to do script \"chmod +x *.sh\" in selected tab of the front window" \
-        -e "delay 0.07" \
+        -e "${injectCmd_delay}" \
         -e "tell application \"Terminal\" to do script \"./start_service_discovery.sh\" in selected tab of the front window" \
-        -e "${injectScript_new_tab}" \
-        -e "${injectScript_delay}" \
-        -e "${injectScript_start_config_service}" \
+        -e "${injectCmd_new_tab}" \
+        -e "${injectCmd_delay}" \
+        -e "${injectCmd_start_config_service}" \
         -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
-        -e "delay 0.07" \
+        -e "${injectCmd_delay}" \
         -e "tell application \"Terminal\" to do script \"./start_pms.sh\" in selected tab of the front window" \
         -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
-        -e "delay 0.07" \
+        -e "${injectCmd_delay}" \
         -e "tell application \"Terminal\" to do script \"./start_engine.sh\" in selected tab of the front window" \
         -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
-        -e "delay 0.07" \
+        -e "${injectCmd_delay}" \
         -e "tell application \"Terminal\" to do script \"./start_gateway.sh\" in selected tab of the front window" \
         -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
-        -e "delay 0.07" \
+        -e "${injectCmd_delay}" \
         -e "tell application \"Terminal\" to do script \"./start_ec.sh\" in selected tab of the front window" \
         -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
-        -e "delay 0.07" \
+        -e "${injectCmd_delay}" \
         -e "tell application \"Terminal\" to do script \"./start_event_logger.sh\" in selected tab of the front window" \
         -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
-        -e "delay 0.07" \
+        -e "${injectCmd_delay}" \
         -e "tell application \"Terminal\" to do script \"./start_gui.sh\" in selected tab of the front window" \
         -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
-        -e "delay 0.07" \
+        -e "${injectCmd_delay}" \
         -e "tell application \"Terminal\" to do script \"./start_mpf.sh\" in selected tab of the front window"
     echo All services have been executed!
     echo Check Terminal window and tabs for different services.

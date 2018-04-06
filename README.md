@@ -110,9 +110,11 @@ In this section you will find Master's theses, which provide further information
 ### Start all services on _Linux/macOS_
 1. Go to [Setup/start_unix](Setup/start_unix)
 2. Execute the bash script `start.sh`.
+    - **NOTE:** It is strongly recommended to use `/bin/bash` and **NOT** to use a `zsh` shell as this can cause issues.
+        - To change your default shell, you can use the command `chsh -s /bin/bash`. To change it back to your custom shell, use the same command (i.e. `chsh -s /bin/zsh`)
 	- The script will automatically detect if your machine is running _Linux_ or _macOS_.
-	- If the script cannot be executed due to permission rights, set the execution permission for the `start.sh` script with 			the following command: `chmod +x start.sh`.
-	- To enable the [example processes](#enabledisable-example-processes), execute the script with the following argument: `./start.sh -dev=true`.
+	- If the script cannot be executed due to permission rights, set the execution permission for the `start.sh` script with the following command: `chmod +x start.sh`.
+	- To enable the [example processes](#enabledisable-example-processes), execute the script with the following argument: `./start.sh -dev`.
 	 Also check the section for further configuration details.
 ### Execution Platform
  1. Start the MySQL Service or Docker Container
