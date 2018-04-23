@@ -57,10 +57,9 @@ public class UserImpl implements User, Serializable {
   @NotBlank
   private String password;
 
-  @Column
-  //@ManyToOne(fetch = FetchType.EAGER)
-  //@JoinColumn(name = "oId")
-  private Long organizationId;
+  @ManyToOne
+  @JoinColumn(name= "o_id")
+  private OrganizationImpl organization;
 
   @Column
   Date createdAt;
@@ -73,13 +72,13 @@ public class UserImpl implements User, Serializable {
   UserImpl() {}
 
   UserImpl(final String firstname, final String lastname, final String username, final String email, final String password,
-           final Long organizationId, final List<RoleImpl> roles, final String systemId) {
+           final OrganizationImpl organization, final List<RoleImpl> roles, final String systemId) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.username = username;
     this.email = email;
     this.password = password;
-    this.organizationId = organizationId;
+    this.organization = organization;
     this.roles = roles;
     this.systemId = systemId;
   }
@@ -149,13 +148,13 @@ public class UserImpl implements User, Serializable {
   }
 
   @Override
-  public Long getOrganizationId() {
-    return organizationId;
+  public OrganizationImpl getOrganization() {
+    return organization;
   }
 
   @Override
-  public void setOrganizationId(Long organizationId) {
-    this.organizationId = organizationId;
+  public void setOrganization(OrganizationImpl organizationId) {
+    this.organization = organizationId;
   }
 
   @Override
@@ -206,7 +205,7 @@ public class UserImpl implements User, Serializable {
   public String toString() {
     return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("uId", uId)
         .append("lastname", lastname).append("firstname", firstname).append("email", email)
-        .append("orgId",organizationId).append("groups", roles)
+        .append("orgId",organization.toString()).append("groups", roles)
         .toString();
   }
 }

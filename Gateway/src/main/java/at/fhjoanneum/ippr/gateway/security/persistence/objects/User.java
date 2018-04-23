@@ -1,5 +1,7 @@
 package at.fhjoanneum.ippr.gateway.security.persistence.objects;
 
+import at.fhjoanneum.ippr.gateway.security.persistence.entities.OrganizationImpl;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -30,9 +32,9 @@ public interface User {
 
   void setPassword(String password);
 
-  Long getOrganizationId();
+  OrganizationImpl getOrganization();
 
-  void setOrganizationId(Long organizationId);
+  void setOrganization(OrganizationImpl organizationId);
 
   void setCreatedAt(Date createdAt);
 

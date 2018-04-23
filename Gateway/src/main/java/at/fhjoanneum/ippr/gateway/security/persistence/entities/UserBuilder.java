@@ -1,6 +1,7 @@
 package at.fhjoanneum.ippr.gateway.security.persistence.entities;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class UserBuilder implements Builder<User> {
   private String username;
   private String email;
   private String password;
-  private Long organizationId;
+  private OrganizationImpl organization;
   private final List<RoleImpl> roles = Lists.newArrayList();
 
   public UserBuilder systemId(final String systemId) {
@@ -59,9 +60,9 @@ public class UserBuilder implements Builder<User> {
     return this;
   }
 
-  public UserBuilder organizationId(final Long organizationId) {
-    checkArgument(!organizationId.equals(null));
-    this.organizationId = organizationId;
+  public UserBuilder organization(final OrganizationImpl organization) {
+    checkNotNull(organization);
+    this.organization = organization;
     return this;
   }
 
@@ -80,7 +81,7 @@ public class UserBuilder implements Builder<User> {
     checkArgument(StringUtils.isNotBlank(password));
     checkArgument(!roles.isEmpty());
 
-    return new UserImpl(firstname, lastname, username, email, password, organizationId, roles, systemId);
+    return new UserImpl(firstname, lastname, username, email, password, organization, roles, systemId);
   }
 
 }

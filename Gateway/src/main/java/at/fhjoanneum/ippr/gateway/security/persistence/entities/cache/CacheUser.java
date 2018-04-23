@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 
+import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
 import org.apache.commons.lang3.StringUtils;
 
 public class CacheUser {
@@ -22,8 +23,8 @@ public class CacheUser {
     this(systemId, firstname, lastname, username, email, groups, StringUtils.EMPTY);
   }
 
-  public CacheUser(final String systemId, final String firstname, final String lastname,
-      final String username, final String email, final List<CacheRole> roles, final String password) {
+  public CacheUser(final String systemId, final String firstname, final String lastname, final String username,
+                   final String email, final List<CacheRole> roles, final String password) {
     checkArgument(StringUtils.isNotBlank(systemId));
     checkArgument(StringUtils.isNotBlank(firstname));
     checkArgument(StringUtils.isNotBlank(lastname));
@@ -50,7 +51,6 @@ public class CacheUser {
   public String getLastname() {
     return lastname;
   }
-
 
   public String getUsername() {
     return username;
