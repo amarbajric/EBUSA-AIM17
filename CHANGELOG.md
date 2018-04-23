@@ -4,6 +4,20 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## 2018-04-24 ([#39](https://github.com/amarbajric/EBUSA-AIM17/pull/39))
+## Added
+- Classes for adopted data model (persistence Objects, ObjectsImpl, ObjectBuilders)
+  - `Organization`
+  - `ProcessStore`
+  - `Rating`
+  - `Review`
+## Changed
+- `UserImpl.java`
+  - added fields email, password, organization (FK), createdAt
+-`UserBuilder.java`
+  - adopted to changes from `UserImpl`
+- `ProcessEngineCallerImpl.java`
+  - made `getUser` and `appendUserInformation` to remove ErrorMsg from GateWayLog
 
 ## 2018-04-23 ([#67](https://github.com/amarbajric/EBUSA-AIM17/pull/67))
 ## Added
