@@ -4,19 +4,12 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang3.StringUtils;
@@ -56,6 +49,22 @@ public class UserImpl implements User, Serializable {
   @Column(unique = true)
   private String username;
 
+  @Column
+  @NotBlank
+  private String email;
+
+  @Column
+  @NotBlank
+  private String password;
+
+  @Column
+  //@ManyToOne(fetch = FetchType.EAGER)
+  //@JoinColumn(name = "oId")
+  private Long organizationId;
+
+  @Column
+  Date createdAt;
+
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "user_role_map", joinColumns = {@JoinColumn(name = "u_id")},
       inverseJoinColumns = {@JoinColumn(name = "role_id")})
@@ -63,11 +72,14 @@ public class UserImpl implements User, Serializable {
 
   UserImpl() {}
 
-  UserImpl(final String firstname, final String lastname, final String username,
-      final List<RoleImpl> roles, final String systemId) {
+  UserImpl(final String firstname, final String lastname, final String username, final String email, final String password,
+           final Long organizationId, final List<RoleImpl> roles, final String systemId) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.username = username;
+    this.email = email;
+    this.password = password;
+    this.organizationId = organizationId;
     this.roles = roles;
     this.systemId = systemId;
   }
@@ -107,6 +119,48 @@ public class UserImpl implements User, Serializable {
   @Override
   public String getUsername() {
     return username;
+  }
+
+  @Override
+  public void setUsername(final String username) {
+    checkArgument(StringUtils.isNotBlank(username));
+    this.username = username;
+  }
+
+  @Override
+  public String getEmail() {
+    return email;
+  }
+
+  @Override
+  public void setEmail(final String email) {
+    checkArgument(StringUtils.isNotBlank(email));
+    this.email = email;
+  }
+
+  @Override
+  public String getPassword() {
+    return password;
+  }
+
+  @Override
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  @Override
+  public Long getOrganizationId() {
+    return organizationId;
+  }
+
+  @Override
+  public void setOrganizationId(Long organizationId) {
+    this.organizationId = organizationId;
+  }
+
+  @Override
+  public void setCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
   }
 
   @Override
@@ -151,7 +205,8 @@ public class UserImpl implements User, Serializable {
   @Override
   public String toString() {
     return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("uId", uId)
-        .append("lastname", lastname).append("firstname", firstname).append("groups", roles)
+        .append("lastname", lastname).append("firstname", firstname).append("email", email)
+        .append("orgId",organizationId).append("groups", roles)
         .toString();
   }
 }

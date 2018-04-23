@@ -115,7 +115,7 @@ public class RBACRetrievalServiceMemoryImpl implements RBACRetrievalService {
 
         final CacheUser cacheUser = new CacheUser(values.get(UserRow.SYSTEM_ID.index),
             values.get(UserRow.FIRST_NAME.index), values.get(UserRow.LAST_NAME.index),
-            values.get(UserRow.USER_NAME.index), userRoles, values.get(UserRow.PASSWORD.index));
+            values.get(UserRow.USER_NAME.index), values.get(UserRow.EMAIL.index), userRoles, values.get(UserRow.PASSWORD.index));
         users.put(cacheUser.getUsername(), cacheUser);
       }
     } catch (final Exception e) {
@@ -159,7 +159,7 @@ public class RBACRetrievalServiceMemoryImpl implements RBACRetrievalService {
   }
 
   private enum UserRow {
-    USER_NAME(0), FIRST_NAME(1), LAST_NAME(2), PASSWORD(3), SYSTEM_ID(4), ROLES(5);
+    USER_NAME(0), FIRST_NAME(1), LAST_NAME(2), PASSWORD(3), EMAIL(4), SYSTEM_ID(5), ROLES(6);
 
     private final int index;
 

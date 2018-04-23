@@ -121,7 +121,8 @@ public class RBACMappingServiceImpl implements RBACMappingService {
       if (!userOpt.isPresent()) {
         final UserBuilder userBuilder =
             new UserBuilder().systemId(user.getSystemId()).firstname(user.getFirstname())
-                .lastname(user.getLastname()).username(user.getUsername());
+                .lastname(user.getLastname()).username(user.getUsername()).email(user.getEmail())
+                .password(user.getPassword());
         user.getRoles().stream().map(role -> rolesCache.get(role.getSystemId()))
             .forEach(role -> userBuilder.addRole(role));
         rbacRepository.saveUser(userBuilder.build());
