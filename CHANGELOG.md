@@ -4,6 +4,13 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+
+## 2018-04-23 ([#67](https://github.com/amarbajric/EBUSA-AIM17/pull/67))
+## Added
+- `CHANGELOG.md` file for the whole project
+  - should allow to quickly look up all changes and for further information reference to the PR and the associated files
+
+
 ## 2018-04-23 ([#64](https://github.com/amarbajric/EBUSA-AIM17/pull/64))
 ## Added
 - `postcss.config.js` in `GUI-dev` for a module to function properly (more or less) 
