@@ -14,11 +14,11 @@ public class ReviewImpl implements Review {
     Long reviewId;
 
     @ManyToOne
-    @JoinColumn(name = "u_id", insertable = false, updatable = false)
+    @JoinColumn(name = "uploader")
     private UserImpl uploader;
 
     @ManyToOne
-    @JoinColumn(name = "u_id")
+    @JoinColumn(name = "approver")
     private UserImpl approver;
 
     @ManyToOne
