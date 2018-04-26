@@ -6,8 +6,9 @@ The format is partially based on [Keep a Changelog](http://keepachangelog.com/en
 
 ## 2018-04-26 ([#74](https://github.com/amarbajric/EBUSA-AIM17/pull/74))
 ## Added
-- new GUI based on ngx-admin
-  - this is the starter-kit (clean implementation)
+- complete GUI replacement: new GUI based on ngx-admin
+  - located in the GUI-dev folder
+  - uses the starter-kit (clean implementation)
 ## Changed
 - GUI-dev archived as GUI-dev-old
 
