@@ -4,7 +4,7 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
-## 2018-04-26 ([#?](https://github.com/amarbajric/EBUSA-AIM17/pull/?))
+## 2018-04-26 ([#74](https://github.com/amarbajric/EBUSA-AIM17/pull/74))
 ## Added
 - new GUI based on ngx-admin
   - this is the starter-kit (clean implementation)
