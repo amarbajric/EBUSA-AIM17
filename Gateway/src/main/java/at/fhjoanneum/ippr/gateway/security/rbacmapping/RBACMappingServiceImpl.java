@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import at.fhjoanneum.ippr.gateway.security.persistence.entities.OrganizationBuilder;
+import at.fhjoanneum.ippr.gateway.security.persistence.entities.cache.CacheOrganization;
+import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +51,7 @@ public class RBACMappingServiceImpl implements RBACMappingService {
     storeRules(users);
     storeRoles(users);
     storeUsers(users);
+    //storeOrganizations(users);
     LOG.info("Finished user mapping");
 
   }
@@ -121,7 +125,8 @@ public class RBACMappingServiceImpl implements RBACMappingService {
       if (!userOpt.isPresent()) {
         final UserBuilder userBuilder =
             new UserBuilder().systemId(user.getSystemId()).firstname(user.getFirstname())
-                .lastname(user.getLastname()).username(user.getUsername());
+                .lastname(user.getLastname()).username(user.getUsername()).email(user.getEmail())
+                .password(user.getPassword());
         user.getRoles().stream().map(role -> rolesCache.get(role.getSystemId()))
             .forEach(role -> userBuilder.addRole(role));
         rbacRepository.saveUser(userBuilder.build());
@@ -158,4 +163,17 @@ public class RBACMappingServiceImpl implements RBACMappingService {
       dbUser.setRoles(newRoles);
     }
   }
+
+  /*private void storeOrganizations(final Map<String, CacheUser> users) {
+    users.values().stream().map(CacheUser::getOrganization).forEach(organization -> {
+      final Optional<Organization> orgaOpt = rbacRepository.getOrganizationBySystemId(organization.getSystemId());
+      if(!orgaOpt.isPresent()) {
+        final OrganizationBuilder organizationBuilder = new OrganizationBuilder().systemId(organization.getSystemId())
+                .organizationName(organization.getOrganizationName()).organizationDescription(organization.getOrganizationDescription());
+        rbacRepository.saveOrganization(organizationBuilder.build());
+      } else {
+
+      }
+    });
+  }*/
 }

@@ -1,0 +1,8 @@
+zuul:
+  routes:
+    external-communicator:
+      path: /ec/**
+      serviceId: external-communicator
+    event-logger:
+      path: /ev/**
+      serviceId: event-logger

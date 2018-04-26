@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import at.fhjoanneum.ippr.gateway.security.persistence.entities.cache.CacheOrganization;
+import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +40,7 @@ public class RBACRetrievalServiceMemoryImpl implements RBACRetrievalService {
   private void readCsv() {
     final Map<String, CacheRule> rules = readRules();
     final Map<String, CacheRole> roles = readRoles(rules);
+    final Map<String, CacheOrganization> orgas = readOrganizations();
     readUsers(roles);
   }
 
@@ -114,8 +117,13 @@ public class RBACRetrievalServiceMemoryImpl implements RBACRetrievalService {
                 .map(role -> roles.get(role)).collect(Collectors.toList());
 
         final CacheUser cacheUser = new CacheUser(values.get(UserRow.SYSTEM_ID.index),
-            values.get(UserRow.FIRST_NAME.index), values.get(UserRow.LAST_NAME.index),
-            values.get(UserRow.USER_NAME.index), userRoles, values.get(UserRow.PASSWORD.index));
+            values.get(UserRow.FIRST_NAME.index),
+            values.get(UserRow.LAST_NAME.index),
+            values.get(UserRow.USER_NAME.index),
+            values.get(UserRow.EMAIL.index),
+            //values.get(UserRow.ORGANISATION.index),
+            userRoles,
+            values.get(UserRow.PASSWORD.index));
         users.put(cacheUser.getUsername(), cacheUser);
       }
     } catch (final Exception e) {
@@ -123,6 +131,32 @@ public class RBACRetrievalServiceMemoryImpl implements RBACRetrievalService {
     } finally {
       closeReader(in, reader);
     }
+  }
+
+  private Map<String, CacheOrganization> readOrganizations() {
+    final Map<String, CacheOrganization> organizations = Maps.newHashMap();
+
+    final Reader in = null;
+    CSVReader reader = null;
+
+    try {
+      final InputStream is = this.getClass().getResourceAsStream("/memoryusers/organizations.csv");
+      reader = new CSVReader(new InputStreamReader(is), '\n', '\'', 1);
+      String[] nextLine;
+      while ((nextLine = reader.readNext()) != null) {
+        final List<String> values =
+                Splitter.on(';').omitEmptyStrings().trimResults().splitToList(nextLine[0]);
+        final CacheOrganization organization =
+                new CacheOrganization(values.get(OrganizationRow.SYSTEM_ID.index), values.get(OrganizationRow.ORGANIZATION_NAME.index),values.get(OrganizationRow.ORGANISATION_DESCRIPTION.index));
+        organizations.put(organization.getSystemId(), organization);
+      }
+    } catch (final Exception e) {
+      LOG.error(e.getMessage());
+    } finally {
+      closeReader(in, reader);
+    }
+
+    return organizations;
   }
 
   private void closeReader(final Reader in, final CSVReader reader) {
@@ -159,12 +193,20 @@ public class RBACRetrievalServiceMemoryImpl implements RBACRetrievalService {
   }
 
   private enum UserRow {
-    USER_NAME(0), FIRST_NAME(1), LAST_NAME(2), PASSWORD(3), SYSTEM_ID(4), ROLES(5);
+    USER_NAME(0), FIRST_NAME(1), LAST_NAME(2), PASSWORD(3), EMAIL(4), SYSTEM_ID(5), ROLES(6);
 
     private final int index;
 
     private UserRow(final int index) {
       this.index = index;
     }
+  }
+
+  private enum OrganizationRow {
+    ORGANIZATION_NAME(0), ORGANISATION_DESCRIPTION(1), SYSTEM_ID(2);
+
+    private final int index;
+
+    private OrganizationRow(final int index) { this.index = index; }
   }
 }

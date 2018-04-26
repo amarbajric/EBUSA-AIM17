@@ -1,6 +1,7 @@
 package at.fhjoanneum.ippr.gateway.security.persistence.entities;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class UserBuilder implements Builder<User> {
   private String firstname;
   private String lastname;
   private String username;
+  private String email;
+  private String password;
+  private OrganizationImpl organization;
   private final List<RoleImpl> roles = Lists.newArrayList();
 
   public UserBuilder systemId(final String systemId) {
@@ -44,6 +48,24 @@ public class UserBuilder implements Builder<User> {
     return this;
   }
 
+  public UserBuilder email(final String email) {
+      checkArgument(StringUtils.isNotBlank(email));
+      this.email = email;
+      return this;
+  }
+
+  public UserBuilder password(final String password) {
+    checkArgument(StringUtils.isNotBlank(password));
+    this.password = password;
+    return this;
+  }
+
+  public UserBuilder organization(final OrganizationImpl organization) {
+    checkNotNull(organization);
+    this.organization = organization;
+    return this;
+  }
+
   public UserBuilder addRole(final Role role) {
     checkArgument(role instanceof RoleImpl);
     roles.add((RoleImpl) role);
@@ -55,9 +77,11 @@ public class UserBuilder implements Builder<User> {
     checkArgument(StringUtils.isNotBlank(firstname));
     checkArgument(StringUtils.isNotBlank(lastname));
     checkArgument(StringUtils.isNotBlank(username));
+    checkArgument(StringUtils.isNotBlank(email));
+    checkArgument(StringUtils.isNotBlank(password));
     checkArgument(!roles.isEmpty());
 
-    return new UserImpl(firstname, lastname, username, roles, systemId);
+    return new UserImpl(firstname, lastname, username, email, password, organization, roles, systemId);
   }
 
 }

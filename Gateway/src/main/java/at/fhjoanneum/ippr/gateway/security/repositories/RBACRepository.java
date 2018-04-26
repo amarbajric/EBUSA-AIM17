@@ -3,6 +3,7 @@ package at.fhjoanneum.ippr.gateway.security.repositories;
 import java.util.List;
 import java.util.Optional;
 
+import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Role;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Rule;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.User;
@@ -14,6 +15,8 @@ public interface RBACRepository {
   Role saveRole(final Role group);
 
   Rule saveRule(final Rule rule);
+
+  Organization saveOrganization(Organization build);
 
   Optional<User> getUserByUserId(final Long userId);
 
@@ -32,4 +35,6 @@ public interface RBACRepository {
   List<User> getUsersByRuleNames(final List<String> ruleNames);
 
   List<Rule> getRules();
+
+  Optional<Organization> getOrganizationBySystemId(String systemId);
 }

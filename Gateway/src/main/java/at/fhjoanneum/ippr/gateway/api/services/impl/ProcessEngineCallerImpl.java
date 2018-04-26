@@ -171,9 +171,9 @@ public class ProcessEngineCallerImpl implements Caller {
   }
 
   @Async
-  private <T extends UserContainer> void appendUserInformation(
-      final ListenableFuture<ResponseEntity<T[]>> responseFuture,
-      final CompletableFuture<List<T>> future) {
+  <T extends UserContainer> void appendUserInformation(
+          final ListenableFuture<ResponseEntity<T[]>> responseFuture,
+          final CompletableFuture<List<T>> future) {
 
     responseFuture.addCallback(result -> {
       final List<T> entries = Lists.newArrayList(result.getBody());
@@ -183,7 +183,7 @@ public class ProcessEngineCallerImpl implements Caller {
   }
 
   @Async
-  private void getUser(final List<UserContainer> userContainer) {
+  void getUser(final List<UserContainer> userContainer) {
     userContainer.stream().filter(entry -> entry.getUserId() != null).forEach(entry -> {
       final User user = userGroupRepository.getUserByUserId(entry.getUserId()).get();
       final UserDTO userDTO =
