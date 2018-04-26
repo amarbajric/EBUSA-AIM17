@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="row quick-stats">
+      <ba-card title="Gestartete Prozesse (24h)" class="col-xlg-3 col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="description">
+          <div class="description-stats"><span><i class="fa fa-cog"></i></span>{{activeProcesses24Hours}}</div>
+        </div>
+      </ba-card>
+      <ba-card title="Alle gestarteten Prozesse" class="col-xlg-3 col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="description">
+          <div class="description-stats"><span><i class="fa fa-cogs"></i></span>{{ activeProcesses }}</div>
+        </div>
+      </ba-card>
+      <ba-card title="Beendete Prozesse (24h)" class="col-xlg-3 col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="description">
+          <div class="description-stats"><span><i class="fa fa-check"></i></span>{{finishedProcesses24Hours}}</div>
+        </div>
+      </ba-card>
+      <ba-card title="Alle beendeten Prozesse" class="col-xlg-3 col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="description">
+          <div class="description-stats"><span><i class="fa fa-archive"></i></span>{{finishedProcesses}}</div>
+        </div>
+      </ba-card>
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <ba-card class="col-xlg-9 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12"
+           title="Revenue" baCardClass="medium-card">
+    <line-chart></line-chart>
+  </ba-card>
+  <ba-card class="col-xlg-3 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12" title="To Do List" baCardClass="xmedium-card feed-comply-panel with-scroll todo-panel">
+    <todo></todo>
+  </ba-card>
+</div>

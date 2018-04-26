@@ -1,0 +1,49 @@
+.formBuilder {
+   li.ui-sortable-handle {
+     color:#000000;
+   }
+
+   .form-elements label {
+       color: #000000;
+   }
+
+   .form-elements a {
+       color: #000000;
+   }
+
+   .form-builder label {
+       color: #000000;
+   }
+
+   li input {
+       color: #000000;
+   }
+
+   .form-elements {
+      .required-wrap,
+      .toggle-wrap,
+      .description-wrap,
+      .className-wrap,
+      .name-wrap,
+      .access-wrap,
+      .value-wrap,
+      .min-wrap,
+      .max-wrap,
+      .step-wrap,
+      .other-wrap,
+      .placeholder-wrap,
+      .rows-wrap,
+      .maxlength-wrap,
+      .subtype-wrap {
+         display: none;
+      }
+   }
+
+
+}
+.businessObjectsBuilder {
+   .list-group-item-selected {
+      background-color: #6dacd7;
+      color: #FFFFFF;
+   }
+}

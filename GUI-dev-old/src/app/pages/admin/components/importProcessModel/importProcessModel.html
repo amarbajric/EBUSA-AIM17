@@ -1,0 +1,128 @@
+<div class="alert alert-danger alert-dismissible fade in" role="alert" *ngIf="error">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Error!</strong> {{error}}
+</div>
+<div class="alert alert-success alert-dismissible fade in" role="alert" *ngIf="success">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{success}}
+</div>
+<div class="row">
+  <div *ngIf="!processModel">
+    <div class="alert alert-info fade in" role="alert">
+      Es ist möglich ein OWL-File hochzuladen, dass ein Prozess-Modell nach der Ontologie "standard-pass-ont" spezifiziert. Noch nicht unterstützt werden: Multisubjekte, externe Subjekte.
+    </div>
+     <ba-card class="col-xlg-12 col-xl-12 col-lg-12 col-sm-12 col-xs-12">
+         <form #owlModelForm="ngForm" (ngSubmit)="uploadOWLModel(owlModelForm)">
+         <label class="control-label">OWL-File: </label>
+         <input type="file" name="fileUpload" id="fileUpload" class="form-control" accept=".owl," (change)="onFileChange($event)">
+         <br />
+         <label class="control-label">Standard-Pass-Ont Version: </label><br />
+         <label class="radio-inline"><input name="version" type="radio" [value]="2"  [(ngModel)]="version"> 0.7.2</label>
+         <label class="radio-inline"><input name="version" type="radio" [value]="5"  [(ngModel)]="version"> 0.7.5</label>
+         <br />
+         <button class="btn btn-primary" type="submit" [disabled]="!owlFile">Upload</button>
+       </form>
+     </ba-card>
+   </div>
+   <div *ngIf="processModel">
+     <form #processModelForm="ngForm" (ngSubmit)="uploadProcessModel(processModelForm)">
+       <ba-card title="Allgemeine Informationen" class="col-xlg-12 col-xl-12 col-lg-12 col-sm-12 col-xs-12">
+         <div class="row">
+           <div class="col-sm-4">
+             <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name="processModel-Name" [(ngModel)]="processModel.name" required>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="description">Beschreibung</label>
+              <input type="text" class="form-control" id="description" name="processModel-Description" [(ngModel)]="processModel.description" required>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="version">Version</label>
+              <input type="number" class="form-control" id="version" type="number" step="0.1" min="0" name="processModel-version" [(ngModel)]="processModel.version" required>
+            </div>
+          </div>
+        </div>
+      </ba-card>
+      <ba-card title="Subjekte" class="col-xlg-12 col-xl-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="row">
+           <div class="col-sm-2" *ngFor="let subjectModel of processModel.subjectModels">
+             <div class="form-group">
+               <label for="name">Name</label>
+               <input type="text" class="form-control" id="name" name="subjectModel-'{{processModel.subjectModels.indexOf(subjectModel)}}'-Name" [ngModel]="subjectModel.name" readonly>
+               <br />
+               <label for="assignedRules">Rechte</label>
+               <select multiple class="form-control" name="subjectModel-'{{processModel.subjectModels.indexOf(subjectModel)}}'-Rule" [(ngModel)]="subjectModel.assignedRules" required>
+                 <option *ngFor="let rule of rules" [ngValue]="rule.name">{{rule.name}}</option>
+               </select>
+             </div>
+           </div>
+         </div>
+         <div class="row">
+           <div class="col-sm-4">
+             <label for="startSubject">Start-Subjekt</label>
+             <select class="form-control" name="startSubjectModelId" [(ngModel)]="processModel.startSubjectModelId" required>
+               <option *ngFor="let subjectModel of processModel.subjectModels" [ngValue]="subjectModel.id">{{subjectModel.name}}</option>
+             </select>
+           </div>
+         </div>
+      </ba-card>
+      <ba-card title="Business Objects" class="col-xlg-12 col-xl-12 col-lg-12 col-sm-12 col-xs-12 businessObjectsBuilder">
+        <div class="row">
+           <div class="col-sm-2">
+             <ul class="list-group">
+               <button class="list-group-item list-group-item-action" [ngClass]="{'list-group-item-selected': businessObject === currentSelectedBusinessObject }" type="button" *ngFor="let businessObject of processModel.boms" (click)="getFormData(businessObject)">{{businessObject.name}}</button>
+             </ul>
+           </div>
+           <div class="col-sm-10">
+             <div class="formBuilder"></div>
+           </div>
+         </div>
+         <br />
+         <div class="row permissions">
+           <div class="subheader"><h3>Feld-Berechtigungen</h3> <button class="btn btn-success btn-xs" type="button" (click)="getFormData(currentSelectedBusinessObject)">Felder aktualisieren</button></div>
+           <div class="noFieldsInfo" *ngIf="!currentBofms || currentBofms.length === 0">Zu diesem Business Object gibt es noch keine Felder!</div>
+           <div class="col-sm-2">
+             <ul class="list-group">
+               <button class="list-group-item list-group-item-action" [ngClass]="{'list-group-item-selected': currentSelectedFieldId === field.id }" type="button" *ngFor="let field of currentBofms" (click)="currentSelectedFieldId = field.id">{{field.name}}</button>
+             </ul>
+           </div>
+           <div class="col-sm-10">
+             <div *ngFor="let field of currentBofms">
+               <table class="table table-striped" *ngIf="currentSelectedFieldId === field.id">
+                  <thead>
+                     <tr>
+                        <th>State</th>
+                        <th>Subject Model</th>
+                        <th>Lesen</th>
+                        <th>Schreiben</th>
+                        <th>Erforderlich</th>
+                     </tr>
+                  </thead>
+                  <tbody *ngIf="currentSelectedBusinessObject">
+                     <tr *ngFor="let stateId of currentSelectedBusinessObject.stateIds">
+                        <td>{{getStateName(stateId)}}</td>
+                        <td>{{getSubjectModelName(stateId)}}</td>
+                        <td><input type="checkbox" name="{{field.id}}-{{stateId}}-read" [(ngModel)]="buildedBofps[field.id][stateId].read"/></td>
+                        <td><input type="checkbox" name="{{field.id}}-{{stateId}}-write" [(ngModel)]="buildedBofps[field.id][stateId].write"/></td>
+                        <td><input type="checkbox" name="{{field.id}}-{{stateId}}-mandatory" [(ngModel)]="buildedBofps[field.id][stateId].mandatory"/></td>
+                     </tr>
+                  </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+      </ba-card>
+      <br />
+      <button class="btn btn-primary" type="submit">Upload</button>
+    </form>
+  </div>
+</div>
