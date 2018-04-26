@@ -1,31 +1,16 @@
-import { NgModule }      from '@angular/core';
-import { CommonModule }  from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { NgaModule } from '../../theme/nga.module';
+import { NgModule } from '@angular/core';
 
-import { Dashboard } from './dashboard.component';
-import { routing }       from './dashboard.routing';
 
-import { LineChart } from './lineChart';
-import { Todo } from './todo';
-import { LineChartService } from './lineChart/lineChart.service';
-import { AuthGuard } from '../../auth.guard';
+import { ThemeModule } from '../../@theme/theme.module';
+import { DashboardComponent } from './dashboard.component';
+
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    NgaModule,
-    routing
+    ThemeModule,
   ],
   declarations: [
-    LineChart,
-    Todo,
-    Dashboard,
+    DashboardComponent,
   ],
-  providers: [
-    LineChartService,
-    AuthGuard
-  ]
 })
-export default class DashboardModule {}
+export class DashboardModule { }

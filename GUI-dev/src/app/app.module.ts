@@ -1,109 +1,36 @@
-import { NgModule, ApplicationRef, APP_INITIALIZER } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
-import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
-import { AUTH_PROVIDERS, provideAuth } from 'angular2-jwt';
-import { AuthService } from './auth.service';
-import { User } from './user';
-import { BackendRequestClass } from './backend.request';
-/*
- * Platform and Environment providers/directives/pipes
- */
-import { ENV_PROVIDERS } from './environment';
-import { routing } from './app.routing';
-
-// App is our top level component
-import { App } from './app.component';
-import { AppState, InternalStateType } from './app.service';
-import { GlobalState } from './global.state';
-import { NgaModule } from './theme/nga.module';
-import { PagesModule } from './pages/pages.module';
-
-// Application wide providers
-const APP_PROVIDERS = [
-  AppState,
-  GlobalState
-];
-
-type StoreType = {
-  state: InternalStateType,
-  restoreInputValues: () => void,
-  disposeOldHosts: () => void
-};
-
 /**
- * `AppModule` is the main entry point into Angular2's bootstraping process
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+import { APP_BASE_HREF } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './@core/core.module';
+
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ThemeModule } from './@theme/theme.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
-    bootstrap: [App],
-  declarations: [
-    App
-  ],
-  imports: [ // import Angular's modules
+  declarations: [AppComponent],
+  imports: [
     BrowserModule,
-    HttpModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgaModule.forRoot(),
-    PagesModule,
-    routing
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+
+    NgbModule.forRoot(),
+    ThemeModule.forRoot(),
+    CoreModule.forRoot(),
   ],
-  providers: [ // expose our Services and Providers into Angular's dependency injection
-    ENV_PROVIDERS,
-    APP_PROVIDERS,
-    AUTH_PROVIDERS,
-    provideAuth({
-      tokenName: 'token',
-      tokenGetter: () => localStorage.getItem('token'),
-      headerName: 'Authorization',
-      headerPrefix: 'Bearer',
-      globalHeaders: [{ 'Content-Type': 'application/json' }]
-   }),
-   AuthService,
-   User,
-   BackendRequestClass,
-   { provide: APP_INITIALIZER, useFactory: (config: BackendRequestClass) => () => config.load(), deps: [BackendRequestClass], multi: true },
-   ]
+  bootstrap: [AppComponent],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/' },
+  ],
 })
-
 export class AppModule {
-
-  constructor(public appRef: ApplicationRef, public appState: AppState) {
-  }
-
-  hmrOnInit(store: StoreType) {
-    if (!store || !store.state) return;
-    // set state
-    this.appState._state = store.state;
-    // set input values
-    if ('restoreInputValues' in store) {
-      let restoreInputValues = store.restoreInputValues;
-      setTimeout(restoreInputValues);
-    }
-    this.appRef.tick();
-    delete store.state;
-    delete store.restoreInputValues;
-  }
-
-  hmrOnDestroy(store: StoreType) {
-    const cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
-    // save state
-    const state = this.appState._state;
-    store.state = state;
-    // recreate root elements
-    store.disposeOldHosts = createNewHosts(cmpLocation);
-    // save input values
-    store.restoreInputValues = createInputTransfer();
-    // remove styles
-    removeNgStyles();
-  }
-
-  hmrAfterDestroy(store: StoreType) {
-    // display new elements
-    store.disposeOldHosts();
-    delete store.disposeOldHosts;
-  }
 }

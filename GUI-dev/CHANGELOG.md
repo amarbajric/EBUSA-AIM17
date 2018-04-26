@@ -1,213 +1,52 @@
-<a name="0.7.0"></a>
-# 0.7.0 (2016-09-19)
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/akveo/ngx-admin/compare/v2.0.2...v2.1.0) (2018-02-26)
 
-### Note
-Tree package does not support angular 2.0 currently so it was hidden from the menu.
-
-### Features
-
-* Angular 2.0
-* Dependencies updated
+Nebular updated to rc.6.
 
 ### Bug Fixes
 
+* **bootstrap:** radio temp fix ([14f5112](https://github.com/akveo/ngx-admin/commit/14f5112))
+* **dashboard:** update btn group toggle html ([#1566](https://github.com/akveo/ngx-admin/issues/1566)) ([2aa114b](https://github.com/akveo/ngx-admin/commit/2aa114b))
 
-### How to update
-
-* Pull sources from git, merge accordingly
-* remove `node_modules`
-* run `npm install`
-* Remove all directives & pipes from components and move them to the ngModule declarations
-* Enjoy!
-
-
-<a name="0.6.0"></a>
-# 0.6.0 (2016-09-19)
-
-### Note
-Tree package does not support RC6 currently so it was hidden from the menu.
 
 ### Features
 
-* Angular rc.6
-* Dependencies updated
-
-### Bug Fixes
-
-
-### How to update
-
-* Pull sources from git, merge accordingly
-* remove `node_modules`
-* run `npm install`
-* Remove all directives & pipes from components and move them to the ngModule declarations
-* Enjoy!
+* **auth:** configurable auth social icons ([#1545](https://github.com/akveo/ngx-admin/issues/1545)) ([9381d8c](https://github.com/akveo/ngx-admin/commit/9381d8c)), closes [#1515](https://github.com/akveo/ngx-admin/issues/1515)
+* **bootstrap:** update to 4.0.0 release  ([ddb6306](https://github.com/akveo/ngx-admin/commit/ddb6306))
+* **maps:** add google map with access search location dropdown ([97c7134](https://github.com/akveo/ngx-admin/commit/97c7134))
+* **popover:** add popover showcase ([#1556](https://github.com/akveo/ngx-admin/issues/1556)) ([f4cdf4a](https://github.com/akveo/ngx-admin/commit/f4cdf4a))
+* **security:** include @nebular/security, ACL setup ([#1565](https://github.com/akveo/ngx-admin/issues/1565)) ([480a90b](https://github.com/akveo/ngx-admin/commit/480a90b))
+* **user:** replace `menu` with `nbContextMenu` directive ([fb5de37](https://github.com/akveo/ngx-admin/commit/fb5de37))
 
 
-<a name="0.5.0"></a>
-# 0.5.0 (2016-08-30)
 
-### Note
-Not all packages used in ng2-admin support RC5 at the moment, so we suggest waiting until ng2-admin@0.5.1 version for a complete support of RC5.
-
-### Features
-
-* Angular rc.5 (ngModule)
-* Webpack 2
-* Dependencies updated
-
-### Bug Fixes
-
-### Breaking changes
-
-Things to consider:
-
-* We introduced NgaModule - wrapper for all ng2-admin features. At the moment it includes everything (directives, services, configs, etc). But, the important thing is that we are planning to refactor it and divide into smaller modules, so that if you don't need a whole list of features somewhere in your code - you can simply import a smaller part. [Here are some more details](https://github.com/akveo/ng2-admin/issues/179).
-* Each page section now is a module (Feature Module as per angular documents) wrapped in pages.module.
-* Routes configuration (again :( ) moved from one complete file to modules (page sections) configurations. Thus we just left menu configuration as it was before (in one file), just renamed it into app.menu.ts.
-* We are planning to continue code refactoring and planning to change component names to follow angular recommendations. Thus we strongly recommend to not import Ba* directives directly and use NgaModule which will encapsulate the changes we are going to make. [Here are some more details](https://github.com/akveo/ng2-admin/issues/179).
-
-
-### How to update
-
-* Read Angluar RC4 -> RC5 [migration guide](https://angular.io/docs/ts/latest/cookbook/rc4-to-rc5.html)
-* Pull sources from git, merge accordingly
-* remove `node_modules`
-* run `npm install`
-* Wrap all your pages into modules, register them in the PagesModule
-* Create separate routing files per module
-* Remove all direct imports of Ba* components, directives, pipes, etc, instead change your modules the way to import NgaModule
-* Enjoy!
-
-<a name="0.4.4"></a>
-# 0.4.4 (2016-08-29)
-
-### Features
-
-* Missed new component [ng2-smart-table](https://akveo.github.io/ng2-smart-table/) - [demo](http://akveo.com/ng2-admin/#/pages/tables/smarttables)
-
-### How to update
-
-* Pull sources from git
-* run `npm install`
-
-<a name="0.4.3"></a>
-# 0.4.3 (2016-08-23)
-
-### Bug Fixes
-
-* Fix leaflet maps styles
-* Fix license
-* Remove tracing of typings (thanks to @GRoguelon)
-* Update baContentTop to work with routerLink (thanks to @Kaizeras)
-* Fix Chartist to handle data update dynamically (thanks to @bnayalivne)
-
-### Features
-
-* Finally get rid of bower (thanks to @GRoguelon)
-* New component [ng2-smart-table](https://akveo.github.io/ng2-smart-table/) - [demo](http://akveo.com/ng2-admin/#/pages/tables/smarttables)
-
-
-### How to update
-
-* Pull sources from git
-* run `npm install`
-
-<a name="0.4.2"></a>
-# 0.4.2 (2016-07-28)
-
-### Bug Fixes
-
-* Fix menu and router configuration
-* Fix broken dependencies
-
-### Features
-
-* Dependencies updated
-* Use @types instead of typings
-
-### BREAKING CHANGES
-
-* Typings were removed, now we use @types instead, more details [here](https://github.com/AngularClass/angular2-webpack-starter#types)
-
-### How to update
-
-* Remove node_modules folder
-* Remove typings folder and move all custom typings to package.json
-* run `npm install`
-
-
-<a name="0.4.0"></a>
-# 0.4.0 (2016-07-12)
-
-### Bug Fixes
-
-* Make source files generated correctly (thanks to @AlbertXingZhang)
-* Fix docker configuration (thanks to @gavinzhou)
-
-### Features
-
-* Angular updated to rc.4
-* Dependencies updated accordingly
-* Angular Component Router instead or Router Deprecated (thanks to @RonnyRoos)
-* New Angular Forms
-* Sidebar rewritten, menu merged with routes configuration
-* New CKEditor component
-* New Image Uploader component
-* New Tree view component
-* New Rating component
-* New Checkbox and multi-checkbox component
-
-### BREAKING CHANGES
-
-* Router is updated to Angular Router Component. Old beta router is removed.
-That means that all the routes are moved to the `src/app/app.routes.ts` file. `src/app/app.menu.ts` is also merged into the routes configuration.
-More details on how to configure a new route you can find [here](https://akveo.github.io/ng2-admin/articles/015-sidebar/).
-
-* Forms are updated as well. Thus you need to reconfigure all your forms to use new Angular Forms. Checkout the `src/app/pages/login/login.component.ts`component for more details and example.
-
-### How to update
-
-* run `npm install`
-
-
-<a name="0.3.0"></a>
-# 0.3.0 (2016-06-29)
-
-### Bug Fixes
-
-* Sidebar menu angle fixed
-* Sidebar menu selected item fixed
-
-### Features
-
-* Angular updated to rc.3
-* Dependencies updated accordingly
-
-### How to update
-
-* Remove `node_modules` and `typings` folders 
-* run `npm install`
-
-<a name="0.2.1"></a>
-# 0.2.1 (2016-06-21)
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/akveo/ngx-admin/compare/v2.0.1...v2.0.2) (2018-01-04)
 
 
 ### Bug Fixes
 
-* Multiple bugfixes
+* **dashboard:** fix mistyped ngbDropdownMenu in some ngbDropdown ul elements ([#1458](https://github.com/akveo/ngx-admin/issues/1458)) ([fa83572](https://github.com/akveo/ngx-admin/commit/fa83572))
+* **dashboard:** fix typo in styles ([#1460](https://github.com/akveo/ngx-admin/issues/1460)) ([630c249](https://github.com/akveo/ngx-admin/commit/630c249))
+
 
 ### Features
 
-* Angular updated to rc.2
-* Dependencies updated accordingly
-* Login page component [Demo](http://akveo.com/ng2-admin/#/login)
-* Sign up page component [Demo](http://akveo.com/ng2-admin/#/register)
+* **dependencies:** update dependencies, angular 5+, nebular rc.4 ([26e16ed](https://github.com/akveo/ngx-admin/commit/26e16ed))
 
-### BREAKING CHANGES
-* `$` renamed to `jQuery` because of name resolution conflicts
 
-### How to update
 
-* Remove `node_modules` and `typings` folders 
-* run `npm install`
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/akveo/ngx-admin/compare/v2.0.0...v2.0.1) (2017-10-26)
+
+
+Nebular changelog is available [here](https://github.com/akveo/nebular/blob/master/CHANGELOG.md#200-rc3-2017-10-26) for more details. 
+
+### Features
+
+* **bootstrap:** update bootstrap to beta.2, nebular to rc.3 ([b525213](https://github.com/akveo/ngx-admin/commit/b525213))
+* **compodoc:** add compodoc documentation generator ([#1327](https://github.com/akveo/ngx-admin/issues/1327)) ([eebbc12](https://github.com/akveo/ngx-admin/commit/eebbc12))
+* **loader:** add loading progress indicator ([#1319](https://github.com/akveo/ngx-admin/issues/1319)) ([f479715](https://github.com/akveo/ngx-admin/commit/f479715))
+
+
+

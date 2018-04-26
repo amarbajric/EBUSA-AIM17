@@ -1,28 +1,17 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import { Component } from '@angular/core';
+
+import { MENU_ITEMS } from './pages-menu';
+
 @Component({
-  selector: 'pages',
-  encapsulation: ViewEncapsulation.None,
-  styles: [],
+  selector: 'ngx-pages',
   template: `
-    <ba-sidebar></ba-sidebar>
-    <ba-page-top></ba-page-top>
-    <div class="al-main">
-      <div class="al-content">
-        <ba-content-top></ba-content-top>
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-    <footer class="al-footer clearfix">
-      <div class="al-footer-right">&copy; 2016 - 2017 Geisriegler, Kolodiy, Stani</div>
-    </footer>
-    <ba-back-top position="200"></ba-back-top>
-    `
+    <ngx-sample-layout>
+      <nb-menu [items]="menu"></nb-menu>
+      <router-outlet></router-outlet>
+    </ngx-sample-layout>
+  `,
 })
-export class Pages {
+export class PagesComponent {
 
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
+  menu = MENU_ITEMS;
 }
