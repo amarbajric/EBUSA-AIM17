@@ -6,5 +6,5 @@ import at.fhjoanneum.ippr.gateway.security.persistence.objects.User;
 
 public interface AuthenticationService {
 
-  Optional<User> authenticateUser(String username, String password);
+  Optional<User> authenticateUser(String email, String password);
 }

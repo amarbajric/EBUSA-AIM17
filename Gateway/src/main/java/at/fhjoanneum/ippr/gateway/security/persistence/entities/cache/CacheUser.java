@@ -29,6 +29,7 @@ public class CacheUser {
     checkArgument(StringUtils.isNotBlank(firstname));
     checkArgument(StringUtils.isNotBlank(lastname));
     checkArgument(StringUtils.isNotBlank(username));
+    checkArgument(StringUtils.isNotBlank(email));
     checkNotNull(roles);
 
     this.systemId = systemId;

@@ -46,10 +46,10 @@ public class UserController {
   public ResponseEntity<LoginResponse> login(@RequestBody final UserLogin login) {
 
     final Optional<User> userOpt =
-        authenticationService.authenticateUser(login.username, login.password);
+        authenticationService.authenticateUser(login.email, login.password);
 
     if (!userOpt.isPresent()) {
-      return new ResponseEntity<UserController.LoginResponse>(HttpStatus.UNAUTHORIZED);
+      return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 
     final User user = userOpt.get();
@@ -62,11 +62,12 @@ public class UserController {
 
     final LoginResponse loginResponse = new LoginResponse(
         Jwts.builder().setSubject(user.getUsername()).claim("userId", user.getUId())
-            .claim("roles", roles).claim("rules", rules).setIssuedAt(new Date())
+            .claim("email", user.getEmail()).claim("roles", roles)
+            .claim("rules", rules).setIssuedAt(new Date())
             .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(1)))
             .signWith(SignatureAlgorithm.HS256, "secretkey").compact());
 
-    return new ResponseEntity<UserController.LoginResponse>(loginResponse, HttpStatus.OK);
+    return new ResponseEntity<>(loginResponse, HttpStatus.OK);
   }
 
   @RequestMapping(value = "api/me", method = {RequestMethod.GET})
@@ -102,7 +103,7 @@ public class UserController {
   private static class UserLogin implements Serializable {
     private static final long serialVersionUID = -431110191246364184L;
 
-    public String username;
+    public String email;
     public String password;
   }
 

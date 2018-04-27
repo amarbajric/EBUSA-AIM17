@@ -124,7 +124,7 @@ public class RBACRetrievalServiceMemoryImpl implements RBACRetrievalService {
             //values.get(UserRow.ORGANISATION.index),
             userRoles,
             values.get(UserRow.PASSWORD.index));
-        users.put(cacheUser.getUsername(), cacheUser);
+        users.put(cacheUser.getEmail(), cacheUser);
       }
     } catch (final Exception e) {
       LOG.error(e.getMessage());

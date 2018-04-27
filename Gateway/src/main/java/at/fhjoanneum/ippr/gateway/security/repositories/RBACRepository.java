@@ -24,6 +24,8 @@ public interface RBACRepository {
 
   Optional<User> getUserByUsername(final String username);
 
+  Optional<User> getUserByEmail(final String email);
+
   Optional<Rule> getRuleBySystemId(final String systemId);
 
   Optional<Role> getRoleBySystemId(final String systemId);

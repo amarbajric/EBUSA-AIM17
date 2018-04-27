@@ -25,24 +25,24 @@ public class AuthenticationServiceMemoryImpl implements AuthenticationService {
   private RBACRepository rbacRepository;
 
   @Override
-  public Optional<User> authenticateUser(final String username, final String password) {
-    if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+  public Optional<User> authenticateUser(final String email, final String password) {
+    if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
       return Optional.empty();
     }
 
     final Map<String, CacheUser> systemUsers = retrievalService.getSystemUsers();
-    final CacheUser cacheUser = systemUsers.get(username);
+    final CacheUser cacheUser = systemUsers.get(email);
 
     if (cacheUser == null) {
-      LOG.info("Could not find user for username: {}", username);
+      LOG.info("Could not find user with email: {}", email);
       return Optional.empty();
     }
     if (!password.equals(cacheUser.getPassword())) {
-      LOG.info("Wrong password for username: {}", username);
+      LOG.info("Wrong password for user with email: {}", email);
       return Optional.empty();
     }
 
-    return rbacRepository.getUserByUsername(username);
+    return rbacRepository.getUserByEmail(email);
   }
 
 }

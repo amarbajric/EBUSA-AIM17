@@ -74,6 +74,11 @@ public class RBACRepositoryImpl implements RBACRepository {
   }
 
   @Override
+  public Optional<User> getUserByEmail(final String email) {
+    return Optional.ofNullable(userRepository.findByEmail(email));
+  }
+
+  @Override
   public List<User> getUsersByRoleName(final String roleName) {
     return Lists.newArrayList(userRepository.findByRoleName(roleName));
   }
@@ -116,6 +121,9 @@ public class RBACRepositoryImpl implements RBACRepository {
 
     @Query(value = "SELECT * FROM user WHERE username = :username", nativeQuery = true)
     UserImpl findByUsername(@Param("username") String username);
+
+    @Query(value = "SELECT * FROM user WHERE email = :email", nativeQuery = true)
+    UserImpl findByEmail(@Param("email") String email);
 
     @Query(
         value = "select u.* from user u join user_role_map ugm on ugm.u_id = u.u_id "

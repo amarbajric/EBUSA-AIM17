@@ -4,6 +4,27 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+
+## 2018-04-27 ([#77](https://github.com/amarbajric/EBUSA-AIM17/pull/77))
+## Added
+- new AuthenticationService in the Gateway parent service
+  - named `AuthenticationServiceDatabaseImpl`
+  - new service is used solely for logging-in users by ONLY checking if user
+  with given `email` and `password` exists in the database
+  - old `AuthenticationServiceMemoryImpl` still existent
+  - added possibility to configure `rbac.system.service` in the `application.properties`
+  of the `Gateway` service with the `database` option. (i.e. `database` option uses login
+  via database check only and `memory` option uses `CacheUser` option)
+## Changed
+- `AuthenticationServiceMemoryImpl` now also uses the `email` attribute and not the `username`
+- Payload class, which defines structure of received JSON when logging-in now (i.e. `UserLogin` in controller)
+now uses `email` instead of `username`
+- modified configuration classes for the `application.properties` file in the `Gateway` service
+to allow for switching between `database` and `memory`
+- adapted `RBACRetrievalServiceMemoryImpl` where csv is read into Map. Keys of map are now
+the users `email` instead of `username` (needed for log-in with email instead of username)
+
+
 ## 2018-04-26 ([#74](https://github.com/amarbajric/EBUSA-AIM17/pull/74))
 ## Added
 - complete GUI replacement: new GUI based on ngx-admin
