@@ -14,6 +14,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NB_AUTH_TOKEN_CLASS, NbAuthJWTToken, NbAuthModule, NbEmailPassAuthProvider} from "@nebular/auth";
+import {NbRoleProvider, NbSecurityModule} from "@nebular/security";
+
+import {of as observableOf} from 'rxjs/observable/of'
+import {RoleProvider} from "./role.provider";
+import {AuthGuard} from "./auth-guard.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,10 +32,54 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+
+    NbAuthModule.forRoot({
+      providers: {
+        email: {
+          service: NbEmailPassAuthProvider,
+          config: {
+            baseEndpoint: 'http://localhost:10000',
+            login: {
+              endpoint: '/user/login',
+            },
+            register: {
+              endpoint: '/user/register'
+            },
+            token: {
+              key: 'token'
+            },
+            validation: {
+
+            }
+          },
+        },
+      },
+    }),
+
+    NbSecurityModule.forRoot({
+      accessControl: {
+        guest: {
+          view: ['news', 'comments'],
+        },
+        user: {
+          parent: 'guest',
+          create: 'comments',
+        },
+        moderator: {
+          parent: 'user',
+          create: 'news',
+          remove: '*',
+        },
+      },
+    })
+
   ],
   bootstrap: [AppComponent],
   providers: [
+    AuthGuard,
     { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
+    { provide: NbRoleProvider, useClass: RoleProvider }
   ],
 })
 export class AppModule {

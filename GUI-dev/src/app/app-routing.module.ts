@@ -1,5 +1,7 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { AuthGuard } from "./auth-guard.service";
+
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -10,7 +12,10 @@ import {
 } from '@nebular/auth';
 
 const routes: Routes = [
-  { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
+  { path: 'pages',
+    loadChildren: 'app/pages/pages.module#PagesModule',
+    canActivate: [AuthGuard]
+  },
   {
     path: 'auth',
     component: NbAuthComponent,
