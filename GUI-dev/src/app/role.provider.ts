@@ -15,8 +15,8 @@ export class RoleProvider implements NbRoleProvider {
     return this.authService.onTokenChange()
       .pipe(
         map((token: NbAuthJWTToken) => {
-          //temporary using first role
-          //todo: implement proper role array utilization
+          // temporary using first role
+          // todo: implement proper role array utilization
           return token.isValid() ? token.getPayload()['roles'][0] : 'guest';
         }),
       );

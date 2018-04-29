@@ -3,8 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 
-import {NbAuthJWTToken, NbAuthService, NbEmailPassAuthProvider} from "@nebular/auth";
-import { NbAccessChecker } from "@nebular/security";
+import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
+import { NbAccessChecker } from '@nebular/security';
 
 @Component({
   selector: 'ngx-header',
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   userMenu = [
     { title: 'Profile', data: 'profile' },
-    { title: 'Log out', data: 'logout', link: '/auth/logout' }
+    { title: 'Log out', data: 'logout', link: '/auth/logout' },
     ];
 
   constructor(private sidebarService: NbSidebarService,
@@ -65,9 +65,9 @@ export class HeaderComponent implements OnInit {
   }
 
   onItemSelection(item) {
-    switch(item) {
-      case 'logout': {console.log("Logout"); this.authService.logout('email'); break}
-      case 'profile': {console.log("Profile"); break}
+    switch (item) {
+      case 'logout': { this.authService.logout('email'); break }
+      case 'profile': { break }
       default: break
     }
   }

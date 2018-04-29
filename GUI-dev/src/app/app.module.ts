@@ -14,12 +14,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {NB_AUTH_TOKEN_CLASS, NbAuthJWTToken, NbAuthModule, NbEmailPassAuthProvider} from "@nebular/auth";
-import {NbRoleProvider, NbSecurityModule} from "@nebular/security";
+import {NB_AUTH_TOKEN_CLASS, NbAuthJWTToken, NbAuthModule, NbEmailPassAuthProvider} from '@nebular/auth';
+import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
 
-import {of as observableOf} from 'rxjs/observable/of'
-import {RoleProvider} from "./role.provider";
-import {AuthGuard} from "./auth-guard.service";
+import {RoleProvider} from './role.provider';
+import {AuthGuard} from './auth-guard.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,26 +37,26 @@ import {AuthGuard} from "./auth-guard.service";
         email: {
           service: NbEmailPassAuthProvider,
           config: {
-            //baseEndpoint: 'http://localhost:10000',
+            // baseEndpoint: 'http://localhost:10000',
             login: {
-              endpoint: 'http://localhost:10000/user/login'
+              endpoint: 'http://localhost:10000/user/login',
             },
             logout: {
               endpoint: '',
               redirect: {
                 success: '/',
                 failure: '/',
-              }
+              },
             },
             register: {
-              endpoint: '/user/register'
+              endpoint: '/user/register',
             },
             token: {
-              key: 'token'
+              key: 'token',
             },
             validation: {
 
-            }
+            },
           },
         },
       },
@@ -79,10 +78,10 @@ import {AuthGuard} from "./auth-guard.service";
           remove: '*',
         },
         Employee: {
-          parent: 'moderator'
-        }
+          parent: 'moderator',
+        },
       },
-    })
+    }),
 
   ],
   bootstrap: [AppComponent],
@@ -90,7 +89,7 @@ import {AuthGuard} from "./auth-guard.service";
     AuthGuard,
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
-    { provide: NbRoleProvider, useClass: RoleProvider }
+    { provide: NbRoleProvider, useClass: RoleProvider },
   ],
 })
 export class AppModule {
