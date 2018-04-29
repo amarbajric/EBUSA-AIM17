@@ -25,16 +25,22 @@ export class HeaderComponent implements OnInit {
     { title: 'Log out', data: 'logout', link: '/auth/logout' },
     ];
 
+  authenticated = false;
+
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private analyticsService: AnalyticsService,
               private authService: NbAuthService,
-              public accessChecker: NbAccessChecker) {
+              public accessChecker: NbAccessChecker,
+              ) {
 
     this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
        if (token.isValid()) {
          this.user = token.getPayload();
+         this.authenticated = true;
+       } else {
+         this.authenticated = false;
        }
       })
 

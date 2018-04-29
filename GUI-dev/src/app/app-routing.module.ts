@@ -12,9 +12,9 @@ import {
 } from '@nebular/auth';
 
 const routes: Routes = [
-  { path: 'pages',
+  { path: '',
     loadChildren: 'app/pages/pages.module#PagesModule',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'auth',

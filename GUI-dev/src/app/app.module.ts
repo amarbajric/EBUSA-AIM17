@@ -40,13 +40,12 @@ import {AuthGuard} from './auth-guard.service';
             // baseEndpoint: 'http://localhost:10000',
             login: {
               endpoint: 'http://localhost:10000/user/login',
+              redirect: {
+                success: 'dashboard'
+              }
             },
             logout: {
               endpoint: '',
-              redirect: {
-                success: '/',
-                failure: '/',
-              },
             },
             register: {
               endpoint: '/user/register',
