@@ -38,9 +38,16 @@ import {AuthGuard} from "./auth-guard.service";
         email: {
           service: NbEmailPassAuthProvider,
           config: {
-            baseEndpoint: 'http://localhost:10000',
+            //baseEndpoint: 'http://localhost:10000',
             login: {
-              endpoint: '/user/login',
+              endpoint: 'http://localhost:10000/user/login'
+            },
+            logout: {
+              endpoint: '',
+              redirect: {
+                success: '/',
+                failure: '/',
+              }
             },
             register: {
               endpoint: '/user/register'
@@ -63,6 +70,7 @@ import {AuthGuard} from "./auth-guard.service";
         },
         user: {
           parent: 'guest',
+          view: 'user',
           create: 'comments',
         },
         moderator: {
@@ -70,6 +78,9 @@ import {AuthGuard} from "./auth-guard.service";
           create: 'news',
           remove: '*',
         },
+        Employee: {
+          parent: 'moderator'
+        }
       },
     })
 
