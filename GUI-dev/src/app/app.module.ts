@@ -41,8 +41,8 @@ import {AuthGuard} from './auth-guard.service';
             login: {
               endpoint: 'http://localhost:10000/user/login',
               redirect: {
-                success: 'dashboard'
-              }
+                success: 'dashboard',
+              },
             },
             logout: {
               endpoint: '',

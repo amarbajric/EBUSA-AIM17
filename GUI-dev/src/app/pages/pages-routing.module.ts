@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
-import {AuthGuard} from "../auth-guard.service";
+import {AuthGuard} from '../auth-guard.service';
 
 
 const routes: Routes = [{
