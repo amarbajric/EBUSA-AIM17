@@ -46,7 +46,7 @@ import {NbAuthResult} from "@nebular/auth";
           <small
             class="form-text error"
             *ngIf="firstname.invalid && firstname.touched && (firstname.errors?.minlength || firstname.errors?.maxlength)">
-            Full name should contains
+            First name should contains
             from {{getConfigValue('forms.validation.firstname.minLength')}}
             to {{getConfigValue('forms.validation.firstname.maxLength')}}
             characters
@@ -68,9 +68,31 @@ import {NbAuthResult} from "@nebular/auth";
           <small
             class="form-text error"
             *ngIf="lastname.invalid && lastname.touched && (lastname.errors?.minlength || lastname.errors?.maxlength)">
-            Full name should contains
+            Last name should contains
             from {{getConfigValue('forms.validation.lastname.minLength')}}
             to {{getConfigValue('forms.validation.lastname.maxLength')}}
+            characters
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="input-username" class="sr-only">Username</label>
+          <input name="username" [(ngModel)]="user.username" id="input-username" #username="ngModel"
+                 class="form-control" placeholder="Username"
+                 [class.form-control-danger]="username.invalid && username.touched"
+                 [required]="getConfigValue('forms.validation.username.required')"
+                 [minlength]="getConfigValue('forms.validation.username.minLength')"
+                 [maxlength]="getConfigValue('forms.validation.username.maxLength')"
+                 autofocus>
+          <small class="form-text error" *ngIf="username.invalid && username.touched && username.errors?.required">
+            Last name is required!
+          </small>
+          <small
+            class="form-text error"
+            *ngIf="username.invalid && username.touched && (username.errors?.minlength || username.errors?.maxlength)">
+            Username should contains
+            from {{getConfigValue('forms.validation.username.minLength')}}
+            to {{getConfigValue('forms.validation.username.maxLength')}}
             characters
           </small>
         </div>
@@ -196,6 +218,8 @@ export class EbRegisterComponent {
     this.submitted = true;
 
     this.service.register(this.provider, this.user).subscribe((result: NbAuthResult) => {
+      console.log(result);
+      console.log(this.user);
       this.submitted = false;
       if (result.isSuccess()) {
         this.messages = result.getMessages();

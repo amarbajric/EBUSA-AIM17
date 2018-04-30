@@ -50,7 +50,7 @@ import {RouterModule} from "@angular/router";
               endpoint: '',
             },
             register: {
-              endpoint: '/user/register',
+              endpoint: 'http://localhost:10000/user/register',
             },
             token: {
               key: 'token',
