@@ -38,6 +38,14 @@ import {
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 
+import {RouterModule} from "@angular/router";
+import {BrowserModule} from "@angular/platform-browser";
+import {NbAuthBlockComponent, NbAuthModule} from "@nebular/auth";
+import {
+  EbAuthBlockComponent, EbAuthComponent, EbLoginComponent, EbRegisterComponent, EbLogoutComponent, EbRequestPasswordComponent,
+  EbResetPasswordComponent
+} from "./components/auth";
+
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const NB_MODULES = [
@@ -55,6 +63,8 @@ const NB_MODULES = [
   NbContextMenuModule,
   NgbModule,
   NbSecurityModule, // *nbIsGranted directive
+
+  RouterModule,
 ];
 
 const COMPONENTS = [
@@ -67,6 +77,7 @@ const COMPONENTS = [
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+
 ];
 
 const PIPES = [
@@ -90,7 +101,17 @@ const NB_THEME_PROVIDERS = [
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
-  declarations: [...COMPONENTS, ...PIPES],
+  declarations: [...COMPONENTS, ...PIPES,
+
+    EbAuthComponent,
+    EbAuthBlockComponent,
+    EbLoginComponent,
+    EbRegisterComponent,
+    EbRequestPasswordComponent,
+    EbResetPasswordComponent,
+    EbLogoutComponent,
+
+  ],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {

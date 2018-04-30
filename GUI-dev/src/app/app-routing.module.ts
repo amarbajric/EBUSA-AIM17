@@ -6,10 +6,14 @@ import {
   NbAuthComponent,
   NbLoginComponent,
   NbLogoutComponent,
-  NbRegisterComponent,
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
+
+import {
+  EbAuthComponent, EbLoginComponent, EbRegisterComponent, EbLogoutComponent,
+  EbRequestPasswordComponent, EbResetPasswordComponent
+} from "./@theme/components/auth";
 
 const routes: Routes = [
   { path: '',
@@ -18,31 +22,31 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    component: NbAuthComponent,
+    component: EbAuthComponent,
     children: [
       {
         path: '',
-        component: NbLoginComponent,
+        component: EbLoginComponent,
       },
       {
         path: 'login',
-        component: NbLoginComponent,
+        component: EbLoginComponent,
       },
       {
         path: 'register',
-        component: NbRegisterComponent,
+        component: EbRegisterComponent,
       },
       {
         path: 'logout',
-        component: NbLogoutComponent,
+        component: EbLogoutComponent,
       },
       {
         path: 'request-password',
-        component: NbRequestPasswordComponent,
+        component: EbRequestPasswordComponent,
       },
       {
         path: 'reset-password',
-        component: NbResetPasswordComponent,
+        component: EbResetPasswordComponent,
       },
     ],
   },

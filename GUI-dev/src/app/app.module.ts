@@ -19,6 +19,8 @@ import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
 
 import {RoleProvider} from './role.provider';
 import {AuthGuard} from './auth-guard.service';
+import {RouterTestingModule} from "@angular/router/testing";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [AppComponent],
