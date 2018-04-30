@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import at.fhjoanneum.ippr.gateway.security.registration.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,9 @@ public class UserController {
 
   @Autowired
   private AuthenticationService authenticationService;
+
+  @Autowired
+  private RegistrationService registrationService;
 
   @Autowired
   private RBACService rbacService;
@@ -68,6 +72,33 @@ public class UserController {
             .signWith(SignatureAlgorithm.HS256, "secretkey").compact());
 
     return new ResponseEntity<>(loginResponse, HttpStatus.OK);
+  }
+
+  @RequestMapping(value = "user/register", method = RequestMethod.POST)
+  public ResponseEntity<RegisterResponse> register(@RequestBody final UserRegister register) {
+
+    final Optional<User> userOpt =
+            registrationService.registerUser(register.firstname, register.lastname, register.username, register.email, register.password);
+
+    if (!userOpt.isPresent()) {
+      return new ResponseEntity<>(new RegisterResponse("Registration failed: Payload incomplete"), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    return new ResponseEntity<>(new RegisterResponse("Ok"), HttpStatus.OK);
+  }
+
+  @RequestMapping(value = "user/register/checkIfMailTaken", method = RequestMethod.POST)
+  public ResponseEntity<CheckMailResponse> checkIfMailExists(@RequestBody final RegisterMailCheck mailCheck) {
+
+    final Optional<User> userOpt = registrationService.checkIfMailTaken(mailCheck.email);
+
+    if (userOpt == null) {
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    } else if (!userOpt.isPresent()) {
+      return new ResponseEntity<>(new CheckMailResponse(false), HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(new CheckMailResponse(true), HttpStatus.OK);
+    }
   }
 
   @RequestMapping(value = "api/me", method = {RequestMethod.GET})
@@ -115,5 +146,37 @@ public class UserController {
     public LoginResponse(final String token) {
       this.token = token;
     }
+  }
+
+  private static class UserRegister implements Serializable {
+    private static final long serialVersionUID = -431110191246364384L;
+
+    public String firstname;
+    public String lastname;
+    public String username;
+    public String email;
+    public String password;
+  }
+
+  private static class RegisterResponse implements Serializable {
+    private static final long serialVersionUID = -431110191246364484L;
+
+    public final String message;
+
+    public RegisterResponse(final String message) { this.message = message; }
+  }
+
+  private static class RegisterMailCheck implements Serializable {
+    private static final long serialVersionUID = -431110191246364584L;
+
+    public String email;
+  }
+
+  public static class CheckMailResponse implements Serializable {
+    private static final long serialVersionUID = -431110191246364684L;
+
+    public final boolean isTaken;
+
+    public CheckMailResponse(final boolean isTaken) { this.isTaken = isTaken; }
   }
 }

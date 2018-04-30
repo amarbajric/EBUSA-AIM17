@@ -13,6 +13,9 @@ import at.fhjoanneum.ippr.gateway.security.persistence.entities.cache.CacheUser;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.User;
 import at.fhjoanneum.ippr.gateway.security.rbacmapping.retrieval.RBACRetrievalService;
 import at.fhjoanneum.ippr.gateway.security.repositories.RBACRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class AuthenticationServiceMemoryImpl implements AuthenticationService {
 
@@ -23,6 +26,9 @@ public class AuthenticationServiceMemoryImpl implements AuthenticationService {
 
   @Autowired
   private RBACRepository rbacRepository;
+
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
   @Override
   public Optional<User> authenticateUser(final String email, final String password) {
@@ -37,7 +43,7 @@ public class AuthenticationServiceMemoryImpl implements AuthenticationService {
       LOG.info("Could not find user with email: {}", email);
       return Optional.empty();
     }
-    if (!password.equals(cacheUser.getPassword())) {
+    if (!passwordEncoder.matches(password, passwordEncoder.encode(cacheUser.getPassword()))) {
       LOG.info("Wrong password for user with email: {}", email);
       return Optional.empty();
     }

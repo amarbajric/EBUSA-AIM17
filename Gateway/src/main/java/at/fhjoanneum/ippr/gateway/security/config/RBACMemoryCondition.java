@@ -1,9 +1,9 @@
-package at.fhjoanneum.ippr.gateway.security.rbacmapping.retrieval.memory;
+package at.fhjoanneum.ippr.gateway.security.config;
 
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-import at.fhjoanneum.ippr.gateway.security.rbacmapping.retrieval.RBACServiceCondition;
+import at.fhjoanneum.ippr.gateway.security.config.RBACServiceCondition;
 
 public class RBACMemoryCondition implements RBACServiceCondition {
 

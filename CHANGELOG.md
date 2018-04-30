@@ -5,6 +5,21 @@ of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## 2018-04-29 ([#79](https://github.com/amarbajric/EBUSA-AIM17/pull/79))
+## Added
+- register implemented
+- register needs adaptations in terms of default role (tbd in corporation with Stefan L.)
+- passwords are now hashed and compared by the hashes when logging-in (Bcrypt)
+- endpoint added to send json with email attribute which checks if email already exists (async email validation)
+  - send `POST` Method to `/user/register/checkIfMailTaken` with JSON containing `email` attribute
+## Changed
+- changed `application.properties` in Gateway service to fix problem with `RBACConfig` where it would not detect 
+property `rbac.system.service`. Therefore, this property was changed to `rbac.system.service.authentication`
+  - if set to `memory` then authentication via `CacheUser` is done and csvs are used
+  - if set to `database` then authentication via database is done and NO csv and NO `CacheUser` is used
+- moved `Condition` files to `config` folder in `Gateway/src/main/java/at/fhjoanneum/ippr/gateway/security/config`
+
+
 ## 2018-04-27 ([#77](https://github.com/amarbajric/EBUSA-AIM17/pull/77))
 ## Added
 - new AuthenticationService in the Gateway parent service

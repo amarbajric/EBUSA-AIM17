@@ -1,9 +1,9 @@
-package at.fhjoanneum.ippr.gateway.security.rbacmapping.retrieval;
+package at.fhjoanneum.ippr.gateway.security.config;
 
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-public class RBACDatabaseCondition implements RBACServiceCondition{
+public class RBACDatabaseCondition implements RBACServiceCondition {
 
     private static String CONFIG_VALUE = "database";
 
