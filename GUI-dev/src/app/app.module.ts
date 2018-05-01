@@ -21,6 +21,8 @@ import {RoleProvider} from './role.provider';
 import {AuthGuard} from './auth-guard.service';
 
 import { EbEmailPassAuthProvider } from './@theme/providers/auth/email-pass-auth.provider';
+import {AsyncEmailValidatorProvider} from "./@theme/providers/async-email-validator/async-email-validator";
+import {ServerConfigProvider} from "./@theme/providers/backend-server/serverconfig";
 
 
 @NgModule({
@@ -65,7 +67,6 @@ import { EbEmailPassAuthProvider } from './@theme/providers/auth/email-pass-auth
       // don't delete
       forms: {
         validation: {
-
         },
       },
       //
@@ -95,6 +96,8 @@ import { EbEmailPassAuthProvider } from './@theme/providers/auth/email-pass-auth
   ],
   bootstrap: [AppComponent],
   providers: [
+    AsyncEmailValidatorProvider,
+    ServerConfigProvider,
     AuthGuard,
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
