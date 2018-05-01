@@ -45,6 +45,7 @@ import {
   EbAuthBlockComponent, EbAuthComponent, EbLoginComponent, EbRegisterComponent, EbLogoutComponent, EbRequestPasswordComponent,
   EbResetPasswordComponent
 } from "./components/auth";
+import {EbEmailPassAuthProvider} from "./providers/auth/email-pass-auth.provider";
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -88,6 +89,7 @@ const PIPES = [
 ];
 
 const NB_THEME_PROVIDERS = [
+  EbEmailPassAuthProvider,
   ...NbThemeModule.forRoot(
     {
       name: 'default',
@@ -107,8 +109,6 @@ const NB_THEME_PROVIDERS = [
     EbAuthBlockComponent,
     EbLoginComponent,
     EbRegisterComponent,
-    EbRequestPasswordComponent,
-    EbResetPasswordComponent,
     EbLogoutComponent,
 
   ],

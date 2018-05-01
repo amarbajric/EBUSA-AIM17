@@ -12,7 +12,6 @@ import {
 
 import {
   EbAuthComponent, EbLoginComponent, EbRegisterComponent, EbLogoutComponent,
-  EbRequestPasswordComponent, EbResetPasswordComponent
 } from "./@theme/components/auth";
 
 const routes: Routes = [
@@ -39,14 +38,6 @@ const routes: Routes = [
       {
         path: 'logout',
         component: EbLogoutComponent,
-      },
-      {
-        path: 'request-password',
-        component: EbRequestPasswordComponent,
-      },
-      {
-        path: 'reset-password',
-        component: EbResetPasswordComponent,
       },
     ],
   },

@@ -14,13 +14,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {NB_AUTH_TOKEN_CLASS, NbAuthJWTToken, NbAuthModule, NbEmailPassAuthProvider} from '@nebular/auth';
+import {NB_AUTH_TOKEN_CLASS, NbAuthJWTToken, NbAuthModule} from '@nebular/auth';
 import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
 
 import {RoleProvider} from './role.provider';
 import {AuthGuard} from './auth-guard.service';
-import {RouterTestingModule} from "@angular/router/testing";
-import {RouterModule} from "@angular/router";
+
+import { EbEmailPassAuthProvider } from "./@theme/providers/auth/email-pass-auth.provider";
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +38,7 @@ import {RouterModule} from "@angular/router";
     NbAuthModule.forRoot({
       providers: {
         email: {
-          service: NbEmailPassAuthProvider,
+          service: EbEmailPassAuthProvider,
           config: {
             // baseEndpoint: 'http://localhost:10000',
             login: {
@@ -51,16 +52,23 @@ import {RouterModule} from "@angular/router";
             },
             register: {
               endpoint: 'http://localhost:10000/user/register',
+              redirect: {
+                success: '/auth/login',
+              },
             },
             token: {
               key: 'token',
             },
-            validation: {
-
-            },
           },
         },
       },
+      // don't delete
+      forms: {
+        validation: {
+
+        }
+      }
+      //
     }),
 
     NbSecurityModule.forRoot({
