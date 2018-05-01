@@ -65,7 +65,10 @@ import { EbEmailPassAuthProvider } from './@theme/providers/auth/email-pass-auth
       // don't delete
       forms: {
         validation: {
-
+          firstname: {
+            minLength: 20,
+            maxLength: 100,
+          }
         },
       },
       //

@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators/map';
@@ -15,10 +15,6 @@ import { NbEmailPassAuthProvider } from '@nebular/auth';
 
 @Injectable()
 export class EbEmailPassAuthProvider extends NbEmailPassAuthProvider {
-
-  constructor(protected http: HttpClient) {
-    super();
-  }
 
   register(data?: any): Observable<NbAuthResult> {
     const method = this.getConfigValue('register.method');

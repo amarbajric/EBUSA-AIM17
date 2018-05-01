@@ -11,12 +11,11 @@ import { getDeepFromObject } from '@nebular/auth/helpers';
 import { NbAuthService } from '@nebular/auth';
 import { NbAuthResult } from '@nebular/auth';
 
-
 @Component({
   selector: 'ngx-eb-register',
   styleUrls: ['./register.component.scss'],
   template: `
-    <nb-auth-block>
+    <ngx-eb-auth-block>
       <h2 class="title">Sign Up to EB</h2>
       <form (ngSubmit)="register()" #form="ngForm">
 
@@ -188,7 +187,7 @@ import { NbAuthResult } from '@nebular/auth';
           Already have an account? <a routerLink="../login"><strong>Sign in</strong></a>
         </small>
       </div>
-    </nb-auth-block>
+    </ngx-eb-auth-block>
   `,
 })
 export class EbRegisterComponent {
