@@ -38,14 +38,11 @@ import {
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 
-import {RouterModule} from "@angular/router";
-import {BrowserModule} from "@angular/platform-browser";
-import {NbAuthBlockComponent, NbAuthModule} from "@nebular/auth";
+import {RouterModule} from '@angular/router';
 import {
-  EbAuthBlockComponent, EbAuthComponent, EbLoginComponent, EbRegisterComponent, EbLogoutComponent, EbRequestPasswordComponent,
-  EbResetPasswordComponent
-} from "./components/auth";
-import {EbEmailPassAuthProvider} from "./providers/auth/email-pass-auth.provider";
+  EbAuthBlockComponent, EbAuthComponent, EbLoginComponent, EbRegisterComponent, EbLogoutComponent,
+} from './components/auth';
+import {EbEmailPassAuthProvider} from './providers/auth/email-pass-auth.provider';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 

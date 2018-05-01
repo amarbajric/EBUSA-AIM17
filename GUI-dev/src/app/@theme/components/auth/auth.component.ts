@@ -4,11 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Component, OnDestroy } from '@angular/core';
-import {NbAuthService} from "@nebular/auth";
+import { NbAuthService } from '@nebular/auth';
 import { takeWhile } from 'rxjs/operators/takeWhile';
 
 @Component({
-  selector: 'nb-auth',
+  selector: 'ngx-eb-auth',
   styleUrls: ['./auth.component.scss'],
   template: `
     <nb-layout>

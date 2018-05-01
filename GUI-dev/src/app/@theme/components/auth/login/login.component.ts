@@ -7,14 +7,14 @@ import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 
-import {NB_AUTH_OPTIONS, NbAuthSocialLink} from "@nebular/auth";
-import {getDeepFromObject} from "@nebular/auth/helpers";
-import {NbAuthService} from "@nebular/auth";
-import {NbAuthResult} from "@nebular/auth";
+import { NB_AUTH_OPTIONS, NbAuthSocialLink } from '@nebular/auth';
+import { getDeepFromObject } from '@nebular/auth/helpers';
+import { NbAuthService } from '@nebular/auth';
+import { NbAuthResult } from '@nebular/auth';
 
 
 @Component({
-  selector: 'nb-login',
+  selector: 'ngx-eb-login',
   template: `
     <nb-auth-block>
       <h2 class="title">Sign In</h2>

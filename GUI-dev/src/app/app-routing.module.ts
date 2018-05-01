@@ -3,16 +3,8 @@ import { NgModule } from '@angular/core';
 // import { AuthGuard } from './auth-guard.service';
 
 import {
-  NbAuthComponent,
-  NbLoginComponent,
-  NbLogoutComponent,
-  NbRequestPasswordComponent,
-  NbResetPasswordComponent,
-} from '@nebular/auth';
-
-import {
   EbAuthComponent, EbLoginComponent, EbRegisterComponent, EbLogoutComponent,
-} from "./@theme/components/auth";
+} from './@theme/components/auth';
 
 const routes: Routes = [
   { path: '',

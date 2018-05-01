@@ -6,13 +6,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {NB_AUTH_OPTIONS} from "@nebular/auth";
-import {getDeepFromObject} from "@nebular/auth/helpers";
-import {NbAuthService} from "@nebular/auth";
-import {NbAuthResult} from "@nebular/auth";
+import { NB_AUTH_OPTIONS } from '@nebular/auth';
+import { getDeepFromObject } from '@nebular/auth/helpers';
+import { NbAuthService } from '@nebular/auth';
+import { NbAuthResult } from '@nebular/auth';
 
 @Component({
-  selector: 'nb-logout',
+  selector: 'ngx-eb-logout',
   template: `
     <div>Logging out, please wait...</div>
   `,

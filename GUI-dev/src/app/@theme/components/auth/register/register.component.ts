@@ -6,14 +6,14 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {NB_AUTH_OPTIONS, NbAuthSocialLink} from "@nebular/auth";
-import {getDeepFromObject} from "@nebular/auth/helpers";
-import {NbAuthService} from "@nebular/auth";
-import {NbAuthResult} from "@nebular/auth";
+import { NB_AUTH_OPTIONS, NbAuthSocialLink } from '@nebular/auth';
+import { getDeepFromObject } from '@nebular/auth/helpers';
+import { NbAuthService } from '@nebular/auth';
+import { NbAuthResult } from '@nebular/auth';
 
 
 @Component({
-  selector: 'nb-register',
+  selector: 'ngx-eb-register',
   styleUrls: ['./register.component.scss'],
   template: `
     <nb-auth-block>
@@ -218,8 +218,6 @@ export class EbRegisterComponent {
     this.submitted = true;
 
     this.service.register(this.provider, this.user).subscribe((result: NbAuthResult) => {
-      console.log(result);
-      console.log(this.user);
       this.submitted = false;
       if (result.isSuccess()) {
         this.messages = result.getMessages();

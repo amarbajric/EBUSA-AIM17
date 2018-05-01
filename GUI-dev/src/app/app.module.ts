@@ -20,7 +20,7 @@ import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
 import {RoleProvider} from './role.provider';
 import {AuthGuard} from './auth-guard.service';
 
-import { EbEmailPassAuthProvider } from "./@theme/providers/auth/email-pass-auth.provider";
+import { EbEmailPassAuthProvider } from './@theme/providers/auth/email-pass-auth.provider';
 
 
 @NgModule({
@@ -66,8 +66,8 @@ import { EbEmailPassAuthProvider } from "./@theme/providers/auth/email-pass-auth
       forms: {
         validation: {
 
-        }
-      }
+        },
+      },
       //
     }),
 

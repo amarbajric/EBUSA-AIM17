@@ -5,19 +5,18 @@
  */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
 
-import {NbAuthResult} from "@nebular/auth";
-import {NbEmailPassAuthProvider} from "@nebular/auth";
+import { NbAuthResult } from '@nebular/auth';
+import { NbEmailPassAuthProvider } from '@nebular/auth';
 
 @Injectable()
 export class EbEmailPassAuthProvider extends NbEmailPassAuthProvider {
 
-  constructor(protected http: HttpClient, private route: ActivatedRoute) {
+  constructor(protected http: HttpClient) {
     super();
   }
 
@@ -33,15 +32,15 @@ export class EbEmailPassAuthProvider extends NbEmailPassAuthProvider {
 
           return res;
         }),
-        //this.validateToken('register'),
+        // this.validateToken('register'),
         map((res) => {
           return new NbAuthResult(
             true,
             res,
             this.getConfigValue('register.redirect.success'),
             [],
-            this.getConfigValue('messages.getter')('register', res),
-            //this.getConfigValue('token.getter')('register', res));
+            this.getConfigValue('messages.getter')('register', res));
+            // this.getConfigValue('token.getter')('register', res));
         }),
         catchError((res) => {
           let errors = [];
