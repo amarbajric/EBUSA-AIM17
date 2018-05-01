@@ -21,8 +21,8 @@ import {RoleProvider} from './role.provider';
 import {AuthGuard} from './auth-guard.service';
 
 import { EbEmailPassAuthProvider } from './@theme/providers/auth/email-pass-auth.provider';
-import {AsyncEmailValidatorProvider} from "./@theme/providers/async-email-validator/async-email-validator";
-import {ServerConfigProvider} from "./@theme/providers/backend-server/serverconfig";
+import {AsyncEmailValidatorProvider} from './@theme/providers/async-email-validator/async-email-validator';
+import {ServerConfigProvider} from './@theme/providers/backend-server/serverconfig';
 
 
 @NgModule({

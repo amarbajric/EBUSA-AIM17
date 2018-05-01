@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {ServerConfigProvider} from "../backend-server/serverconfig";
-import {MailAsyncValidationRes} from "../../../../models/models";
+import {ServerConfigProvider} from '../backend-server/serverconfig';
+import {MailAsyncValidationRes} from '../../../../models/models';
 
 
 @Injectable()
