@@ -6,6 +6,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-bar-chart',
     link: '/dashboard',
   },
+
+  {
+    title: 'Approval Page',
+    icon: 'nb-checkmark',
+    link: '/approval',
+  },
   /*{
     title: 'FEATURES',
     group: true,

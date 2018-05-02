@@ -5,6 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import {AuthGuard} from '../auth-guard.service';
+import {ApprovalComponent} from "./approval/approval.component";
 
 
 const routes: Routes = [{
@@ -19,6 +20,11 @@ const routes: Routes = [{
     {
       path: 'home',
       component: HomeComponent,
+    },
+    {
+      path: 'approval',
+      component: ApprovalComponent,
+      canActivate: [AuthGuard],
     },
     {
       path: '',
