@@ -5,7 +5,6 @@ import { AnalyticsService } from '../../../@core/utils/analytics.service';
 
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import { NbAccessChecker } from '@nebular/security';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -33,7 +32,6 @@ export class HeaderComponent implements OnInit {
               private analyticsService: AnalyticsService,
               private authService: NbAuthService,
               public accessChecker: NbAccessChecker,
-              private router: Router,
               ) {
 
     this.authService.onTokenChange()

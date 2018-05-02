@@ -14,17 +14,15 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {NB_AUTH_TOKEN_CLASS, NbAuthJWTToken, NbAuthModule} from '@nebular/auth';
-import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
+import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken, NbAuthModule } from '@nebular/auth';
+import { NbRoleProvider, NbSecurityModule } from '@nebular/security';
 
-import {RoleProvider} from './role.provider';
-import {AuthGuard} from './auth-guard.service';
+import { RoleProvider } from './role.provider';
+import { AuthGuard } from './auth-guard.service';
 
 import { EbEmailPassAuthProvider } from './@theme/providers/auth/email-pass-auth.provider';
-import {AsyncEmailValidatorProvider} from './@theme/providers/async-email-validator/async-email-validator';
-import {ServerConfigProvider} from './@theme/providers/backend-server/serverconfig';
-import {EbTacComponent} from "./@theme/components";
-
+import { AsyncEmailValidatorProvider } from './@theme/providers/async-email-validator/async-email-validator';
+import { ServerConfigProvider } from './@theme/providers/backend-server/serverconfig';
 
 @NgModule({
   declarations: [AppComponent],

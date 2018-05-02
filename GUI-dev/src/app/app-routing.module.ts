@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import {
   EbAuthComponent, EbLoginComponent, EbRegisterComponent, EbLogoutComponent,
 } from './@theme/components/auth';
-import {EbTacComponent} from "./@theme/components/tac/tac.component";
+import { EbTacComponent } from './@theme/components/tac/tac.component';
 
 const routes: Routes = [
   { path: '',
