@@ -3,27 +3,30 @@
      [class.right]="position === 'inverse'">
   <div class="logo-containter">
     <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
-    <div class="logo" (click)="goToHome()">Easy<span>Biz</span></div>
+    <div class="logo"><a href="#" (click)="goToHome()">Easy<span>Biz</span></a></div>
   </div>
 
 </div>
 
-<div *ngIf="authenticated;else login">
-<nb-actions
-  size="medium"
-  class="header-container"
-  [class.right]="position === 'normal'"
-  [class.left]="position === 'inverse'">
+<div *ngIf="authenticated; else login"
+     class="header-container"
+     [class.right]="position === 'normal'"
+     [class.left]="position === 'inverse'">
+<nb-actions>
   <!--<nb-action icon="nb-grid-b" class="toggle-layout" (click)="toggleSettings()"></nb-action>-->
-  <nb-action *nbIsGranted="['view', 'user']">
-    <nb-user [nbContextMenu]="userMenu" [name]="user?.email"></nb-user>
-  </nb-action>
   <nb-action class="control-item" disabled icon="nb-notifications"></nb-action>
   <nb-action class="control-item" icon="nb-email"></nb-action>
-  <nb-action class="control-item">
-    <nb-search type="rotate-layout" (click)="startSearch()"></nb-search>
+  <nb-action class="control-item"><nb-search type="rotate-layout" (click)="startSearch()"></nb-search></nb-action>
+  <nb-action *nbIsGranted="['view', 'user']">
+    <nb-user [nbContextMenu]="userMenu" [name]="user?.email"></nb-user>
   </nb-action>
 </nb-actions>
 </div>
 
-<ng-template #login><a routerLink="/auth/login">Sign In</a></ng-template>
+<ng-template #login>
+<div class="header-container"
+     [class.right]="position === 'normal'"
+     [class.left]="position === 'inverse'">
+  <a routerLink="/auth/login">Sign In</a>
+</div>
+</ng-template>
