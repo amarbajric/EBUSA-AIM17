@@ -4,6 +4,22 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## 2018-05-02
+## Added
+- Authentication
+  - Components are in `@theme/auth`
+  - Validation takes configuration from `app.module.ts` => `NbAuthModule/providers/forms/validation`
+- Registration
+  - Currently takes \[firstname, lastname, username, email, password\] to the backend endpoint /register
+  - `NbAuthModule/providers/email/config` in `app.module.ts` is used to configure those endpoints
+  - access via `/auth/registration`
+- Roles
+  - Utilizes special roles and rights management
+  - Roles are currently assigned via the `role.provider.ts` which takes the first role from the token (issue)
+  - `NbSecurityModule` in `app.module.ts` is used to configure rights
+    - `view`, `create`, `remove` on role-level or `parent` to inherit rights
+    - `*nbIsGranted="\['view', 'user'\]"` is a condition the hides the element unless the user has the right `view` on `user`
+  
 
 ## 2018-04-29 ([#79](https://github.com/amarbajric/EBUSA-AIM17/pull/79))
 ## Added
