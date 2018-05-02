@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Component, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { NB_AUTH_OPTIONS, NbAuthSocialLink } from '@nebular/auth';
 import { getDeepFromObject } from '@nebular/auth/helpers';
@@ -40,6 +40,7 @@ export class EbRegisterComponent {
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected config = {},
               protected router: Router,
+              protected route: ActivatedRoute,
               protected asyncEmailValidation: AsyncEmailValidatorProvider) {
 
     this.redirectDelay = this.getConfigValue('forms.register.redirectDelay');
@@ -83,5 +84,4 @@ export class EbRegisterComponent {
   onMailChanged(event, emailErr) {
     !emailErr ? this.asyncEmail.next(event.target.value) : null;
   }
-
 }
