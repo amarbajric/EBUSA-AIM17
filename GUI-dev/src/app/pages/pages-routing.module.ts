@@ -5,7 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import {AuthGuard} from '../auth-guard.service';
-import {ApprovalComponent} from "./approval/approval.component";
+import {ApprovalComponent} from './approval/approval.component';
 
 
 const routes: Routes = [{
