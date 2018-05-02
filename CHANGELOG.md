@@ -18,8 +18,8 @@ The format is partially based on [Keep a Changelog](http://keepachangelog.com/en
   - Roles are currently assigned via the `role.provider.ts` which takes the first role from the token (issue)
   - `NbSecurityModule` in `app.module.ts` is used to configure rights
     - `view`, `create`, `remove` on role-level or `parent` to inherit rights
-    - `*nbIsGranted="\['view', 'user'\]"` is a condition the hides the element unless the user has the right `view` on `user`
-  
+    - `*nbIsGranted="['view', 'user']"` is a condition the hides the element unless the user has the right `view` on `user`
+
 
 ## 2018-04-29 ([#79](https://github.com/amarbajric/EBUSA-AIM17/pull/79))
 ## Added
