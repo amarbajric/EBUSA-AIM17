@@ -5,11 +5,16 @@ import { NgModule } from '@angular/core';
 import {
   EbAuthComponent, EbLoginComponent, EbRegisterComponent, EbLogoutComponent,
 } from './@theme/components/auth';
+import {EbTacComponent} from "./@theme/components/tac/tac.component";
 
 const routes: Routes = [
   { path: '',
     loadChildren: 'app/pages/pages.module#PagesModule',
     // canActivate: [AuthGuard],
+  },
+  {
+    path: 'tac',
+    component: EbTacComponent,
   },
   {
     path: 'auth',

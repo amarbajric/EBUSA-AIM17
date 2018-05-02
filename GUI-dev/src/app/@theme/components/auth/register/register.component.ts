@@ -55,7 +55,6 @@ export class EbRegisterComponent {
       }));
   }
 
-
   register(): void {
     this.errors = this.messages = [];
     this.submitted = true;

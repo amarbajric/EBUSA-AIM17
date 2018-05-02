@@ -43,6 +43,7 @@ import {
   EbAuthBlockComponent, EbAuthComponent, EbLoginComponent, EbRegisterComponent, EbLogoutComponent,
 } from './components/auth';
 import {EbEmailPassAuthProvider} from './providers/auth/email-pass-auth.provider';
+import {EbTacComponent} from "./components/tac/tac.component";
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -61,7 +62,6 @@ const NB_MODULES = [
   NbContextMenuModule,
   NgbModule,
   NbSecurityModule, // *nbIsGranted directive
-
   RouterModule,
 ];
 
@@ -75,6 +75,12 @@ const COMPONENTS = [
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  EbAuthComponent,
+  EbAuthBlockComponent,
+  EbLoginComponent,
+  EbRegisterComponent,
+  EbLogoutComponent,
+  EbTacComponent,
 
 ];
 
@@ -100,15 +106,7 @@ const NB_THEME_PROVIDERS = [
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
-  declarations: [...COMPONENTS, ...PIPES,
-
-    EbAuthComponent,
-    EbAuthBlockComponent,
-    EbLoginComponent,
-    EbRegisterComponent,
-    EbLogoutComponent,
-
-  ],
+  declarations: [...COMPONENTS, ...PIPES],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {

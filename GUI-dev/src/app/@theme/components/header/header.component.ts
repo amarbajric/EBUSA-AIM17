@@ -68,10 +68,6 @@ export class HeaderComponent implements OnInit {
     this.menuService.navigateHome();
   }
 
-  login() {
-    this.router.navigate('/auth/login');
-  }
-
   startSearch() {
     this.analyticsService.trackEvent('startSearch');
   }
