@@ -13,10 +13,6 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
   },
   {
-    path: 'tac',
-    component: EbTacComponent,
-  },
-  {
     path: 'auth',
     component: EbAuthComponent,
     children: [
@@ -37,6 +33,10 @@ const routes: Routes = [
         component: EbLogoutComponent,
       },
     ],
+  },
+  {
+    path: 'tac',
+    component: EbTacComponent,
   },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
