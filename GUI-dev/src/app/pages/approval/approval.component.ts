@@ -29,7 +29,7 @@ export class ApprovalComponent implements OnInit {
     this.iFrameSource = 'http://localhost:4200/#/home';
   }
 
-  transformUrl (url:string): any {
+  transformUrl(url: string): any {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
