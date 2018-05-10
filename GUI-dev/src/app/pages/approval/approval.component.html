@@ -6,7 +6,7 @@
 
   <!--<iframe [src]="transformUrl(iFrameSource)" class="modelGraphic"></iframe>-->
 
-<div>Process Details: </div>
+  <div><h2>Process Details: </h2></div>
   <nb-card>
   <div>
     <p>Process Name: {{process.process_name}}</p>
@@ -15,7 +15,7 @@
   </div>
   </nb-card>
 
-  <div>Review Comments: </div>
+  <!--<div>Review Comments: </div>
   <nb-card>
   <div *ngFor="let review of reviews">
     <p>
@@ -23,10 +23,19 @@
     </p>
     -----------------------------------------
   </div>
+  </nb-card>-->
+
+  <h2>Review Comments: </h2>
+  <nb-card>
+    <ul *ngFor="let review of reviews">
+      <li>{{review}}</li>
+    </ul>
   </nb-card>
 
+
+
   <div class="form-group">
-    <label for="comment">Comment:</label>
+    <label for="comment"><h2>Comment:</h2></label>
     <textarea class="form-control" rows="5" id="comment"></textarea>
   </div>
 

@@ -12,7 +12,7 @@ export class ApprovalComponent implements OnInit {
   @Input() process: Process;
 
   iFrameSource: string = 'http://localhost:4000/#/';
-  reviews: string[] = ['Awesome process model", "This could use some serious improvement", "Subject X is missing'];
+  reviews: string[] = ['Awesome process model', 'This could use some serious improvement', 'Subject X is missing'];
 
   constructor(private sanitizer: DomSanitizer) {
 
