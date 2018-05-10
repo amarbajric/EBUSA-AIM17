@@ -13,14 +13,7 @@ export class Process {
   u_id?: number;
 }
 
-export class Rating {
-  // define props...
-  rating_id?: number;
-  comment?: string;
-  rating?: number;
-  process_id: number;
-  u_id?: number;
-}
+
 
 export class Review {
   // define props...
