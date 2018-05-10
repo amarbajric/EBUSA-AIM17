@@ -5,14 +5,14 @@ import {Process} from '../../../models/models';
 @Component({
   selector: 'ngx-dashboard',
   templateUrl: './approval.component.html',
-  styleUrls:['./approval.component.scss'],
+  styleUrls: ['./approval.component.scss'],
 })
 export class ApprovalComponent implements OnInit {
 
-  @Input() process:Process;
+  @Input() process: Process;
 
   iFrameSource: string = 'http://localhost:4000/#/';
-  reviews:string[] = ['Awesome process model", "This could use some serious improvement", "Subject X is missing'];
+  reviews: string[] = ['Awesome process model", "This could use some serious improvement", "Subject X is missing'];
 
   constructor(private sanitizer: DomSanitizer) {
 
@@ -29,7 +29,7 @@ export class ApprovalComponent implements OnInit {
     this.iFrameSource = 'http://localhost:4200/#/home';
   }
 
-  transformUrl(url:string):any {
+  transformUrl(url:string): any {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
