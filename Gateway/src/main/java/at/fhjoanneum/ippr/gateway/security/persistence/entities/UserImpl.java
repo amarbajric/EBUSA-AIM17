@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.google.common.base.Objects;
@@ -61,8 +62,11 @@ public class UserImpl implements User, Serializable {
   @JoinColumn(name = "o_id")
   private OrganizationImpl organization;
 
-  @Column
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(nullable = false, updatable=false)
   Date createdAt;
+
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "user_role_map", joinColumns = {@JoinColumn(name = "u_id")},
