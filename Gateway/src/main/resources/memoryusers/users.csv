@@ -1,6 +1,6 @@
 username;firstname;lastname;password;email;systemId;roles
-stefan;Stefan;Stani;1234;stani@ebusa.com;STANI;EMPLOYEE
-matthias;Matthias;Geisriegler;1234;geisriegler@ebusa.com;GEISRIEGLER;EMPLOYEE,ADMIN
-robert;Robert;Singer;1234;singer@ebusa.com;SINGER;BOSS
-maksym;Maksym;Kolody;1234;kolody@ebusa.com;KOLODY;EMPLOYEE
-marlene;Marlene;TUI;1234;tui@ebusa.com;TUI;TRAVEL
+stefan;Stefan;Stani;1234;stani@ebusa.com;STANI_EBUSA_COM;EMPLOYEE
+matthias;Matthias;Geisriegler;1234;geisriegler@ebusa.com;GEISRIEGLER_EBUSA_COM;EMPLOYEE,ADMIN
+robert;Robert;Singer;1234;singer@ebusa.com;SINGER_EBUSA_COM;BOSS
+maksym;Maksym;Kolody;1234;kolody@ebusa.com;KOLODY_EBUSA_COM;EMPLOYEE
+marlene;Marlene;TUI;1234;tui@ebusa.com;TUI_EBUSA_COM;TRAVEL
