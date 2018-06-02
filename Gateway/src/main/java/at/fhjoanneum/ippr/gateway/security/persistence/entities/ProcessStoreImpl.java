@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
-@Entity(name="PROCESSSTORE")
+@Entity(name="process_store")
 @XmlRootElement
 public class ProcessStoreImpl implements ProcessStore {
 

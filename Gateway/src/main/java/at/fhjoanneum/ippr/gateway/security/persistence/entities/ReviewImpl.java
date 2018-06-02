@@ -5,7 +5,7 @@ import at.fhjoanneum.ippr.gateway.security.persistence.objects.Review;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity(name="REVIEW")
+@Entity(name="review")
 @XmlRootElement
 public class ReviewImpl implements Review {
 

@@ -25,7 +25,7 @@ import at.fhjoanneum.ippr.gateway.security.persistence.objects.Role;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Rule;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.User;
 
-@Entity(name = "USER")
+@Entity(name = "user")
 @XmlRootElement
 public class UserImpl implements User, Serializable {
 
@@ -46,10 +46,10 @@ public class UserImpl implements User, Serializable {
   @NotBlank
   private String lastname;
 
-  @Column(unique = true)
+  @Column
   private String username;
 
-  @Column
+  @Column(unique = true)
   @NotBlank
   private String email;
 
@@ -58,7 +58,7 @@ public class UserImpl implements User, Serializable {
   private String password;
 
   @ManyToOne
-  @JoinColumn(name= "o_id")
+  @JoinColumn(name = "o_id")
   private OrganizationImpl organization;
 
   @Column
@@ -205,7 +205,7 @@ public class UserImpl implements User, Serializable {
   public String toString() {
     return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("uId", uId)
         .append("lastname", lastname).append("firstname", firstname).append("email", email)
-        .append("orgId",organization.toString()).append("groups", roles)
+        .append("username", username).append("orgId",organization.toString()).append("groups", roles)
         .toString();
   }
 }

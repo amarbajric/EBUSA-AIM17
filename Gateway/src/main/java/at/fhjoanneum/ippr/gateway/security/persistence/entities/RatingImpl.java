@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity(name="RATING")
+@Entity(name="rating")
 @XmlRootElement
 public class RatingImpl implements Rating {
 

@@ -11,7 +11,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@Entity(name = "ORGANIZATION")
+@Entity(name = "organization")
 @XmlRootElement
 public class OrganizationImpl implements Organization {
 
