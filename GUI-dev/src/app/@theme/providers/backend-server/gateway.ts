@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
+import {User} from "../../../../models/models";
 
 
 @Injectable()
@@ -17,6 +18,14 @@ export class GatewayProvider {
     this.http.get<Array<any>>(null, {})
       .toPromise()
       .then(processes => processes);
+  */
+
+  // gets a specific (userId) user
+  /*
+  getUser (userId: string): Promise<User> {
+    return this.http.get<User>(this.serverConfig.getUser + userId)
+      .toPromise()
+  }
   */
 
 }

@@ -5,6 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import {AuthGuard} from '../auth-guard.service';
+import {UserDetailsComponent} from "./user-details/user-details.component";
 
 
 const routes: Routes = [{
@@ -24,6 +25,11 @@ const routes: Routes = [{
       path: '',
       redirectTo: 'home',
       pathMatch: 'full',
+    },
+    {
+      path: 'user-details',
+      component: UserDetailsComponent,
+      canActivate: [AuthGuard]
     },
   ],
 }];
