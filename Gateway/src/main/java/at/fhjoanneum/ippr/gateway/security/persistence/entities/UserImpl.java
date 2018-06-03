@@ -64,6 +64,7 @@ public class UserImpl implements User, Serializable {
 
   @ManyToOne
   @JoinColumn(name = "o_id")
+  @JsonIgnore
   private OrganizationImpl organization;
 
   @CreationTimestamp

@@ -46,7 +46,7 @@ public class UserController {
   @Autowired
   private RBACService rbacService;
 
-  @RequestMapping(value = "user/login", method = RequestMethod.POST)
+  @RequestMapping(value = "api/user/login", method = RequestMethod.POST)
   public ResponseEntity<LoginResponse> login(@RequestBody final UserLogin login) {
 
     final Optional<User> userOpt =
@@ -74,7 +74,7 @@ public class UserController {
     return new ResponseEntity<>(loginResponse, HttpStatus.OK);
   }
 
-  @RequestMapping(value = "user/register", method = RequestMethod.POST)
+  @RequestMapping(value = "api/user/register", method = RequestMethod.POST)
   public ResponseEntity<RegisterResponse> register(@RequestBody final UserRegister register) {
 
     final Optional<User> userOpt =
@@ -87,7 +87,7 @@ public class UserController {
     return new ResponseEntity<>(new RegisterResponse("Ok"), HttpStatus.OK);
   }
 
-  @RequestMapping(value = "user/register/checkIfMailTaken", method = RequestMethod.POST)
+  @RequestMapping(value = "api/user/register/checkIfMailTaken", method = RequestMethod.POST)
   public ResponseEntity<CheckMailResponse> checkIfMailExists(@RequestBody final RegisterMailCheck mailCheck) {
 
     final Optional<User> userOpt = registrationService.checkIfMailTaken(mailCheck.email);
@@ -102,7 +102,7 @@ public class UserController {
   }
 
   @RequestMapping(value = "api/me", method = {RequestMethod.GET})
-  public User login(final HttpServletRequest request) throws ServletException {
+  public User getLoggedInUser(final HttpServletRequest request) throws ServletException {
     final Claims claims = (Claims) request.getAttribute("claims");
     final Integer userId = (Integer) claims.get("userId");
 
