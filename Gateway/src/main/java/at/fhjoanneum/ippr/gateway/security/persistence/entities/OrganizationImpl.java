@@ -3,6 +3,7 @@ package at.fhjoanneum.ippr.gateway.security.persistence.entities;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.NotBlank;
@@ -20,6 +21,7 @@ public class OrganizationImpl implements Organization {
     private Long oId;
 
     @Column(unique = true)
+    @JsonIgnore
     private String systemId;
 
     @Column
@@ -56,7 +58,7 @@ public class OrganizationImpl implements Organization {
     }
 
     @Override
-    public String getOrganisationName() {
+    public String getOrganizationName() {
         return organizationName;
     }
 

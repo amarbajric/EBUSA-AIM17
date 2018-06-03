@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -37,6 +39,7 @@ public class UserImpl implements User, Serializable {
   private Long uId;
 
   @Column(unique = true)
+  @JsonIgnore
   private String systemId;
 
   @Column
@@ -55,6 +58,7 @@ public class UserImpl implements User, Serializable {
   private String email;
 
   @Column
+  @JsonIgnore
   @NotBlank
   private String password;
 
@@ -64,6 +68,7 @@ public class UserImpl implements User, Serializable {
 
   @CreationTimestamp
   @Temporal(TemporalType.TIMESTAMP)
+  @JsonFormat(pattern = "yyyy-MM-dd")
   @Column(nullable = false, updatable=false)
   Date createdAt;
 

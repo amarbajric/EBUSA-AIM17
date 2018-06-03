@@ -6,7 +6,7 @@ public interface Organization {
 
     String getSystemId();
 
-    String getOrganisationName();
+    String getOrganizationName();
 
     void setOrganizationName(String organizationName);
 
