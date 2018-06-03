@@ -9,25 +9,18 @@ import {GatewayProvider} from "../../@theme/providers/backend-server/gateway";
 })
 export class UserDetailsComponent {
 
-  /*
   user: User = new User();
-  userId: string = "";
+  constructor (private gateway: GatewayProvider) {
 
-  constructor (private authService: NbAuthService,
-               private gateway: GatewayProvider
-               ) {
-
-    this.authService.onTokenChange()
-      .subscribe((token: NbAuthJWTToken) => {
-        if (token.isValid()) {
-          this.userId = token.getPayload().userId;
-        }
+    /*
+    this.gateway.getUser()
+      .then((user) => {
+        this.user = user;
+        console.log(this.user);
       });
+    */
 
-    this.gateway.getUser(this.userId)
-      .then((retUser) =>
-        this.user = retUser
-      )
+    //test
+    this.gateway.getUser2();
   }
-  */
 }

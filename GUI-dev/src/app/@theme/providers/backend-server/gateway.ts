@@ -20,12 +20,19 @@ export class GatewayProvider {
       .then(processes => processes);
   */
 
-  // gets a specific (userId) user
-  /*
-  getUser (userId: string): Promise<User> {
-    return this.http.get<User>(this.serverConfig.getUser + userId)
+  // gets the current user
+  getUser (): Promise<User> {
+    return this.http.get<User>(this.serverConfig.getUser)
       .toPromise()
   }
-  */
+
+  //test for current user
+  getUser2 () {
+    this.http.get(this.serverConfig.getUser)
+      .subscribe(
+        data => console.log(data),
+        err => console.log(err)
+      )
+  }
 
 }

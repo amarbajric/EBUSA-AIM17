@@ -46,6 +46,8 @@ import { EbEmailPassAuthProvider } from './providers/auth/email-pass-auth.provid
 import { EbTacComponent } from './components/tac/tac.component';
 import {GatewayProvider} from "./providers/backend-server/gateway";
 import {ServerConfigProvider} from "./providers/backend-server/serverconfig";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {TokenInterceptor} from "./components/auth/token.interceptor";
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -97,6 +99,13 @@ const NB_THEME_PROVIDERS = [
   EbEmailPassAuthProvider,
   GatewayProvider,
   ServerConfigProvider,
+  [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   ...NbThemeModule.forRoot(
     {
       name: 'default',
