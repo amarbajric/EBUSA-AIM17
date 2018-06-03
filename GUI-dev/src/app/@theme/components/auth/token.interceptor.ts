@@ -3,10 +3,10 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import {NbAuthService} from "@nebular/auth";
+import {NbAuthService} from '@nebular/auth';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -17,12 +17,12 @@ export class TokenInterceptor implements HttpInterceptor {
 
     request = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${this.auth.getToken()}`
-      }
+        Authorization: `Bearer ${this.auth.getToken()}`,
+      },
     });
 
-    console.log(request.headers);
-    console.log(this.auth.getToken());
+    // console.log(request.headers);
+    // console.log(this.auth.getToken());
 
     return next.handle(request);
   }

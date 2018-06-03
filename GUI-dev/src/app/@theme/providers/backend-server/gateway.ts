@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
-import {User} from "../../../../models/models";
+import {User} from '../../../../models/models';
 
 
 @Injectable()
@@ -26,13 +26,13 @@ export class GatewayProvider {
       .toPromise()
   }
 
-  //test for current user
+  // test for current user
   getUser2 () {
     this.http.get(this.serverConfig.getUser)
       .subscribe(
-        data => console.log(data),
-        err => console.log(err)
-      )
+        data => {}, // console.log(data),
+        err => {} // console.log(err)
+      );
   }
 
 }

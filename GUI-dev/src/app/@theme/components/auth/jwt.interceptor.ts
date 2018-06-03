@@ -1,10 +1,10 @@
 import 'rxjs/add/operator/do';
 import {
   HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,
-  HttpResponse
-} from "@angular/common/http";
-import {NbAuthService} from "@nebular/auth";
-import {Observable} from "rxjs/Observable";
+  HttpResponse,
+} from '@angular/common/http';
+import {NbAuthService} from '@nebular/auth';
+import {Observable} from 'rxjs/Observable';
 
 export class JwtInterceptor implements HttpInterceptor {
 

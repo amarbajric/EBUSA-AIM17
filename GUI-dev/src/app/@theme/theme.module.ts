@@ -44,10 +44,10 @@ import {
 } from './components/auth';
 import { EbEmailPassAuthProvider } from './providers/auth/email-pass-auth.provider';
 import { EbTacComponent } from './components/tac/tac.component';
-import {GatewayProvider} from "./providers/backend-server/gateway";
-import {ServerConfigProvider} from "./providers/backend-server/serverconfig";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {TokenInterceptor} from "./components/auth/token.interceptor";
+import {GatewayProvider} from './providers/backend-server/gateway';
+import {ServerConfigProvider} from './providers/backend-server/serverconfig';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {TokenInterceptor} from './components/auth/token.interceptor';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -103,8 +103,8 @@ const NB_THEME_PROVIDERS = [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   ...NbThemeModule.forRoot(
     {

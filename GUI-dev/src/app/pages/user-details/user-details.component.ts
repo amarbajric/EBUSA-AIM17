@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {NbAuthJWTToken, NbAuthService} from "@nebular/auth";
-import {User} from "../../../models/models";
-import {GatewayProvider} from "../../@theme/providers/backend-server/gateway";
+import {Component} from '@angular/core';
+import {User} from '../../../models/models';
+import {GatewayProvider} from '../../@theme/providers/backend-server/gateway';
 
 @Component({
   selector: 'ngx-user-details',
@@ -20,7 +19,7 @@ export class UserDetailsComponent {
       });
     */
 
-    //test
+    // test
     this.gateway.getUser2();
   }
 }
