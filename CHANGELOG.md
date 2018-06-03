@@ -4,6 +4,27 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## 2018-06-03 ([#91](https://github.com/amarbajric/EBUSA-AIM17/pull/91))
+## Added
+- Menu
+  - Entry "Process Store"
+- Components/Modules
+  - ProcessStoreSearchComponent (uses test data at the moment)
+  - ProcessStoreSearchModule
+- Routings
+  - "processstore-search" -> "ProcessStoreSearchComponent"
+- Models (Angular)
+  - ProcessStore (based on ProcessStoreDTO from active feature branch)
+- Services (Angular)
+  - ProcessStoreService (preparation, not in use at the moment)
+- Pipes
+  - SimpleSearchPipe
+- NPM Dependencies
+  - angular-star-rating
+    - css-star-rating
+- Static Assets
+  - "star-rating.icons.svg"
+
 ## 2018-05-02 ([#89](https://github.com/amarbajric/EBUSA-AIM17/pull/89))
 ## Added
 - Authentication

@@ -24,6 +24,7 @@ import { AuthGuard } from './auth-guard.service';
 import { EbEmailPassAuthProvider } from './@theme/providers/auth/email-pass-auth.provider';
 import { AsyncEmailValidatorProvider } from './@theme/providers/async-email-validator/async-email-validator';
 import { ServerConfigProvider } from './@theme/providers/backend-server/serverconfig';
+import { ProcessStoreService } from './processstore.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -100,6 +101,7 @@ import { ServerConfigProvider } from './@theme/providers/backend-server/serverco
     AsyncEmailValidatorProvider,
     ServerConfigProvider,
     AuthGuard,
+    ProcessStoreService,
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
     { provide: NbRoleProvider, useClass: RoleProvider },

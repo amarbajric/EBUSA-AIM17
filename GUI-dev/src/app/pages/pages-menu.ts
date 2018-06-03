@@ -6,6 +6,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-bar-chart',
     link: '/dashboard',
   },
+  {
+    title: 'Process Store',
+    icon: 'ion-cash',
+    link: '/processstore-search',
+  },
   /*{
     title: 'FEATURES',
     group: true,

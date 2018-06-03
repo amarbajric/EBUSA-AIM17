@@ -5,6 +5,19 @@ export class Process {
   // define props...
 }
 
+export class ProcessStore {
+  processId: number;
+  processName: string;
+  processDescription: string;
+  processCreator: string;
+  processCreatedAt: Date;
+  processVersion: number;
+  processPrice: number;
+  // missing in current ProcessStoreDTO in backend:
+  processImageSource: string;
+  processAverageRating: number;
+}
+
 
 export class User {
   firstname: string;

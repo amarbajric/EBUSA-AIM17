@@ -1,0 +1,52 @@
+<div _ngcontent-c20="" class="row show-grid">
+    <div _ngcontent-c20="" class="col-md-2">
+        <nb-card _ngcontent-c20="">
+            <nb-card-body>
+                Filter 1 <br>
+                Filter 2 <br>
+                Filter 3
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div _ngcontent-c20="" class="col-md-10">
+        <div class="row">
+            <nb-card _nghost-c23="" class="col-md-12">
+                <nb-card-body>
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            <div class="input-group">
+                                <span class="input-group-addon transparent"><i _ngcontent-c31="" class="nb-search" style="vertical-align: middle;"></i></span>
+                                <input [(ngModel)]="processSearchString" id="processSearchString" class="form-control left-border-none" placeholder="Search for processes .." type="text" name="processSearchString">
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+
+        <div class="row">
+            <div *ngFor="let process of processes | simpleSearch:'processName,processDescription':processSearchString" _ngcontent-c12="" class="col-md-6">
+                <nb-card _ngcontent-c13="" _nghost-c23="">
+                    <nb-card-header _ngcontent-c29="">{{process.processName}}</nb-card-header>
+                    <nb-card-body>
+                        <div class="float-right">by {{process.processCreator}}</div>
+                        <div><img [src]="process.processImageSource" class="img-fluid"></div>
+                        {{process.processDescription}}
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-9" style="font-size: 2.0rem">€ {{process.processPrice}}</div>
+                            <div class="col-md-3">
+                                <star-rating [starType]="'svg'" [rating]="process.processAverageRating" [staticColor]="'ok'" [disabled]="true" [showHalfStars]="true"></star-rating>
+                            </div>
+                        </div>
+                        <div class="float-right">
+                            <a [routerLink]="['/processstore-details/'+process.processId]">view details</a>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+              
+            
+        </div>
+    </div>
+</div>
