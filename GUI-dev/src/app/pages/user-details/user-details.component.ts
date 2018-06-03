@@ -11,15 +11,10 @@ export class UserDetailsComponent {
   user: User = new User();
   constructor (private gateway: GatewayProvider) {
 
-    /*
     this.gateway.getUser()
       .then((user) => {
         this.user = user;
-        console.log(this.user);
-      });
-    */
-
-    // test
-    this.gateway.getUser2();
+      })
+      .catch(err => console.log(err));
   }
 }

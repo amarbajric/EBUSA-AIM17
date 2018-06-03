@@ -6,7 +6,8 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import {NbAuthService} from '@nebular/auth';
+import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -14,16 +15,18 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(public auth: NbAuthService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.auth.getToken()}`,
-      },
-    });
-
-    // console.log(request.headers);
-    // console.log(this.auth.getToken());
-
-    return next.handle(request);
+    return this.auth.getToken()
+      .pipe(
+        switchMap((token: NbAuthJWTToken) => {
+          if (token.isValid()) {
+            request = request.clone({
+              setHeaders: {
+                Authorization: `Bearer ${token.getValue()}`
+              }
+            })
+          }
+          return next.handle(request)
+        }),
+      );
   }
 }

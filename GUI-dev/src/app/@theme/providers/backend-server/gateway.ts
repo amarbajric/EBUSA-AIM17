@@ -26,13 +26,4 @@ export class GatewayProvider {
       .toPromise()
   }
 
-  // test for current user
-  getUser2 () {
-    this.http.get(this.serverConfig.getUser)
-      .subscribe(
-        data => {}, // console.log(data),
-        err => {}, // console.log(err)
-      );
-  }
-
 }
