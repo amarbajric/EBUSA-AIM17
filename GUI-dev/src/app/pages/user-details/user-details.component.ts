@@ -15,6 +15,5 @@ export class UserDetailsComponent {
       .then((user) => {
         this.user = user;
       })
-      .catch(err => console.log(err));
   }
 }
