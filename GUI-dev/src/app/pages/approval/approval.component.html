@@ -3,8 +3,15 @@
     <nb-card-body>This is the approval page for EasyBiz model reviewer</nb-card-body>
   </nb-card>
 
+  <h2>Process models that need approval: </h2>
+  <nb-card>
+    <ul *ngFor="let processModel of processModels">
+      <li>{{processModel}}</li>
+    </ul>
+  </nb-card>
 
-  <!--<iframe [src]="transformUrl(iFrameSource)" class="modelGraphic"></iframe>-->
+  <div><h2> Process model: </h2></div>
+  <iframe [src]="transformUrl(iFrameSource)" class="modelGraphic"></iframe>
 
   <div><h2>Process Details: </h2></div>
   <nb-card>
@@ -40,7 +47,7 @@
   </div>
 
   <!--<button ng-click="changeIFrame()" class="btn btn-info" (click)="switchIFrameSource()">Change iFrame</button>-->
-  <button ng-click="postComment()" class="btn btn-info" (click)="postComment()">Post comment</button>
+  <button ng-click="postComment()" class="btn btn-info" (click)="postComment(comment)">Post comment</button>
   <button ng-click="approveProcessModel()" class="btn btn-success">Approve this process model</button>
   <button ng-click="denyProcessModel()" class="btn btn-danger">Deny this process model</button>
 

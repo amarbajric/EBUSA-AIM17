@@ -4,6 +4,14 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## 2018-06-03 ([#87](https://github.com/amarbajric/EBUSA-AIM17/pull/87))
+## Added
+- Approval page
+  - added to navigation
+  - added model for Process and Review in models.ts
+  - page uses test data instead of actual data from the DB
+  - iFrame is supposed to show process model of the process that is to be reviewed
+
 ## 2018-05-02 ([#89](https://github.com/amarbajric/EBUSA-AIM17/pull/89))
 ## Added
 - Authentication

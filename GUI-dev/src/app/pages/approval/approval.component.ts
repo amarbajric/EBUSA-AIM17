@@ -13,6 +13,7 @@ export class ApprovalComponent implements OnInit {
 
   iFrameSource: string = 'http://localhost:4000/#/';
   reviews: string[] = ['Awesome process model', 'This could use some serious improvement', 'Subject X is missing'];
+  processModels: string[] = ['Process 1', 'Process 2', 'Process 3'];
 
   constructor(private sanitizer: DomSanitizer) {
 
@@ -33,5 +34,16 @@ export class ApprovalComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
+  postComment() {
+    // add API calls for posting and approving/denying models
+  }
+
+  approveProcessModel() {
+
+  }
+
+  denyProcessModel() {
+
+  }
 
 }
