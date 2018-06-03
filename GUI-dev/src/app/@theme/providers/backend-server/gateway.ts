@@ -31,7 +31,7 @@ export class GatewayProvider {
     this.http.get(this.serverConfig.getUser)
       .subscribe(
         data => {}, // console.log(data),
-        err => {} // console.log(err)
+        err => {}, // console.log(err)
       );
   }
 
