@@ -1,10 +1,10 @@
 import 'rxjs/add/operator/switchMap';
 import { Component,  OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {ProcessesService} from '../../../../allProcesses.service';
 import {User} from '../../../../../models/models';
 
-type businessObject = {
+interface businessObject {
   bomId: number,
   boiId: number,
   name: string,
@@ -73,7 +73,7 @@ export class ActiveProcessDetailComponent implements OnInit {
     this.businessObjects = undefined;
     this.nextStates = undefined;
     // this.spinner.show();
-    if( ! this.nextIsEndState) {
+    if (!this.nextIsEndState) {
       that.assignedUsers = undefined;
       this.service.getProcessState(this.piId)
         .subscribe(
@@ -96,13 +96,13 @@ export class ActiveProcessDetailComponent implements OnInit {
             let dataJson;
             try {
               dataJson = JSON.parse(data['_body']);
-            } catch(e) {
+            } catch (e) {
               return false;
             }
             that.businessObjects = dataJson.businessObjects;
             that.nextStates = dataJson.nextStates;
             that.assignedUsers = dataJson.assignedUsers;
-            if(that.assignedUsers) {
+            if (that.assignedUsers) {
               that.getPossibleUserAssignments();
             }
           },
@@ -121,7 +121,7 @@ export class ActiveProcessDetailComponent implements OnInit {
     const that = this;
     this.assignedUsers.forEach(
       au => {
-        if(!au.userId) {
+        if (!au.userId) {
           that.service.getPossibleUsersForProcessModel(au.assignedRules).
           subscribe(
             data => {
@@ -147,12 +147,12 @@ export class ActiveProcessDetailComponent implements OnInit {
     const businessObjectsValues = [];
     const userAssignments = [];
     that.nextIsEndState = that.nextStates.filter(ns => ns.nextStateId === form.nextStateId)[0].endState;
-    if(this.isSendState()) {
+    if (this.isSendState()) {
        Object.keys(form.value).forEach(k => {
         const kSplit = k.split('User-Assignment_:-');
-        if(kSplit.length > 1) {
+        if (kSplit.length > 1) {
           const value = form.value[k];
-          userAssignments.push({smId:value.smId, userId:value.userId});
+          userAssignments.push({smId: value.smId, userId: value.userId});
         }
       });
     }
@@ -175,19 +175,19 @@ export class ActiveProcessDetailComponent implements OnInit {
     const childBoValues = [];
       Object.keys(form.value).forEach(k => {
       const kSplit = k.split('-:_');
-      if(kSplit.length > 1) {
+      if (kSplit.length > 1) {
         const bomId = kSplit[0];
         const bofmId = kSplit[1];
-        if(bomId === (bo.bomId).toString()) {
+        if (bomId === (bo.bomId).toString()) {
           const value = form.value[k];
-          fields.push({bofmId: bofmId, value: value,});
+          fields.push({bofmId: bofmId, value: value});
         }
       }
     });
     bo.children.forEach(childBo => {
       childBoValues.push(this.getBusinessObjectsValues(childBo, form))},
     );
-    return {bomId:bo.bomId, fields:fields, children:childBoValues};
+    return {bomId: bo.bomId, fields: fields, children: childBoValues};
   }
 
   private submitStateChange(businessObjectsAndNextStateAndUserAssignments) {
@@ -211,7 +211,7 @@ export class ActiveProcessDetailComponent implements OnInit {
   }
 
   isReceiveState() {
-    if(this.subjectsState) {
+    if (this.subjectsState) {
       return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].stateFunctionType === 'RECEIVE';
     } else {
       return false;
@@ -219,7 +219,7 @@ export class ActiveProcessDetailComponent implements OnInit {
   }
 
   isToReceiveState() {
-    if(this.subjectsState) {
+    if (this.subjectsState) {
       return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].subState === 'TO_RECEIVE';
     } else {
       return false;
@@ -227,7 +227,7 @@ export class ActiveProcessDetailComponent implements OnInit {
   }
 
   isReceivedState() {
-    if(this.subjectsState) {
+    if (this.subjectsState) {
       return this.subjectsState.subjects.filter(s => s.userId ===
         this._user.getUid())[0].subState === 'RECEIVED';
     } else {
@@ -236,7 +236,7 @@ export class ActiveProcessDetailComponent implements OnInit {
   }
 
   isSendState() {
-    if(this.subjectsState) {
+    if (this.subjectsState) {
       return this.subjectsState.subjects.filter(s => s.userId ===
         this._user.getUid())[0].stateFunctionType === 'SEND';
     } else {

@@ -18,26 +18,26 @@ export class ManipulatePNMLComponent implements OnInit {
   }
 
   onPNMLFileChange(event) {
-    const that = this;
+    // const that = this;
     this.pnmlFile = event.srcElement.files[0];
     const split = this.pnmlFile.name.split('.');
-    if(split[split.length - 1] !== 'pnml') {
+    if (split[split.length - 1] !== 'pnml') {
       this.pnmlFile = undefined;
       event.target.value = '';
     }
   }
 
   onCSVFileChange(event) {
-    const that = this;
+    // const that = this;
     this.csvFile = event.srcElement.files[0];
     const split = this.csvFile.name.split('.');
-    if(split[split.length - 1] !== 'csv') {
+    if (split[split.length - 1] !== 'csv') {
       this.csvFile = undefined;
       event.target.value = '';
     }
   }
 
-  uploadFiles(form):void {
+  uploadFiles(form): void {
     const that = this;
     const pnmlReader = new FileReader();
     const csvReader = new FileReader();
@@ -62,7 +62,7 @@ export class ManipulatePNMLComponent implements OnInit {
   }
 
   saveData(data, fileName) {
-    let a = document.createElement('a');
+    const a = document.createElement('a');
     document.body.appendChild(a);
     a.style.cssText = 'display: none';
     const blob = new Blob([data._body], {type: 'application/xml'});

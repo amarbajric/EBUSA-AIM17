@@ -4,13 +4,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {NbSpinnerService} from '@nebular/theme';
 
 @Component({
-  selector: 'ngx-activeProcesses',
+  selector: 'ngx-active-processes',
   styleUrls: [],
   templateUrl:  './activeProcesses.html',
 })
 export class ActiveProcessesComponent implements OnInit  {
 
-  activeProcesses:[
+  activeProcesses: [
     {
       piId: number,
       startTime: number[],
@@ -35,17 +35,17 @@ export class ActiveProcessesComponent implements OnInit  {
         },
         err => {
           that.msg = {text: err, type: 'error'}
-          console.log(err);
+          // console.log(err);
           that.spinner.clear();
         },
       );
   }
 
-  showProcess(piId:number) {
+  showProcess(piId: number) {
     this.router.navigate(['../active', piId], { relativeTo: this.route });
   }
 
-  stopProcess(piId:number) {
+  stopProcess(piId: number) {
     this.service.stopProcess(piId)
     .subscribe(
         data => {

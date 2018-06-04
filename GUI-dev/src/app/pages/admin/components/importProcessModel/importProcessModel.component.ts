@@ -29,10 +29,10 @@ export class ImportProcessModelComponent implements OnInit {
   }
 
   onFileChange(event) {
-    const that = this;
+    // const that = this;
     this.owlFile = event.srcElement.files[0];
     const split = this.owlFile.name.split('.');
-    if(split[split.length - 1] !== 'owl') {
+    if (split[split.length - 1] !== 'owl') {
       this.owlFile = undefined;
       event.target.value = '';
     }
@@ -41,7 +41,7 @@ export class ImportProcessModelComponent implements OnInit {
   uploadOWLModel(form): void {
     const that = this;
     const reader = new FileReader();
-    if(this.owlFile) {
+    if (this.owlFile) {
       reader.onload = function(e) {
         const body = {owlContent: reader.result, version: '0.7.' + that.version}
         that.service.uploadOWLModel(body)
@@ -84,11 +84,12 @@ export class ImportProcessModelComponent implements OnInit {
     processModelResult = this.processModel;
     processModelResult.bofms = this.getBofms();
     processModelResult.bofps = [];
-    Object.keys(this.buildedBofps).forEach(a => processModelResult.bofps = processModelResult.bofps.concat((<any>Object).values(this.buildedBofps[a])));
+    Object.keys(this.buildedBofps).forEach(a => processModelResult.bofps = processModelResult.bofps.
+    concat((<any>Object).values(this.buildedBofps[a])));
     this.service.importProcessModel(processModelResult)
        .subscribe(
           data => {
-             if( JSON.parse(data['_body']) === true){
+             if ( JSON.parse(data['_body']) === true){
                that.processModel = undefined;
                that.rules = undefined;
                that.error = undefined;
@@ -111,12 +112,12 @@ export class ImportProcessModelComponent implements OnInit {
 
   getBofms() {
     const result = [];
-    if(this.currentSelectedBusinessObject) {
-      for(const bom in this.buildedBusinessObjects) {
-        if(Object.keys(this.buildedBusinessObjects[bom]).length > 0) {
+    if (this.currentSelectedBusinessObject) {
+      for (const bom in this.buildedBusinessObjects) {
+        if (Object.keys(this.buildedBusinessObjects[bom]).length > 0) {
           const values = JSON.parse(this.buildedBusinessObjects[bom]);
           values.forEach(value => {
-            if( value.type !== 'paragraph' ) {
+            if ( value.type !== 'paragraph' ) {
               let type;
               switch (value.type) {
                 case 'text':
@@ -150,13 +151,13 @@ export class ImportProcessModelComponent implements OnInit {
   }
 
   initFormBuilder(businessObject): void {
-    const that = this;
-    const options = {
+    // const that = this;
+   /* const options = {
       dataType: 'json', // default: 'xml',
       disableFields: ['autocomplete', 'button', 'checkbox-group', 'file', 'header', 'hidden', 'paragraph', 'select',
         'textarea'],
       showActionButtons: false,
-    };
+    }; */
     // this.formBuilder = jQuery('.formBuilder').formBuilder(options).data('formBuilder');
 
     /*// Timeout, otherwise the formData will still be the old value
@@ -174,18 +175,18 @@ export class ImportProcessModelComponent implements OnInit {
 
   getFormData(businessObject, internal?: boolean): void {
     const that = this;
-    if(this.currentSelectedBusinessObject !== businessObject){
+    if (this.currentSelectedBusinessObject !== businessObject){
       this.buildedBusinessObjects[this.currentSelectedBusinessObject.id] = this.formBuilder.formData;
       const formData = this.buildedBusinessObjects[businessObject.id];
       // formData = jQuery.isEmptyObject(formData) ? undefined : formData === '[]' ? undefined : formData;
-      if(formData !== undefined && !internal) {
+      if (formData !== undefined && !internal) {
         // This is a necessary thing, otherwise setData will not work correctly
         this.formBuilder.actions.addField(
         {
-        		'type': 'paragraph',
-        		'subtype': 'p',
-        		'label': 'Paragraph',
-        		'className': 'paragraph',
+          'type': 'paragraph',
+          'subtype': 'p',
+        	'label': 'Paragraph',
+        	'className': 'paragraph',
         },
         );
         this.formBuilder.actions.setData(formData);
@@ -201,7 +202,7 @@ export class ImportProcessModelComponent implements OnInit {
     const allBofms = this.getBofms();
     allBofms.forEach(field => {
       const boms = that.processModel.boms.filter(bom => bom.id === field.bomId);
-      if(!that.buildedBofps[field.id]) {
+      if (!that.buildedBofps[field.id]) {
         that.buildedBofps[field.id] = {};
         boms.forEach(bom => {
           bom.stateIds.forEach(stateId => {
@@ -219,7 +220,7 @@ export class ImportProcessModelComponent implements OnInit {
 
     // remove deleted fields
     Object.keys(this.buildedBofps).forEach(fieldId => {
-      if(allBofms.filter(b => b.id === fieldId).length < 1) {
+      if (allBofms.filter(b => b.id === fieldId).length < 1) {
           delete this.buildedBofps[fieldId];
       }
     });

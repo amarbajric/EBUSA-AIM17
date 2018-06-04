@@ -32,7 +32,7 @@ export class ActiveProcessesComponent implements OnInit  {
         err => {
           that.msg = {text: err, type: 'error'}
           // console.log(err);
-        }
+        },
       );
   }
 

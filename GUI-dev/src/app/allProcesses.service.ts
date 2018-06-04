@@ -7,7 +7,7 @@ export class ProcessesService {
 
   restApi = window.location.protocol + '//' + window.location.hostname + ':10000/api';
 
-  constructor(private _authHttp:HttpClient, private _user:User) {
+  constructor(private _authHttp: HttpClient, private _user: User) {
 
   }
 
@@ -54,16 +54,16 @@ export class ProcessesService {
      return this._authHttp.get(this.restApi + '/processes/finished/' + this._user.getUid() + '?page=0');
    }
 
-   getUserById(userId:number) {
+   getUserById(userId: number) {
       return this._authHttp.get(this.restApi + '/user/' + userId);
    }
 
-   stopProcess(piId:number) {
+   stopProcess(piId: number) {
       return this._authHttp.post(this.restApi + '/processes/stop/' + piId, {});
    }
 
    getProcessTasksForUser(userId?: number) {
-     if(! userId) {
+     if (!userId) {
        userId = this._user.getUid();
      }
      return this._authHttp.get(this.restApi + '/processes/tasks/' + userId);

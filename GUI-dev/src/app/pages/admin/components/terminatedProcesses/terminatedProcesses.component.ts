@@ -20,7 +20,7 @@ export class TerminatedProcessesComponent implements OnInit  {
   ];
   msg = undefined;
 
-  constructor(protected service: ProcessesService, protected spinner:NbSpinnerService, protected route: ActivatedRoute,
+  constructor(protected service: ProcessesService, protected spinner: NbSpinnerService, protected route: ActivatedRoute,
               protected router: Router) {
   }
 
@@ -33,11 +33,11 @@ export class TerminatedProcessesComponent implements OnInit  {
           that.terminatedProcesses = JSON.parse(data['_body']);
           that.spinner.clear();
         },
-        err =>{
+        err => {
           that.msg = {text: err, type: 'error'}
           // console.log(err);
           that.spinner.clear();
-        }
+        },
       );
   }
 }

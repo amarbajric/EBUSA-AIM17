@@ -18,7 +18,7 @@ export class StartableProcessesComponent implements OnInit {
    selectedUserAssignments = {};
    isSelectionValid = false;
 
-  constructor(protected service:ProcessesService, protected route: ActivatedRoute, protected router: Router) {}
+  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router) {}
 
   ngOnInit(): void {
     const that = this;
@@ -28,11 +28,11 @@ export class StartableProcessesComponent implements OnInit {
             that.processModels = JSON.parse(data['_body']);
          },
          err => that.msg = {text: err, type: 'error'},
-         () => {} // console.log('Request Complete')
+         () => {}, // console.log('Request Complete')
        );
   }
 
-  startProcess(pmId:number):void {
+  startProcess(pmId: number): void {
     const that = this;
     this.service.startProcess(pmId)
       .subscribe(
@@ -46,7 +46,7 @@ export class StartableProcessesComponent implements OnInit {
           that.msg = {text: err, type: 'error'}
           // this.modal.hide();
         },
-        () => {} // console.log('Request done')
+        () => {}, // console.log('Request done')
       );
   }
 }

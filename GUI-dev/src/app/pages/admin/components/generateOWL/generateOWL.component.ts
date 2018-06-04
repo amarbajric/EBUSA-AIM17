@@ -22,7 +22,7 @@ export class GenerateOWLComponent implements OnInit {
     let pnmlFile = that.pnmlFiles.filter(x => x.id === id)[0];
     pnmlFile.file = event.srcElement.files[0];
     const split = pnmlFile.file.name.split('.');
-    if(split[split.length - 1] !== 'pnml') {
+    if (split[split.length - 1] !== 'pnml') {
       pnmlFile = undefined;
       event.target.value = '';
     }

@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class TerminatedProcessesComponent implements OnInit  {
 
-  terminatedProcesses:[
+  terminatedProcesses: [
     {
       piId: number,
       startTime: number[],

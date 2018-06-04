@@ -31,11 +31,11 @@ import {Component, Input} from '@angular/core';
           </div>
         </div>
         <input type="checkbox" *ngIf = "field.type === 'checkbox' && field.readonly" name = "{{field.name}}"
-               [ngModel]="field.value" value = "{{field.value}}" style="display:none" /> <!-- Dirty Hack for sending checkbox 
+               [ngModel]="field.value" value = "{{field.value}}" style="display:none" /> <!-- Dirty Hack for sending checkbox
                value
                if checkbox is readonly (angular does not send hidden fields) -->
         <input type = "radio" *ngIf = "field.type === 'radio'" name = "{{businessObject.bomId}}-:_{{field.bofmId}}"
-               [ngModel]="field.value" value="{{field.value}}" style="display:none" /> <!-- Dirty Hack for sending radiofield 
+               [ngModel]="field.value" value="{{field.value}}" style="display:none" /> <!-- Dirty Hack for sending radiofield
                value -->
         </div>
       </div>

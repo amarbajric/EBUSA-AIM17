@@ -11,7 +11,7 @@ export class ProcessModelsComponent implements OnInit {
    processModels = [];
    error = undefined;
 
-  constructor(protected service:ProcessesService) {}
+  constructor(protected service: ProcessesService) {}
 
   ngOnInit(): void {
     const that = this;
@@ -20,7 +20,7 @@ export class ProcessModelsComponent implements OnInit {
          data => {
             that.processModels = JSON.parse(data['_body']);
          },
-         err => that.error = err
+         err => that.error = err,
        );
   }
 
