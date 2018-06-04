@@ -15,9 +15,6 @@ The format is partially based on [Keep a Changelog](http://keepachangelog.com/en
         - token.interceptor.ts
         - jwt.interceptor.ts
     - Adds the current user token to every http request
-## Changed
-- Path to backend API
-    - added '/api/' to backend-URL
 
 
 ## 2018-05-02 ([#89](https://github.com/amarbajric/EBUSA-AIM17/pull/89))
