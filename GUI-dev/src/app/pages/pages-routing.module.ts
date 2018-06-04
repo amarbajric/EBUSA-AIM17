@@ -8,6 +8,9 @@ import { AuthGuard } from '../auth-guard.service';
 import {ActiveProcesses} from "./dashboard/components/activeProcesses/activeProcesses.component";
 import {EventLogger} from "./admin/components/eventLogger/eventLogger.component";
 
+import {UserDetailsComponent} from './user-details/user-details.component';
+
+
 
 const routes: Routes = [{
   path: '',
@@ -32,6 +35,11 @@ const routes: Routes = [{
       path: '',
       redirectTo: 'home',
       pathMatch: 'full',
+    },
+    {
+      path: 'user-details',
+      component: UserDetailsComponent,
+      canActivate: [AuthGuard],
     },
   ],
 }];

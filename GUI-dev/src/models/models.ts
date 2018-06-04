@@ -13,10 +13,34 @@ export class User {
   email: string;
   password: string;
   uid:number;
+  createdAt: Date;
+  organization?: Organization;
+  roles: [Role];
 
   public getUid() {
     return this.uid;
   }
+
+}
+
+export class Organization {
+  organizationName: string;
+  description: string;
+  oid: number;
+}
+
+export class Role {
+  roleId: number;
+  name: string;
+  systemId: string;
+  rules: [Rule];
+}
+
+export class Rule {
+  ruleId: number;
+  name: string;
+  systemId: string;
+
 }
 
 
