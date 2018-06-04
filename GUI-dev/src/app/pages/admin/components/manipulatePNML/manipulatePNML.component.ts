@@ -42,7 +42,7 @@ export class ManipulatePNMLComponent implements OnInit {
     const pnmlReader = new FileReader();
     const csvReader = new FileReader();
     let newFileName = '';
-    if(this.pnmlFile) {
+    if (this.pnmlFile) {
       pnmlReader.onload = (e) => csvReader.readAsText(this.csvFile);
       csvReader.onload = (e) => {
         that.service.manipulatePNML(pnmlReader.result, csvReader.result)

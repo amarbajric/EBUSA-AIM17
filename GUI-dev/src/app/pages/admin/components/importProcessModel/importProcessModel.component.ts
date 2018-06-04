@@ -89,7 +89,7 @@ export class ImportProcessModelComponent implements OnInit {
     this.service.importProcessModel(processModelResult)
        .subscribe(
           data => {
-             if ( JSON.parse(data['_body']) === true){
+             if ( JSON.parse(data['_body']) === true) {
                that.processModel = undefined;
                that.rules = undefined;
                that.error = undefined;
@@ -175,7 +175,7 @@ export class ImportProcessModelComponent implements OnInit {
 
   getFormData(businessObject, internal?: boolean): void {
     const that = this;
-    if (this.currentSelectedBusinessObject !== businessObject){
+    if (this.currentSelectedBusinessObject !== businessObject) {
       this.buildedBusinessObjects[this.currentSelectedBusinessObject.id] = this.formBuilder.formData;
       const formData = this.buildedBusinessObjects[businessObject.id];
       // formData = jQuery.isEmptyObject(formData) ? undefined : formData === '[]' ? undefined : formData;
@@ -185,8 +185,8 @@ export class ImportProcessModelComponent implements OnInit {
         {
           'type': 'paragraph',
           'subtype': 'p',
-        	'label': 'Paragraph',
-        	'className': 'paragraph',
+          'label': 'Paragraph',
+          'className': 'paragraph',
         },
         );
         this.formBuilder.actions.setData(formData);
