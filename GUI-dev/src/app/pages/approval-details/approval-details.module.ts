@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 
 import { ThemeModule } from '../../@theme/theme.module';
-import {ApprovalDetailsComponent} from "./approval-details.component";
+import {ApprovalDetailsComponent} from './approval-details.component';
 
 
 @NgModule({

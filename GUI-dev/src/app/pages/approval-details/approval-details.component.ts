@@ -4,7 +4,7 @@ import {Process} from '../../../models/models';
 import {Review} from '../../../models/models';
 
 @Component({
-  selector: 'approval-details',
+  selector: 'ngx-approval-details',
   templateUrl: './approval-details.component.html',
   styleUrls: ['./approval-details.component.scss'],
 })
