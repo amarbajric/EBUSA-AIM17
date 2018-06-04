@@ -13,7 +13,7 @@ export class User {
   email: string;
   password: string;
   createdAt: Date;
-  organization: Organization;
+  organization?: Organization;
   roles: [Role];
 }
 

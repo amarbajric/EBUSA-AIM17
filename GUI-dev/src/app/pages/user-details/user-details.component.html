@@ -27,13 +27,13 @@
           <div class="flex-column text-body">
             <dl>
               <dt>Organization:</dt>
-              <dd></dd>
+              <dd>{{ user.organization?.organizationName }}</dd>
 
               <dt>Role:</dt>
-              <dd></dd>
+              <dd ng-repeat="role in user.roles"> {{ role.name }}</dd>
 
               <dt>Member since:</dt>
-              <dd> {{ user.createdAt }}</dd>
+              <dd>{{ user.createdAt }}</dd>
             </dl>
           </div>
         </div>

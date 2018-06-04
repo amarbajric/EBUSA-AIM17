@@ -18,8 +18,4 @@ export class UserDetailsComponent {
         this.user = user;
       })
   }
-
-  private prepareUserData() {
-
-  }
 }
