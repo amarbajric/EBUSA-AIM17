@@ -4,6 +4,25 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## 2018-06-04 (PR ID GOES HERE)
+## Added
+- annotations for createdAt to include in json and annot. to exclude irrelevant properties like password and systemid
+- OrganizationController
+- OrganizationService and Impl
+- OrganizationRepository and Impl
+- endpoints for organization (getbyid, getall, save, update)
+- enpoints for user (update)
+## Changed
+- mistake in OrganizationBuilder
+- RBACRepository where the organization related things have been removed
+- mappings and annotations in the UserImpl and OrganizationImpl entity classes
+- some property namings which caused false naming convention in json
+- organization in UserImpl to be ignored in json as it is causing an StackOverFlowError because it is runs into an 
+endless recursion when showing employees of org. (when querying org.) and also showing employees when querying one user
+and displaying organization property.
+  - when querying a user, the `organization` property does not hold a property `employees` because of the mentioned error
+  - when querying an organization, there is a property `employees` which holds all employees of the organization
+
 ## 2018-06-02 (PR ID GOES HERE)
 ## Added
 - Timestamp to the `createdAt` property of the `UserImpl` entity to have automatic timestamp creation
