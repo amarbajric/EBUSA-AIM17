@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ServerConfigProvider {
 
+  // add /api/ after localhost before PR
+  // delete /api from getUser
   private _host = 'http://localhost:10000';
   private _checkIfMailTaken = `${this._host}/user/register/checkIfMailTaken/`;
   private _getUser = `${this._host}/api/me/`;

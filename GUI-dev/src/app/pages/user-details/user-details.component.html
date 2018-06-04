@@ -6,30 +6,35 @@
         <div class="flex-row text-heading">
           <h5>General Information</h5>
           <div class="flex-column text-body">
-            <div>
-              Firstname: {{user.firstname}}
-            </div>
-            <div>
-              Lastname: {{user.lastname}}
-            </div>
-            <div>
-              E-Mail: {{user.email}}
-            </div>
+            <dl>
+              <dt>Firstname:</dt>
+              <dd>{{user.firstname}}</dd>
+
+              <dt>Lastname:</dt>
+              <dd>{{user.lastname}}</dd>
+
+              <dt>Username:</dt>
+              <dd>{{user.username}}</dd>
+
+              <dt>E-Mail:</dt>
+              <dd>{{user.email}}</dd>
+            </dl>
           </div>
         </div>
-
+      <hr />
         <div class="flex-row text-heading">
           <h5>Security Information</h5>
           <div class="flex-column text-body">
-            <div>
-              Organization:
-            </div>
-            <div>
-              Role:
-            </div>
-            <div>
-              Member since:
-            </div>
+            <dl>
+              <dt>Organization:</dt>
+              <dd></dd>
+
+              <dt>Role:</dt>
+              <dd></dd>
+
+              <dt>Member since:</dt>
+              <dd> {{ user.createdAt }}</dd>
+            </dl>
           </div>
         </div>
 
