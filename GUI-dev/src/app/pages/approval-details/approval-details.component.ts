@@ -2,19 +2,18 @@ import {Component, Input, OnInit} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Process} from '../../../models/models';
 import {Review} from '../../../models/models';
-import {ApprovalDetailsComponent} from '../approval-details/approval-details.component';
 
 @Component({
-  selector: 'approval',
-  templateUrl: './approval.component.html',
-  styleUrls: ['./approval.component.scss'],
+  selector: 'approval-details',
+  templateUrl: './approval-details.component.html',
+  styleUrls: ['./approval-details.component.scss'],
 })
-export class ApprovalComponent implements OnInit {
+export class ApprovalDetailsComponent implements OnInit {
 
   @Input() process: Process;
-  public processes: [Process];
-  public reviews: [Review];
-  public selectedProcess: Process;
+  @Input() selectedProccesForDetails: Process;
+  public processes;
+  public reviews;
 
   iFrameSource: string = 'http://localhost:4000/#/';
   // reviews: string[] = ['Awesome process model', 'This could use some serious improvement', 'Subject X is missing'];
@@ -84,18 +83,6 @@ export class ApprovalComponent implements OnInit {
   }
 
   denyProcessModel() {
-
-  }
-
-  loadDetails(processID: number) {
-    console.log(processID);
-
-    for(let process of this.processes) {
-      // console.log(process);
-      if (process.process_id == processID) {
-        this.selectedProcess = process;
-      }
-    }
 
   }
 

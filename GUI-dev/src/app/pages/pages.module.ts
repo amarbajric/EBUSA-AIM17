@@ -6,6 +6,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import {HomeModule} from './home/home.module';
 import {ApprovalModule} from './approval/approval.module';
+import {ApprovalDetailsModule} from "./approval-details/approval-details.module";
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -18,6 +19,7 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     HomeModule,
     ApprovalModule,
+    ApprovalDetailsModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,

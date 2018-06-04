@@ -3,54 +3,31 @@
     <nb-card-body>This is the approval page for EasyBiz model reviewer</nb-card-body>
   </nb-card>
 
-  <h2>Process models that need approval: </h2>
+  <h2>List of process models that need approval: </h2>
   <nb-card>
-    <ul *ngFor="let processModel of processModels">
-      <li>{{processModel}}</li>
+    <!--
+    <table>
+      <tr>
+        <th>Process Name:</th>
+        <th>Process Description:</th>
+        <th>Process Creator:</th>
+      </tr>
+      <tr *ngFor="let process of processes">
+        <td><a href="" (click)="selectProcess()>{{process.process_name}}</a></td>
+        <td>{{process.process_description}}</td>
+        <td>{{process.creator}}</td>
+      </tr>
+    </table>
+    -->
+    <ul *ngFor="let process of processes" style="list-style:none; font-weight:bold">
+      <li>Process: <a href="javascript:;" (click)="loadDetails(process.process_id)">{{process.process_name}}</a></li>
+      <li><ul style="list-style:none"><li>{{process.process_description}}</li>
+        <li>{{process.creator}}</li></ul></li>
     </ul>
   </nb-card>
 
-  <div><h2> Process model: </h2></div>
-  <iframe [src]="transformUrl(iFrameSource)" class="modelGraphic"></iframe>
-
-  <div><h2>Process Details: </h2></div>
-  <nb-card>
   <div>
-    <p>Process Name: {{process.process_name}}</p>
-    <br/>
-    <p>Description: {{process.process_description}}</p>
+    <approval-details></approval-details>
   </div>
-  </nb-card>
-
-  <!--<div>Review Comments: </div>
-  <nb-card>
-  <div *ngFor="let review of reviews">
-    <p>
-      {{review}}
-    </p>
-    -----------------------------------------
-  </div>
-  </nb-card>-->
-
-  <h2>Review Comments: </h2>
-  <nb-card>
-    <ul *ngFor="let review of reviews">
-      <li>{{review}}</li>
-    </ul>
-  </nb-card>
-
-
-
-  <div class="form-group">
-    <label for="comment"><h2>Comment:</h2></label>
-    <textarea class="form-control" rows="5" id="comment"></textarea>
-  </div>
-
-  <!--<button ng-click="changeIFrame()" class="btn btn-info" (click)="switchIFrameSource()">Change iFrame</button>-->
-  <button ng-click="postComment()" class="btn btn-info" (click)="postComment(comment)">Post comment</button>
-  <button ng-click="approveProcessModel()" class="btn btn-success">Approve this process model</button>
-  <button ng-click="denyProcessModel()" class="btn btn-danger">Deny this process model</button>
-
-
 
 </div>

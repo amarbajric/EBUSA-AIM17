@@ -11,6 +11,7 @@ export class Process {
   state?: string;
   version?: number;
   u_id?: number;
+  creator?: string;
 }
 
 
@@ -23,7 +24,8 @@ export class Review {
   u_id?: number;
   process_id: number;
   approver: number;
-  uploader: number;
+  uploader?: string;
+  created_at?: Date;
 }
 
 
