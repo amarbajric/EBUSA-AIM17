@@ -89,7 +89,7 @@ export class ApprovalComponent implements OnInit {
   loadDetails(processID: number) {
     // console.log(processID);
 
-    for (let process of this.processes) {
+    for (const process of this.processes) {
       // console.log(process);
       if (process.process_id === processID) {
         this.selectedProcess = process;
