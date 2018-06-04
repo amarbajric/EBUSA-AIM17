@@ -28,7 +28,7 @@ export class UserDetailsComponent {
   // generates test data
   // TODO: to be deleted
   private generateTestData() {
-    if(!this.user.createdAt) {
+    if (!this.user.createdAt) {
       this.user.createdAt = new Date();
     }
 
@@ -44,7 +44,7 @@ export class UserDetailsComponent {
   }
 
   private checkUserData() {
-    if(!this.user.organization) {
+    if (!this.user.organization) {
       const organization: Organization = new Organization();
       organization.organizationName = 'no organization';
       this.user.organization = organization;

@@ -4,6 +4,22 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## 2018-05-02 ([#51](https://github.com/amarbajric/EBUSA-AIM17/pull/))
+## Added
+- User-Details
+    - Components are in ../pages/user-details
+    - Displays User information
+    - Contains test data
+- Interceptor
+    - Components are in ../@theme/components/auth/
+        - token.interceptor.ts
+        - jwt.interceptor.ts
+    - Adds the current user token to every http request
+## Changed
+- Path to backend API
+    - added '/api/' to backend-URL
+
+
 ## 2018-05-02 ([#89](https://github.com/amarbajric/EBUSA-AIM17/pull/89))
 ## Added
 - Authentication
