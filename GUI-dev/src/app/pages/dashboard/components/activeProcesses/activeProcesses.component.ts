@@ -3,7 +3,7 @@ import {ProcessesService} from '../../../../allProcesses.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'active-processes',
+  selector: 'ngx-active-processes',
   styleUrls: [],
   templateUrl:  './activeProcesses.html',
 })

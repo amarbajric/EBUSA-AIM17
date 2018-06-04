@@ -5,7 +5,7 @@ import './importModelFormBuilder.loader.ts';
 
 
 @Component({
-  selector: 'import',
+  selector: 'ngx-model-import',
   styleUrls: ['./importProcessModel.scss'],
   templateUrl: './importProcessModel.html',
 })
@@ -31,19 +31,19 @@ export class ImportProcessModelComponent implements OnInit {
   onFileChange(event) {
     let that = this;
     this.owlFile = event.srcElement.files[0];
-    let split = this.owlFile.name.split('.');
+    const split = this.owlFile.name.split('.');
     if(split[split.length-1] !== 'owl') {
       this.owlFile = undefined;
       event.target.value = '';
     }
   }
 
-  uploadOWLModel(form):void {
-    let that = this;
+  uploadOWLModel(form): void {
+    const that = this;
     let reader = new FileReader();
     if(this.owlFile) {
       reader.onload = function(e) {
-        let body = {owlContent: reader.result, version: '0.7.'+that.version}
+        const body = {owlContent: reader.result, version: '0.7.'+that.version}
         that.service.uploadOWLModel(body)
         .subscribe(
             data => {
@@ -55,7 +55,7 @@ export class ImportProcessModelComponent implements OnInit {
             },
             err => that.error = 'Die OWL Datei konnte nicht richtig interpretiert werden!',
             () => {
-            }
+            },
           );
       }
       reader.readAsText(this.owlFile);
@@ -67,17 +67,17 @@ export class ImportProcessModelComponent implements OnInit {
     this.service.getRules()
        .subscribe(
           data => {
-             console.log(data);
+             // console.log(data);
              that.rules = JSON.parse(data['_body']);
              that.currentSelectedBusinessObject = that.processModel.boms[0];
              that.initFormBuilder(that.currentSelectedBusinessObject);
           },
           err => that.error = err,
-          () => console.log('Request Complete')
+          () => {} // console.log('Request Complete')
         );
   }
 
-  uploadProcessModel(form):void {
+  uploadProcessModel(form): void {
     const that = this;
     let processModelResult;
     this.getFormData(this.currentSelectedBusinessObject);
@@ -105,18 +105,18 @@ export class ImportProcessModelComponent implements OnInit {
              }
           },
           err => that.error = 'Das Prozessmodell konnte nicht importiert werden!',
-          () => console.log('Request Complete')
+          () => {} // console.log('Request Complete')
         );
   }
 
-  getBofms(){
-    let result = [];
-    if(this.currentSelectedBusinessObject){
-      for(let bom in this.buildedBusinessObjects) {
+  getBofms() {
+    const result = [];
+    if(this.currentSelectedBusinessObject) {
+      for(const bom in this.buildedBusinessObjects) {
         if(Object.keys(this.buildedBusinessObjects[bom]).length > 0) {
-          let values = JSON.parse(this.buildedBusinessObjects[bom]);
+          const values = JSON.parse(this.buildedBusinessObjects[bom]);
           values.forEach(value => {
-            if(value.type !== 'paragraph'){
+            if(value.type !== 'paragraph') {
               let type;
               switch (value.type) {
                 case 'text':
@@ -139,7 +139,7 @@ export class ImportProcessModelComponent implements OnInit {
                 name: value.label,
                 type: type,
                 bomId: bom,
-                id: value.name
+                id: value.name,
               })
             }
           });
@@ -150,15 +150,15 @@ export class ImportProcessModelComponent implements OnInit {
   }
 
   initFormBuilder(businessObject): void {
-    let that = this;
-    let options = {
+    const that = this;
+    const options = {
       dataType: 'json', // default: 'xml',
       disableFields: ['autocomplete', 'button', 'checkbox-group', 'file', 'header', 'hidden', 'paragraph', 'select', 'textarea'],
-      showActionButtons: false
+      showActionButtons: false,
     };
-    //this.formBuilder = jQuery('.formBuilder').formBuilder(options).data('formBuilder');
+    // this.formBuilder = jQuery('.formBuilder').formBuilder(options).data('formBuilder');
 
-    /*//Timeout, otherwise the formData will still be the old value
+    /*// Timeout, otherwise the formData will still be the old value
     document.addEventListener('fieldAdded', function(e){
       setTimeout(function(){
         that.getFormData(that.currentSelectedBusinessObject, true);
@@ -172,19 +172,19 @@ export class ImportProcessModelComponent implements OnInit {
   }
 
   getFormData(businessObject, internal?:boolean): void {
-    let that = this;
+    const that = this;
     if(this.currentSelectedBusinessObject !== businessObject){
       this.buildedBusinessObjects[this.currentSelectedBusinessObject.id] = this.formBuilder.formData;
-      let formData = this.buildedBusinessObjects[businessObject.id];
-      //formData = jQuery.isEmptyObject(formData) ? undefined : formData === '[]' ? undefined : formData;
-      if(formData !== undefined && !internal){
-        //This is a necessary thing, otherwise setData will not work correctly
+      const formData = this.buildedBusinessObjects[businessObject.id];
+      // formData = jQuery.isEmptyObject(formData) ? undefined : formData === '[]' ? undefined : formData;
+      if(formData !== undefined && !internal) {
+        // This is a necessary thing, otherwise setData will not work correctly
         this.formBuilder.actions.addField(
         	{
         		'type': 'paragraph',
         		'subtype': 'p',
         		'label': 'Paragraph',
-        		'className': 'paragraph'
+        		'className': 'paragraph',
         	}
         );
         this.formBuilder.actions.setData(formData);
@@ -196,10 +196,10 @@ export class ImportProcessModelComponent implements OnInit {
     }
     this.currentSelectedBusinessObject = businessObject;
     this.currentBofms = this.getBofms().filter(b => b.bomId === this.currentSelectedBusinessObject.id);
-    //Add new fields
-    let allBofms = this.getBofms();
+    // Add new fields
+    const allBofms = this.getBofms();
     allBofms.forEach(field => {
-      let boms = that.processModel.boms.filter(bom => bom.id === field.bomId);
+      const boms = that.processModel.boms.filter(bom => bom.id === field.bomId);
       if(!that.buildedBofps[field.id]) {
         that.buildedBofps[field.id] = {};
         boms.forEach(bom => {
@@ -209,14 +209,14 @@ export class ImportProcessModelComponent implements OnInit {
               write: true,
               mandatory: false,
               stateId: stateId,
-              bofmId: field.id
+              bofmId: field.id,
             }
           })
         })
       }
     });
 
-    //remove deleted fields
+    // remove deleted fields
     Object.keys(this.buildedBofps).forEach(fieldId => {
       if(allBofms.filter(b => b.id === fieldId).length < 1) {
           delete this.buildedBofps[fieldId];
@@ -229,7 +229,7 @@ export class ImportProcessModelComponent implements OnInit {
   }
 
   getSubjectModelName(stateId): string {
-    let subjectModelId = this.processModel.states.filter(s => s.id === stateId)[0].subjectModelId;
+    const subjectModelId = this.processModel.states.filter(s => s.id === stateId)[0].subjectModelId;
     return this.processModel.subjectModels.filter(sm => sm.id === subjectModelId)[0].name;
   }
 }

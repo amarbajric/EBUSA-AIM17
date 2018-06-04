@@ -22,23 +22,23 @@ export class GenerateOWLComponent implements OnInit {
     let pnmlFile = that.pnmlFiles.filter(x => x.id === id)[0];
     pnmlFile.file = event.srcElement.files[0];
     const split = pnmlFile.file.name.split('.');
-    if(split[split.length-1] !== 'pnml') {
+    if(split[split.length - 1] !== 'pnml') {
       pnmlFile = undefined;
       event.target.value = '';
     }
   }
 
   uploadFiles(form):void {
-    var that = this;
-    var newFileName = that.processName+'-generated.owl';
-    var fileResults = {}
-    var fileReaderPromises = [];
+    const that = this;
+    const newFileName = that.processName+'-generated.owl';
+    const fileResults = {}
+    const fileReaderPromises = [];
     that.pnmlFiles.forEach(p => {
       if (!p.name || p.name === '' || !p.file) {
         return;
       }
-      var promise = new Promise((resolve, reject) => {
-        var pnmlReader = new FileReader();
+      const promise = new Promise((resolve, reject) => {
+        const pnmlReader = new FileReader();
         pnmlReader.onload = (e) => {
           fileResults[p.name] = pnmlReader.result;
           resolve();

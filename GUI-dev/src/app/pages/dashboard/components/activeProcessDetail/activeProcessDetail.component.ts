@@ -15,13 +15,13 @@ type businessObject = {
     type: string,
     required: boolean,
     readonly: boolean,
-    value: any
+    value: any,
   }],
   children: [businessObject];
 }
 
 @Component({
-  selector: 'active-process-detail',
+  selector: 'ngx-active-process-detail',
   styleUrls: ['./activeProcessDetail.scss'],
   templateUrl:  './activeProcessDetail.html',
 })
@@ -42,20 +42,20 @@ export class ActiveProcessDetailComponent implements OnInit {
       stateFunctionType: string,
       subState: string,
       lastChanged: number[],
-      user: any
-    }]
+      user: any,
+    }],
   };
   businessObjects: businessObject[];
   nextStates: [{
     name: string,
     nextStateId: number,
-    endState: boolean
+    endState: boolean,
   }];
   assignedUsers:[{
     smId: number,
     userId: number,
     assignedRules: string[],
-    subjectName: string
+    subjectName: string,
   }];
   possibleUserAssignments = [];
   selectedUserAssignments = [];
@@ -63,7 +63,8 @@ export class ActiveProcessDetailComponent implements OnInit {
   isFinished = false;
   myCurrentState;
 
-  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router, private _user:User) {
+  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router,
+              private _user: User) {
   }
 
   ngOnInit() {
@@ -71,27 +72,28 @@ export class ActiveProcessDetailComponent implements OnInit {
     this.piId = + this.route.snapshot.params['piId'];
     this.businessObjects = undefined;
     this.nextStates = undefined;
-    //this.spinner.show();
-    if(!this.nextIsEndState){
+    // this.spinner.show();
+    if(!this.nextIsEndState) {
       that.assignedUsers = undefined;
       this.service.getProcessState(this.piId)
         .subscribe(
           data => {
             that.subjectsState = JSON.parse(data['_body']);
-            that.myCurrentState = that.subjectsState.subjects.filter(s => s.userId === that._user.getUid())[0].stateName;
-            //that.spinner.hide();
+            that.myCurrentState = that.subjectsState.subjects.filter(s => s.userId === that._user.getUid())
+              [0].stateName;
+            // that.spinner.hide();
           },
-          err =>{
+          err => {
             that.msg = {text: err, type: 'error'}
-            //console.log(err);
-            //that.spinner.hide();
-          }
+            // console.log(err);
+            // that.spinner.hide();
+          },
         );
 
       this.service.getTasksForProcessForUser(this.piId)
         .subscribe(
           data => {
-            var dataJson;
+            let dataJson;
             try {
               dataJson = JSON.parse(data['_body']);
             } catch(e) {
@@ -104,14 +106,14 @@ export class ActiveProcessDetailComponent implements OnInit {
               that.getPossibleUserAssignments();
             }
           },
-          err =>{
+          err => {
             that.msg = {text: err, type: 'error'}
-            //console.log(err);
-          }
+            // console.log(err);
+          },
         );
     } else {
       this.isFinished = true;
-      //this.spinner.hide();
+      // this.spinner.hide();
     }
   }
 
@@ -119,21 +121,22 @@ export class ActiveProcessDetailComponent implements OnInit {
     const that = this;
     this.assignedUsers.forEach(
       au => {
-        if(!au.userId){
+        if(!au.userId) {
           that.service.getPossibleUsersForProcessModel(au.assignedRules).
           subscribe(
             data => {
               const users = JSON.parse(data['_body']);
               au.assignedRules.forEach(rule => {
-                that.possibleUserAssignments.push({rule: rule, smId: au.smId, users: users, subjectName: au.subjectName});
+                that.possibleUserAssignments.push({rule: rule, smId: au.smId, users: users, subjectName: au.subjectName
+                });
                 that.selectedUserAssignments[rule] = undefined;
               });
             },
-            err =>{
+            err => {
               this.msg = {text: err, type: 'error'}
               that.possibleUserAssignments = [];
             },
-            () => {}//console.log('Request done')
+            () => {}, // console.log('Request done')
           );
         }
       });
@@ -144,10 +147,10 @@ export class ActiveProcessDetailComponent implements OnInit {
     const businessObjectsValues = [];
     const userAssignments = [];
     that.nextIsEndState = that.nextStates.filter(ns => ns.nextStateId === form.nextStateId)[0].endState;
-    if(this.isSendState()){
+    if(this.isSendState()) {
       const keys = Object.keys(form.value).forEach(k => {
         const kSplit = k.split('User-Assignment_:-');
-        if(kSplit.length > 1){
+        if(kSplit.length > 1) {
           const value = form.value[k];
           userAssignments.push({smId:value.smId, userId:value.userId});
         }
@@ -160,7 +163,7 @@ export class ActiveProcessDetailComponent implements OnInit {
     const businessObjectsAndNextStateAndUserAssignments = {
       nextStateId: form.nextStateId,
       businessObjects: businessObjectsValues,
-      userAssignments: userAssignments
+      userAssignments: userAssignments,
     };
 
     this.submitStateChange(businessObjectsAndNextStateAndUserAssignments);
@@ -182,7 +185,7 @@ export class ActiveProcessDetailComponent implements OnInit {
       }
     });
     bo.children.forEach(childBo => {
-      childBoValues.push(this.getBusinessObjectsValues(childBo, form))}
+      childBoValues.push(this.getBusinessObjectsValues(childBo, form))},
     );
     return {bomId:bo.bomId, fields:fields, children:childBoValues};
   }
@@ -196,44 +199,46 @@ export class ActiveProcessDetailComponent implements OnInit {
         },
         err =>{
           that.msg = {text: err, type: 'error'}
-          //console.log(err);
-        }
+          // console.log(err);
+        },
       );
   }
 
-  //dirty hack so that the value of the checkbox changes (otherwise the form submit value will stay the original value)
-  onChangeCheckboxFn(that, element){
+  // dirty hack so that the value of the checkbox changes (otherwise the form submit value will stay the original value)
+  onChangeCheckboxFn(that, element) {
     const name = element.name.split('-:_')[0];
     that.model._parent.form.controls[name].setValue(element.checked)
   }
 
-  isReceiveState(){
-    if(this.subjectsState){
+  isReceiveState() {
+    if(this.subjectsState) {
       return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].stateFunctionType === 'RECEIVE';
     } else {
       return false;
     }
   }
 
-  isToReceiveState(){
-    if(this.subjectsState){
+  isToReceiveState() {
+    if(this.subjectsState) {
       return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].subState === 'TO_RECEIVE';
     } else {
       return false;
     }
   }
 
-  isReceivedState(){
-    if(this.subjectsState){
-      return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].subState === 'RECEIVED';
+  isReceivedState() {
+    if(this.subjectsState) {
+      return this.subjectsState.subjects.filter(s => s.userId ===
+        this._user.getUid())[0].subState === 'RECEIVED';
     } else {
       return false;
     }
   }
 
-  isSendState(){
-    if(this.subjectsState){
-      return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].stateFunctionType === 'SEND';
+  isSendState() {
+    if(this.subjectsState) {
+      return this.subjectsState.subjects.filter(s => s.userId ===
+        this._user.getUid())[0].stateFunctionType === 'SEND';
     } else {
       return false;
     }

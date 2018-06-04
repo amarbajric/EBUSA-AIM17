@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 import { EventLoggerService} from '../../../../evntLogger.service';
 
 @Component({
-  selector: 'import',
+  selector: 'ngx-manipulate-import',
   styleUrls: [],
   templateUrl: './manipulatePNML.html',
 })
@@ -18,30 +18,30 @@ export class ManipulatePNMLComponent implements OnInit {
   }
 
   onPNMLFileChange(event) {
-    var that = this;
+    const that = this;
     this.pnmlFile = event.srcElement.files[0];
-    var split = this.pnmlFile.name.split('.');
-    if(split[split.length-1] !== 'pnml') {
+    const split = this.pnmlFile.name.split('.');
+    if(split[split.length - 1] !== 'pnml') {
       this.pnmlFile = undefined;
       event.target.value = '';
     }
   }
 
   onCSVFileChange(event) {
-    var that = this;
+    const that = this;
     this.csvFile = event.srcElement.files[0];
-    var split = this.csvFile.name.split('.');
-    if(split[split.length-1] !== 'csv') {
+    const split = this.csvFile.name.split('.');
+    if(split[split.length - 1] !== 'csv') {
       this.csvFile = undefined;
       event.target.value = '';
     }
   }
 
   uploadFiles(form):void {
-    var that = this;
-    var pnmlReader = new FileReader();
-    var csvReader = new FileReader();
-    var newFileName = '';
+    const that = this;
+    const pnmlReader = new FileReader();
+    const csvReader = new FileReader();
+    let newFileName = '';
     if(this.pnmlFile) {
       pnmlReader.onload = (e) => csvReader.readAsText(this.csvFile);
       csvReader.onload = (e) => {

@@ -3,9 +3,9 @@ import {ProcessesService} from '../../../../allProcesses.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'terminated-processes',
+  selector: 'ngx-terminated-processes',
   styles: [],
-  templateUrl:  './terminatedProcesses.html'
+  templateUrl:  './terminatedProcesses.html',
 })
 export class TerminatedProcessesComponent implements OnInit  {
 
@@ -23,7 +23,7 @@ export class TerminatedProcessesComponent implements OnInit  {
   }
 
   ngOnInit() {
-    var that = this;
+    const that = this;
 
     this.service.getTerminatedProcessesForUser()
     .subscribe(
@@ -33,8 +33,8 @@ export class TerminatedProcessesComponent implements OnInit  {
         },
         err => {
           that.msg = {text: err, type: 'error'}
-          console.log(err);
-        }
+          // console.log(err);
+        },
       );
   }
 }

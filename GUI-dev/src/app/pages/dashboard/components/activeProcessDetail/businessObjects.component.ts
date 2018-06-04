@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 @Component ({
-  selector: 'business-objects',
+  selector: 'ngx-business-objects',
   template: `
   <div *ngFor="let businessObject of businessObjects">
     <nb-card title="{{businessObject.name}}" baCardClass="with-scroll">
@@ -18,7 +18,9 @@ import {Component, Input} from '@angular/core';
                  name="{{businessObject.bomId}}-:_{{field.bofmId}}" [ngModel]="field.value" 
                  [attr.max]="field.max" [attr.min]="field.min" [attr.required]="field.required" 
                  [readonly]="field.readonly">
-          <!--<ba-checkbox *ngSwitchCase="'checkbox'" name="{{businessObject.bomId}}-:_{{field.readonly ? field.name + '-:_control' : field.bofmId }}" [ngModel]="field.value" [value]="field.value" [label]="field.description" [onChangeCheckboxFn]="onChangeCheckboxFn" [disabled]="field.readonly"></ba-checkbox>-->
+          <!--<ba-checkbox *ngSwitchCase="'checkbox'" name="{{businessObject.bomId}}-:_{{field.readonly ? field.name +
+           '-:_control' : field.bofmId }}" [ngModel]="field.value" [value]="field.value" [label]="field.description" 
+           [onChangeCheckboxFn]="onChangeCheckboxFn" [disabled]="field.readonly"></ba-checkbox>-->
           <div class="row" *ngSwitchCase="'radio'">
             <div class="col-sm-1" *ngFor="let choice of field.choices">
               <label class="radio-inline nowrap">
@@ -28,10 +30,12 @@ import {Component, Input} from '@angular/core';
             </label>
           </div>
         </div>
-        <input type="checkbox" *ngIf="field.type === 'checkbox' && field.readonly" name="{{field.name}}" 
-               [ngModel]="field.value" value="{{field.value}}" style="display:none" /> <!-- Dirty Hack for sending checkbox value if checkbox is readonly (angular does not send hidden fields) -->
-        <input type="radio" *ngIf="field.type === 'radio'" name="{{businessObject.bomId}}-:_{{field.bofmId}}" 
-               [ngModel]="field.value" value="{{field.value}}" style="display:none" /> <!-- Dirty Hack for sending radiofield value -->
+        <input type="checkbox" *ngIf = "field.type === 'checkbox' && field.readonly" name = "{{field.name}}" 
+               [ngModel]="field.value" value = "{{field.value}}" style="display:none" /> <!-- Dirty Hack for sending checkbox value
+               if checkbox is readonly (angular does not send hidden fields) -->
+        <input type = "radio" *ngIf = "field.type === 'radio'" name = "{{businessObject.bomId}}-:_{{field.bofmId}}" 
+               [ngModel]="field.value" value="{{field.value}}" style="display:none" /> <!-- Dirty Hack for sending radiofield 
+               value -->
         </div>
       </div>
     </div>

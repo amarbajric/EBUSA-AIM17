@@ -4,9 +4,9 @@ import {ProcessesService} from '../../../../allProcesses.service';
 import { EventLoggerService} from '../../../../evntLogger.service';
 
 @Component({
-  selector: 'models',
+  selector: 'ngx-event-logger',
   styleUrls: [],
-  templateUrl: './eventLogger.html'
+  templateUrl: './eventLogger.html',
 })
 export class EventLoggerComponent implements OnInit {
    processModels = [];
@@ -17,7 +17,7 @@ export class EventLoggerComponent implements OnInit {
    loadedEventLogForSubject = undefined;
    eventLog = [];
 
-  constructor(protected processService:ProcessesService, protected eventLoggerService:EventLoggerService) {}
+  constructor(protected processService: ProcessesService, protected eventLoggerService: EventLoggerService) { }
 
   ngOnInit(): void {
     const that = this;
@@ -26,7 +26,7 @@ export class EventLoggerComponent implements OnInit {
          data => {
             that.processModels = JSON.parse(data['_body']);
          },
-         err => that.error = err
+         err => that.error = err,
        );
   }
 
@@ -38,7 +38,7 @@ export class EventLoggerComponent implements OnInit {
            that.loadedEventLogForProcessModel = processModel;
            that.loadedEventLogForSubject = subject.name;
            const result = JSON.parse(data['_body']);
-           if(result.length === 0){
+           if(result.length === 0) {
              that.error = 'Für dieses Prozessmodell gibt es keinen (vollständigen) Event-Log!';
            } else {
              that.eventLog = result;
@@ -49,7 +49,7 @@ export class EventLoggerComponent implements OnInit {
            that.loadedEventLogForProcessModel = undefined;
            that.loadedEventLogForSubject = undefined;
            that.eventLog = [];
-         }
+         },
        );
   }
 

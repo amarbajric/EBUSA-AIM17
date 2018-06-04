@@ -1,9 +1,9 @@
-import { NgModule }      from '@angular/core';
-import { CommonModule }  from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { AdminComponent } from './admin.component';
-import { routing }       from './admin.routing';
+import { routing } from './admin.routing';
 
 import { ActiveProcessesComponent } from './components/activeProcesses/activeProcesses.component';
 import { ImportProcessModelComponent } from './components/importProcessModel/importProcessModel.component';
@@ -36,6 +36,6 @@ import {ThemeModule} from '../../@theme/theme.module';
   ],
   providers: [
     AuthGuard,
-  ]
+  ],
 })
 export default class AdminModule {}

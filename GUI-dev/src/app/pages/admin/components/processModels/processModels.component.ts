@@ -14,7 +14,7 @@ export class ProcessModelsComponent implements OnInit {
   constructor(protected service:ProcessesService) {}
 
   ngOnInit(): void {
-    var that = this;
+    const that = this;
     this.service.getProcessModels()
       .subscribe(
          data => {
@@ -24,7 +24,7 @@ export class ProcessModelsComponent implements OnInit {
        );
   }
 
-  deleteProcessModel(pmId:number):void {
+  deleteProcessModel(pmId: number): void {
     // not implemented
   }
 }
