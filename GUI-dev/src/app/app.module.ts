@@ -45,7 +45,7 @@ import { ServerConfigProvider } from './@theme/providers/backend-server/serverco
           config: {
             // baseEndpoint: 'http://localhost:10000',
             login: {
-              endpoint: 'http://localhost:10000/api/user/login',
+              endpoint: 'http://localhost:10000/user/login',
               redirect: {
                 success: 'dashboard',
               },
@@ -54,7 +54,7 @@ import { ServerConfigProvider } from './@theme/providers/backend-server/serverco
               endpoint: '',
             },
             register: {
-              endpoint: 'http://localhost:10000/api/user/register',
+              endpoint: 'http://localhost:10000/user/register',
               redirect: {
                 success: '/auth/login',
               },
