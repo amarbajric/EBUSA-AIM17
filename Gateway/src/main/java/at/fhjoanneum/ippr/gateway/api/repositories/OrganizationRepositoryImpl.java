@@ -32,6 +32,11 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
     }
 
     @Override
+    public Optional<Organization> getOrganizationByOrganizationName(String organizationName){
+        return Optional.ofNullable(organizationRepository.findOrganizationByOrganizationName(organizationName));
+    }
+
+    @Override
     public List<Organization> getOrganizations() {
         return Lists.newArrayList(organizationRepository.findAll());
     }
@@ -41,6 +46,9 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
 
         @Query(value = "SELECT * FROM organization WHERE o_id = :organizationId", nativeQuery = true)
         OrganizationImpl findByOrganizationId(@Param("organizationId") Long organizationId);
+
+        @Query(value = "SELECT * FROM organization WHERE organization_name = :organizationName", nativeQuery = true)
+        OrganizationImpl findOrganizationByOrganizationName(@Param("organizationName") String organizationName);
     }
 
 }

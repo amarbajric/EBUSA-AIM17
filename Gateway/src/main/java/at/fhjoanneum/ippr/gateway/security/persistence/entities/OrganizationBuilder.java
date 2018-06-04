@@ -56,6 +56,6 @@ public class OrganizationBuilder implements Builder<Organization> {
         checkArgument(StringUtils.isNotBlank(organizationName));
         checkArgument(StringUtils.isNotBlank(organizationDescription));
 
-        return new OrganizationImpl(organizationName, organizationDescription, systemId, processes, employees);
+        return new OrganizationImpl(systemId, organizationName, organizationDescription, processes, employees);
     }
 }

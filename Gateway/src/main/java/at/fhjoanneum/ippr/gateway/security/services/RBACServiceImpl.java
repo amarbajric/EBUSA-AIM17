@@ -1,9 +1,13 @@
 package at.fhjoanneum.ippr.gateway.security.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
+import at.fhjoanneum.ippr.gateway.api.repositories.OrganizationRepository;
+import at.fhjoanneum.ippr.gateway.security.persistence.entities.OrganizationImpl;
+import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
@@ -21,6 +25,9 @@ public class RBACServiceImpl implements RBACService {
 
   @Autowired
   private RBACRepository rbacRepository;
+
+  @Autowired
+  private OrganizationRepository organizationRepository;
 
   @Override
   public User getUserByUserId(final Long uId) {
@@ -43,5 +50,30 @@ public class RBACServiceImpl implements RBACService {
   @Override
   public Future<List<Rule>> getRules() {
     return new AsyncResult<List<Rule>>(rbacRepository.getRules());
+  }
+
+  @Override
+  public Optional<User> updateUser(final Long userId, final String username, final String firstName,
+                                   final String lastName, final String email, final String password, final Long o_id) {
+
+    Optional<User> userToUpdate = rbacRepository.getUserByUserId(userId);
+    Optional<Organization> orgToUpdate = null;
+
+    if (!userToUpdate.isPresent()) {
+      return Optional.empty();
+    }
+    if (o_id != null) {
+      orgToUpdate = organizationRepository.getOrganizationByOrganizationId(o_id);
+    }
+    // Update user
+    if (username != null) userToUpdate.get().setUsername(username);
+    if (firstName != null) userToUpdate.get().setFirstname(firstName);
+    if (lastName != null) userToUpdate.get().setLastname(lastName);
+    if (email != null) userToUpdate.get().setEmail(email);
+    if (password != null) userToUpdate.get().setPassword(password);
+    if (orgToUpdate != null && orgToUpdate.isPresent()) userToUpdate.get().setOrganization((OrganizationImpl) orgToUpdate.get());
+
+    rbacRepository.saveUser(userToUpdate.get());
+    return rbacRepository.getUserByUserId(userId);
   }
 }

@@ -9,6 +9,8 @@ public interface OrganizationRepository {
 
     Optional<Organization> getOrganizationByOrganizationId(Long oId);
 
+    Optional<Organization> getOrganizationByOrganizationName(String name);
+
     List<Organization> getOrganizations();
 
     Organization saveOrganization(Organization org);

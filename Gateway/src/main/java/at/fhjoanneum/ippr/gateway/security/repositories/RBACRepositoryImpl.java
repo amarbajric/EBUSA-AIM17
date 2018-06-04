@@ -3,8 +3,6 @@ package at.fhjoanneum.ippr.gateway.security.repositories;
 import java.util.List;
 import java.util.Optional;
 
-import at.fhjoanneum.ippr.gateway.security.persistence.entities.OrganizationImpl;
-import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
