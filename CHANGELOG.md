@@ -4,7 +4,7 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
-## 2018-06-04 (PR ID GOES HERE)
+## 2018-06-04 ([#92](https://github.com/amarbajric/EBUSA-AIM17/pull/92))
 ## Added
 - annotations for createdAt to include in json and annot. to exclude irrelevant properties like password and systemid
 - OrganizationController
@@ -23,7 +23,7 @@ and displaying organization property.
   - when querying a user, the `organization` property does not hold a property `employees` because of the mentioned error
   - when querying an organization, there is a property `employees` which holds all employees of the organization
 
-## 2018-06-02 (PR ID GOES HERE)
+## 2018-06-02 ([#92](https://github.com/amarbajric/EBUSA-AIM17/pull/92))
 ## Added
 - Timestamp to the `createdAt` property of the `UserImpl` entity to have automatic timestamp creation
 - new csv's in the folder `database_init` which are used when the property `rbac.system.service.authentication` is set
