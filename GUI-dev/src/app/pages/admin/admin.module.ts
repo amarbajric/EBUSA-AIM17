@@ -13,6 +13,7 @@ import { EventLogger } from './components/eventLogger/eventLogger.component';
 import { ManipulatePNML } from './components/manipulatePNML/manipulatePNML.component';
 import { GenerateOWL } from './components/generateOWL/generateOWL.component';
 import {AuthGuard} from "../../auth-guard.service";
+import {ThemeModule} from "../../@theme/theme.module";
 
 
 
@@ -21,6 +22,7 @@ import {AuthGuard} from "../../auth-guard.service";
     CommonModule,
     FormsModule,
     routing,
+    ThemeModule,
   ],
   declarations: [
     Admin,

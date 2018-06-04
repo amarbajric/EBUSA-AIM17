@@ -4,7 +4,9 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
-import {AuthGuard} from '../auth-guard.service';
+import { AuthGuard } from '../auth-guard.service';
+import {ActiveProcesses} from "./dashboard/components/activeProcesses/activeProcesses.component";
+import {EventLogger} from "./admin/components/eventLogger/eventLogger.component";
 
 
 const routes: Routes = [{
@@ -16,6 +18,12 @@ const routes: Routes = [{
       component: DashboardComponent,
       canActivate: [AuthGuard],
     },
+    {
+      path: 'activeProcesses',
+      component: ActiveProcesses,
+
+    },
+
     {
       path: 'home',
       component: HomeComponent,

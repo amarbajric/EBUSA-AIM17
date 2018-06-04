@@ -10,7 +10,7 @@
 </div>
 <div class="row">
    <nb-card >
-      <h4 *ngIf="processModels.length < 1">Es gibt keine Prozessmodelle</h4>
+      <nb-card-body *ngIf="processModels.length < 1">Es gibt keine Prozessmodelle</nb-card-body>
       <div class="form-group">
         <label>Prozessmodell</label>
         <select class="form-control" [(ngModel)]="selectedProcessModel" style="width:50%;">

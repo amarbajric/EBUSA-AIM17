@@ -6,7 +6,7 @@
 </div>
 <div class="row">
    <nb-card>
-      <h4 *ngIf="processModels.length < 1">Es gibt keine Prozesse, die Sie starten können!</h4>
+      <nb-card-body *ngIf="processModels.length < 1">Es gibt keine Prozesse, die Sie starten können!</nb-card-body>
       <table class="table table-striped" *ngIf="processModels.length > 0">
          <thead>
             <tr>
