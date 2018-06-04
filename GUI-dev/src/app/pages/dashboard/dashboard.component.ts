@@ -14,7 +14,7 @@ export class DashboardComponent {
     },
     {
       title: 'Route tab #2',
-      route: '/pages/images',
+      route: '/activeProcesses',
     }
   ];
 */
