@@ -12,6 +12,11 @@ export class User {
   username: string;
   email: string;
   password: string;
+  uid:number;
+
+  public getUid() {
+    return this.uid;
+  }
 }
 
 
@@ -19,3 +24,4 @@ export class User {
 export interface MailAsyncValidationRes {
   isTaken: boolean
 }
+
