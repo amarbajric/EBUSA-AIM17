@@ -1,21 +1,21 @@
 import { Component,  OnInit } from '@angular/core';
-import { NbSpinnerService } from "@nebular/theme";
+import { NbSpinnerService } from '@nebular/theme';
 import { Router, ActivatedRoute } from '@angular/router';
-import {ProcessesService} from "../../../../allProcesses.service";
+import {ProcessesService} from '../../../../allProcesses.service';
 
 @Component({
   selector: 'terminatedProcesses',
   styleUrls: [],
-  templateUrl:  './terminatedProcesses.html'
+  templateUrl:  './terminatedProcesses.html',
 })
-export class TerminatedProcesses implements OnInit  {
+export class TerminatedProcessesComponent implements OnInit  {
 
-  terminatedProcesses:[
+  terminatedProcesses: [
     {
-      piId:number,
-      startTime:number[],
-      processName:string,
-      startUserId:number
+      piId: number,
+      startTime: number[],
+      processName: string,
+      startUserId: number
     }
   ];
   msg = undefined;
@@ -24,7 +24,7 @@ export class TerminatedProcesses implements OnInit  {
   }
 
   ngOnInit() {
-    var that = this;
+    const that = this;
     this.spinner.load();
     this.service.getTerminatedProcesses()
     .subscribe(

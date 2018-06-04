@@ -1,36 +1,36 @@
 import 'rxjs/add/operator/switchMap';
 import { Component,  OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import {ProcessesService} from "../../../../allProcesses.service";
-import {User} from "../../../../../models/models";
+import {ProcessesService} from '../../../../allProcesses.service';
+import {User} from '../../../../../models/models';
 
 type businessObject = {
-  bomId:number,
-  boiId:number,
-  name:string,
-  fields:[{
-    bofmId:number,
-    bofiId:number,
-    name:string,
-    type:string,
-    required:boolean,
-    readonly:boolean,
-    value:any
+  bomId: number,
+  boiId: number,
+  name: string,
+  fields: [{
+    bofmId: number,
+    bofiId: number,
+    name: string,
+    type: string,
+    required: boolean,
+    readonly: boolean,
+    value: any
   }],
-  children:[businessObject];
+  children: [businessObject];
 }
 
 @Component({
-  selector: 'activeProcessDetail',
+  selector: 'active-process-detail',
   styleUrls: ['./activeProcessDetail.scss'],
-  templateUrl:  './activeProcessDetail.html'
+  templateUrl:  './activeProcessDetail.html',
 })
-export class ActiveProcessDetail implements OnInit {
+export class ActiveProcessDetailComponent implements OnInit {
 
-  piId:number;
+  piId: number;
   msg = undefined;
-  subjectsState:{
-    piId:number,
+  subjectsState: {
+    piId: number,
     status: string,
     startTime: number[],
     endTime: number[],
@@ -45,17 +45,17 @@ export class ActiveProcessDetail implements OnInit {
       user: any
     }]
   };
-  businessObjects:businessObject[];
-  nextStates:[{
-    name:string,
-    nextStateId:number,
-    endState:boolean
+  businessObjects: businessObject[];
+  nextStates: [{
+    name: string,
+    nextStateId: number,
+    endState: boolean
   }];
   assignedUsers:[{
-    smId:number,
-    userId:number,
-    assignedRules:string[],
-    subjectName:string
+    smId: number,
+    userId: number,
+    assignedRules: string[],
+    subjectName: string
   }];
   possibleUserAssignments = [];
   selectedUserAssignments = [];
@@ -67,8 +67,8 @@ export class ActiveProcessDetail implements OnInit {
   }
 
   ngOnInit() {
-    var that = this;
-    this.piId = +this.route.snapshot.params['piId'];
+    const that = this;
+    this.piId = + this.route.snapshot.params['piId'];
     this.businessObjects = undefined;
     this.nextStates = undefined;
     //this.spinner.show();
@@ -83,7 +83,7 @@ export class ActiveProcessDetail implements OnInit {
           },
           err =>{
             that.msg = {text: err, type: 'error'}
-            console.log(err);
+            //console.log(err);
             //that.spinner.hide();
           }
         );
@@ -106,7 +106,7 @@ export class ActiveProcessDetail implements OnInit {
           },
           err =>{
             that.msg = {text: err, type: 'error'}
-            console.log(err);
+            //console.log(err);
           }
         );
     } else {
@@ -116,14 +116,14 @@ export class ActiveProcessDetail implements OnInit {
   }
 
   getPossibleUserAssignments() {
-    var that = this;
+    const that = this;
     this.assignedUsers.forEach(
       au => {
         if(!au.userId){
           that.service.getPossibleUsersForProcessModel(au.assignedRules).
           subscribe(
             data => {
-              let users = JSON.parse(data['_body']);
+              const users = JSON.parse(data['_body']);
               au.assignedRules.forEach(rule => {
                 that.possibleUserAssignments.push({rule: rule, smId: au.smId, users: users, subjectName: au.subjectName});
                 that.selectedUserAssignments[rule] = undefined;
@@ -133,22 +133,22 @@ export class ActiveProcessDetail implements OnInit {
               this.msg = {text: err, type: 'error'}
               that.possibleUserAssignments = [];
             },
-            () => console.log("Request done")
+            () => {}//console.log('Request done')
           );
         }
       });
   }
 
   submitForm(form) {
-    var that = this;
-    var businessObjectsValues = [];
-    var userAssignments = [];
+    const that = this;
+    const businessObjectsValues = [];
+    const userAssignments = [];
     that.nextIsEndState = that.nextStates.filter(ns => ns.nextStateId === form.nextStateId)[0].endState;
     if(this.isSendState()){
-      var keys = Object.keys(form.value).forEach(k => {
-        var kSplit = k.split("User-Assignment_:-");
+      const keys = Object.keys(form.value).forEach(k => {
+        const kSplit = k.split('User-Assignment_:-');
         if(kSplit.length > 1){
-          var value = form.value[k];
+          const value = form.value[k];
           userAssignments.push({smId:value.smId, userId:value.userId});
         }
       });
@@ -157,7 +157,7 @@ export class ActiveProcessDetail implements OnInit {
     this.businessObjects.forEach(bo => {
       businessObjectsValues.push(this.getBusinessObjectsValues(bo, form));
     });
-    var businessObjectsAndNextStateAndUserAssignments = {
+    const businessObjectsAndNextStateAndUserAssignments = {
       nextStateId: form.nextStateId,
       businessObjects: businessObjectsValues,
       userAssignments: userAssignments
@@ -168,15 +168,15 @@ export class ActiveProcessDetail implements OnInit {
   }
 
   private getBusinessObjectsValues(bo:businessObject, form): any{
-    var fields = []
-    var childBoValues = [];
-    var keys = Object.keys(form.value).forEach(k => {
-      var kSplit = k.split("-:_");
+    const fields = []
+    const childBoValues = [];
+    const keys = Object.keys(form.value).forEach(k => {
+      const kSplit = k.split('-:_');
       if(kSplit.length > 1) {
-        var bomId = kSplit[0];
-        var bofmId = kSplit[1];
+        const bomId = kSplit[0];
+        const bofmId = kSplit[1];
         if(bomId === (bo.bomId).toString()) {
-          var value = form.value[k];
+          const value = form.value[k];
           fields.push({bofmId:bofmId, value:value});
         }
       }
@@ -188,7 +188,7 @@ export class ActiveProcessDetail implements OnInit {
   }
 
   private submitStateChange(businessObjectsAndNextStateAndUserAssignments) {
-    var that = this;
+    const that = this;
     this.service.submitBusinessObjectsAndNextStateAndUserAssignments(this.piId, businessObjectsAndNextStateAndUserAssignments)
       .subscribe(
         data => {
@@ -196,20 +196,20 @@ export class ActiveProcessDetail implements OnInit {
         },
         err =>{
           that.msg = {text: err, type: 'error'}
-          console.log(err);
+          //console.log(err);
         }
       );
   }
 
   //dirty hack so that the value of the checkbox changes (otherwise the form submit value will stay the original value)
   onChangeCheckboxFn(that, element){
-    var name = element.name.split("-:_")[0];
+    const name = element.name.split('-:_')[0];
     that.model._parent.form.controls[name].setValue(element.checked)
   }
 
   isReceiveState(){
     if(this.subjectsState){
-      return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].stateFunctionType === "RECEIVE";
+      return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].stateFunctionType === 'RECEIVE';
     } else {
       return false;
     }
@@ -217,7 +217,7 @@ export class ActiveProcessDetail implements OnInit {
 
   isToReceiveState(){
     if(this.subjectsState){
-      return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].subState === "TO_RECEIVE";
+      return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].subState === 'TO_RECEIVE';
     } else {
       return false;
     }
@@ -225,7 +225,7 @@ export class ActiveProcessDetail implements OnInit {
 
   isReceivedState(){
     if(this.subjectsState){
-      return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].subState === "RECEIVED";
+      return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].subState === 'RECEIVED';
     } else {
       return false;
     }
@@ -233,7 +233,7 @@ export class ActiveProcessDetail implements OnInit {
 
   isSendState(){
     if(this.subjectsState){
-      return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].stateFunctionType === "SEND";
+      return this.subjectsState.subjects.filter(s => s.userId === this._user.getUid())[0].stateFunctionType === 'SEND';
     } else {
       return false;
     }

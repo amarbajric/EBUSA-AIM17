@@ -24,9 +24,9 @@ import { AuthGuard } from './auth-guard.service';
 import { EbEmailPassAuthProvider } from './@theme/providers/auth/email-pass-auth.provider';
 import { AsyncEmailValidatorProvider } from './@theme/providers/async-email-validator/async-email-validator';
 import { ServerConfigProvider } from './@theme/providers/backend-server/serverconfig';
-import {EventLoggerService} from "./evntLogger.service";
-import {ProcessesService} from "./allProcesses.service";
-import {User} from "../models/models";
+import {EventLoggerService} from './evntLogger.service';
+import {ProcessesService} from './allProcesses.service';
+import {User} from '../models/models';
 
 @NgModule({
   declarations: [AppComponent],
@@ -108,7 +108,7 @@ import {User} from "../models/models";
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
     { provide: NbRoleProvider, useClass: RoleProvider },
-    { provide: User, useClass: User}
+    { provide: User, useClass: User},
   ],
 })
 export class AppModule {

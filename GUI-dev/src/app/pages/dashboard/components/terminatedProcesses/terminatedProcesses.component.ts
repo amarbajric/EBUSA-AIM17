@@ -1,20 +1,20 @@
 import { Component,  OnInit } from '@angular/core';
-import {ProcessesService} from "../../../../allProcesses.service";
+import {ProcessesService} from '../../../../allProcesses.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'terminatedProcesses',
+  selector: 'terminated-processes',
   styles: [],
   templateUrl:  './terminatedProcesses.html'
 })
-export class TerminatedProcesses implements OnInit  {
+export class TerminatedProcessesComponent implements OnInit  {
 
   terminatedProcesses:[
     {
-      piId:number,
-      startTime:number[],
-      processName:string,
-      startUserId:number
+      piId: number,
+      startTime: number[],
+      processName: string,
+      startUserId: number,
     }
   ];
   msg = undefined;
@@ -31,7 +31,7 @@ export class TerminatedProcesses implements OnInit  {
           that.terminatedProcesses = JSON.parse(data['_body']);
 
         },
-        err =>{
+        err => {
           that.msg = {text: err, type: 'error'}
           console.log(err);
         }

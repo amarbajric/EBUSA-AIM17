@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'admin',
+  selector: 'ngx-admin',
   styles: [],
-  template: `<router-outlet></router-outlet>`
+  template: `<router-outlet></router-outlet>`,
 })
-export class Admin {
+export class AdminComponent {
 
   constructor() {
   }

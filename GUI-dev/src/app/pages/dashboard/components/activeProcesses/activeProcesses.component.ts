@@ -1,20 +1,20 @@
-import { Component,  OnInit } from '@angular/core';
-import {ProcessesService} from "../../../../allProcesses.service";
+import { Component,  OnInit } from '@angular/core';''
+import {ProcessesService} from '../../../../allProcesses.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'activeProcesses',
+  selector: 'active-processes',
   styleUrls: [],
-  templateUrl:  './activeProcesses.html'
+  templateUrl:  './activeProcesses.html',
 })
-export class ActiveProcesses implements OnInit  {
+export class ActiveProcessesComponent implements OnInit  {
 
   activeProcesses:[
     {
       piId:number,
       startTime:number[],
       processName:string,
-      startUserId:number
+      startUserId:number,
     }
   ];
   msg = undefined;
@@ -23,20 +23,20 @@ export class ActiveProcesses implements OnInit  {
   }
 
   ngOnInit() {
-    var that = this;
+    const that = this;
     this.service.getProcessTasksForUser()
     .subscribe(
         data => {
           that.activeProcesses = JSON.parse(data['_body']);
         },
-        err =>{
+        err => {
           that.msg = {text: err, type: 'error'}
-          console.log(err);
+          // console.log(err);
         }
       );
   }
 
-  showProcess(piId:number){
+  showProcess(piId:number) {
     this.router.navigate(['../active', piId], { relativeTo: this.route });
   }
 }

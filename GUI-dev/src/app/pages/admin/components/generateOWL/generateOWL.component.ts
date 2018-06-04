@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { EventLoggerService} from "../../../../evntLogger.service";
+import { EventLoggerService} from '../../../../evntLogger.service';
 
 @Component({
-  selector: 'import',
+  selector: 'ngx-import',
   styleUrls: ['./generateOWL.scss'],
-  templateUrl: './generateOWL.html'
+  templateUrl: './generateOWL.html',
 })
-export class GenerateOWL implements OnInit {
+export class GenerateOWLComponent implements OnInit {
    error = undefined;
-   pnmlFiles = [{id: 1, name: "", file: undefined}, {id: 2, name: "", file: undefined}];
-   processName = "";
+   pnmlFiles = [{id: 1, name: '', file: undefined}, {id: 2, name: '', file: undefined}];
+   processName = '';
 
   constructor(protected service:EventLoggerService) {}
 
@@ -18,23 +18,23 @@ export class GenerateOWL implements OnInit {
   }
 
   onPNMLFileChange(event, id) {
-    var that = this;
-    var pnmlFile = that.pnmlFiles.filter(x => x.id === id)[0];
+    const that = this;
+    let pnmlFile = that.pnmlFiles.filter(x => x.id === id)[0];
     pnmlFile.file = event.srcElement.files[0];
-    var split = pnmlFile.file.name.split(".");
-    if(split[split.length-1] !== "pnml") {
+    const split = pnmlFile.file.name.split('.');
+    if(split[split.length-1] !== 'pnml') {
       pnmlFile = undefined;
-      event.target.value = "";
+      event.target.value = '';
     }
   }
 
   uploadFiles(form):void {
     var that = this;
-    var newFileName = that.processName+"-generated.owl";
+    var newFileName = that.processName+'-generated.owl';
     var fileResults = {}
     var fileReaderPromises = [];
     that.pnmlFiles.forEach(p => {
-      if (!p.name || p.name === "" || !p.file) {
+      if (!p.name || p.name === '' || !p.file) {
         return;
       }
       var promise = new Promise((resolve, reject) => {
@@ -55,30 +55,30 @@ export class GenerateOWL implements OnInit {
             that.error = undefined;
           },
           err => {
-            that.error = "Die OWL Datei konnte nicht generiert werden! " + JSON.parse(err._body).message;
+            that.error = 'Die OWL Datei konnte nicht generiert werden! ' + JSON.parse(err._body).message;
           }
         );
     })
   }
 
-  isUploadDisabled(){
-    var that = this;
-    return that.processName === "" ||
+  isUploadDisabled() {
+    const that = this;
+    return that.processName === '' ||
       that.processName === undefined ||
-      that.pnmlFiles[0].name === "" ||
+      that.pnmlFiles[0].name === '' ||
       that.pnmlFiles[0].name === undefined ||
       that.pnmlFiles[0].file === undefined ||
-      that.pnmlFiles[1].name === "" ||
+      that.pnmlFiles[1].name === '' ||
       that.pnmlFiles[1].name === undefined ||
       that.pnmlFiles[1].file === undefined ||
       that.pnmlFiles[0].name === that.pnmlFiles[1].name
   }
 
   saveData(data, fileName) {
-    var a = document.createElement("a");
+    var a = document.createElement('a');
     document.body.appendChild(a);
-    a.style.cssText = "display: none";
-    let blob = new Blob([data._body], {type: "application/xml"});
+    a.style.cssText = 'display: none';
+    let blob = new Blob([data._body], {type: 'application/xml'});
     let url = window.URL.createObjectURL(blob);
     a.href = url;
     a.download = fileName;

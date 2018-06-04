@@ -1,21 +1,21 @@
 import { Component,  OnInit } from '@angular/core';
-import {ProcessesService} from "../../../../allProcesses.service";
+import {ProcessesService} from '../../../../allProcesses.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {NbSpinnerService} from "@nebular/theme";
+import {NbSpinnerService} from '@nebular/theme';
 
 @Component({
   selector: 'activeProcesses',
   styleUrls: [],
-  templateUrl:  './activeProcesses.html'
+  templateUrl:  './activeProcesses.html',
 })
-export class ActiveProcesses implements OnInit  {
+export class ActiveProcessesComponent implements OnInit  {
 
   activeProcesses:[
     {
-      piId:number,
-      startTime:number[],
-      processName:string,
-      startUserId:number
+      piId: number,
+      startTime: number[],
+      processName: string,
+      startUserId: number,
     }
   ];
   msg = undefined;
@@ -24,7 +24,7 @@ export class ActiveProcesses implements OnInit  {
   }
 
   ngOnInit() {
-    var that = this;
+    const that = this;
     this.spinner.load();
     this.service.getActiveProcesses()
     .subscribe(
@@ -32,7 +32,7 @@ export class ActiveProcesses implements OnInit  {
           that.activeProcesses = JSON.parse(data['_body']);
           that.spinner.clear();
         },
-        err =>{
+        err => {
           that.msg = {text: err, type: 'error'}
           console.log(err);
           that.spinner.clear();
@@ -40,17 +40,17 @@ export class ActiveProcesses implements OnInit  {
       );
   }
 
-  showProcess(piId:number){
+  showProcess(piId:number) {
     this.router.navigate(['../active', piId], { relativeTo: this.route });
   }
 
-  stopProcess(piId:number){
+  stopProcess(piId:number) {
     this.service.stopProcess(piId)
     .subscribe(
         data => {
           this.ngOnInit();
         },
-        err =>{
+        err => {
           this.msg = {text: err, type: 'error'}
           console.log(err);
         }

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { EventLoggerService} from "../../../../evntLogger.service";
+import { EventLoggerService} from '../../../../evntLogger.service';
 
 @Component({
   selector: 'import',
   styleUrls: [],
-  templateUrl: './manipulatePNML.html'
+  templateUrl: './manipulatePNML.html',
 })
-export class ManipulatePNML implements OnInit {
+export class ManipulatePNMLComponent implements OnInit {
    error = undefined;
    pnmlFile;
    csvFile;
@@ -20,20 +20,20 @@ export class ManipulatePNML implements OnInit {
   onPNMLFileChange(event) {
     var that = this;
     this.pnmlFile = event.srcElement.files[0];
-    var split = this.pnmlFile.name.split(".");
-    if(split[split.length-1] !== "pnml") {
+    var split = this.pnmlFile.name.split('.');
+    if(split[split.length-1] !== 'pnml') {
       this.pnmlFile = undefined;
-      event.target.value = "";
+      event.target.value = '';
     }
   }
 
   onCSVFileChange(event) {
     var that = this;
     this.csvFile = event.srcElement.files[0];
-    var split = this.csvFile.name.split(".");
-    if(split[split.length-1] !== "csv") {
+    var split = this.csvFile.name.split('.');
+    if(split[split.length-1] !== 'csv') {
       this.csvFile = undefined;
-      event.target.value = "";
+      event.target.value = '';
     }
   }
 
@@ -41,7 +41,7 @@ export class ManipulatePNML implements OnInit {
     var that = this;
     var pnmlReader = new FileReader();
     var csvReader = new FileReader();
-    var newFileName = "";
+    var newFileName = '';
     if(this.pnmlFile) {
       pnmlReader.onload = (e) => csvReader.readAsText(this.csvFile);
       csvReader.onload = (e) => {
@@ -52,20 +52,20 @@ export class ManipulatePNML implements OnInit {
               that.error = undefined;
             },
             err => {
-              that.error = "Die PNML Datei konnte nicht richtig interpretiert werden! " + JSON.parse(err._body).message;
+              that.error = 'Die PNML Datei konnte nicht richtig interpretiert werden! ' + JSON.parse(err._body).message;
             }
           );
       }
-      newFileName = this.pnmlFile.name.replace(".pnml", "-manipulated.pnml");
+      newFileName = this.pnmlFile.name.replace('.pnml', '-manipulated.pnml');
       pnmlReader.readAsText(this.pnmlFile);
     }
   }
 
   saveData(data, fileName) {
-    var a = document.createElement("a");
+    var a = document.createElement('a');
     document.body.appendChild(a);
-    a.style.cssText = "display: none";
-    let blob = new Blob([data._body], {type: "application/xml"});
+    a.style.cssText = 'display: none';
+    let blob = new Blob([data._body], {type: 'application/xml'});
     let url = window.URL.createObjectURL(blob);
     a.href = url;
     a.download = fileName;

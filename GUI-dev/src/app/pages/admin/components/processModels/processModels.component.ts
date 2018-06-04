@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { ProcessesService} from "../../../../allProcesses.service";
+import { ProcessesService} from '../../../../allProcesses.service';
 
 @Component({
-  selector: 'models',
+  selector: 'ngx-models',
   styleUrls: [],
-  templateUrl: './processModels.html'
+  templateUrl: './processModels.html',
 })
-export class ProcessModels implements OnInit {
+export class ProcessModelsComponent implements OnInit {
    processModels = [];
    error = undefined;
 

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import {ProcessesService} from "../../../../allProcesses.service";
-import { EventLoggerService} from "../../../../evntLogger.service";
+import {ProcessesService} from '../../../../allProcesses.service';
+import { EventLoggerService} from '../../../../evntLogger.service';
 
 @Component({
   selector: 'models',
   styleUrls: [],
   templateUrl: './eventLogger.html'
 })
-export class EventLogger implements OnInit {
+export class EventLoggerComponent implements OnInit {
    processModels = [];
    error = undefined;
    selectedProcessModel = {subjectModels: undefined};
@@ -20,7 +20,7 @@ export class EventLogger implements OnInit {
   constructor(protected processService:ProcessesService, protected eventLoggerService:EventLoggerService) {}
 
   ngOnInit(): void {
-    var that = this;
+    const that = this;
     this.processService.getProcessModels()
       .subscribe(
          data => {
@@ -30,16 +30,16 @@ export class EventLogger implements OnInit {
        );
   }
 
-  getEventLog(processModel, subject):void {
-    var that = this;
+  getEventLog(processModel, subject): void {
+    const that = this;
     this.eventLoggerService.getEventLog(processModel.pmId, subject.name)
       .subscribe(
          data => {
            that.loadedEventLogForProcessModel = processModel;
            that.loadedEventLogForSubject = subject.name;
-           var result = JSON.parse(data['_body']);
+           const result = JSON.parse(data['_body']);
            if(result.length === 0){
-             that.error = "Für dieses Prozessmodell gibt es keinen (vollständigen) Event-Log!";
+             that.error = 'Für dieses Prozessmodell gibt es keinen (vollständigen) Event-Log!';
            } else {
              that.eventLog = result;
            }
@@ -53,7 +53,7 @@ export class EventLogger implements OnInit {
        );
   }
 
-  downloadEventLog(processModel, subject){
+  downloadEventLog(processModel, subject) {
     window.open(this.eventLoggerService.getEventLogDownloadLink(processModel.pmId, subject.name));
   }
 }

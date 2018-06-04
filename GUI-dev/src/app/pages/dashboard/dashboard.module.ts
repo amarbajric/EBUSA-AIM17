@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
-import {BusinessObjects} from "./components/activeProcessDetail/businessObjects.component";
-import {StartableProcesses} from "./components/startableProcesses/startableProcesses.component";
-import {TerminatedProcesses} from "./components/terminatedProcesses/terminatedProcesses.component";
-import {ActiveProcessDetail} from "./components/activeProcessDetail/activeProcessDetail.component";
-import {ActiveProcesses} from "./components/activeProcesses/activeProcesses.component";
+import {BusinessObjectsComponent} from './components/activeProcessDetail/businessObjects.component';
+import {StartableProcessesComponent} from './components/startableProcesses/startableProcesses.component';
+import {TerminatedProcessesComponent} from './components/terminatedProcesses/terminatedProcesses.component';
+import {ActiveProcessDetailComponent} from './components/activeProcessDetail/activeProcessDetail.component';
+import { ActiveProcessesComponent} from './components/activeProcesses/activeProcesses.component';
 
 
 @NgModule({
@@ -16,11 +16,11 @@ import {ActiveProcesses} from "./components/activeProcesses/activeProcesses.comp
   ],
   declarations: [
     DashboardComponent,
-    ActiveProcesses,
-    ActiveProcessDetail,
-    TerminatedProcesses,
-    StartableProcesses,
-    BusinessObjects,
+    ActiveProcessesComponent,
+    ActiveProcessDetailComponent,
+    TerminatedProcessesComponent,
+    StartableProcessesComponent,
+    BusinessObjectsComponent,
   ],
 })
 export class DashboardModule { }

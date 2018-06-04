@@ -12,7 +12,7 @@ export class User {
   username: string;
   email: string;
   password: string;
-  uid:number;
+  uid: number;
   createdAt: Date;
   organization?: Organization;
   roles: [Role];

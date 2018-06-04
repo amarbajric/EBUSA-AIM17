@@ -2,18 +2,18 @@ import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { Admin } from './admin.component';
+import { AdminComponent } from './admin.component';
 import { routing }       from './admin.routing';
 
-import { ActiveProcesses } from './components/activeProcesses/activeProcesses.component';
-import { ImportProcessModel } from './components/importProcessModel/importProcessModel.component';
-import { TerminatedProcesses } from './components/terminatedProcesses/terminatedProcesses.component';
-import { ProcessModels } from './components/processModels/processModels.component';
-import { EventLogger } from './components/eventLogger/eventLogger.component';
-import { ManipulatePNML } from './components/manipulatePNML/manipulatePNML.component';
-import { GenerateOWL } from './components/generateOWL/generateOWL.component';
-import {AuthGuard} from "../../auth-guard.service";
-import {ThemeModule} from "../../@theme/theme.module";
+import { ActiveProcessesComponent } from './components/activeProcesses/activeProcesses.component';
+import { ImportProcessModelComponent } from './components/importProcessModel/importProcessModel.component';
+import { TerminatedProcessesComponent } from './components/terminatedProcesses/terminatedProcesses.component';
+import { ProcessModelsComponent } from './components/processModels/processModels.component';
+import { EventLoggerComponent } from './components/eventLogger/eventLogger.component';
+import { ManipulatePNMLComponent } from './components/manipulatePNML/manipulatePNML.component';
+import { GenerateOWLComponent } from './components/generateOWL/generateOWL.component';
+import {AuthGuard} from '../../auth-guard.service';
+import {ThemeModule} from '../../@theme/theme.module';
 
 
 
@@ -25,14 +25,14 @@ import {ThemeModule} from "../../@theme/theme.module";
     ThemeModule,
   ],
   declarations: [
-    Admin,
-    ActiveProcesses,
-    TerminatedProcesses,
-    ProcessModels,
-    ImportProcessModel,
-    EventLogger,
-    ManipulatePNML,
-    GenerateOWL
+    AdminComponent,
+    ActiveProcessesComponent,
+    TerminatedProcessesComponent,
+    ProcessModelsComponent,
+    ImportProcessModelComponent,
+    EventLoggerComponent,
+    ManipulatePNMLComponent,
+    GenerateOWLComponent,
   ],
   providers: [
     AuthGuard,
