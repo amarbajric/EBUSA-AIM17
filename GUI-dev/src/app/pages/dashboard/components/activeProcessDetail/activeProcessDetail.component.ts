@@ -51,7 +51,7 @@ export class ActiveProcessDetailComponent implements OnInit {
     nextStateId: number,
     endState: boolean,
   }];
-  assignedUsers:[{
+  assignedUsers: [{
     smId: number,
     userId: number,
     assignedRules: string[],
@@ -73,7 +73,7 @@ export class ActiveProcessDetailComponent implements OnInit {
     this.businessObjects = undefined;
     this.nextStates = undefined;
     // this.spinner.show();
-    if(!this.nextIsEndState) {
+    if( ! this.nextIsEndState) {
       that.assignedUsers = undefined;
       this.service.getProcessState(this.piId)
         .subscribe(
@@ -127,7 +127,7 @@ export class ActiveProcessDetailComponent implements OnInit {
             data => {
               const users = JSON.parse(data['_body']);
               au.assignedRules.forEach(rule => {
-                that.possibleUserAssignments.push({rule: rule, smId: au.smId, users: users, subjectName: au.subjectName
+                that.possibleUserAssignments.push({rule: rule, smId: au.smId, users: users, subjectName: au.subjectName,
                 });
                 that.selectedUserAssignments[rule] = undefined;
               });
@@ -148,7 +148,7 @@ export class ActiveProcessDetailComponent implements OnInit {
     const userAssignments = [];
     that.nextIsEndState = that.nextStates.filter(ns => ns.nextStateId === form.nextStateId)[0].endState;
     if(this.isSendState()) {
-      const keys = Object.keys(form.value).forEach(k => {
+       Object.keys(form.value).forEach(k => {
         const kSplit = k.split('User-Assignment_:-');
         if(kSplit.length > 1) {
           const value = form.value[k];
@@ -170,17 +170,17 @@ export class ActiveProcessDetailComponent implements OnInit {
 
   }
 
-  private getBusinessObjectsValues(bo:businessObject, form): any{
+  private getBusinessObjectsValues(bo: businessObject, form): any {
     const fields = []
     const childBoValues = [];
-    const keys = Object.keys(form.value).forEach(k => {
+      Object.keys(form.value).forEach(k => {
       const kSplit = k.split('-:_');
       if(kSplit.length > 1) {
         const bomId = kSplit[0];
         const bofmId = kSplit[1];
         if(bomId === (bo.bomId).toString()) {
           const value = form.value[k];
-          fields.push({bofmId:bofmId, value:value});
+          fields.push({bofmId: bofmId, value: value,});
         }
       }
     });
@@ -197,7 +197,7 @@ export class ActiveProcessDetailComponent implements OnInit {
         data => {
           that.ngOnInit();
         },
-        err =>{
+        err => {
           that.msg = {text: err, type: 'error'}
           // console.log(err);
         },

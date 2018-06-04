@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {NbSpinnerService} from '@nebular/theme';
 
 @Component({
-  selector: 'activeProcesses',
+  selector: 'ngx-activeProcesses',
   styleUrls: [],
   templateUrl:  './activeProcesses.html',
 })
@@ -20,7 +20,8 @@ export class ActiveProcessesComponent implements OnInit  {
   ];
   msg = undefined;
 
-  constructor(protected service: ProcessesService, protected spinner: NbSpinnerService, protected route: ActivatedRoute, protected router: Router) {
+  constructor(protected service: ProcessesService, protected spinner: NbSpinnerService, protected route: ActivatedRoute,
+              protected router: Router) {
   }
 
   ngOnInit() {
@@ -36,7 +37,7 @@ export class ActiveProcessesComponent implements OnInit  {
           that.msg = {text: err, type: 'error'}
           console.log(err);
           that.spinner.clear();
-        }
+        },
       );
   }
 
@@ -52,8 +53,8 @@ export class ActiveProcessesComponent implements OnInit  {
         },
         err => {
           this.msg = {text: err, type: 'error'}
-          console.log(err);
-        }
+          // console.log(err);
+        },
       );
   }
 }

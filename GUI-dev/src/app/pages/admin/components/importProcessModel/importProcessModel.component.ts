@@ -23,16 +23,16 @@ export class ImportProcessModelComponent implements OnInit {
    owlFile;
    version = 5;
 
-  constructor(protected service:ProcessesService) {}
+  constructor(protected service: ProcessesService) {}
 
   ngOnInit(): void {
   }
 
   onFileChange(event) {
-    let that = this;
+    const that = this;
     this.owlFile = event.srcElement.files[0];
     const split = this.owlFile.name.split('.');
-    if(split[split.length-1] !== 'owl') {
+    if(split[split.length - 1] !== 'owl') {
       this.owlFile = undefined;
       event.target.value = '';
     }
@@ -40,10 +40,10 @@ export class ImportProcessModelComponent implements OnInit {
 
   uploadOWLModel(form): void {
     const that = this;
-    let reader = new FileReader();
+    const reader = new FileReader();
     if(this.owlFile) {
       reader.onload = function(e) {
-        const body = {owlContent: reader.result, version: '0.7.'+that.version}
+        const body = {owlContent: reader.result, version: '0.7.' + that.version}
         that.service.uploadOWLModel(body)
         .subscribe(
             data => {
@@ -73,7 +73,7 @@ export class ImportProcessModelComponent implements OnInit {
              that.initFormBuilder(that.currentSelectedBusinessObject);
           },
           err => that.error = err,
-          () => {} // console.log('Request Complete')
+          () => {}, // console.log('Request Complete')
         );
   }
 
@@ -88,15 +88,15 @@ export class ImportProcessModelComponent implements OnInit {
     this.service.importProcessModel(processModelResult)
        .subscribe(
           data => {
-             if(JSON.parse(data['_body']) === true){
+             if( JSON.parse(data['_body']) === true){
                that.processModel = undefined;
-               that.rules= undefined;
+               that.rules = undefined;
                that.error = undefined;
-               that.formBuilder= undefined;
+               that.formBuilder = undefined;
                that.buildedBusinessObjects = {};
-               that.currentSelectedBusinessObject= undefined;
-               that.currentSelectedFieldId= undefined;
-               that.currentBofms= undefined;
+               that.currentSelectedBusinessObject = undefined;
+               that.currentSelectedFieldId = undefined;
+               that.currentBofms = undefined;
                that.buildedBofps = {};
                that.success = 'Das Prozessmodell wurde erfolgreich importiert!';
              } else {
@@ -105,7 +105,7 @@ export class ImportProcessModelComponent implements OnInit {
              }
           },
           err => that.error = 'Das Prozessmodell konnte nicht importiert werden!',
-          () => {} // console.log('Request Complete')
+          () => {}, // console.log('Request Complete')
         );
   }
 
@@ -116,7 +116,7 @@ export class ImportProcessModelComponent implements OnInit {
         if(Object.keys(this.buildedBusinessObjects[bom]).length > 0) {
           const values = JSON.parse(this.buildedBusinessObjects[bom]);
           values.forEach(value => {
-            if(value.type !== 'paragraph') {
+            if( value.type !== 'paragraph' ) {
               let type;
               switch (value.type) {
                 case 'text':
@@ -153,7 +153,8 @@ export class ImportProcessModelComponent implements OnInit {
     const that = this;
     const options = {
       dataType: 'json', // default: 'xml',
-      disableFields: ['autocomplete', 'button', 'checkbox-group', 'file', 'header', 'hidden', 'paragraph', 'select', 'textarea'],
+      disableFields: ['autocomplete', 'button', 'checkbox-group', 'file', 'header', 'hidden', 'paragraph', 'select',
+        'textarea'],
       showActionButtons: false,
     };
     // this.formBuilder = jQuery('.formBuilder').formBuilder(options).data('formBuilder');
@@ -171,7 +172,7 @@ export class ImportProcessModelComponent implements OnInit {
     });*/
   }
 
-  getFormData(businessObject, internal?:boolean): void {
+  getFormData(businessObject, internal?: boolean): void {
     const that = this;
     if(this.currentSelectedBusinessObject !== businessObject){
       this.buildedBusinessObjects[this.currentSelectedBusinessObject.id] = this.formBuilder.formData;
@@ -180,12 +181,12 @@ export class ImportProcessModelComponent implements OnInit {
       if(formData !== undefined && !internal) {
         // This is a necessary thing, otherwise setData will not work correctly
         this.formBuilder.actions.addField(
-        	{
+        {
         		'type': 'paragraph',
         		'subtype': 'p',
         		'label': 'Paragraph',
         		'className': 'paragraph',
-        	}
+        },
         );
         this.formBuilder.actions.setData(formData);
       } else {

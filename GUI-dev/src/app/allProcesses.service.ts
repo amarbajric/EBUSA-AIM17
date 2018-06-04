@@ -12,30 +12,30 @@ export class ProcessesService {
   }
 
    getProcessModels() {
-    return this._authHttp.get(this.restApi+'/processes/toStart?page=0');
+    return this._authHttp.get(this.restApi + '/processes/toStart?page=0');
    }
 
    startProcess(pmId: number) {
-     return this._authHttp.post(this.restApi+'/processes/startProcess', {
+     return this._authHttp.post(this.restApi + '/processes/startProcess', {
       'pmId': pmId,
       'startUserId': this._user.getUid(),
       });
    }
 
    getAmountOfActiveProcesses() {
-     return this._authHttp.get(this.restApi+'/processes/amountOfActiveProcesses')
+     return this._authHttp.get(this.restApi + '/processes/amountOfActiveProcesses')
    }
 
-   getAmountOfActiveProcessesForUser(userId:number) {
-     return this._authHttp.get(this.restApi+'/processes/amountOfActiveProcessesPerUser/'+userId);
+   getAmountOfActiveProcessesForUser(userId: number) {
+     return this._authHttp.get(this.restApi + '/processes/amountOfActiveProcessesPerUser/' + userId);
    }
 
-   getPossibleUsersForProcessModel(rules:string[]) {
-      return this._authHttp.get(this.restApi+'/processes/users/rule/'+rules);
+   getPossibleUsersForProcessModel(rules: string[]) {
+      return this._authHttp.get(this.restApi + '/processes/users/rule/' + rules);
    }
 
-   getProcessState(piId:number) {
-       return this._authHttp.get(this.restApi+'/processes/state/'+piId);
+   getProcessState(piId: number) {
+       return this._authHttp.get(this.restApi + '/processes/state/' + piId);
    }
 
    getActiveProcesses() {
@@ -62,14 +62,14 @@ export class ProcessesService {
       return this._authHttp.post(this.restApi + '/processes/stop/' + piId, {});
    }
 
-   getProcessTasksForUser(userId?:number) {
-     if(!userId) {
+   getProcessTasksForUser(userId?: number) {
+     if(! userId) {
        userId = this._user.getUid();
      }
      return this._authHttp.get(this.restApi + '/processes/tasks/' + userId);
    }
 
-   getTasksForProcessForUser(piId:number) {
+   getTasksForProcessForUser(piId: number) {
      return this._authHttp.get(this.restApi + '/processes/task/' + piId + '/' + this._user.getUid());
    }
 

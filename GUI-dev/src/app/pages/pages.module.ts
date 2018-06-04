@@ -5,7 +5,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import {HomeModule} from './home/home.module';
 
-import AdminModule from "./admin/admin.module";
+import AdminModule from './admin/admin.module';
 
 import {UserDetailsModule} from './user-details/user-details.module';
 

@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {ProcessesService} from '../../../../allProcesses.service';
 
 @Component({
-  selector: 'terminatedProcesses',
+  selector: 'ngx-terminated-processes',
   styleUrls: [],
   templateUrl:  './terminatedProcesses.html',
 })
@@ -15,12 +15,13 @@ export class TerminatedProcessesComponent implements OnInit  {
       piId: number,
       startTime: number[],
       processName: string,
-      startUserId: number
+      startUserId: number,
     }
   ];
   msg = undefined;
 
-  constructor(protected service: ProcessesService, protected spinner:NbSpinnerService, protected route: ActivatedRoute, protected router: Router) {
+  constructor(protected service: ProcessesService, protected spinner:NbSpinnerService, protected route: ActivatedRoute,
+              protected router: Router) {
   }
 
   ngOnInit() {
@@ -34,7 +35,7 @@ export class TerminatedProcessesComponent implements OnInit  {
         },
         err =>{
           that.msg = {text: err, type: 'error'}
-          console.log(err);
+          // console.log(err);
           that.spinner.clear();
         }
       );

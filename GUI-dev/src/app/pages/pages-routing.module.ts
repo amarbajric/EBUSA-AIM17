@@ -6,7 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from '../auth-guard.service';
 import {ActiveProcessesComponent} from './dashboard/components/activeProcesses/activeProcesses.component';
-import {EventLoggerComponent} from './admin/components/eventLogger/eventLogger.component';
+// import {EventLoggerComponent} from './admin/components/eventLogger/eventLogger.component';
 
 import {UserDetailsComponent} from './user-details/user-details.component';
 

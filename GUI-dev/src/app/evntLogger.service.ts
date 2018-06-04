@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-//import {User} from '../models/models';
+// import {User} from '../models/models';
 
 @Injectable()
 export class EventLoggerService {

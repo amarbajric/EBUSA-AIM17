@@ -12,7 +12,7 @@ export class GenerateOWLComponent implements OnInit {
    pnmlFiles = [{id: 1, name: '', file: undefined}, {id: 2, name: '', file: undefined}];
    processName = '';
 
-  constructor(protected service:EventLoggerService) {}
+  constructor(protected service: EventLoggerService) {}
 
   ngOnInit(): void {
   }
@@ -28,9 +28,9 @@ export class GenerateOWLComponent implements OnInit {
     }
   }
 
-  uploadFiles(form):void {
+  uploadFiles(form): void {
     const that = this;
-    const newFileName = that.processName+'-generated.owl';
+    const newFileName = that.processName + '-generated.owl';
     const fileResults = {}
     const fileReaderPromises = [];
     that.pnmlFiles.forEach(p => {
@@ -56,7 +56,7 @@ export class GenerateOWLComponent implements OnInit {
           },
           err => {
             that.error = 'Die OWL Datei konnte nicht generiert werden! ' + JSON.parse(err._body).message;
-          }
+          },
         );
     })
   }
@@ -75,11 +75,11 @@ export class GenerateOWLComponent implements OnInit {
   }
 
   saveData(data, fileName) {
-    var a = document.createElement('a');
+    const a = document.createElement('a');
     document.body.appendChild(a);
     a.style.cssText = 'display: none';
-    let blob = new Blob([data._body], {type: 'application/xml'});
-    let url = window.URL.createObjectURL(blob);
+    const blob = new Blob([data._body], {type: 'application/xml'});
+    const url = window.URL.createObjectURL(blob);
     a.href = url;
     a.download = fileName;
     a.click();

@@ -12,7 +12,7 @@ export class ManipulatePNMLComponent implements OnInit {
    pnmlFile;
    csvFile;
 
-  constructor(protected service:EventLoggerService) {}
+  constructor(protected service: EventLoggerService) {}
 
   ngOnInit(): void {
   }
@@ -53,7 +53,7 @@ export class ManipulatePNMLComponent implements OnInit {
             },
             err => {
               that.error = 'Die PNML Datei konnte nicht richtig interpretiert werden! ' + JSON.parse(err._body).message;
-            }
+            },
           );
       }
       newFileName = this.pnmlFile.name.replace('.pnml', '-manipulated.pnml');
@@ -62,11 +62,11 @@ export class ManipulatePNMLComponent implements OnInit {
   }
 
   saveData(data, fileName) {
-    var a = document.createElement('a');
+    let a = document.createElement('a');
     document.body.appendChild(a);
     a.style.cssText = 'display: none';
-    let blob = new Blob([data._body], {type: 'application/xml'});
-    let url = window.URL.createObjectURL(blob);
+    const blob = new Blob([data._body], {type: 'application/xml'});
+    const url = window.URL.createObjectURL(blob);
     a.href = url;
     a.download = fileName;
     a.click();

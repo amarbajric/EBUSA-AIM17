@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core';''
+import { Component,  OnInit } from '@angular/core';
 import {ProcessesService} from '../../../../allProcesses.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -9,12 +9,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ActiveProcessesComponent implements OnInit  {
 
-  activeProcesses:[
+  activeProcesses: [
     {
-      piId:number,
-      startTime:number[],
-      processName:string,
-      startUserId:number,
+      piId: number,
+      startTime: number[],
+      processName: string,
+      startUserId: number,
     }
   ];
   msg = undefined;
@@ -36,7 +36,7 @@ export class ActiveProcessesComponent implements OnInit  {
       );
   }
 
-  showProcess(piId:number) {
+  showProcess(piId: number) {
     this.router.navigate(['../active', piId], { relativeTo: this.route });
   }
 }

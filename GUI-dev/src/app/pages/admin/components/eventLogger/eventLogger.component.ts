@@ -38,7 +38,7 @@ export class EventLoggerComponent implements OnInit {
            that.loadedEventLogForProcessModel = processModel;
            that.loadedEventLogForSubject = subject.name;
            const result = JSON.parse(data['_body']);
-           if(result.length === 0) {
+           if ( result.length === 0 ) {
              that.error = 'Für dieses Prozessmodell gibt es keinen (vollständigen) Event-Log!';
            } else {
              that.eventLog = result;
