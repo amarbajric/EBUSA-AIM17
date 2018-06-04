@@ -11,7 +11,8 @@ import {Review} from '../../../models/models';
 export class ApprovalDetailsComponent implements OnInit {
 
   @Input() process: Process;
-  @Input() selectedProccesForDetails: Process;
+  @Input() selectedProcessFromParent: Process;
+  @Input() selectedReviewFromParent: [Review];
   public processes;
   public reviews;
 

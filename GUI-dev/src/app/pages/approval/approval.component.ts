@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Process} from '../../../models/models';
 import {Review} from '../../../models/models';
+import {ApprovalDetailsComponent} from "../approval-details/approval-details.component";
 
 @Component({
   selector: 'ngx-approval',
@@ -12,8 +13,11 @@ export class ApprovalComponent implements OnInit {
 
   @Input() process: Process;
   public processes: [Process];
+  @Input() review: Review;
   public reviews: [Review];
   public selectedProcess: Process;
+  public selectedReview: Review;
+
 
   iFrameSource: string = 'http://localhost:4000/#/';
   // reviews: string[] = ['Awesome process model', 'This could use some serious improvement', 'Subject X is missing'];
@@ -90,9 +94,17 @@ export class ApprovalComponent implements OnInit {
     // console.log(processID);
 
     for (const process of this.processes) {
-      // console.log(process);
+       // console.log(process);
       if (process.process_id === processID) {
         this.selectedProcess = process;
+      }
+    }
+
+    for (const review of this.reviews) {
+      // console.log(review);
+      if (review.process_id === processID) {
+        this.selectedReview = review;
+        // console.log(this.reviews);
       }
     }
 
