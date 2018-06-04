@@ -41,7 +41,7 @@ import {Component, Input} from '@angular/core';
       </div>
     </div>
   </nb-card>
-  <business-objects [businessObjects]=businessObject.children></business-objects>
+  <ngx-business-objects [businessObjects]=businessObject.children></ngx-business-objects>
 </div>
   `,
 })

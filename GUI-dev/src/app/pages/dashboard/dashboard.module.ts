@@ -8,11 +8,14 @@ import {StartableProcessesComponent} from './components/startableProcesses/start
 import {TerminatedProcessesComponent} from './components/terminatedProcesses/terminatedProcesses.component';
 import {ActiveProcessDetailComponent} from './components/activeProcessDetail/activeProcessDetail.component';
 import { ActiveProcessesComponent} from './components/activeProcesses/activeProcesses.component';
+import {FormsModule} from '@angular/forms';
+
 
 
 @NgModule({
   imports: [
     ThemeModule,
+    FormsModule,
   ],
   declarations: [
     DashboardComponent,

@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {ProcessesService} from '../../../../allProcesses.service';
 import {User} from '../../../../../models/models';
 
-interface BusinessObject {
+type businessObject = {
   bomId: number,
   boiId: number,
   name: string,
@@ -17,7 +17,7 @@ interface BusinessObject {
     readonly: boolean,
     value: any,
   }],
-  children: [BusinessObject];
+  children: [businessObject];
 }
 
 @Component({
@@ -45,7 +45,7 @@ export class ActiveProcessDetailComponent implements OnInit {
       user: any,
     }],
   };
-  businessObjects: BusinessObject[];
+  businessObjects: businessObject[];
   nextStates: [{
     name: string,
     nextStateId: number,
@@ -170,7 +170,7 @@ export class ActiveProcessDetailComponent implements OnInit {
 
   }
 
-  private getBusinessObjectsValues(bo: BusinessObject, form): any {
+  private getBusinessObjectsValues(bo: businessObject, form): any {
     const fields = []
     const childBoValues = [];
       Object.keys(form.value).forEach(k => {
