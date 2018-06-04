@@ -32,7 +32,7 @@ export class ApprovalDetailsComponent implements OnInit {
     this.process.u_id = 6;
     */
 
-    let exampleProcess1 = new Process()
+    const exampleProcess1 = new Process()
     exampleProcess1.created_at = new Date();
     exampleProcess1.process_name = 'Business-Trip-Application-Process'
     exampleProcess1.process_description = 'This S-BPM process model describes how a employee applies for a business trip'
@@ -41,7 +41,7 @@ export class ApprovalDetailsComponent implements OnInit {
     exampleProcess1.version = 2.0;
     exampleProcess1.state = 'not approved';
 
-    let exampleProcess2 = new Process()
+    const exampleProcess2 = new Process()
     exampleProcess2.created_at = new Date();
     exampleProcess2.process_name = 'Hiring-Process'
     exampleProcess2.process_description = 'This S-BPM process model describes how a new employee is hired by a company'
@@ -50,13 +50,13 @@ export class ApprovalDetailsComponent implements OnInit {
     exampleProcess2.version = 1.0;
     exampleProcess2.state = 'not approved';
 
-    let exampleReview1 = new Review()
+    const exampleReview1 = new Review()
     exampleReview1.comment = 'Awesome process model';
     exampleReview1.uploader = 'fgraf';
     exampleReview1.created_at = new Date();
     exampleReview1.process_id = 1;
 
-    let exampleReview2 = new Review()
+    const exampleReview2 = new Review()
     exampleReview2.comment = 'This could use some serious improvement';
     exampleReview2.uploader = 'singer';
     exampleReview2.created_at = new Date();

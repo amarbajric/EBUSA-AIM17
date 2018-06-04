@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Process} from '../../../models/models';
 import {Review} from '../../../models/models';
-import {ApprovalDetailsComponent} from '../approval-details/approval-details.component';
 
 @Component({
   selector: 'ngx-approval',
@@ -90,9 +89,9 @@ export class ApprovalComponent implements OnInit {
   loadDetails(processID: number) {
     // console.log(processID);
 
-    for(let process of this.processes) {
+    for (let process of this.processes) {
       // console.log(process);
-      if (process.process_id == processID) {
+      if (process.process_id === processID) {
         this.selectedProcess = process;
       }
     }
