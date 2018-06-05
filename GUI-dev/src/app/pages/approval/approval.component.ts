@@ -117,13 +117,9 @@ export class ApprovalComponent implements OnInit {
       // console.log(review);
       if (review.process_id === processID) {
         this.selectedReviews.push(review);
-        // this.selectedReviews.push(review);
-        // console.log(review);
-        // console.log(this.selectedReviews);
       }
-      // console.log(this.selectedReviews);
     }
-    console.log(this.selectedReviews);
+    // console.log(this.selectedReviews);
 
   }
 
