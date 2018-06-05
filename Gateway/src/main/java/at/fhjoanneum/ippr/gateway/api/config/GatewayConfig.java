@@ -13,7 +13,6 @@ public class GatewayConfig {
   @Autowired
   private DiscoveryClient discoveryClient;
 
-
   public String getProcessModelStorageAddress() {
     return discoveryClient.getInstances(ServiceIdentifiers.PROCESS_MODEL_STORAGE).get(0).getUri()
         .toString() + "/";
@@ -22,5 +21,9 @@ public class GatewayConfig {
   public String getProcessEngineAddress() {
     return discoveryClient.getInstances(ServiceIdentifiers.PROCESS_ENGINE).get(0).getUri()
         .toString() + "/";
+  }
+
+  public String getProcessStoreAddress() {
+    return discoveryClient.getInstances(ServiceIdentifiers.PROCESS_STORE).get(0).getUri().toString() + "/";
   }
 }

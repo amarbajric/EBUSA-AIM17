@@ -8,4 +8,5 @@ public class ServiceIdentifiers {
   public static final String PROCESS_ENGINE = "process-engine";
   public static final String PROCESS_MODEL_STORAGE = "process-model-storage";
   public static final String EXTERNAL_COMMUNICATOR = "external-communicator";
+  public static final String PROCESS_STORE = "process-store";
 }

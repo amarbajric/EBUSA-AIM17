@@ -1,0 +1,58 @@
+
+<div class="alert alert-danger alert-dismissible fade in" role="alert" *ngIf="error">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Error!</strong> {{error}}
+</div>
+<div class="alert alert-info fade in" role="alert">
+  Es werden nur vollständige Prozessdaten aus dem Event-Log ausgelesen (jeder Case der sowohl Start als auch Ende hat).
+</div>
+<div class="row">
+   <nb-card >
+      <nb-card-body *ngIf="processModels.length < 1">Es gibt keine Prozessmodelle</nb-card-body>
+      <div class="form-group">
+        <label>Prozessmodell</label>
+        <select class="form-control" [(ngModel)]="selectedProcessModel" style="width:50%;">
+          <option *ngFor="let processModel of processModels" [ngValue]="processModel">{{processModel.name}} (Erstellt: {{ processModel.createdAt | date:'dd.MM.yyyy HH:mm:ss' }})</option>
+        </select>
+        <br/>
+        <label>Subjekt</label>
+        <select class="form-control" [(ngModel)]="selectedSubject" style="width:50%;" [disabled]="selectedProcessModel === undefined">
+          <option *ngFor="let subjectModel of selectedProcessModel.subjectModels" [ngValue]="subjectModel">{{subjectModel.name}}</option>
+        </select>
+        <br/>
+        <button class="btn btn-primary btn-lg" type="submit" (click)="getEventLog(selectedProcessModel, selectedSubject)" [disabled]="selectedSubject === undefined">Event-Log laden</button>
+        <button class="btn btn-primary btn-lg" type="submit" (click)="downloadEventLog(selectedProcessModel, selectedSubject)" [disabled]="selectedSubject === undefined">Event-Log CSV herunterladen</button>
+      </div>
+      <div *ngIf="eventLog.length > 0">
+        <h4>Event-Log für {{ loadedEventLogForProcessModel.name }} (Erstellt: {{ loadedEventLogForProcessModel.createdAt | date:'dd.MM.yyyy HH:mm:ss' }} - {{loadedEventLogForSubject}})</h4>
+        <table class="table table-striped">
+           <thead>
+              <tr>
+                 <th>CaseId</th>
+                 <th>Timestamp</th>
+                 <th>Activity</th>
+                 <th>Resource</th>
+                 <th>State</th>
+                 <th>Message Type</th>
+                 <th>Recipient</th>
+                 <th>Sender</th>
+              </tr>
+           </thead>
+           <tbody>
+              <tr *ngFor="let event of eventLog">
+                 <td>{{ event.caseId }}</td>
+                 <td>{{ event.timestamp }}</td>
+                 <td>{{ event.activity }}</td>
+                 <td>{{ event.resource }}</td>
+                 <td>{{ event.state }}</td>
+                 <td>{{ event.messageType }}</td>
+                 <td>{{ event.recipient }}</td>
+                 <td>{{ event.sender }}</td>
+              </tr>
+           </tbody>
+        </table>
+      </div>
+   </nb-card>
+</div>

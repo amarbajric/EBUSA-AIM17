@@ -6,6 +6,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-bar-chart',
     link: '/dashboard',
   },
+
   /*{
     title: 'FEATURES',
     group: true,
