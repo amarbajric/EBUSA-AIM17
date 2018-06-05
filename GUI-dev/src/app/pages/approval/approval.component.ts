@@ -2,8 +2,7 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Process} from '../../../models/models';
 import {Review} from '../../../models/models';
-import {ApprovalDetailsComponent} from "../approval-details/approval-details.component";
-import {forEach} from "@angular/router/src/utils/collection";
+
 
 @Component({
   selector: 'ngx-approval',
@@ -117,10 +116,9 @@ export class ApprovalComponent implements OnInit {
       // console.log(review);
       if (review.process_id === processID) {
         this.selectedReviews = [review];
-        
-        //this.selectedReviews.push(review);
+        // this.selectedReviews.push(review);
         // console.log(review);
-        //console.log(this.selectedReviews);
+        // console.log(this.selectedReviews);
       }
     }
 
