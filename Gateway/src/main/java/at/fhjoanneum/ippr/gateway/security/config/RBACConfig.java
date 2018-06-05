@@ -5,7 +5,6 @@ import at.fhjoanneum.ippr.gateway.security.registration.RegistrationService;
 import at.fhjoanneum.ippr.gateway.security.registration.RegistrationServiceDatabaseImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import at.fhjoanneum.ippr.gateway.security.authentication.AuthenticationService;
 import at.fhjoanneum.ippr.gateway.security.authentication.memory.AuthenticationServiceMemoryImpl;
 import at.fhjoanneum.ippr.gateway.security.rbacmapping.retrieval.RBACRetrievalService;
-import at.fhjoanneum.ippr.gateway.security.rbacmapping.retrieval.memory.RBACRetrievalServiceMemoryImpl;
+import at.fhjoanneum.ippr.gateway.security.rbacmapping.retrieval.RBACRetrievalServiceImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -35,16 +34,15 @@ public class RBACConfig {
     return new BCryptPasswordEncoder();
   }
 
+  @Bean(name = "rbacRetrievalService")
+  public RBACRetrievalService rbacRepository() {
+    LOG.info("Loaded Bean {}", RBACRetrievalServiceImpl.class);
+    return new RBACRetrievalServiceImpl(); }
+
 
   /**
    *  These two configs are used for memory and Cached objects
    */
-  @Bean(name = "rbacRetrievalService")
-  @Conditional(RBACMemoryCondition.class)
-  public RBACRetrievalService userGroupMemoryService() {
-    LOG.info("Loaded Bean {}", RBACRetrievalServiceMemoryImpl.class);
-    return new RBACRetrievalServiceMemoryImpl(); }
-
   @Bean(name = "authenticationService")
   @Conditional(RBACMemoryCondition.class)
   public AuthenticationService memoryAuthenticationService() {
@@ -55,13 +53,6 @@ public class RBACConfig {
   /**
    *  These two configs are used for database
    */
-  // TODO: Exclude rbacretrievalservice when using database to avoid mapping users from csv to db and so on
-  @Bean(name = "rbacRetrievalService")
-  @Conditional(RBACDatabaseCondition.class)
-  public RBACRetrievalService rbacRepository() {
-    LOG.info("Loaded Bean {}", RBACRetrievalServiceMemoryImpl.class);
-    return new RBACRetrievalServiceMemoryImpl(); }
-
   @Bean(name = "authenticationService")
   @Conditional(RBACDatabaseCondition.class)
   public AuthenticationService databaseAuthenticationService() {

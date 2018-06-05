@@ -11,6 +11,7 @@ import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -46,6 +47,9 @@ public class RBACMappingServiceImpl implements RBACMappingService {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
+  @Value("${rbac.system.service.authentication}")
+  private String rbacAuthStrategy;
+
 
   private final Map<String, Rule> rulesCache = Maps.newHashMap();
   private final Map<String, Role> rolesCache = Maps.newHashMap();
@@ -53,14 +57,19 @@ public class RBACMappingServiceImpl implements RBACMappingService {
   @Override
   @Async
   public void mapUsers() {
-    LOG.info("Start user mapping");
-    final Map<String, CacheUser> users = retrievalService.getSystemUsers();
+    String csvPath = "";
+    if (rbacAuthStrategy.equals("memory")) {
+      csvPath = "/memoryusers/";
+    } else if (rbacAuthStrategy.equals("database")) {
+      csvPath = "/database_init/";
+    }
+    LOG.info(String.format("Start user %s mapping", rbacAuthStrategy));
+    final Map<String, CacheUser> users = retrievalService.getSystemUsers(csvPath);
     storeRules(users);
     storeRoles(users);
     storeUsers(users);
     //storeOrganizations(users);
-    LOG.info("Finished user mapping");
-
+    LOG.info(String.format("Finished user %s mapping", rbacAuthStrategy));
   }
 
   private void storeRules(final Map<String, CacheUser> users) {

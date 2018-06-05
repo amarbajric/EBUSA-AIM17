@@ -36,7 +36,7 @@ public class AuthenticationServiceMemoryImpl implements AuthenticationService {
       return Optional.empty();
     }
 
-    final Map<String, CacheUser> systemUsers = retrievalService.getSystemUsers();
+    final Map<String, CacheUser> systemUsers = retrievalService.getSystemUsers("/memoryusers/");
     final CacheUser cacheUser = systemUsers.get(email);
 
     if (cacheUser == null) {

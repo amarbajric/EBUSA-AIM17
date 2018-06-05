@@ -1,0 +1,43 @@
+<div class="alert alert-danger alert-dismissible fade in" role="alert" *ngIf="error">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Error!</strong> {{error}}
+</div>
+<div class="alert alert-success alert-dismissible fade in" role="alert" *ngIf="success">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{success}}
+</div>
+<div class="row">
+  <div class="alert alert-info fade in" role="alert">
+    PNML Files, die ein oWFN eines Subjekts modellieren, können hochgeladen werden um ein OWL File nach der standard-pass-ont v0.7.5 zu generieren, das wiederrum in diese Plattform als Prozessmodell importiert werden kann.
+  </div>
+   <nb-card >
+       <form #pnmlForm="ngForm" (ngSubmit)="uploadFiles(pnmlForm)">
+         <div class="row">
+           <div class="col col-md-3">
+             <label class="control-label">Prozess-Name: </label>
+             <input type="text" class="form-control" name="processName" id="processName" [(ngModel)]="processName" />
+           </div>
+         </div>
+         <div *ngFor="let pnml of pnmlFiles" class="row pt">
+           <div class="col col-md-3">
+             <label class="control-label">Subjekt-Name: </label>
+             <input type="text" name="subjectName{{pnml.id}}" id="subjectName{{pnml.id}}" class="form-control"  [(ngModel)]="pnml.name" />
+           </div>
+           <div class="col col-md-9">
+             <label class="control-label">PNML-File: </label>
+             <input type="file" name="fileUploadPNML{{pnml.id}}" id="fileUploadPNML{{pnml.id}}" class="form-control" accept=".pnml," (change)="onPNMLFileChange($event, pnml.id)" />
+           </div>
+           <br />
+         </div>
+         <br />
+       <div class="alert alert-warning" role="alert" *ngIf="isUploadDisabled()">
+         Bitte einen Prozessnamen und eindeutige Subjekt-Namen festlegen sowie die entsprechenden Dateien auswählen.
+       </div>
+       <button class="btn btn-primary" type="submit" [disabled]="isUploadDisabled()">Upload</button>
+     </form>
+   </nb-card>
+</div>

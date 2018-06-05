@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Path;
 
 import at.fhjoanneum.ippr.gateway.security.registration.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,7 +103,7 @@ public class UserController {
   }
 
   @RequestMapping(value = "api/me", method = {RequestMethod.GET})
-  public User login(final HttpServletRequest request) throws ServletException {
+  public User getLoggedInUser(final HttpServletRequest request) throws ServletException {
     final Claims claims = (Claims) request.getAttribute("claims");
     final Integer userId = (Integer) claims.get("userId");
 
@@ -113,6 +114,20 @@ public class UserController {
   public User getUser(final HttpServletRequest request,
       @PathVariable(name = "userId", required = true) final Long userId) {
     return rbacService.getUserByUserId(userId);
+  }
+
+  @RequestMapping(value = "api/user/{userId}", method = RequestMethod.PUT)
+  public ResponseEntity<UpdateResponse> updateUser(@RequestBody final UserUpdate user,
+                         @PathVariable(name = "userId", required = true) final Long userId) {
+
+    final Optional<User> updatedUser =
+            rbacService.updateUser(userId, user.username, user.firstname, user.lastname, user.email, user.password,
+                    user.organizationId);
+
+    return updatedUser.map(user1 -> new ResponseEntity<>(new UpdateResponse("Ok", user1), HttpStatus.OK))
+            .orElseGet(() -> new ResponseEntity<>(new UpdateResponse(String.format("Updating User with id %s failed.", userId), null),
+            HttpStatus.INTERNAL_SERVER_ERROR));
+
   }
 
   @RequestMapping(value = "api/processes/users/rule/{rules}", method = RequestMethod.GET)
@@ -178,5 +193,25 @@ public class UserController {
     public final boolean isTaken;
 
     public CheckMailResponse(final boolean isTaken) { this.isTaken = isTaken; }
+  }
+
+  private static class UserUpdate implements Serializable {
+    private static final long serialVersionUID = -431110191246364751L;
+
+    public String firstname;
+    public String lastname;
+    public String username;
+    public String email;
+    public String password;
+    public Long organizationId;
+  }
+
+  private static class UpdateResponse implements Serializable {
+    private static final long serialVersionUID = -431110191246364999L;
+
+    public final String message;
+    public final User user;
+
+    public UpdateResponse(final String message, final User user) { this.message = message; this.user = user; }
   }
 }

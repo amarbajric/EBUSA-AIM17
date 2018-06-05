@@ -16,8 +16,6 @@ public interface RBACRepository {
 
   Rule saveRule(final Rule rule);
 
-  Organization saveOrganization(Organization build);
-
   Optional<User> getUserByUserId(final Long userId);
 
   Optional<User> getUserBySystemId(final String systemId);
@@ -38,5 +36,4 @@ public interface RBACRepository {
 
   List<Rule> getRules();
 
-  Optional<Organization> getOrganizationBySystemId(String systemId);
 }

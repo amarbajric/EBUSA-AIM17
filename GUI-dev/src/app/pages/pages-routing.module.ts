@@ -6,6 +6,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import {AuthGuard} from '../auth-guard.service';
 import {ApprovalComponent} from './approval/approval.component';
+import {ActiveProcessesComponent} from './dashboard/components/activeProcesses/activeProcesses.component';
+// import {EventLoggerComponent} from './admin/components/eventLogger/eventLogger.component';
+
+import {UserDetailsComponent} from './user-details/user-details.component';
+
 
 
 const routes: Routes = [{
@@ -17,6 +22,12 @@ const routes: Routes = [{
       component: DashboardComponent,
       canActivate: [AuthGuard],
     },
+    {
+      path: 'activeProcesses',
+      component: ActiveProcessesComponent,
+
+    },
+
     {
       path: 'home',
       component: HomeComponent,
@@ -30,6 +41,11 @@ const routes: Routes = [{
       path: '',
       redirectTo: 'home',
       pathMatch: 'full',
+    },
+    {
+      path: 'user-details',
+      component: UserDetailsComponent,
+      canActivate: [AuthGuard],
     },
   ],
 }];

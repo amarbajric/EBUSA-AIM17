@@ -52,6 +52,11 @@ echo ########################################################## & echo.
 start start_ec.bat
 echo. & echo ##########################################################
 
+echo Start ProcessStore
+echo ########################################################## & echo.
+start start_process_store.bat
+echo. & echo ##########################################################
+
 echo Start EventLogger
 echo ########################################################## & echo.
 start start_event_logger.bat

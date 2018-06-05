@@ -20,7 +20,7 @@ import com.google.common.base.Objects;
 
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Rule;
 
-@Entity(name = "RULE")
+@Entity(name = "rule")
 @XmlRootElement
 public class RuleImpl implements Rule, Serializable {
 

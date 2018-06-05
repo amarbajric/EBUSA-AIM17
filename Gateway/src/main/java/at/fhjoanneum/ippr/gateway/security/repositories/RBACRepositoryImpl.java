@@ -3,8 +3,6 @@ package at.fhjoanneum.ippr.gateway.security.repositories;
 import java.util.List;
 import java.util.Optional;
 
-import at.fhjoanneum.ippr.gateway.security.persistence.entities.OrganizationImpl;
-import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -35,9 +33,6 @@ public class RBACRepositoryImpl implements RBACRepository {
   @Autowired
   private RuleRepository ruleRepository;
 
-  @Autowired
-  private OrganizationRepository organizationRepository;
-
   @Override
   public User saveUser(final User user) {
     return userRepository.save((UserImpl) user);
@@ -51,11 +46,6 @@ public class RBACRepositoryImpl implements RBACRepository {
   @Override
   public Rule saveRule(final Rule rule) {
     return ruleRepository.save((RuleImpl) rule);
-  }
-
-  @Override
-  public Organization saveOrganization(Organization organization) {
-    return organizationRepository.save((OrganizationImpl) organization);
   }
 
   @Override
@@ -108,12 +98,8 @@ public class RBACRepositoryImpl implements RBACRepository {
     return Lists.newArrayList(ruleRepository.findAll());
   }
 
-  @Override
-  public Optional<Organization> getOrganizationBySystemId(String systemId) {
-    return Optional.ofNullable(organizationRepository.findBySystemId(systemId));
-  }
 
-    @Repository
+  @Repository
   interface UserRepository extends PagingAndSortingRepository<UserImpl, Long> {
 
     @Query(value = "SELECT * FROM user WHERE system_id = :systemId", nativeQuery = true)
@@ -154,12 +140,5 @@ public class RBACRepositoryImpl implements RBACRepository {
 
     @Query(value = "SELECT * FROM rule WHERE system_id = :systemId", nativeQuery = true)
     RuleImpl findBySystemId(@Param("systemId") String systemId);
-  }
-
-  @Repository
-  interface OrganizationRepository extends CrudRepository<OrganizationImpl, Long> {
-
-    @Query(value = "SELECT * FROM organization WHERE system_id = :systemId", nativeQuery = true)
-    OrganizationImpl findBySystemId(@Param("systemId") String systemId);
   }
 }

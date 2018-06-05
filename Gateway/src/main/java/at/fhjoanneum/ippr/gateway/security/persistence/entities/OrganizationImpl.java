@@ -3,6 +3,8 @@ package at.fhjoanneum.ippr.gateway.security.persistence.entities;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
+import at.fhjoanneum.ippr.gateway.security.persistence.objects.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.NotBlank;
@@ -10,8 +12,9 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Entity(name = "ORGANIZATION")
+@Entity(name = "organization")
 @XmlRootElement
 public class OrganizationImpl implements Organization {
 
@@ -20,6 +23,7 @@ public class OrganizationImpl implements Organization {
     private Long oId;
 
     @Column(unique = true)
+    @JsonIgnore
     private String systemId;
 
     @Column
@@ -30,6 +34,9 @@ public class OrganizationImpl implements Organization {
     @NotBlank
     private String organizationDescription;
 
+    @OneToMany(mappedBy = "organization")
+    private List<UserImpl> employees = Lists.newArrayList();
+
     @ManyToMany
     @JoinTable(name = "orga_process_map", joinColumns = {@JoinColumn(name = "o_id")},
             inverseJoinColumns = {@JoinColumn(name = "process_id")})
@@ -38,11 +45,13 @@ public class OrganizationImpl implements Organization {
 
     OrganizationImpl() {}
 
-    OrganizationImpl(String systemId, String organizationName, String organizationDescription, List<ProcessStoreImpl> processes) {
+    OrganizationImpl(String systemId, String organizationName, String organizationDescription,
+                     List<ProcessStoreImpl> processes, List<UserImpl> employees) {
         this.organizationName = organizationName;
         this.organizationDescription = organizationDescription;
         this.systemId = systemId;
         this.processes = processes;
+        this.employees = employees;
     }
 
     @Override
@@ -56,7 +65,7 @@ public class OrganizationImpl implements Organization {
     }
 
     @Override
-    public String getOrganisationName() {
+    public String getOrganizationName() {
         return organizationName;
     }
 
@@ -78,5 +87,15 @@ public class OrganizationImpl implements Organization {
         checkArgument(StringUtils.isNotBlank(organizationDescription));
         this.organizationDescription = organizationDescription;
 
+    }
+
+    @Override
+    public List<UserImpl> getEmployees() { return employees; }
+
+    @Override
+    public void setEmployees(final List<UserImpl> employees) {
+        this.employees.clear();
+        this.employees = employees.stream().filter(UserImpl.class::isInstance)
+                .map(employee -> (UserImpl) employee).collect(Collectors.toList());
     }
 }

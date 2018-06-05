@@ -1,6 +1,5 @@
 package at.fhjoanneum.ippr.gateway.security.registration;
 
-import at.fhjoanneum.ippr.gateway.security.persistence.entities.RoleBuilder;
 import at.fhjoanneum.ippr.gateway.security.persistence.entities.UserBuilder;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.User;
 import at.fhjoanneum.ippr.gateway.security.repositories.RBACRepository;
@@ -8,8 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
@@ -33,14 +30,14 @@ public class RegistrationServiceDatabaseImpl implements RegistrationService {
         }
 
         User newUser = new UserBuilder()
-                .systemId(firstname.toUpperCase())
+                .systemId(email.toUpperCase().replaceAll("\\^[@.-]+","_"))
                 .firstname(firstname)
                 .lastname(lastname)
                 .username(username)
                 .email(email)
                 .password(passwordEncoder.encode(password))
-                // TODO: needs change. Define new roles.
-                .addRole(rbacRepository.getRoleByRoleName("Employee").get())
+                // New registered user gets the default role "USER"
+                .addRole(rbacRepository.getRoleByRoleName("USER").get())
                 .build();
 
         rbacRepository.saveUser(newUser);

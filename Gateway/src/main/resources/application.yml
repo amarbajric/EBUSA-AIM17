@@ -6,6 +6,9 @@ zuul:
     event-logger:
       path: /ev/**
       serviceId: event-logger
+    process-store:
+      path: /process-store/**
+      serviceId: process-store
 
     
     

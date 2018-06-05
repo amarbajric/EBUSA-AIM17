@@ -29,7 +29,7 @@ import com.google.common.collect.Lists;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Role;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Rule;
 
-@Entity(name = "ROLE")
+@Entity(name = "role")
 @XmlRootElement
 public class RoleImpl implements Role, Serializable {
 

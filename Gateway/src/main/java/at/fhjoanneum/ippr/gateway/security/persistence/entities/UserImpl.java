@@ -12,9 +12,14 @@ import java.util.stream.Collectors;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.google.common.base.Objects;
@@ -25,7 +30,7 @@ import at.fhjoanneum.ippr.gateway.security.persistence.objects.Role;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Rule;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.User;
 
-@Entity(name = "USER")
+@Entity(name = "user")
 @XmlRootElement
 public class UserImpl implements User, Serializable {
 
@@ -36,6 +41,7 @@ public class UserImpl implements User, Serializable {
   private Long uId;
 
   @Column(unique = true)
+  @JsonIgnore
   private String systemId;
 
   @Column
@@ -46,23 +52,29 @@ public class UserImpl implements User, Serializable {
   @NotBlank
   private String lastname;
 
-  @Column(unique = true)
+  @Column
   private String username;
 
-  @Column
+  @Column(unique = true)
   @NotBlank
   private String email;
 
   @Column
+  @JsonIgnore
   @NotBlank
   private String password;
 
   @ManyToOne
-  @JoinColumn(name= "o_id")
+  @JoinColumn(name = "o_id")
+  @JsonIgnoreProperties("employees")
   private OrganizationImpl organization;
 
-  @Column
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  @Column(nullable = false, updatable=false)
   Date createdAt;
+
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "user_role_map", joinColumns = {@JoinColumn(name = "u_id")},
@@ -205,7 +217,7 @@ public class UserImpl implements User, Serializable {
   public String toString() {
     return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("uId", uId)
         .append("lastname", lastname).append("firstname", firstname).append("email", email)
-        .append("orgId",organization.toString()).append("groups", roles)
+        .append("username", username).append("orgId",organization.toString()).append("groups", roles)
         .toString();
   }
 }

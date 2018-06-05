@@ -1,0 +1,44 @@
+<div class="row">
+  <nb-card>
+    <nb-card-header>Profile</nb-card-header>
+    <nb-card-body>
+
+      <div class="flex-row text-heading">
+        <h5>General Information</h5>
+        <div class="flex-column text-body">
+          <dl>
+            <dt>Firstname:</dt>
+            <dd>{{user.firstname}}</dd>
+
+            <dt>Lastname:</dt>
+            <dd>{{user.lastname}}</dd>
+
+            <dt>Username:</dt>
+            <dd>{{user.username}}</dd>
+
+            <dt>E-Mail:</dt>
+            <dd>{{user.email}}</dd>
+          </dl>
+        </div>
+      </div>
+      <hr />
+      <div class="flex-row text-heading">
+        <h5>Security Information</h5>
+        <div class="flex-column text-body">
+          <dl>
+            <dt>Organization:</dt>
+            <dd>{{ user.organization?.organizationName }}</dd>
+
+            <dt>Role:</dt>
+            <dd><span *ngFor="let role of user.roles"> {{ role.name }}<br /></span></dd>
+
+            <dt>Member since:</dt>
+            <dd>{{ user.createdAt | date:'dd-MM-yyyy' }}</dd>
+          </dl>
+        </div>
+      </div>
+
+    </nb-card-body>
+  </nb-card>
+</div>
+
