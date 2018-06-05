@@ -3,6 +3,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {Process} from '../../../models/models';
 import {Review} from '../../../models/models';
 import {ApprovalDetailsComponent} from "../approval-details/approval-details.component";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'ngx-approval',
@@ -16,7 +17,7 @@ export class ApprovalComponent implements OnInit {
   @Input() review: Review;
   public reviews: [Review];
   public selectedProcess: Process;
-  public selectedReview: Review;
+  public selectedReviews: [Review];
 
 
   iFrameSource: string = 'http://localhost:4000/#/';
@@ -64,10 +65,22 @@ export class ApprovalComponent implements OnInit {
     exampleReview2.comment = 'This could use some serious improvement';
     exampleReview2.uploader = 'singer';
     exampleReview2.created_at = new Date();
-    exampleReview1.process_id = 2;
+    exampleReview2.process_id = 2;
+
+    const exampleReview3 = new Review()
+    exampleReview3.comment = 'We will adapt the process to the new requirements';
+    exampleReview3.uploader = 'fgraf';
+    exampleReview3.created_at = new Date();
+    exampleReview3.process_id = 2;
+
+    const exampleReview4 = new Review()
+    exampleReview4.comment = 'We have fixed the model now';
+    exampleReview4.uploader = 'fgraf';
+    exampleReview4.created_at = new Date();
+    exampleReview4.process_id = 2;
 
     this.processes = [exampleProcess1, exampleProcess2];
-    this.reviews = [exampleReview1, exampleReview2];
+    this.reviews = [exampleReview1, exampleReview2, exampleReview3, exampleReview4];
   }
 
   switchIFrameSource() {
@@ -103,8 +116,12 @@ export class ApprovalComponent implements OnInit {
     for (const review of this.reviews) {
       // console.log(review);
       if (review.process_id === processID) {
-        this.selectedReview = review;
-        // console.log(this.reviews);
+        this.selectedReviews = [review];
+
+
+        //this.selectedReviews.push(review);
+        // console.log(review);
+        console.log(this.selectedReviews);
       }
     }
 

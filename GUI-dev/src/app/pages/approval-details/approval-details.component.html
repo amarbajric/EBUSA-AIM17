@@ -44,6 +44,7 @@
         <th>Comment:</th>
         <th>User:</th>
         <th>Created at:</th>
+        <th>Process ID:</th>
       </tr>
       <!--
       <tr *ngFor="let review of reviews">
@@ -52,10 +53,11 @@
         <td>{{review.created_at | date :'short'}}</td>
       </tr>
       -->
-      <tr>
+      <tr *ngFor="let selectedReviewFromParent of selectedReviewsFromParent">
         <td>{{selectedReviewFromParent?.comment}}</td>
         <td>{{selectedReviewFromParent?.uploader}}</td>
         <td>{{selectedReviewFromParent?.created_at | date :'short'}}</td>
+        <td>{{selectedReviewFromParent?.process_id}}</td>
       </tr>
     </table>
   </nb-card>
