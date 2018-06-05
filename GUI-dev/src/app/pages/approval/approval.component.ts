@@ -12,11 +12,11 @@ import {Review} from '../../../models/models';
 export class ApprovalComponent implements OnInit {
 
   @Input() process: Process;
-  public processes: [Process];
+  public processes: Process[] = [];
   @Input() review: Review;
-  public reviews: [Review];
+  public reviews: Review[] = [];
   public selectedProcess: Process;
-  public selectedReviews: [Review];
+  public selectedReviews: Review[] = [];
 
 
   iFrameSource: string = 'http://localhost:4000/#/';
@@ -104,6 +104,7 @@ export class ApprovalComponent implements OnInit {
 
   loadDetails(processID: number) {
     // console.log(processID);
+    this.selectedReviews = [];
 
     for (const process of this.processes) {
        // console.log(process);
@@ -115,12 +116,14 @@ export class ApprovalComponent implements OnInit {
     for (const review of this.reviews) {
       // console.log(review);
       if (review.process_id === processID) {
-        this.selectedReviews = [review];
+        this.selectedReviews.push(review);
         // this.selectedReviews.push(review);
         // console.log(review);
         // console.log(this.selectedReviews);
       }
+      // console.log(this.selectedReviews);
     }
+    console.log(this.selectedReviews);
 
   }
 
