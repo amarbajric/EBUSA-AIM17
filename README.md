@@ -178,7 +178,7 @@ Basically, the following ports are used:
   
 To change the port configuration, change the server port in this file e.g. Gateway: [application.properties](Gateway/src/main/resources/application.properties)  
   
-**Note:** If you change the port of the Gateway, make sure to change the restApi configuration in [processes.service.ts](GUI-Dev/src/app/processes.service.ts) and to rebuild the GUI-Dev and GUI project according to the guide provide [below](#gui).  
+**Note:** If you change the port of the Gateway, make sure to change the restApi configuration in [allProcesses.service.ts](GUI-Dev/src/app/allProcesses.service.ts) and to rebuild the GUI-Dev and GUI project according to the guide provide [below](#gui).
   
 ### User Configuration
 In general, the authentication concept ist based on RBAC. Each user can be assigned to one or more roles. Each role can be assigned to one more rules.  

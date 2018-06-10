@@ -1,4 +1,4 @@
-package at.fhjoanneum.ippr.gateway.security.rbacmapping.retrieval.memory;
+package at.fhjoanneum.ippr.gateway.security.rbacmapping.retrieval;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import at.fhjoanneum.ippr.gateway.security.persistence.entities.cache.CacheOrganization;
-import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,39 +18,38 @@ import com.google.common.collect.Maps;
 import at.fhjoanneum.ippr.gateway.security.persistence.entities.cache.CacheRole;
 import at.fhjoanneum.ippr.gateway.security.persistence.entities.cache.CacheRule;
 import at.fhjoanneum.ippr.gateway.security.persistence.entities.cache.CacheUser;
-import at.fhjoanneum.ippr.gateway.security.rbacmapping.retrieval.RBACRetrievalService;
 import au.com.bytecode.opencsv.CSVReader;
 
-public class RBACRetrievalServiceMemoryImpl implements RBACRetrievalService {
+public class RBACRetrievalServiceImpl implements RBACRetrievalService {
 
-  private static final Logger LOG = LoggerFactory.getLogger(RBACRetrievalServiceMemoryImpl.class);
+  private static final Logger LOG = LoggerFactory.getLogger(RBACRetrievalServiceImpl.class);
 
   private static Map<String, CacheUser> users = null;
 
   @Override
-  public Map<String, CacheUser> getSystemUsers() {
+  public Map<String, CacheUser> getSystemUsers(String pathToCsvs) {
     if (users == null) {
       users = Maps.newHashMap();
-      readCsv();
+      readCsv(pathToCsvs);
     }
     return users;
   }
 
-  private void readCsv() {
-    final Map<String, CacheRule> rules = readRules();
-    final Map<String, CacheRole> roles = readRoles(rules);
+  private void readCsv(String pathToCsvs) {
+    final Map<String, CacheRule> rules = readRules(pathToCsvs);
+    final Map<String, CacheRole> roles = readRoles(rules, pathToCsvs);
     final Map<String, CacheOrganization> orgas = readOrganizations();
-    readUsers(roles);
+    readUsers(roles, pathToCsvs);
   }
 
-  private Map<String, CacheRule> readRules() {
+  private Map<String, CacheRule> readRules(String csvPath) {
     final Map<String, CacheRule> rules = Maps.newHashMap();
 
     final Reader in = null;
     CSVReader reader = null;
 
     try {
-      final InputStream is = this.getClass().getResourceAsStream("/memoryusers/rules.csv");
+      final InputStream is = this.getClass().getResourceAsStream(csvPath + "rules.csv");
       reader = new CSVReader(new InputStreamReader(is), '\n', '\'', 1);
       String[] nextLine;
       while ((nextLine = reader.readNext()) != null) {
@@ -70,14 +68,14 @@ public class RBACRetrievalServiceMemoryImpl implements RBACRetrievalService {
     return rules;
   }
 
-  private Map<String, CacheRole> readRoles(final Map<String, CacheRule> rules) {
+  private Map<String, CacheRole> readRoles(final Map<String, CacheRule> rules, String csvPath) {
     final Map<String, CacheRole> roles = Maps.newHashMap();
 
     final Reader in = null;
     CSVReader reader = null;
 
     try {
-      final InputStream is = this.getClass().getResourceAsStream("/memoryusers/roles.csv");
+      final InputStream is = this.getClass().getResourceAsStream(csvPath + "roles.csv");
       reader = new CSVReader(new InputStreamReader(is), '\n', '\'', 1);
       String[] nextLine;
       while ((nextLine = reader.readNext()) != null) {
@@ -99,12 +97,12 @@ public class RBACRetrievalServiceMemoryImpl implements RBACRetrievalService {
     return roles;
   }
 
-  private void readUsers(final Map<String, CacheRole> roles) {
+  private void readUsers(final Map<String, CacheRole> roles, String csvPath) {
     final Reader in = null;
     CSVReader reader = null;
 
     try {
-      final InputStream is = this.getClass().getResourceAsStream("/memoryusers/users.csv");
+      final InputStream is = this.getClass().getResourceAsStream(csvPath + "users.csv");
       reader = new CSVReader(new InputStreamReader(is), '\n', '\'', 1);
       String[] nextLine;
       while ((nextLine = reader.readNext()) != null) {

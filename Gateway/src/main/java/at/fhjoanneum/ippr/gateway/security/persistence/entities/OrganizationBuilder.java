@@ -3,6 +3,7 @@ package at.fhjoanneum.ippr.gateway.security.persistence.entities;
 import at.fhjoanneum.ippr.gateway.security.persistence.Builder;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.ProcessStore;
+import at.fhjoanneum.ippr.gateway.security.persistence.objects.User;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,6 +17,7 @@ public class OrganizationBuilder implements Builder<Organization> {
     private String organizationName;
     private String organizationDescription;
     private final List<ProcessStoreImpl> processes = Lists.newArrayList();
+    private final List<UserImpl> employees = Lists.newArrayList();
 
     public OrganizationBuilder systemId(final String systemId) {
         checkArgument(StringUtils.isNotBlank(systemId));
@@ -41,6 +43,12 @@ public class OrganizationBuilder implements Builder<Organization> {
         return this;
     }
 
+    public OrganizationBuilder addEmployee(final User employee) {
+        checkArgument(employee instanceof UserImpl);
+        employees.add((UserImpl) employee);
+        return this;
+    }
+
 
     @Override
     public Organization build() {
@@ -48,6 +56,6 @@ public class OrganizationBuilder implements Builder<Organization> {
         checkArgument(StringUtils.isNotBlank(organizationName));
         checkArgument(StringUtils.isNotBlank(organizationDescription));
 
-        return new OrganizationImpl(organizationName, organizationDescription, systemId, processes);
+        return new OrganizationImpl(systemId, organizationName, organizationDescription, processes, employees);
     }
 }

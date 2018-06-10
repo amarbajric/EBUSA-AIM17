@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   user = {};
 
   userMenu = [
-    { title: 'Profile', data: 'profile' },
+    { title: 'Profile', data: 'user-details', link: '/user-details' },
     { title: 'Log out', data: 'logout', link: '/auth/logout' },
     ];
 
