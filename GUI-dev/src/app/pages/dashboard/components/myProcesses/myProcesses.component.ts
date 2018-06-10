@@ -3,13 +3,13 @@ import {ProcessesService} from '../../../../allProcesses.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'ngx-active-processes',
-  styleUrls: [],
-  templateUrl:  './activeProcesses.html',
+  selector: 'ngx-my-processes',
+  styleUrls: ['myProcesses.component.scss'],
+  templateUrl:  './myProcesses.html',
 })
-export class ActiveProcessesComponent implements OnInit  {
+export class MyProcessesComponent implements OnInit  {
 
-  activeProcesses: [
+  myProcesses: [
     {
       piId: number,
       startTime: number[],
@@ -20,8 +20,7 @@ export class ActiveProcessesComponent implements OnInit  {
   msg = undefined;
 
   constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router) {
-
-    this.activeProcesses = [{"piId":1, "startTime": [8], "processName": "Günther", "startUserId": 12}];
+    this.myProcesses = [{"piId":1, "startTime": [8], "processName": "Günther", "startUserId": 12}];
   }
 
   ngOnInit() {
@@ -29,7 +28,7 @@ export class ActiveProcessesComponent implements OnInit  {
     this.service.getProcessTasksForUser()
     .subscribe(
         data => {
-          that.activeProcesses = JSON.parse(data['_body']);
+          that.myProcesses = JSON.parse(data['_body']);
         },
         err => {
           that.msg = {text: err, type: 'error'}
@@ -39,6 +38,6 @@ export class ActiveProcessesComponent implements OnInit  {
   }
 
   showProcess(piId: number) {
-    this.router.navigate(['../active', piId], { relativeTo: this.route });
+    this.router.navigate(['../mine', piId], { relativeTo: this.route });
   }
 }

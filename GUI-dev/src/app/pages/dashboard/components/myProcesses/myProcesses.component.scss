@@ -1,0 +1,57 @@
+
+@import '../../../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/bootstrap/hero-buttons';
+
+
+.row {
+  width: 100%;
+}
+h5 {
+  color: #46bca3;
+  margin-left: 2rem;
+  margin-top: 1rem;
+}
+
+table {
+  margin-left: 2rem;
+  margin-top: 1rem;
+  margin-right: 2rem;
+}
+
+/*
+@include nb-install-component() {
+  nb-card-header {
+    flex-direction: row;
+    align-items: center;
+    height: 15rem;
+    overflow: visible;
+    color: #00d977;
+
+
+  }
+}*/
+/*@import '../../../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+
+@include nb-install-component() {
+  .nb-card-header {
+    card-header-fg: #00d977;
+    card-header-active-fg: #3d3780;
+  }
+}*/
+
+/*
+
+
+@import '../../../../@theme/styles/themes';
+
+@include nb-install-component() {
+
+  nb-card-header {
+    card-header-fg: #00d977;
+    card-header-active-fg: #3d3780;
+  }
+
+}
+*/

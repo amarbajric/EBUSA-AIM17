@@ -2,13 +2,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from '../auth-guard.service';
 import {ActiveProcessesComponent} from './dashboard/components/activeProcesses/activeProcesses.component';
 // import {EventLoggerComponent} from './admin/components/eventLogger/eventLogger.component';
 
 import {UserDetailsComponent} from './user-details/user-details.component';
+import {MyProcessesComponent} from "./dashboard/components/myProcesses/myProcesses.component";
 
 
 
@@ -20,11 +21,18 @@ const routes: Routes = [{
       path: 'dashboard',
       component: DashboardComponent,
       canActivate: [AuthGuard],
-    },
-    {
-      path: 'activeProcesses',
-      component: ActiveProcessesComponent,
+      children: [{
+          path: '',
+          redirectTo: 'myProcesses',
+          pathMatch: 'full',
+        }, {
+          path: 'myProcesses',
+          component: MyProcessesComponent,
+        }, {
+          path: 'active',
+          component: ActiveProcessesComponent,
 
+      }],
     },
 
     {

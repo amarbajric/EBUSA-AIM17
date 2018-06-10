@@ -1,21 +1,22 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'ngx-dashboard',
+  styleUrls: ['dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
 
-/*
-  tabs = [
+  tabs: any[] = [
     {
-      title: 'Active Processes',
-      route: '/activeProcesses',
+      title: 'Meine Prozesse',
+      route: '/dashboard/myProcesses',
     },
     {
-      title: 'Route tab #2',
-      route: '/activeProcesses',
-    }
+      title: 'Prozesse in Validierung',
+      route: '/dashboard/myProcesses',
+    },
   ];
-*/
+
 }
