@@ -27,7 +27,6 @@ import { ServerConfigProvider } from './@theme/providers/backend-server/serverco
 import {EventLoggerService} from './evntLogger.service';
 import {ProcessesService} from './allProcesses.service';
 import {User} from '../models/models';
-import { ProcessStoreService } from './processstore.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -106,7 +105,6 @@ import { ProcessStoreService } from './processstore.service';
     AuthGuard,
     EventLoggerService,
     ProcessesService,
-    ProcessStoreService,
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
     { provide: NbRoleProvider, useClass: RoleProvider },

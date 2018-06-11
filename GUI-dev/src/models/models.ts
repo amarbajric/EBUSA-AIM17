@@ -5,7 +5,7 @@ export class Process {
   // define props...
 }
 
-export class ProcessStore {
+export class StoreProcess {
   processId: number;
   processName: string;
   processDescription: string;
@@ -14,7 +14,6 @@ export class ProcessStore {
   processVersion: number;
   processPrice: number;
   // missing in current ProcessStoreDTO in backend:
-  processImageSource: string;
   processAverageRating: number;
 }
 

@@ -1,0 +1,13 @@
+:host /deep/ {
+    .btn-divided-group {
+        > label.btn:not(:first-child) {
+            margin-left: 0;
+        }
+    }
+    .price {
+        font-size: 2.0rem
+    }
+    i.iconVertical {
+        vertical-align: middle;
+    }
+}
