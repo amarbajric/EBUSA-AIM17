@@ -1,0 +1,23 @@
+<div class="row">
+      <h5 *ngIf="!validationProcesses || validationProcesses.length < 1">Es gibt keine zu validierenden Prozesse!</h5>
+      <table class="table table-striped" *ngIf="validationProcesses && validationProcesses.length > 0">
+         <thead>
+            <tr>
+               <th>#</th>
+               <th>Prozessname</th>
+               <th>Letzte Änderung</th>
+               <th>Aktion</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr *ngFor="let process of validationProcesses">
+               <td>{{ process.piId }}</td>
+               <td>{{ process.processName }}</td>
+               <td>{{ process.lastChanged | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+               <td>
+                 <button class="btn btn-primary btn-sm" (click)="showProcess(process.piId)">Anzeigen</button>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+ </div>

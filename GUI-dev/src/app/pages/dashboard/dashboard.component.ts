@@ -15,7 +15,7 @@ export class DashboardComponent {
     },
     {
       title: 'Prozesse in Validierung',
-      route: '/dashboard/myProcesses',
+      route: '/dashboard/active',
     },
   ];
 

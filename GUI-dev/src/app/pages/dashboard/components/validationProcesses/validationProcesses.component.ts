@@ -4,12 +4,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ngx-active-processes',
-  styleUrls: ['activeProcesses.component.scss'],
-  templateUrl:  './activeProcesses.html',
+  styleUrls: ['validationProcesses.component.scss'],
+  templateUrl:  './validationProcesses.html',
 })
 export class ActiveProcessesComponent implements OnInit  {
 
-  activeProcesses: [
+  validationProcesses: [
     {
       piId: number,
       startTime: number[],
@@ -21,7 +21,7 @@ export class ActiveProcessesComponent implements OnInit  {
 
   constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router) {
 
-    this.activeProcesses = [{"piId":1, "startTime": [8], "processName": "Günther", "startUserId": 12}];
+    this.validationProcesses = [{"piId":1, "startTime": [8], "processName": "Günther", "startUserId": 12}];
   }
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class ActiveProcessesComponent implements OnInit  {
     this.service.getProcessTasksForUser()
     .subscribe(
         data => {
-          that.activeProcesses = JSON.parse(data['_body']);
+          that.validationProcesses = JSON.parse(data['_body']);
         },
         err => {
           that.msg = {text: err, type: 'error'}

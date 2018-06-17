@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class MyProcessesComponent implements OnInit  {
 
+  /*
   myProcesses: [
     {
       piId: number,
@@ -16,28 +17,27 @@ export class MyProcessesComponent implements OnInit  {
       processName: string,
       startUserId: number,
     }
-  ];
+  ];*/
+  myProcesses = [];
+  error = undefined;
   msg = undefined;
 
   constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router) {
-    this.myProcesses = [{"piId":1, "startTime": [8], "processName": "Günther", "startUserId": 12}];
+    //this.myProcesses = [{"piId":1, "startTime": [8], "processName": "Günther", "startUserId": 12}];
   }
 
   ngOnInit() {
     const that = this;
-    this.service.getProcessTasksForUser()
-    .subscribe(
+    this.service.getProcessModels()
+      .subscribe(
         data => {
           that.myProcesses = JSON.parse(data['_body']);
         },
-        err => {
-          that.msg = {text: err, type: 'error'}
-          // console.log(err);
-        },
+        err => that.error = err,
       );
   }
 
-  showProcess(piId: number) {
+  /*showProcess(piId: number) {
     this.router.navigate(['../mine', piId], { relativeTo: this.route });
-  }
+  }*/
 }
