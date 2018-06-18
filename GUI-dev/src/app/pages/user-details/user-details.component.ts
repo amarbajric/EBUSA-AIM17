@@ -21,6 +21,7 @@ export class UserDetailsComponent {
       })
   }
 
+  // check if user has an organization
   private checkUserData() {
     if (!this.user.organization) {
       const organization: Organization = new Organization();
