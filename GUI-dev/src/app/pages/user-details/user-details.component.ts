@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Organization, Role, User} from '../../../models/models';
+import {Organization, User} from '../../../models/models';
 import {GatewayProvider} from '../../@theme/providers/backend-server/gateway';
 
 @Component({
