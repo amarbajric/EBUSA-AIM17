@@ -4,6 +4,15 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## 2018-06-19 ([#95](https://github.com/amarbajric/EBUSA-AIM17/pull/95))
+## Changed
+- Access Control
+    - Exchanged the `prove of concept` with the actual roles
+    - Can be found in app.modules.ts
+    - Documentation for use and further extension can be found on SharePoint
+## Removed
+- User-Page (Profile) test data
+
 ## 2018-06-04 ([#95](https://github.com/amarbajric/EBUSA-AIM17/pull/95))
 ## Added
 - Admin Page
