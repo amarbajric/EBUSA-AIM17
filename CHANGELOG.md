@@ -71,7 +71,8 @@ it gives the right path to the csv's (memoryusers or database_init folder)
 - RBACRetrievalService is now getting the csvPath from the mappingService and is loading all rules,roles and users
 - RBACRetrievalServiceMemoryImpl renamed to RBACRetrievalImpl as it is used for both strategies now
 
-## 2018-06-02 ([#93](https://github.com/amarbajric/EBUSA-AIM17/pull/93))
+
+## 2018-05-02 ([#51](https://github.com/amarbajric/EBUSA-AIM17/pull/93))
 ## Added
 - User-Details
     - Components are in ../pages/user-details
@@ -82,6 +83,7 @@ it gives the right path to the csv's (memoryusers or database_init folder)
         - token.interceptor.ts
         - jwt.interceptor.ts
     - Adds the current user token to every http request
+
 
 ## 2018-05-02 ([#89](https://github.com/amarbajric/EBUSA-AIM17/pull/89))
 ## Added

@@ -4,10 +4,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import {HomeModule} from './home/home.module';
-
-import AdminModule from './admin/admin.module';
-
 import {UserDetailsModule} from './user-details/user-details.module';
+import AdminModule from './admin/admin.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -21,8 +19,6 @@ const PAGES_COMPONENTS = [
     HomeModule,
     AdminModule,
     UserDetailsModule,
-
-
   ],
   declarations: [
     ...PAGES_COMPONENTS,

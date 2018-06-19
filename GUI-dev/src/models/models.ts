@@ -12,6 +12,7 @@ export class User {
   username: string;
   email: string;
   password: string;
+<<<<<<< HEAD
   uid: number;
   createdAt: Date;
   organization?: Organization;
@@ -21,6 +22,11 @@ export class User {
     return this.uid;
   }
 
+=======
+  createdAt: Date;
+  organization?: Organization;
+  roles: [Role];
+>>>>>>> refs/remotes/origin/user-details-#51
 }
 
 export class Organization {
@@ -40,7 +46,10 @@ export class Rule {
   ruleId: number;
   name: string;
   systemId: string;
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/user-details-#51
 }
 
 
