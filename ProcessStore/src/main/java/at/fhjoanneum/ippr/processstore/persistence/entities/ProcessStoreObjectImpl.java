@@ -39,10 +39,32 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
     @NotBlank
     private Double processPrice;
 
+    @Column
+    private String processApprover;
+
+    @Column
+    private String processApproverComment;
+
+    @Column(nullable = false)
+    private boolean isApproved;
+
+    @Column
+    private Date processApprovedDate;
+
 
     public ProcessStoreObjectImpl() {}
 
-    public ProcessStoreObjectImpl(String processName, String processDescription, String processCreator, Date processCreatedAt, Long processVersion, Double processPrice) {
+    public ProcessStoreObjectImpl(String processName, String processDescription, String processCreator, Date processCreatedAt, Long processVersion, Double processPrice, String processApprover, String processApproverComment, boolean isApproved, Date processApprovedDate) {
+        this.processName = processName;
+        this.processDescription = processDescription;
+        this.processCreator = processCreator;
+        this.processCreatedAt = processCreatedAt;
+        this.processVersion = processVersion;
+        this.processPrice = processPrice;
+        this.processApprover = processApprover;
+        this.processApproverComment = processApproverComment;
+        this.isApproved = isApproved;
+        this.processApprovedDate = processApprovedDate;
     }
 
     @Override
@@ -98,5 +120,37 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
 
     public void setProcessPrice(Double processPrice) {
         this.processPrice = processPrice;
+    }
+
+    public String getProcessApprover() {
+        return processApprover;
+    }
+
+    public void setProcessApprover(String processApprover) {
+        this.processApprover = processApprover;
+    }
+
+    public String getProcessApproverComment() {
+        return processApproverComment;
+    }
+
+    public void setProcessApproverComment(String processApproverComment) {
+        this.processApproverComment = processApproverComment;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
+
+    public Date getProcessApprovedDate() {
+        return processApprovedDate;
+    }
+
+    public void setProcessApprovedDate(Date processApprovedDate) {
+        this.processApprovedDate = processApprovedDate;
     }
 }

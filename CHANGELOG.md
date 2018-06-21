@@ -65,6 +65,14 @@ and displaying organization property.
   - when querying a user, the `organization` property does not hold a property `employees` because of the mentioned error
   - when querying an organization, there is a property `employees` which holds all employees of the organization
 
+## 2018-06-03 ([#87](https://github.com/amarbajric/EBUSA-AIM17/pull/87))
+## Added
+- Approval page
+  - added to navigation
+  - added model for Process and Review in models.ts
+  - page uses test data instead of actual data from the DB
+  - iFrame is supposed to show process model of the process that is to be reviewed
+
 ## 2018-06-02 ([#92](https://github.com/amarbajric/EBUSA-AIM17/pull/92))
 ## Added
 - Timestamp to the `createdAt` property of the `UserImpl` entity to have automatic timestamp creation
