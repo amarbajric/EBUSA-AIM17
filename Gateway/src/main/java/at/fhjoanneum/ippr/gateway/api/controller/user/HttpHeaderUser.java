@@ -18,10 +18,12 @@ public class HttpHeaderUser {
 
   private static final String CLAIM_ID = "claims";
   private static final String USER_ID = "userId";
+  private static final String ORGANIZATION_ID = "organizationId";
   private static final String ROLES_ID = "roles";
   private static final String RULES_ID = "rules";
 
   private final String userId;
+  private final String organizationId;
   private final String roles;
   private final String rules;
 
@@ -33,15 +35,21 @@ public class HttpHeaderUser {
     Preconditions.checkNotNull(claims.get(RULES_ID));
 
     final String userId = String.valueOf(claims.get(USER_ID));
+    final String organizationId = String.valueOf(claims.get(ORGANIZATION_ID));
     final String roles = StringUtils.join((List<String>) claims.get(ROLES_ID), ",");
     final String rules = StringUtils.join((List<String>) claims.get(RULES_ID), ",");
     this.userId = userId;
+    this.organizationId = organizationId;
     this.roles = roles;
     this.rules = rules;
   }
 
   public String getUserId() {
     return userId;
+  }
+
+  public String getOrganizationId() {
+    return organizationId;
   }
 
   public String getRoles() {
@@ -55,6 +63,7 @@ public class HttpHeaderUser {
   public HttpHeaders getHttpHeaders() {
     final HttpHeaders headers = new HttpHeaders();
     headers.add(USER_ID, userId);
+    headers.add(ORGANIZATION_ID, organizationId);
     headers.add(ROLES_ID, roles);
     headers.add(RULES_ID, rules);
     return headers;

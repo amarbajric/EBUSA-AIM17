@@ -13,6 +13,27 @@ The format is partially based on [Keep a Changelog](http://keepachangelog.com/en
 ## Removed
 - User-Page (Profile) test data
 
+## 2018-06-11 ([#91](https://github.com/amarbajric/EBUSA-AIM17/pull/91))
+## Added
+- Menu
+  - Entry "Process Store"
+- Components/Modules
+  - ProcessStoreSearchComponent (search via frontend, filtering (price, rating createdBy) via backend)
+  - ProcessStoreSearchModule
+- Gateway (Angular)
+  - getStoreProcesses (with filtering)
+- Routings
+  - "processstore-search" -> "ProcessStoreSearchComponent"
+- Models (Angular)
+  - StoreProcess (based on ProcessStoreDTO)
+- Pipes
+  - SimpleSearchPipe
+- NPM Dependencies
+  - angular-star-rating
+    - css-star-rating
+- Static Assets
+  - "star-rating.icons.svg"
+
 ## 2018-06-04 ([#95](https://github.com/amarbajric/EBUSA-AIM17/pull/95))
 ## Added
 - Admin Page
@@ -53,6 +74,14 @@ and displaying organization property.
   - when querying a user, the `organization` property does not hold a property `employees` because of the mentioned error
   - when querying an organization, there is a property `employees` which holds all employees of the organization
 
+## 2018-06-03 ([#87](https://github.com/amarbajric/EBUSA-AIM17/pull/87))
+## Added
+- Approval page
+  - added to navigation
+  - added model for Process and Review in models.ts
+  - page uses test data instead of actual data from the DB
+  - iFrame is supposed to show process model of the process that is to be reviewed
+
 ## 2018-06-02 ([#92](https://github.com/amarbajric/EBUSA-AIM17/pull/92))
 ## Added
 - Timestamp to the `createdAt` property of the `UserImpl` entity to have automatic timestamp creation
@@ -71,8 +100,7 @@ it gives the right path to the csv's (memoryusers or database_init folder)
 - RBACRetrievalService is now getting the csvPath from the mappingService and is loading all rules,roles and users
 - RBACRetrievalServiceMemoryImpl renamed to RBACRetrievalImpl as it is used for both strategies now
 
-
-## 2018-05-02 ([#51](https://github.com/amarbajric/EBUSA-AIM17/pull/93))
+## 2018-06-02 ([#93](https://github.com/amarbajric/EBUSA-AIM17/pull/93))
 ## Added
 - User-Details
     - Components are in ../pages/user-details
@@ -83,7 +111,6 @@ it gives the right path to the csv's (memoryusers or database_init folder)
         - token.interceptor.ts
         - jwt.interceptor.ts
     - Adds the current user token to every http request
-
 
 ## 2018-05-02 ([#89](https://github.com/amarbajric/EBUSA-AIM17/pull/89))
 ## Added

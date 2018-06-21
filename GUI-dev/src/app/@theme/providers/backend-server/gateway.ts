@@ -1,7 +1,7 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
-import {User} from '../../../../models/models';
+import {User, StoreProcess} from '../../../../models/models';
 
 
 @Injectable()
@@ -23,6 +23,16 @@ export class GatewayProvider {
   // gets the current user
   getUser (): Promise<User> {
     return this.http.get<User>(this.serverConfig.getUser)
+      .toPromise()
+  }
+
+  getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
+    let filterParams = new HttpParams();
+    if (filterType && filterType !== 'none' && filterInput) {
+      filterParams = filterParams.append('filterType', filterType);
+      filterParams = filterParams.append('filterInput', filterInput);
+    }
+    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses, { params: filterParams })
       .toPromise()
   }
 

@@ -7,7 +7,7 @@ import java.util.Date;
 @XmlRootElement
 public class ProcessStoreDTO implements Serializable {
 
-    //private static final long serialVersionUID = 2075853829794256949L;
+    private static final long serialVersionUID = 2075853829794256949L;
 
     private Long processId;
 
@@ -17,12 +17,14 @@ public class ProcessStoreDTO implements Serializable {
     private Date processCreatedAt;
     private Long processVersion;
     private Double processPrice;
+    private String processApprover;
+    private String processApproverComment;
+    private boolean isApproved;
+    private Date processApprovedDate;
 
     public ProcessStoreDTO() {}
 
-    public ProcessStoreDTO(final Long processId, final String processName, final String processDescription,
-                           final String processCreator, final Date processCreatedAt, final Long processVersion,
-                           final Double processPrice) {
+    public ProcessStoreDTO(final Long processId, final String processName, final String processDescription, final String processCreator, final Date processCreatedAt, final Long processVersion, final Double processPrice, final String processApprover, final String processApproverComment, final boolean isApproved, final Date processApprovedDate) {
         this.processId = processId;
         this.processName = processName;
         this.processDescription = processDescription;
@@ -30,7 +32,10 @@ public class ProcessStoreDTO implements Serializable {
         this.processCreatedAt = processCreatedAt;
         this.processVersion = processVersion;
         this.processPrice = processPrice;
-
+        this.processApprover = processApprover;
+        this.processApproverComment = processApproverComment;
+        this.isApproved = isApproved;
+        this.processApprovedDate = processApprovedDate;
     }
 
     public Long getProcessId() { return processId; }
@@ -55,5 +60,21 @@ public class ProcessStoreDTO implements Serializable {
 
     public Double getProcessPrice() {
         return processPrice;
+    }
+
+    public String getProcessApprover() {
+        return processApprover;
+    }
+
+    public String getProcessApproverComment() {
+        return processApproverComment;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public Date getProcessApprovedDate() {
+        return processApprovedDate;
     }
 }
