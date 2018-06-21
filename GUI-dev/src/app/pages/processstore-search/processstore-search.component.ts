@@ -30,6 +30,6 @@ export class ProcessStoreSearchComponent implements OnInit {
       console.warn('ProcessStoreSearchComponent: using mocked test data, filtering NOT supported')
     }
 
-  } 
+  }
 
 }
