@@ -4,6 +4,21 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## 2018-06-23 ([#86](https://github.com/amarbajric/EBUSA-AIM17/pull/98))
+## Added
+- Process Rating Component and Module
+  - The component shows existing process ratings and allows users to add new ratings
+  - A rating consists of the rating itself (stars) and a comment
+  - The component is used like this: `<ngx-process-ratings [processId]="processId"></ngx-process-ratings>`
+  - The component fetches and posts the ratings itself
+- Store Process Details Page
+  - Added a Store Process Details Page where the Rating Component is used
+  - More content will be added to it in another task
+- Gateway Methods
+  - getStoreProcessRatings
+  - postStoreProcessRatings
+- Model StoreProcessRating
+
 ## 2018-06-19 ([#51](https://github.com/amarbajric/EBUSA-AIM17/pull/97))
 ## Changed
 - Access Control

@@ -26,6 +26,14 @@ export class StoreProcess {
   processAverageRating: number;
 }
 
+export class StoreProcessRating {
+  ratingId: number;
+  rating: number;
+  comment: string;
+  createdBy: string;
+  createdAt: Date;
+}
+
 
 
 export class Review {

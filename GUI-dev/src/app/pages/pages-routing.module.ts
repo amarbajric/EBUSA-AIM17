@@ -9,6 +9,7 @@ import {ActiveProcessesComponent} from './dashboard/components/activeProcesses/a
 // import {EventLoggerComponent} from './admin/components/eventLogger/eventLogger.component';
 import { ProcessStoreSearchComponent } from './processstore-search/processstore-search.component';
 import {UserDetailsComponent} from './user-details/user-details.component';
+import { ProcessStoreDetailsComponent } from './processstore-details/processstore-details.component';
 
 
 const routes: Routes = [{
@@ -29,6 +30,11 @@ const routes: Routes = [{
     {
       path: 'processstore-search',
       component: ProcessStoreSearchComponent,
+      canActivate: [AuthGuard],
+    },
+    {
+      path: 'processstore-details/:processId',
+      component: ProcessStoreDetailsComponent,
       canActivate: [AuthGuard],
     },
     {
