@@ -78,21 +78,26 @@ import {User} from '../models/models';
 
     NbSecurityModule.forRoot({
       accessControl: {
-        guest: {
-          view: ['news', 'comments'],
+        USER: {
+          view: ['profile', 'processes'],
         },
-        user: {
-          parent: 'guest',
-          view: 'user',
-          create: 'comments',
+        ORG_EMP: {
+          parent: 'USER',
+          view: 'org',
         },
-        moderator: {
-          parent: 'user',
-          create: 'news',
-          remove: '*',
+        ORG_CEO: {
+          parent: 'ORG_EMP',
+          view: 'ceo_org',
         },
-        Employee: {
-          parent: 'moderator',
+        SYS_ADMIN: {
+          parent: 'USER',
+          view: '*',
+          create: '*',
+          delete: '*',
+        },
+        SYS_APPROVER: {
+          parent: 'USER',
+          view: ['new_processes', 'approvals'],
         },
       },
     }),

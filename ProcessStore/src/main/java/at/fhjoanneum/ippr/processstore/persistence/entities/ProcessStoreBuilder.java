@@ -17,23 +17,29 @@ public class ProcessStoreBuilder implements Builder<ProcessStoreObject> {
     private Date processCreatedAt;
     private Long processVersion;
     private Double processPrice;
+    private String processApprover;
+    private String processApproverComment;
+    private boolean isApproved = false;
+    private Date processApprovedDate;
 
-    public ProcessStoreBuilder processName(final String processName, String processDescription, String processCreator,
-                                           Date processCreatedAt, Long processVersion, Double processPrice){
+    public ProcessStoreBuilder(String processName, String processDescription, String processCreator, Date processCreatedAt, Long processVersion, Double processPrice, String processApprover, String processApproverComment, boolean isApproved, Date processApprovedDate) {
         checkArgument(StringUtils.isNotBlank(processName));
         checkArgument(StringUtils.isNotBlank(processDescription));
         checkArgument(StringUtils.isNotBlank(processCreator));
         checkNotNull(processCreatedAt);
         checkNotNull(processVersion);
         checkNotNull(processPrice);
+        checkNotNull(isApproved);
         this.processName = processName;
         this.processDescription = processDescription;
         this.processCreator = processCreator;
         this.processCreatedAt = processCreatedAt;
         this.processVersion = processVersion;
         this.processPrice = processPrice;
-
-        return this;
+        this.processApprover = processApprover;
+        this.processApproverComment = processApproverComment;
+        this.isApproved = isApproved;
+        this.processApprovedDate = processApprovedDate;
     }
 
     @Override
@@ -44,8 +50,9 @@ public class ProcessStoreBuilder implements Builder<ProcessStoreObject> {
         checkNotNull(processCreatedAt);
         checkNotNull(processVersion);
         checkNotNull(processPrice);
+        checkNotNull(isApproved);
 
         return new ProcessStoreObjectImpl(processName, processDescription, processCreator, processCreatedAt,
-                processVersion, processPrice);
+                processVersion, processPrice, processApprover, processApproverComment, isApproved, processApprovedDate);
     }
 }

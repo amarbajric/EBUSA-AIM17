@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Future;
@@ -35,9 +36,10 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
         return new AsyncResult<List<ProcessStoreDTO>>(processes);
     }
 
+    @Override
     @Async
     public Future<ProcessStoreDTO> findProcessById(Long processId) {
-        final ProcessStoreObjectImpl result = processStore.findProcessWithId(processId);
+        final ProcessStoreObjectImpl result = processStore.findProcessById(processId);
 
         final ProcessStoreDTO process = createProcessStoreDTO(result);
 
@@ -45,15 +47,75 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
     }
 
     @Override
-    public Optional<ProcessStoreDTO> saveProcessStoreObject(String processName) {
-        return Optional.empty();
+    public Future<List<ProcessStoreDTO>> findAllApprovedProcesses() {
+        final List<ProcessStoreObjectImpl> results = processStore.findAllProcesses(true);
+
+        final List<ProcessStoreDTO> processes = createProcessStoreDTOList(results);
+
+        return new AsyncResult<List<ProcessStoreDTO>>(processes);
+    }
+
+    @Override
+    public Future<List<ProcessStoreDTO>> findAllNotApprovedProcesses() {
+        final List<ProcessStoreObjectImpl> results = processStore.findAllProcesses(false);
+
+        final List<ProcessStoreDTO> processes = createProcessStoreDTOList(results);
+
+        return new AsyncResult<List<ProcessStoreDTO>>(processes);
+    }
+
+    @Override
+    public Future<ProcessStoreDTO> changeApprovedState(boolean isApproved, Long processId) {
+        processStore.changeApprovedState(isApproved, processId);
+
+        final ProcessStoreObjectImpl result = processStore.findProcessById(processId);
+
+        final ProcessStoreDTO process = createProcessStoreDTO(result);
+
+        return new AsyncResult<ProcessStoreDTO>(process);
+    }
+
+    @Override
+    public Future<List<ProcessStoreDTO>> findAllProcessesByUserId(String userId) {
+        final List<ProcessStoreObjectImpl> results = processStore.findAllProcessesByUserId(userId);
+
+        final List<ProcessStoreDTO> processes = createProcessStoreDTOList(results);
+
+        return new AsyncResult<List<ProcessStoreDTO>>(processes);
+    }
+
+    @Override
+    public Future<List<ProcessStoreDTO>> findAllProcessesByOrganisationId(String organisationId) {
+        return null;
+    }
+
+    @Override
+    public void saveProcessStoreObject(String processName, String processDescription,
+                                                            String processCreator, Date processCreatedAt,
+                                                            Long processVersion, Double processPrice) {
+
+        ProcessStoreObjectImpl processStoreObject = new ProcessStoreObjectImpl();
+        processStoreObject.setProcessName(processName);
+        processStoreObject.setProcessDescription(processDescription);
+        processStoreObject.setProcessCreator(processCreator);
+        processStoreObject.setProcessCreatedAt(processCreatedAt);
+        processStoreObject.setProcessVersion(processVersion);
+        processStoreObject.setProcessPrice(processPrice);
+        processStoreObject.setApproved(false);
+        processStoreObject.setProcessApprovedDate(null);
+        processStoreObject.setProcessApprover(null);
+        processStoreObject.setProcessApproverComment(null);
+
+        processStore.save(processStoreObject);
     }
 
     private static ProcessStoreDTO createProcessStoreDTO(final ProcessStoreObjectImpl processStoreObject) {
         return new ProcessStoreDTO(processStoreObject.getStoreId(), processStoreObject.getProcessName(),
                 processStoreObject.getProcessDescription(), processStoreObject.getProcessCreator(),
                 processStoreObject.getProcessCreatedAt(), processStoreObject.getProcessVersion(),
-                processStoreObject.getProcessPrice());
+                processStoreObject.getProcessPrice(), processStoreObject.getProcessApprover(),
+                processStoreObject.getProcessApproverComment(), processStoreObject.isApproved(),
+                processStoreObject.getProcessApprovedDate());
     }
 
     private static List<ProcessStoreDTO> createProcessStoreDTOList(final List<ProcessStoreObjectImpl> results) {
