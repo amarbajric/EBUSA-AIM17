@@ -1,13 +1,15 @@
 <div class="row">
-      <h5 *ngIf="!myProcesses || myProcesses.length < 1">Sie haben derzeit keine Prozesse!</h5>
-  <h4>{{numberRows}}</h4>
-      <table class="table table-striped" *ngIf="myProcesses && myProcesses.length > 0">
+      <!--<h5 *ngIf="!myProcesses || myProcesses.length < 1">Sie haben derzeit keine Prozesse!</h5>-->
+ <h5 *ngIf="this.inOrganization === false">Sie sind noch kein Mitglied einer Organisation.</h5>
+  <button *ngIf="this.inOrganization === false" class="btn btn-primary btn-sm" (click)="openCreateOrganization()">neue Organisation erstellen</button>
+
+      <table class="table table-striped" *ngIf="myProcesses && myProcesses.length > 0 && this.inOrganization === true ">
          <thead>
             <tr>
                <th>#</th>
                <th>Prozessname</th>
                <th>Erstelldatum</th>
-               <th>Aktion</th>
+               <th>Details</th>
             </tr>
          </thead>
          <tbody>

@@ -5,6 +5,7 @@ import {GatewayProvider} from "../../../../@theme/providers/backend-server/gatew
 import {User} from "../../../../../models/models";
 import {ModalComponent} from "../modal/modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {CreateOrgaModalComponent} from "../createOrgaModal/createOrgaModal.component";
 
 
 @Component({
@@ -16,19 +17,25 @@ export class MyProcessesComponent implements OnInit  {
 
 
   myProcesses;
-  user: User = new User();
-
+  user: User;
+  inOrganization: boolean = false;
 
   constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router, private gateway: GatewayProvider, private modalService: NgbModal) {
 
-    this.gateway.getUser()
-      .then((user) => {
-        this.user = user;
-      })
 
   }
 
   ngOnInit() {
+    this.gateway.getUser()
+      .then((user) => {
+        this.user = user;
+        if(user.organization !== null)
+        {
+          this.inOrganization = true;
+        }
+      })
+
+    // console.log(this.user);
     this.getProcesses();
   }
 
@@ -57,6 +64,10 @@ export class MyProcessesComponent implements OnInit  {
 
   }
 
+  openCreateOrganization()
+  {
+    const createOrgaModal = this.modalService.open(CreateOrgaModalComponent, { size: 'lg', container: 'nb-layout' });
+  }
 
   /*showProcess(piId: number) {
     this.router.navigate(['../mine', piId], { relativeTo: this.route });

@@ -15,6 +15,7 @@ import { ProcessStoreDetailsComponent } from './processstore-details/processstor
 import { ReviewProcessesComponent } from './dashboard/components/reviewProcesses/reviewProcesses.component';
 import {ModalComponent} from "./dashboard/components/modal/modal.component";
 import {ValidatedProcessesComponent} from "./dashboard/components/validatedProcesses/validatedProcesses.component";
+import {CreateOrgaModalComponent} from "./dashboard/components/createOrgaModal/createOrgaModal.component";
 
 
 
@@ -47,7 +48,13 @@ const routes: Routes = [{
         path: 'modalView',
         component: ModalComponent,
 
-      }],
+      },{
+          path: 'createOrgaModalView',
+          component: CreateOrgaModalComponent,
+
+        },
+
+      ],
     },
 
     {

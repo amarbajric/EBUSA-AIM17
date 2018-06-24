@@ -1,5 +1,4 @@
 <div class="row">
-    <div class="col-md-12">
       <h5 *ngIf="!reviewProcesses || reviewProcesses.length < 1">Es gibt keine zu validierenden Prozesse!</h5>
       <table class="table table-striped" *ngIf="reviewProcesses && reviewProcesses.length > 0">
          <thead>
@@ -7,7 +6,7 @@
                <th>#</th>
                <th>Prozessname</th>
                <th>Erstelldatum</th>
-               <th>Aktion</th>
+               <th>Details</th>
             </tr>
          </thead>
          <tbody>
@@ -22,5 +21,4 @@
             </tr>
          </tbody>
       </table>
- </div>
 </div>

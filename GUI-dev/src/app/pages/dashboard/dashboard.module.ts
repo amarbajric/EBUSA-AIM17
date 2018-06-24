@@ -13,6 +13,7 @@ import {DashboardComponent} from "./dashboard.component";
 import {ReviewProcessesComponent} from "./components/reviewProcesses/reviewProcesses.component";
 import {ModalComponent} from "./components/modal/modal.component";
 import {ValidatedProcessesComponent} from "./components/validatedProcesses/validatedProcesses.component";
+import {CreateOrgaModalComponent} from "./components/createOrgaModal/createOrgaModal.component";
 
 
 
@@ -33,6 +34,7 @@ import {ValidatedProcessesComponent} from "./components/validatedProcesses/valid
     ReviewProcessesComponent,
     ValidatedProcessesComponent,
     ModalComponent,
+    CreateOrgaModalComponent,
   ],
 })
 export class DashboardModule { }
