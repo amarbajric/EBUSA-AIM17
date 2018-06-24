@@ -14,6 +14,8 @@ export class ServerConfigProvider {
   // temporäre Endpunkte --> muss noch auf user approved geändert werden
   private _getApprovedProcessesByUser = `${this._host}api/store/processes/approved`;
   private _getNotApprovedProcessesByUser = `${this._host}api/store/processes/notApproved`;
+  private _createOrganization = `${this._host}api/organization`;
+
 
 
   public get checkIfMailTaken(): string {return this._checkIfMailTaken};
@@ -25,5 +27,6 @@ export class ServerConfigProvider {
   public get getProcessById(): string {return this._getProcessById};
   public get getApprovedProcessesByUser(): string {return this._getApprovedProcessesByUser};
   public get getNotApprovedProcessesByUser(): string {return this._getNotApprovedProcessesByUser};
+  public get createOrganizaion(): string {return this._createOrganization};
 
 }

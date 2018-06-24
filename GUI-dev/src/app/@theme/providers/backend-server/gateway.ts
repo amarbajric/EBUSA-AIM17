@@ -1,7 +1,7 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
-import {User, StoreProcess, StoreProcessRating} from '../../../../models/models';
+import {User, StoreProcess, StoreProcessRating, Organization} from '../../../../models/models';
 
 
 @Injectable()
@@ -40,6 +40,10 @@ export class GatewayProvider {
   getNotApprovedProcessesByUser(): Promise<StoreProcess[]> {
     return this.http.get<StoreProcess[]>(this.serverConfig.getNotApprovedProcessesByUser, )
       .toPromise()
+  }
+
+  createNewOrganisation(organization: Organization): void  {
+    this.http.post<Organization>(this.serverConfig.createOrganizaion, organization).toPromise();
   }
 
 

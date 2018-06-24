@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {StoreProcess} from "../../../../../models/models";
+import {Organization, StoreProcess} from "../../../../../models/models";
 import {GatewayProvider} from "../../../../@theme/providers/backend-server/gateway";
 
 @Component({
   selector: 'ngx-create-orga-modal',
+  styleUrls: ['createOrgaModal.component.scss'],
   template: `
     <div class="modal-header">
       <span>Neue Organisation erstellen</span>
@@ -13,14 +14,22 @@ import {GatewayProvider} from "../../../../@theme/providers/backend-server/gatew
       </button>
     </div>
     <div  class="flex-column text-body">
-      <dl>
-        <dt>Organisationsname:</dt>
-        <dd>hier</dd>
-
-        <dt>Beschreibung:</dt>
-        <dd>hier</dd>
-      </dl>
+      <div class="form-group">
+        <br>
+        <h6>Organisationsname</h6>
+        <input name="organizationName" [(ngModel)]="organization.organizationName" id="input-organizationName" #organizationName="ngModel"
+               class="form-control" placeholder="Organisationsname"
+               >
+      </div>
+      <div class="form-group">
+        <br>
+        <h6>Beschreibung</h6>
+        <input name="organizationDescription" [(ngModel)]="organization.description" id="input-organizationDescription" #organizationDescription="ngModel"
+               class="form-control" placeholder="Beschreibung der Organisation"
+        >
+      </div>
     </div>
+       
     <div class="modal-footer">
       <button class="btn btn-md btn-primary" (click)="closeModal()">Abbrechen</button>
       <button class="btn btn-md btn-primary" (click)="saveModal()">Speichern</button>
@@ -29,7 +38,7 @@ import {GatewayProvider} from "../../../../@theme/providers/backend-server/gatew
 })
 export class CreateOrgaModalComponent {
 
-
+  organization: Organization = new Organization;
 
   constructor(private activeModal: NgbActiveModal, private gateway: GatewayProvider) {
 
@@ -40,8 +49,9 @@ export class CreateOrgaModalComponent {
   }
 
   saveModal() {
-    this.activeModal.close();
+      this.gateway.createNewOrganisation(this.organization);
   }
+
 
 
 }
