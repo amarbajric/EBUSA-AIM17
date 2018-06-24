@@ -1,0 +1,37 @@
+<div class="row show-grid">
+  <div class="col-md-10">
+
+    <div *ngFor="let rating of processRatings" class="row">
+      <nb-card class="col-md-9">
+        <nb-card-header>
+          <div class="float-right">
+            <star-rating [starType]="'svg'" [rating]="rating.rating" [staticColor]="'ok'" [disabled]="true" [showHalfStars]="false"></star-rating>
+          </div>
+          <div>{{rating.createdBy}} | {{rating.createdAt | date:'yyyy-MM-dd'}}</div>
+        </nb-card-header>
+        <nb-card-body>
+          <div>{{rating.comment}}</div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <div class="row">
+      <nb-card class="col-md-9">
+        <nb-card-header>
+          <div class="float-right">
+            <star-rating [starType]="'svg'" [rating]="newRating.rating" [staticColor]="'ok'" [disabled]="false" [showHalfStars]="false"
+              (ratingChange)="onRatingChange($event)"></star-rating>
+          </div>
+          <div>Add your own rating</div>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="input-group">
+            <textarea [(ngModel)]="newRating.comment" rows="5" placeholder="Your comment .." class="form-control"></textarea>
+          </div>
+          <button (click)="submitProcessRating(processId)" class="btn btn-success" type="submit">Send</button>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+  </div>
+</div>

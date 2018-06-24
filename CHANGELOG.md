@@ -4,6 +4,51 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## 2018-06-23 ([#86](https://github.com/amarbajric/EBUSA-AIM17/pull/98))
+## Added
+- Process Rating Component and Module
+  - The component shows existing process ratings and allows users to add new ratings
+  - A rating consists of the rating itself (stars) and a comment
+  - The component is used like this: `<ngx-process-ratings [processId]="processId"></ngx-process-ratings>`
+  - The component fetches and posts the ratings itself
+- Store Process Details Page
+  - Added a Store Process Details Page where the Rating Component is used
+  - More content will be added to it in another task
+- Gateway Methods
+  - getStoreProcessRatings
+  - postStoreProcessRatings
+- Model StoreProcessRating
+
+## 2018-06-19 ([#51](https://github.com/amarbajric/EBUSA-AIM17/pull/97))
+## Changed
+- Access Control
+    - Exchanged the `prove of concept` with the actual roles
+    - Can be found in app.modules.ts
+    - Documentation for use and further extension can be found on SharePoint
+## Removed
+- User-Page (Profile) test data
+
+## 2018-06-11 ([#91](https://github.com/amarbajric/EBUSA-AIM17/pull/91))
+## Added
+- Menu
+  - Entry "Process Store"
+- Components/Modules
+  - ProcessStoreSearchComponent (search via frontend, filtering (price, rating createdBy) via backend)
+  - ProcessStoreSearchModule
+- Gateway (Angular)
+  - getStoreProcesses (with filtering)
+- Routings
+  - "processstore-search" -> "ProcessStoreSearchComponent"
+- Models (Angular)
+  - StoreProcess (based on ProcessStoreDTO)
+- Pipes
+  - SimpleSearchPipe
+- NPM Dependencies
+  - angular-star-rating
+    - css-star-rating
+- Static Assets
+  - "star-rating.icons.svg"
+
 ## 2018-06-04 ([#95](https://github.com/amarbajric/EBUSA-AIM17/pull/95))
 ## Added
 - Admin Page
@@ -43,6 +88,14 @@ endless recursion when showing employees of org. (when querying org.) and also s
 and displaying organization property.
   - when querying a user, the `organization` property does not hold a property `employees` because of the mentioned error
   - when querying an organization, there is a property `employees` which holds all employees of the organization
+
+## 2018-06-03 ([#87](https://github.com/amarbajric/EBUSA-AIM17/pull/87))
+## Added
+- Approval page
+  - added to navigation
+  - added model for Process and Review in models.ts
+  - page uses test data instead of actual data from the DB
+  - iFrame is supposed to show process model of the process that is to be reviewed
 
 ## 2018-06-02 ([#92](https://github.com/amarbajric/EBUSA-AIM17/pull/92))
 ## Added

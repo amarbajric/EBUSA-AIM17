@@ -1,0 +1,72 @@
+<div class="row show-grid">
+    <div class="col-md-2">
+        <nb-card>
+            <nb-card-body>
+                <div class="container-title">Filter By:</div>
+                <div class="row">
+                    <div [(ngModel)]="filterType" ngbRadioGroup class="btn-group-vertical btn-group-toggle btn-divided-group btn-outline-divided-group btn-group-full-width">
+                        <label ngbButtonLabel class="btn btn-secondary">
+                            <input ngbButton type="radio" value="priceBelowOrEquals"> Price Below
+                        </label>
+                        <label ngbButtonLabel class="btn btn-secondary">
+                            <input ngbButton type="radio" value="ratingAboveOrEquals"> Rating Above
+                        </label>
+                        <label ngbButtonLabel class="btn btn-secondary">
+                            <input ngbButton type="radio" value="createdBy"> Created By
+                        </label>
+                        <label ngbButtonLabel class="btn btn-secondary">
+                            <input ngbButton type="radio" value="none"> None
+                        </label>
+                    </div>
+                    <div>
+                        <input [(ngModel)]="filterInput" class="form-control" placeholder="Filter Input">
+                    </div>
+                    <div>
+                        <button (click)="getProcesses()" class="btn btn-outline-primary">Apply</button>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <nb-card class="col-md-12">
+                    <nb-card-body>
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                <div class="input-group">
+                                    <span class="input-group-addon transparent">
+                                        <i class="nb-search icon-vertical"></i>
+                                    </span>
+                                    <input [(ngModel)]="processSearchString" id="processSearchString" class="form-control left-border-none" placeholder="Search for processes .."
+                                        type="text" name="processSearchString">
+                                </div>
+                            </div>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+
+            <div class="row d-flex">
+                <nb-card *ngFor="let process of processes | simpleSearch:'processName,processDescription':processSearchString" class="col-md-6">
+                    <nb-card-header>{{process.processName}}</nb-card-header>
+                    <nb-card-body class="clearfix">
+                        <div class="float-right">by {{process.processCreator}}</div>
+                        <div>{{process.processDescription}}</div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-9 price">€ {{process.processPrice | number: '1.2-2'}}</div>
+                            <div class="col-md-3">
+                                <star-rating [starType]="'svg'" [rating]="process.processAverageRating" [staticColor]="'ok'" [disabled]="true" [showHalfStars]="true"></star-rating>
+                            </div>
+                        </div>
+                        <div class="float-right">
+                            <a [routerLink]="['/processstore-details/'+process.processId]">view details</a>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+
+
+            </div>
+        </div>
+    </div>
