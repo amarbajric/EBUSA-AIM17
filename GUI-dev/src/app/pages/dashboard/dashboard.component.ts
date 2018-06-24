@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {StoreProcess, User} from "../../../models/models";
+import {GatewayProvider} from "../../@theme/providers/backend-server/gateway";
 
 
 @Component({
@@ -8,6 +10,16 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  favoriteProcess: StoreProcess;
+
+  constructor(private gateway: GatewayProvider){
+
+}
+
+  ngOnInit() {
+    this.getFavoriteProcesses();
+  }
+
   tabs: any[] = [
     {
       title: 'Meine Prozesse',
@@ -15,8 +27,23 @@ export class DashboardComponent {
     },
     {
       title: 'Prozesse in Validierung',
-      route: '/dashboard/active',
+      route: '/dashboard/validation',
+    },
+    {
+      title: 'Validierte Prozesse',
+      route: '/dashboard/validated',
     },
   ];
+
+
+  getFavoriteProcesses() {
+    let tempProcesses;
+    this.gateway.getApprovedProcessesByUser()
+      .then((processes) => {
+        this.favoriteProcess = processes[0];
+
+      })
+  }
+
 
 }

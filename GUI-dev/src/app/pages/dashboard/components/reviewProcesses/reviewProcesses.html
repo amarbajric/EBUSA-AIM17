@@ -1,7 +1,7 @@
 <div class="row">
-      <h5 *ngIf="!myProcesses || myProcesses.length < 1">Sie haben derzeit keine Prozesse!</h5>
-  <h4>{{numberRows}}</h4>
-      <table class="table table-striped" *ngIf="myProcesses && myProcesses.length > 0">
+    <div class="col-md-12">
+      <h5 *ngIf="!reviewProcesses || reviewProcesses.length < 1">Es gibt keine zu validierenden Prozesse!</h5>
+      <table class="table table-striped" *ngIf="reviewProcesses && reviewProcesses.length > 0">
          <thead>
             <tr>
                <th>#</th>
@@ -11,15 +11,16 @@
             </tr>
          </thead>
          <tbody>
-            <tr *ngFor="let process of myProcesses">
+            <tr *ngFor="let process of reviewProcesses">
                <td>{{ process.processId }}</td>
                <td>{{ process.processName }}</td>
                <td>{{ process.processCreatedAt | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+               <!--<td>{{process.organization}}></td>-->
                <td>
                  <button class="btn btn-primary btn-sm" (click)="showProcessDetails(process.processId, process.processName, process.processVersion, process.processPrice, process.processCreator, process.processDescription)">Anzeigen</button>
                </td>
             </tr>
          </tbody>
       </table>
-
  </div>
+</div>

@@ -26,6 +26,34 @@ export class GatewayProvider {
       .toPromise()
   }
 
+  /* getUserProcesses(userId: number): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getUserProcesses + '/' + userId, )
+      .toPromise()
+  } */
+
+
+  getApprovedProcessesByUser(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getApprovedProcessesByUser, )
+      .toPromise()
+  }
+
+  getNotApprovedProcessesByUser(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getNotApprovedProcessesByUser, )
+      .toPromise()
+  }
+
+
+  getUserProcesses(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses, )
+      .toPromise()
+  }
+
+  getProcessById(processId: number): Promise<StoreProcess> {
+    return this.http.get<StoreProcess>(this.serverConfig.getProcessById + '/' + processId, )
+      .toPromise()
+  }
+
+
   getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
     let filterParams = new HttpParams();
     if (filterType && filterType !== 'none' && filterInput) {

@@ -12,6 +12,9 @@ import {UserDetailsComponent} from './user-details/user-details.component';
 import {MyProcessesComponent} from "./dashboard/components/myProcesses/myProcesses.component";
 
 import { ProcessStoreDetailsComponent } from './processstore-details/processstore-details.component';
+import { ReviewProcessesComponent } from './dashboard/components/reviewProcesses/reviewProcesses.component';
+import {ModalComponent} from "./dashboard/components/modal/modal.component";
+import {ValidatedProcessesComponent} from "./dashboard/components/validatedProcesses/validatedProcesses.component";
 
 
 
@@ -31,8 +34,18 @@ const routes: Routes = [{
           path: 'myProcesses',
           component: MyProcessesComponent,
         }, {
-          path: 'active',
-          component: ActiveProcessesComponent,
+          path: 'validation',
+          component: ReviewProcessesComponent,
+
+      },
+        {
+          path: 'validated',
+          component: ValidatedProcessesComponent,
+
+        },
+        {
+        path: 'modalView',
+        component: ModalComponent,
 
       }],
     },

@@ -10,6 +10,10 @@ import { ActiveProcessesComponent} from './components/activeProcesses/activeProc
 import {FormsModule} from '@angular/forms';
 import {MyProcessesComponent} from "./components/myProcesses/myProcesses.component";
 import {DashboardComponent} from "./dashboard.component";
+import {ReviewProcessesComponent} from "./components/reviewProcesses/reviewProcesses.component";
+import {ModalComponent} from "./components/modal/modal.component";
+import {ValidatedProcessesComponent} from "./components/validatedProcesses/validatedProcesses.component";
+
 
 
 
@@ -26,6 +30,9 @@ import {DashboardComponent} from "./dashboard.component";
     StartableProcessesComponent,
     BusinessObjectsComponent,
     MyProcessesComponent,
+    ReviewProcessesComponent,
+    ValidatedProcessesComponent,
+    ModalComponent,
   ],
 })
 export class DashboardModule { }

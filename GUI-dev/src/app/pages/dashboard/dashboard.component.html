@@ -1,17 +1,41 @@
 <div class="row">
+<div class="col-md-12">
   <table>
     <tr>
       <div class="tabs-table">
-        <nb-card size="small" >
+        <nb-card class="col-md-12">
           <nb-route-tabset [tabs]="tabs" fullWidth></nb-route-tabset>
         </nb-card>
       </div>
     </tr>
     <tr>
-  <nb-card>
+  <nb-card class="col-md-12">
+    <nb-badge text="new" status="success" position="top right"></nb-badge>
       <nb-card-header>News</nb-card-header>
-      <nb-card-body></nb-card-body>
+      <nb-card-body>
+        <table class="col-md-12">
+          <tr>
+            <td colspan="2"><h5>Am öftesten gekauft</h5></td>
+            <td colspan="2"><h5>Beste Bewertungen</h5></td>
+          </tr>
+          <tr>
+            <td>
+              <i class='nb-heart' style='font-size:72px;'></i>
+            </td>
+            <td>
+              <a [routerLink]="['/processstore-details/'+favoriteProcess.processId]">{{favoriteProcess.processName}}</a>
+            </td>
+            <td>
+              <i class='nb-arrow-dropup' style='font-size:72px;color:#42db7d' ></i>
+            </td>
+            <td>
+              <a [routerLink]="['/processstore-details/'+favoriteProcess.processId]">{{favoriteProcess.processName}}</a>
+            </td>
+          </tr>
+        </table>
+      </nb-card-body>
   </nb-card>
     </tr>
   </table>
+</div>
 </div>

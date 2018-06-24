@@ -17,6 +17,7 @@ import {
   NbCheckboxModule,
   NbPopoverModule,
   NbContextMenuModule,
+  NbBadgeModule,
 } from '@nebular/theme';
 
 import { NbSecurityModule } from '@nebular/security';
@@ -67,6 +68,7 @@ const NB_MODULES = [
   NgbModule,
   NbSecurityModule, // *nbIsGranted directive
   RouterModule,
+  NbBadgeModule,
 ];
 
 const COMPONENTS = [

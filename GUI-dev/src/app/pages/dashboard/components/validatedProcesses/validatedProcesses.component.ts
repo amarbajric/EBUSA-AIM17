@@ -1,31 +1,23 @@
 import { Component,  OnInit } from '@angular/core';
 import {ProcessesService} from '../../../../allProcesses.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {GatewayProvider} from "../../../../@theme/providers/backend-server/gateway";
-import {User} from "../../../../../models/models";
-import {ModalComponent} from "../modal/modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {GatewayProvider} from "../../../../@theme/providers/backend-server/gateway";
+import { ModalComponent } from "../modal/modal.component";
+import {StoreProcess} from "../../../../../models/models";
 
 
 @Component({
-  selector: 'ngx-my-processes',
-  styleUrls: ['myProcesses.component.scss'],
-  templateUrl:  './myProcesses.html',
+  selector: 'ngx-validated-processes',
+  styleUrls: ['validatedProcesses.component.scss'],
+  templateUrl:  './validatedProcesses.html',
 })
-export class MyProcessesComponent implements OnInit  {
+export class ValidatedProcessesComponent implements OnInit  {
 
+  protected validationProcesses: StoreProcess[];
+  selectedProc: StoreProcess;
 
-  myProcesses;
-  user: User = new User();
-
-
-  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router, private gateway: GatewayProvider, private modalService: NgbModal) {
-
-    this.gateway.getUser()
-      .then((user) => {
-        this.user = user;
-      })
-
+  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router, private modalService: NgbModal, private gateway: GatewayProvider) {
   }
 
   ngOnInit() {
@@ -34,17 +26,21 @@ export class MyProcessesComponent implements OnInit  {
 
 
   getProcesses() {
-    this.gateway.getUserProcesses()
+    let tempProcesses;
+    this.gateway.getApprovedProcessesByUser()
       .then((processes) => {
-        this.myProcesses = processes;
+      this.validationProcesses = processes;
+      /* tempProcesses = processes;
+      let tempProcesses2 = tempProcesses.filter(proc => {proc.approved === false});
+        console.log(tempProcesses2);
+        console.log(tempProcesses); */
       })
-
   }
 
   showProcessDetails(processId: number, processName: string, processVersion: string, processPrice: number, processCreator: string, processDesc: string)
   {
     // console.log('selected processID: ' + processId);
-    // console.log(this.reviewProcesses)
+    // console.log(this.validationProcesses)
 
     const activeModal = this.modalService.open(ModalComponent, { size: 'lg', container: 'nb-layout' });
     // activeModal.componentInstance.modalProcessId = processId;
@@ -58,7 +54,5 @@ export class MyProcessesComponent implements OnInit  {
   }
 
 
-  /*showProcess(piId: number) {
-    this.router.navigate(['../mine', piId], { relativeTo: this.route });
-  }*/
+
 }
