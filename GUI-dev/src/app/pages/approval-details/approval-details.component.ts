@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Process} from '../../../models/models';
+import {Process, StoreProcess} from '../../../models/models';
 import {Review} from '../../../models/models';
+import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-approval-details',
@@ -9,38 +11,79 @@ import {Review} from '../../../models/models';
 })
 export class ApprovalDetailsComponent implements OnInit {
 
-  @Input() process: Process;
-  @Input() selectedProcessFromParent: Process;
-  @Input() selectedReviewsFromParent: [Review];
+  process: StoreProcess;
+  // @Input() selectedProcessFromParent: Process;
+  // @Input() selectedReviewsFromParent: [Review];
+  selectedProcessId: string;
   public processes;
-  public reviews;
+  public processReviews:Review[] = [];
+  public allReviews:Review[] = [];
 
 
-  constructor() {
+  processId: string;
 
+  constructor(private gateway: GatewayProvider, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
-    /*
-    this.process = new Process();
-    this.process.created_at = new Date();
-    this.process.process_name = 'Business-Trip-Application-Process';
-    this.process.process_description = 'This S-BPM process model describes how a employee applies for a business trip';
-    this.process.u_id = 6;
-    */
+    this.selectedProcessId = this.route.snapshot.paramMap.get('processId');
+    this.loadSelectedProcessDetails();
+
+    const exampleReview1 = new Review()
+    exampleReview1.comment = 'Awesome process model';
+    exampleReview1.uploader = 'fgraf';
+    exampleReview1.created_at = new Date();
+    exampleReview1.process_id = 1;
+
+    const exampleReview2 = new Review()
+    exampleReview2.comment = 'This could use some serious improvement';
+    exampleReview2.uploader = 'singer';
+    exampleReview2.created_at = new Date();
+    exampleReview2.process_id = 2;
+
+    const exampleReview3 = new Review()
+    exampleReview3.comment = 'We will adapt the process to the new requirements';
+    exampleReview3.uploader = 'fgraf';
+    exampleReview3.created_at = new Date();
+    exampleReview3.process_id = 2;
+
+    const exampleReview4 = new Review()
+    exampleReview4.comment = 'We have fixed the model now';
+    exampleReview4.uploader = 'fgraf';
+    exampleReview4.created_at = new Date();
+    exampleReview4.process_id = 2;
+
+    // this.processes = [exampleProcess1, exampleProcess2];
+    this.allReviews.push(exampleReview1, exampleReview2, exampleReview3, exampleReview4);
+    this.processReviews = this.allReviews.filter(x => x.process_id == parseInt(this.selectedProcessId));
 
   }
 
-  postComment() {
+  loadSelectedProcessDetails() {
+    // GET localhost:10000/api/store/process/{processId} - returns process with {processid}
+    this.gateway.getStoreProcessById(this.selectedProcessId)
+      .then((process) => {
+        this.process = process;
+        console.log(process);
+      })
+  }
+
+  postComment(comment: string) {
     // add API calls for posting and approving/denying models
+    console.log(comment);
+    this.gateway.postStoreProcessComment(this.selectedProcessId)
   }
 
-  approveProcessModel() {
-
+  approveStoreProcess() {
+    // POST localhost:10000/api/store/process/{processId}/approve - approve process with {processid}
+    this.gateway.postStoreProcessApproved(this.selectedProcessId);
+    this.router.navigate(['/approval']);
   }
 
-  denyProcessModel() {
-
+  unapproveStoreProcess() {
+    // POST localhost:10000/api/store/process/{processId}/unapprove - unapprove process with {processid}
+    this.gateway.postStoreProcessUnapproved(this.selectedProcessId);
+    this.router.navigate(['/approval']);
   }
 
 }

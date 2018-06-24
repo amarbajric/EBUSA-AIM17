@@ -22,8 +22,10 @@ export class StoreProcess {
   processCreatedAt: Date;
   processVersion: number;
   processPrice: number;
-  // missing in current ProcessStoreDTO in backend:
+  // avg rating missing in current ProcessStoreDTO in backend:
   processAverageRating: number;
+  approved: boolean;
+  processApproverComment: string;
 }
 
 export class StoreProcessRating {

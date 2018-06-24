@@ -26,14 +26,14 @@ export class GatewayProvider {
       .toPromise()
   }
 
-  getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
+  getStoreProcesses(filterType: string = "", filterInput: string = ""): Promise<StoreProcess[]> {
     let filterParams = new HttpParams();
     if (filterType && filterType !== 'none' && filterInput) {
       filterParams = filterParams.append('filterType', filterType);
       filterParams = filterParams.append('filterInput', filterInput);
     }
     return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses, { params: filterParams })
-      .toPromise()
+      .toPromise();
   }
 
   getStoreProcessRatings(processId: string): Promise<StoreProcessRating[]> {
@@ -44,7 +44,34 @@ export class GatewayProvider {
   }
 
   postStoreProcessRatings(processId: string, rating: StoreProcessRating): void {
-    const url = this.serverConfig.postStoreProcessRating + '/' + processId
+    const url = this.serverConfig.postStoreProcessRating + '/' + processId;
     this.http.post<StoreProcessRating>(url, rating).toPromise()
   }
+
+  getUnapprovedStoreProcesses(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getUnapprovedStoreProcesses)
+      .toPromise()
+  }
+
+  postStoreProcessApproved(processId: string): void {
+    const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/approve';
+    this.http.post<StoreProcess>(url, processId).toPromise()
+  }
+
+  postStoreProcessUnapproved(processId: string): void {
+    const url = this.serverConfig.postStoreProcessUnapproved + '/' + processId + '/unapprove';
+    this.http.post<StoreProcess>(url, processId).toPromise()
+  }
+
+  getStoreProcessById(processId: string): Promise<StoreProcess> {
+    const url = this.serverConfig.getStoreProcessById + '/' + processId;
+    return this.http.get<StoreProcess>(url)
+      .toPromise()
+  }
+
+  postStoreProcessComment(processId: string): void {
+    const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/comment';
+    this.http.post<StoreProcess>(url, processId).toPromise()
+  }
+
 }

@@ -11,6 +11,7 @@
         <th>Created at:</th>
         <th>Process ID:</th>
         <th>Version:</th>
+        <th>Reviewer comment:</th>
         <th>Status:</th>
       </tr>
       <!--
@@ -25,13 +26,14 @@
       -->
 
       <tr>
-        <td>{{selectedProcessFromParent?.process_name}}</td>
-        <td>{{selectedProcessFromParent?.process_description}}</td>
-        <td>{{selectedProcessFromParent?.creator}}</td>
-        <td>{{selectedProcessFromParent?.created_at | date:'dd-MM-yyyy'}}</td>
-        <td>{{selectedProcessFromParent?.process_id}}</td>
-        <td>{{selectedProcessFromParent?.version}}</td>
-        <td>{{selectedProcessFromParent?.state}}</td>
+        <td>{{process?.processName}}</td>
+        <td>{{process?.processDescription}}</td>
+        <td>{{process?.processCreator}}</td>
+        <td>{{process?.processCreatedAt | date:'dd-MM-yyyy'}}</td>
+        <td>{{process?.processId}}</td>
+        <td>{{process?.processVersion}}</td>
+        <td>{{process?.processApproverComment}}</td>
+        <td>{{process?.approved}}</td>
       </tr>
     </table>
   </nb-card>
@@ -53,11 +55,12 @@
         <td>{{review.created_at | date :'short'}}</td>
       </tr>
       -->
-      <tr *ngFor="let selectedReviewFromParent of selectedReviewsFromParent">
-        <td>{{selectedReviewFromParent?.comment}}</td>
-        <td>{{selectedReviewFromParent?.uploader}}</td>
-        <td>{{selectedReviewFromParent?.created_at | date :'short'}}</td>
-        <td>{{selectedReviewFromParent?.process_id}}</td>
+      <tr *ngFor="let review of processReviews">
+        <td>{{review?.comment}}</td>
+        <td>{{review?.uploader}}</td>
+        <td>{{review?.created_at | date :'short'}}</td>
+        <td>{{review?.process_id}}</td>
+        <td>{{review?.processApproverComment}}</td>
       </tr>
     </table>
   </nb-card>
@@ -70,8 +73,10 @@
 
 
   <!--<button ng-click="changeIFrame()" class="btn btn-info" (click)="switchIFrameSource()">Change iFrame</button>-->
-  <button ng-click="postComment()" class="btn btn-info" (click)="postComment(comment)">Post comment</button>
-  <button ng-click="approveProcessModel()" class="btn btn-success">Approve this process model</button>
-  <button ng-click="denyProcessModel()" class="btn btn-danger">Deny this process model</button>
+  <button (click)="postComment(comment)" class="btn btn-info">Post comment</button>
+  <button (click)="approveStoreProcess()" class="btn btn-success">Approve this process model</button>
+  <button (click)="unapproveStoreProcess()" class="btn btn-danger">Deny this process model</button>
+  <button routerLink="/approval" class="btn btn-hero-secondary">Cancel</button>
+
 
 </div>
