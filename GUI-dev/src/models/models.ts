@@ -1,4 +1,4 @@
-// Define all models (i.e. User JSON Structure or Process from process store strucutre as class)
+// Define all models (i.e. User JSON Structure or Process from process store structure as class)
 
 
 export class Process {
@@ -22,6 +22,8 @@ export class StoreProcess {
   processCreatedAt: Date;
   processVersion: number;
   processPrice: number;
+  processApprovedDate: Date;
+  processApprover: string;
   // missing in current ProcessStoreDTO in backend:
   processAverageRating: number;
 }

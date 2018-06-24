@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {StoreProcess} from '../../../models/models';
+import {GatewayProvider} from '../../@theme/providers/backend-server/gateway';
 
 @Component({
   selector: 'ngx-processstore-details',
@@ -9,11 +11,22 @@ import { ActivatedRoute } from '@angular/router';
 export class ProcessStoreDetailsComponent implements OnInit {
 
   processId: string;
+  process: StoreProcess = new StoreProcess;
 
-  constructor(private route: ActivatedRoute) { }
-
-  ngOnInit() {
-    this.processId = this.route.snapshot.paramMap.get('processId');
+  constructor(private route: ActivatedRoute,
+              private gateway: GatewayProvider) {
   }
 
+  ngOnInit() {
+    // geht the ID from the selected process
+    this.route.params.subscribe(params => {
+      this.processId = params['processId'];
+    });
+
+    // get the process details with the ID
+    this.gateway.getProcessById(this.processId)
+      .then((process) => {
+        this.process = process;
+      })
+  }
 }

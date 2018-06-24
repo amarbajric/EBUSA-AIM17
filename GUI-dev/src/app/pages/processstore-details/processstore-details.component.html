@@ -1,7 +1,54 @@
 <div class="row show-grid">
   <div class="col-md-10">
-    <div>-- Placeholder for details --</div>
+    <nb-card>
+      <nb-card-header>Process Details</nb-card-header>
+      <nb-card-body>
+        <div class="text-heading">
+          <h5>{{ process.processName }}</h5>
+          <div class="float-right">
+            created by {{ process.processCreator }}
+          </div>
+        </div>
+        <hr>
+        <div class="text-body">
+          <img src="../../@theme/images/defaultProcess.jpg" alt="Example Process Image">
+          <div class=""> {{ process.processDescription}} </div>
+          <div class="">
+            <div class="price">
+              € {{process.processPrice | number: '1.2-2'}}
+            </div>
+            <div class="float-right">
+              <button ng-click="addToCart" class="btn btn-success">Add to cart</button>
+            </div>
+          </div>
+          <hr>
+          <div class="">
+            <dl>
+              <dt>version:</dt>
+              <dd>{{ process.processVersion }}</dd>
+
+              <dt>process id: </dt>
+              <dd>{{ process.processId }}</dd>
+
+              <dt>approved by:</dt>
+              <dd>{{ process.processApprover }}</dd>
+
+              <dt>approved at: </dt>
+              <dd>{{ process.processApprovedDate | date:'dd-MM-yyyy' }}</dd>
+
+              <dt>created at: </dt>
+              <dd>{{ process.processCreatedAt | date:'dd-MM-yyyy' }}</dd>
+
+            </dl>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+    <hr/>
+    <!--
+    <nb-card-header>Ratings</nb-card-header>
     <div>Ratings:</div>
     <ngx-process-ratings [processId]="processId"></ngx-process-ratings>
+    -->
   </div>
 </div>
