@@ -24,6 +24,7 @@ export class StoreProcess {
   processPrice: number;
   // missing in current ProcessStoreDTO in backend:
   processAverageRating: number;
+  processApprovedDate: Date;
 }
 
 export class StoreProcessRating {
