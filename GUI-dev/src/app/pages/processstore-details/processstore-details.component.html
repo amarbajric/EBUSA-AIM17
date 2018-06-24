@@ -3,8 +3,8 @@
     <nb-card>
       <nb-card-header>Process Details</nb-card-header>
       <nb-card-body>
-        <div class="text-heading">
-          <h5>{{ process.processName }}</h5>
+        <div class="text-heading clearfix">
+          <h5 class="float-left">{{ process.processName }}</h5>
           <div class="float-right">
             created by {{ process.processCreator }}
           </div>
@@ -13,12 +13,13 @@
         <div class="text-body">
           <img src="../../@theme/images/defaultProcess.jpg" alt="Example Process Image">
           <div class=""> {{ process.processDescription}} </div>
-          <div class="">
-            <div class="price">
+          <br>
+          <div class="clearfix">
+            <div class="price float-left">
               € {{process.processPrice | number: '1.2-2'}}
             </div>
             <div class="float-right">
-              <button ng-click="addToCart" class="btn btn-success">Add to cart</button>
+              <button ng-click="buyProcess()" class="btn btn-success">Buy</button>
             </div>
           </div>
           <hr>

@@ -18,7 +18,7 @@ export class ProcessStoreDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // geht the ID from the selected process
+    // get the ID from the selected process
     this.route.params.subscribe(params => {
       this.processId = params['processId'];
     });
@@ -28,5 +28,10 @@ export class ProcessStoreDetailsComponent implements OnInit {
       .then((process) => {
         this.process = process;
       })
+  }
+
+  // buys the process / adds it to the organization
+  buyProcess() {
+    // TODO: implement with backend
   }
 }

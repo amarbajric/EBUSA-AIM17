@@ -4,6 +4,12 @@
     font-size: 2rem;
   }
 
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
   dl {
     width: 100%;
     overflow: hidden;
