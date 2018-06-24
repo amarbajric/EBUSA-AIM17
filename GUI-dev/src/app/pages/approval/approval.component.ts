@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Process, StoreProcess} from '../../../models/models';
 import {Review} from '../../../models/models';
 import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -24,47 +24,25 @@ export class ApprovalComponent implements OnInit {
   settings = {
     columns: {
       processId: {
-        title: 'ID'
+        title: 'ID',
       },
       processName: {
-        title: 'Process Name'
+        title: 'Process Name',
       },
       processDescription: {
-        title: 'Description'
+        title: 'Description',
       },
       processCreator: {
-        title: 'Creator'
+        title: 'Creator',
       },
       approved: {
-        title: 'Status'
-      }
+        title: 'Status',
+      },
     },
     actions: false,
   };
 
   data:StoreProcess[] = [];
-
-  data2 = [
-    {
-      id: 1,
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz"
-    },
-    {
-      id: 2,
-      name: "Ervin Howell",
-      username: "Antonette",
-      email: "Shanna@melissa.tv"
-    },
-
-    {
-      id: 11,
-      name: "Nicholas DuBuque",
-      username: "Nicholas.Stanton",
-      email: "Rey.Padberg@rosamond.biz"
-    }
-  ];
 
 
   constructor(private gateway: GatewayProvider, private router: Router) {
@@ -80,16 +58,16 @@ export class ApprovalComponent implements OnInit {
   getUnapprovedProcesses() {
       this.gateway.getUnapprovedStoreProcesses()
         .then((processes) => {
-          //this.processes = processes;
+          // this.processes = processes;
         })
   }
 
   getAllProcesses() {
     this.gateway.getStoreProcesses().then((processes) => {
       this.processes = processes;
-      console.log(processes);
+      // console.log(processes);
       this.data = processes;
-      console.log(this.data)
+      // console.log(this.data)
     })
   }
 
@@ -100,9 +78,9 @@ export class ApprovalComponent implements OnInit {
   }
 
   onUserRowSelect(event): void {
-    console.log(event.data.processId);
+    // console.log(event.data.processId);
     this.loadDetails(event.data.processId);
-    //this.loadDetails(processId);
+    // this.loadDetails(processId);
   }
 
 }

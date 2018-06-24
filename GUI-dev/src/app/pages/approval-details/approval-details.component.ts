@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Process, StoreProcess} from '../../../models/models';
+import {Component, OnInit} from '@angular/core';
+import { StoreProcess} from '../../../models/models';
 import {Review} from '../../../models/models';
 import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -16,8 +16,8 @@ export class ApprovalDetailsComponent implements OnInit {
   // @Input() selectedReviewsFromParent: [Review];
   selectedProcessId: string;
   public processes;
-  public processReviews:Review[] = [];
-  public allReviews:Review[] = [];
+  public processReviews: Review[] = [];
+  public allReviews: Review[] = [];
 
 
   processId: string;
@@ -55,7 +55,7 @@ export class ApprovalDetailsComponent implements OnInit {
 
     // this.processes = [exampleProcess1, exampleProcess2];
     this.allReviews.push(exampleReview1, exampleReview2, exampleReview3, exampleReview4);
-    this.processReviews = this.allReviews.filter(x => x.process_id == parseInt(this.selectedProcessId));
+    this.processReviews = this.allReviews.filter(x => x.process_id === parseInt(this.selectedProcessId));
 
   }
 
@@ -64,13 +64,13 @@ export class ApprovalDetailsComponent implements OnInit {
     this.gateway.getStoreProcessById(this.selectedProcessId)
       .then((process) => {
         this.process = process;
-        console.log(process);
+        // console.log(process);
       })
   }
 
   postComment(comment: string) {
     // add API calls for posting and approving/denying models
-    console.log(comment);
+    // console.log(comment);
     this.gateway.postStoreProcessComment(this.selectedProcessId)
   }
 
