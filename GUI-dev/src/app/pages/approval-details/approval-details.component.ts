@@ -55,7 +55,7 @@ export class ApprovalDetailsComponent implements OnInit {
 
     // this.processes = [exampleProcess1, exampleProcess2];
     this.allReviews.push(exampleReview1, exampleReview2, exampleReview3, exampleReview4);
-    this.processReviews = this.allReviews.filter(x => x.process_id === parseInt(this.selectedProcessId));
+    this.processReviews = this.allReviews.filter(x => x.process_id === parseInt(this.selectedProcessId, 10));
 
   }
 

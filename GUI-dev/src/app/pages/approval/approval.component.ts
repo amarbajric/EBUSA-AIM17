@@ -42,7 +42,7 @@ export class ApprovalComponent implements OnInit {
     actions: false,
   };
 
-  data:StoreProcess[] = [];
+  data: StoreProcess[] = [];
 
 
   constructor(private gateway: GatewayProvider, private router: Router) {

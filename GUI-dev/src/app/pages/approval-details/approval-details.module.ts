@@ -1,6 +1,4 @@
-import { NgModule, OnInit } from '@angular/core';
-import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
-import { ActivatedRoute } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 import { ThemeModule } from '../../@theme/theme.module';
 
@@ -13,4 +11,4 @@ import { ThemeModule } from '../../@theme/theme.module';
     // ApprovalDetailsComponent,
   ],
 })
-export class ApprovalDetailsModule{}
+export class ApprovalDetailsModule {}
