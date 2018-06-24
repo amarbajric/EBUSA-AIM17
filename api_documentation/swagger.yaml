@@ -1,0 +1,242 @@
+swagger: '2.0'
+info:
+  description: 'description t.b.a'
+  version: 1.0.0
+  title: EasyBiz API
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+#host: 'localhost:10000'
+#basePath: /api
+tags:
+  - name: user
+    description: Operations about user
+    externalDocs:
+      description: Find out more about our store
+      url: 'http://swagger.io'
+  - name: api
+schemes:
+  - http
+paths:
+  /user/register:
+    post:
+      tags:
+        - user
+      summary: Create a new user
+      description: Creates a new user in the system with the given information
+      operationId: createUser
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Created user object
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        default:
+          description: successful operation
+  /user/register/checkIfMailTaken:
+    post:
+      tags:
+        - user
+      description: check if mail is already taken
+      operationId: checkIfMailExists
+      produces:
+        - application/json
+      parameters:
+        - name: email
+          in: path
+          description: The email that needs to be checked
+          required: true
+          type: string
+      responses:
+        default:
+          description: successful operation
+  /user/login:
+    get:
+      tags:
+        - user
+      summary: Logs user into the system
+      description: Provides a payload containing user related data.
+      operationId: loginUser
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Created user object
+          required: true
+          schema:
+            $ref: '#/definitions/Login'
+      responses:
+        '200':
+          description: successfully logged in
+          schema:
+            type: string
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+        '400':
+          description: Invalid email/password supplied
+  #/user/logout:
+  #  get:
+  #    tags:
+  #      - user
+  #    summary: Logs out current logged in user session
+  #    description: ''
+  #    operationId: logoutUser
+  #    produces:
+  #      - application/json
+  #    parameters: []
+  #    responses:
+  #      default:
+  #        description: successful operation
+  '/api/user/{userId}':
+    get:
+      tags:
+        - api
+      summary: Get user by userId
+      description: ''
+      operationId: getUserByUserId
+      produces:
+        - application/json
+      parameters:
+        - name: userId
+          in: path
+          description: Provide a userID to retrieve user related information
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+    put:
+      tags:
+        - api
+      summary: Update user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      produces:
+        - application/json
+      parameters:
+        - name: userId
+          in: path
+          description: name that need to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Updated user object
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '400':
+          description: Invalid user supplied
+        '404':
+          description: User not found
+    delete:
+      tags:
+        - api
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      produces:
+        - application/json
+      parameters:
+        - name: userId
+          in: path
+          description: The name that needs to be deleted
+          required: true
+          type: string
+      responses:
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+  /api/me:
+    post:
+      tags:
+        - api
+      summary: Retrieve current user information
+      description: retrieve information regearding the current user
+      operationId: getUserInformation
+      produces:
+        - application/json
+      responses:
+        default:
+          description: successful operation
+  '/api/processes/users/rule/{rules}':
+    get:
+      tags:
+        - api
+      summary: Retrieve List a List user rules
+      description: Retrieve List a List user rules
+      operationId: getUserRuleList
+      produces:
+        - application/json
+      parameters:
+        - name: rules
+          in: path
+          description: Provide rules
+          required: true
+          type: string
+      responses:
+        default:
+          description: successful operation
+  /api/rules:
+    get:
+      tags:
+        - api
+      summary: Retrieve rules
+      description: get all rules
+      operationId: getRules
+      produces:
+        - application/json
+      responses:
+        default:
+          description: successful operation
+definitions:
+  User:
+    type: object
+    properties:
+      firstname:
+        type: string
+      lastname:
+        type: string
+      username:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+    xml:
+      name: User
+  Login:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    xml:
+      name: User
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'
