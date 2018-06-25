@@ -3,8 +3,6 @@ import { StoreProcess} from '../../../models/models';
 import {Review} from '../../../models/models';
 import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NbAuthService} from "@nebular/auth";
-import {NB_AUTH_OPTIONS} from '@nebular/auth';
 
 @Component({
   selector: 'ngx-approval-details',
