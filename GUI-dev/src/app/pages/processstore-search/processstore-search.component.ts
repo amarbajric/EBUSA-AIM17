@@ -10,8 +10,10 @@ export class ProcessStoreSearchComponent implements OnInit {
 
   public processes;
   private mockEnabled;
-  private filterType = 'none';
-  private filterInput;
+  // tslint:disable-next-line
+  private filterType = 'none'; // is used in html
+  // tslint:disable-next-line
+  private filterInput; // is used in html
 
   constructor(private gateway: GatewayProvider) {}
 
@@ -22,7 +24,7 @@ export class ProcessStoreSearchComponent implements OnInit {
 
   getProcesses() {
     if (!this.mockEnabled) {
-      this.gateway.getStoreProcesses(this.filterType, this.filterInput)
+      this.gateway.getStoreProcesses()
       .then((processes) => {
         this.processes = processes;
       })

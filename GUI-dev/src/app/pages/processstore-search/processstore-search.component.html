@@ -21,9 +21,6 @@
                     <div>
                         <input [(ngModel)]="filterInput" class="form-control" placeholder="Filter Input">
                     </div>
-                    <div>
-                        <button (click)="getProcesses()" class="btn btn-outline-primary">Apply</button>
-                    </div>
                 </div>
             </nb-card-body>
         </nb-card>
@@ -48,7 +45,7 @@
             </div>
 
             <div class="row d-flex">
-                <nb-card *ngFor="let process of processes | simpleSearch:'processName,processDescription':processSearchString" class="col-md-6">
+                <nb-card *ngFor="let process of processes | simpleSearch:'processName,processDescription':processSearchString | processFilter:filterInput:filterType" class="col-md-6">
                     <nb-card-header>{{process.processName}}</nb-card-header>
                     <nb-card-body class="clearfix">
                         <div class="float-right">by {{process.processCreator}}</div>
