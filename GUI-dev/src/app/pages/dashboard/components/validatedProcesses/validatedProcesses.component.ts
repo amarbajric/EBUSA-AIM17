@@ -17,7 +17,8 @@ export class ValidatedProcessesComponent implements OnInit  {
   protected validationProcesses: StoreProcess[];
   selectedProc: StoreProcess;
 
-  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router, private modalService: NgbModal, private gateway: GatewayProvider) {
+  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router,
+              private modalService: NgbModal, private gateway: GatewayProvider) {
   }
 
   ngOnInit() {
@@ -26,19 +27,14 @@ export class ValidatedProcessesComponent implements OnInit  {
 
 
   getProcesses() {
-    let tempProcesses;
     this.gateway.getApprovedProcessesByUser()
       .then((processes) => {
       this.validationProcesses = processes;
-      /* tempProcesses = processes;
-      let tempProcesses2 = tempProcesses.filter(proc => {proc.approved === false});
-        console.log(tempProcesses2);
-        console.log(tempProcesses); */
       })
   }
 
-  showProcessDetails(processId: number, processName: string, processVersion: string, processPrice: number, processCreator: string, processDesc: string)
-  {
+  showProcessDetails(processId: number, processName: string, processVersion: string, processPrice: number,
+                     processCreator: string, processDesc: string) {
     // console.log('selected processID: ' + processId);
     // console.log(this.validationProcesses)
 

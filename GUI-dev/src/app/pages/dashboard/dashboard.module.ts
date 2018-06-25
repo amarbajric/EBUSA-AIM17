@@ -8,13 +8,13 @@ import {TerminatedProcessesComponent} from './components/terminatedProcesses/ter
 import {ActiveProcessDetailComponent} from './components/activeProcessDetail/activeProcessDetail.component';
 import { ActiveProcessesComponent} from './components/activeProcesses/activeProcesses.component';
 import {FormsModule} from '@angular/forms';
-import {MyProcessesComponent} from "./components/myProcesses/myProcesses.component";
-import {DashboardComponent} from "./dashboard.component";
-import {ReviewProcessesComponent} from "./components/reviewProcesses/reviewProcesses.component";
-import {ModalComponent} from "./components/modal/modal.component";
-import {ValidatedProcessesComponent} from "./components/validatedProcesses/validatedProcesses.component";
-import {CreateOrgaModalComponent} from "./components/createOrgaModal/createOrgaModal.component";
-import {ToasterModule} from "angular2-toaster";
+import {MyProcessesComponent} from './components/myProcesses/myProcesses.component';
+import {DashboardComponent} from './dashboard.component';
+import {ReviewProcessesComponent} from './components/reviewProcesses/reviewProcesses.component';
+import {ModalComponent} from './components/modal/modal.component';
+import {ValidatedProcessesComponent} from './components/validatedProcesses/validatedProcesses.component';
+import {CreateOrgaModalComponent} from './components/createOrgaModal/createOrgaModal.component';
+import {ToasterModule} from 'angular2-toaster';
 
 
 
@@ -23,7 +23,7 @@ import {ToasterModule} from "angular2-toaster";
   imports: [
     ThemeModule,
     FormsModule,
-    ToasterModule
+    ToasterModule,
   ],
   declarations: [
     DashboardComponent,

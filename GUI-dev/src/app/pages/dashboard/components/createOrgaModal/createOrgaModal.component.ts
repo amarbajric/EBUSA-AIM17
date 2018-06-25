@@ -2,7 +2,7 @@ import {Component, EventEmitter} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {Organization} from '../../../../../models/models';
 import {GatewayProvider} from '../../../../@theme/providers/backend-server/gateway';
-import {ToasterService} from "angular2-toaster";
+import {ToasterService} from 'angular2-toaster';
 
 @Component({
   selector: 'ngx-create-orga-modal',
@@ -20,7 +20,7 @@ import {ToasterService} from "angular2-toaster";
       <div class="form-group">
         <br>
         <h6>Organisationsname</h6>
-        <input name="organizationName" [(ngModel)]="organization.organizationName" id="input-organizationName" 
+        <input name="organizationName" [(ngModel)]="organization.organizationName" id="input-organizationName"
                #organizationName="ngModel"
                class="form-control" placeholder="Organisationsname"
                >
@@ -34,7 +34,6 @@ import {ToasterService} from "angular2-toaster";
         >
       </div>
     </div>
-       
     <div class="modal-footer">
       <button class="btn btn-md btn-primary" (click)="closeModal()">Abbrechen</button>
       <button class="btn btn-md btn-primary" (click)="saveModal()">Speichern</button>

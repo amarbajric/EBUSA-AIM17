@@ -17,7 +17,8 @@ export class ReviewProcessesComponent implements OnInit  {
   protected reviewProcesses: StoreProcess[];
   selectedProc: StoreProcess;
 
-  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router, private modalService: NgbModal, private gateway: GatewayProvider) {
+  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router,
+              private modalService: NgbModal, private gateway: GatewayProvider) {
   }
 
   ngOnInit() {
@@ -26,7 +27,6 @@ export class ReviewProcessesComponent implements OnInit  {
 
 
   getProcesses() {
-    let tempProcesses;
     this.gateway.getNotApprovedProcessesByUser()
       .then((processes) => {
       this.reviewProcesses = processes;
@@ -37,8 +37,8 @@ export class ReviewProcessesComponent implements OnInit  {
       })
   }
 
-  showProcessDetails(processId: number, processName: string, processVersion: string, processPrice: number, processCreator: string, processDesc: string)
-  {
+  showProcessDetails(processId: number, processName: string, processVersion: string, processPrice: number,
+                     processCreator: string, processDesc: string) {
     // console.log('selected processID: ' + processId);
     // console.log(this.reviewProcesses)
 

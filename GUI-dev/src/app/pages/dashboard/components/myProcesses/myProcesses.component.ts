@@ -41,7 +41,7 @@ export class MyProcessesComponent implements OnInit  {
     this.gateway.getUser()
       .then((user) => {
         this.user = user;
-        if(user.organization !== null) {
+        if (user.organization !== null) {
           this.inOrganization = true;
         }
       })
@@ -72,16 +72,14 @@ export class MyProcessesComponent implements OnInit  {
 
   }
 
-  openCreateOrganization()
-  {
+  openCreateOrganization() {
     const createOrgaModal = this.modalService.open(CreateOrgaModalComponent,
       { size: 'lg', container: 'nb-layout' });
     createOrgaModal.componentInstance.saved.subscribe(() => {this.createToast()});
 
   }
 
-  public createToast()
-  {
+  public createToast() {
     const toast: Toast = {
       type: 'success',
       title: 'Success',
