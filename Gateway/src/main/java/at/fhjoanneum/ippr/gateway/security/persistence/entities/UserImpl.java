@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
