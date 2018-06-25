@@ -19,7 +19,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     </div>
   `,
 })
-export class ProcessstoreDetailsModal {
+export class ProcessstoreDetailsModalComponent {
 
   modalHeader: string;
   modalContent: string;
@@ -40,6 +40,6 @@ export class ProcessstoreDetailsModal {
         this.process = process;
       })
     */
-    // console.log('pressed buy);
+    // console.log("pressed buy");
   }
 }

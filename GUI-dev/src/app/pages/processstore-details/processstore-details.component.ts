@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {StoreProcess} from '../../../models/models';
 import {GatewayProvider} from '../../@theme/providers/backend-server/gateway';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ProcessstoreDetailsModal} from './modal/processstore-details.modal';
+import {ProcessstoreDetailsModalComponent} from './modal/processstore-details.modal';
 
 @Component({
   selector: 'ngx-processstore-details',
@@ -48,7 +48,7 @@ export class ProcessStoreDetailsComponent implements OnInit {
   // activates a modal for approval of payment
   // method for buy can be found in the modal
   showBuyModal() {
-    const activeModal = this.modalService.open(ProcessstoreDetailsModal, {
+    const activeModal = this.modalService.open(ProcessstoreDetailsModalComponent, {
       size: 'sm',
       backdrop: 'static',
       container: 'nb-layout',
@@ -61,6 +61,6 @@ export class ProcessStoreDetailsComponent implements OnInit {
   // starting the process
   // TODO: implement start process
   startProcess(processId: string) {
-    // console.log('process started')
+    // console.log("process started");
   }
 }
