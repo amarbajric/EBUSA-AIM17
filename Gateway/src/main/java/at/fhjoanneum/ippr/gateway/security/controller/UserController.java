@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -118,7 +119,7 @@ public class UserController {
 
   @RequestMapping(value = "api/user/{userId}", method = RequestMethod.PUT)
   public ResponseEntity<UpdateResponse> updateUser(@RequestBody final UserUpdate user,
-                         @PathVariable(name = "userId", required = true) final Long userId) {
+                         @PathVariable(name = "userId", required = true) final Long userId) throws ExecutionException, InterruptedException {
 
     final Optional<User> updatedUser =
             rbacService.updateUser(userId, user.username, user.firstname, user.lastname, user.email, user.password,
