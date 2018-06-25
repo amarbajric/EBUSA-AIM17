@@ -3,7 +3,7 @@ import { AdminComponent } from './admin.component';
 import { ActiveProcessesComponent } from './components/activeProcesses/activeProcesses.component';
 import { TerminatedProcessesComponent } from './components/terminatedProcesses/terminatedProcesses.component';
 import { ProcessModelsComponent } from './components/processModels/processModels.component';
-import { ImportProcessModelComponent } from './components/importProcessModel/importProcessModel.component';
+import { ImportProcessModelComponent } from '../importProcessModel/importProcessModel.component';
 import { EventLoggerComponent } from './components/eventLogger/eventLogger.component';
 import { ManipulatePNMLComponent } from './components/manipulatePNML/manipulatePNML.component';
 import { GenerateOWLComponent } from './components/generateOWL/generateOWL.component';

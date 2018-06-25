@@ -26,6 +26,10 @@ export class GatewayProvider {
       .toPromise()
   }
 
+  uploadOWLModel(): Promise<any> {
+    return this.http.get<User>(this.serverConfig.uploadOWL).toPromise()
+  }
+
   getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
     let filterParams = new HttpParams();
     if (filterType && filterType !== 'none' && filterInput) {

@@ -9,11 +9,14 @@ export class ServerConfigProvider {
   private _getUser = `${this._host}/api/me/`;
   private _getStoreProcesses = `${this._host}api/store/processes`;
   private _getOrPostStoreProcessRatings = `${this._host}api/store/processRatings`;
+  private _uploadOWL = `${this._host}api/owlprocessmodel`;
+
 
   public get checkIfMailTaken(): string {return this._checkIfMailTaken};
   public get getUser(): string {return this._getUser};
   public get getStoreProcesses(): string {return this._getStoreProcesses};
   public get getStoreProcessRatings(): string {return this._getOrPostStoreProcessRatings};
   public get postStoreProcessRating(): string {return this._getOrPostStoreProcessRatings};
+  public get uploadOWL(): string {return this._uploadOWL};
 
 }

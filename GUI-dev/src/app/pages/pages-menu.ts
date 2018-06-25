@@ -17,6 +17,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-checkmark',
     link: '/approval',
   },
+  {
+    title: 'Create Process',
+    icon: 'nb-paper-plane',
+    link: '/createProcess',
+  },
+  {
+    title: 'upload Process',
+    icon: 'nb-paper-plane',
+    link: '/importProcess',
+  },
   /*{
     title: 'FEATURES',
     group: true,
