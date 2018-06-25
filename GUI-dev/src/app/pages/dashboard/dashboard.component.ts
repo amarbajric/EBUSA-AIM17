@@ -14,8 +14,8 @@ import {ToasterService} from "angular2-toaster";
 })
 export class DashboardComponent {
 
-  favoriteProcess: StoreProcess;
-  bestRatedProcess: StoreProcess;
+  favoriteProcess: StoreProcess = new StoreProcess();
+  bestRatedProcess: StoreProcess = new StoreProcess();
   tabName: any[];
   user: User;
   isUser: boolean;

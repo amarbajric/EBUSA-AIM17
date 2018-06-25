@@ -45,7 +45,6 @@ export class MyProcessesComponent implements OnInit  {
         }
       })
 
-    // console.log(this.user);
     this.getProcesses();
   }
 
@@ -60,11 +59,9 @@ export class MyProcessesComponent implements OnInit  {
 
   showProcessDetails(processId: number, processName: string, processVersion: string, processPrice: number, processCreator: string, processDesc: string)
   {
-    // console.log('selected processID: ' + processId);
-    // console.log(this.reviewProcesses)
+
 
     const activeModal = this.modalService.open(ModalComponent, { size: 'lg', container: 'nb-layout' });
-    // activeModal.componentInstance.modalProcessId = processId;
     activeModal.componentInstance.modalProcessName = processName;
     activeModal.componentInstance.modalProcessVersion = processVersion;
     activeModal.componentInstance.modalProcessPrice = processPrice;
