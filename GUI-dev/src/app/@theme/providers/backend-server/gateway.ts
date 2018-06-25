@@ -69,8 +69,8 @@ export class GatewayProvider {
       .toPromise()
   }
 
-  postStoreProcessComment(processId: string): void {
-    const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/comment';
+  postStoreProcessComment(comment: string, processId: string): void {
+    const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/updateComment';
     this.http.post<StoreProcess>(url, processId).toPromise()
   }
 

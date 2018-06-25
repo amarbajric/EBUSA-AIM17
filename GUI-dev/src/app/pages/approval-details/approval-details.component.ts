@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import { StoreProcess} from '../../../models/models';
 import {Review} from '../../../models/models';
 import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NbAuthService} from "@nebular/auth";
+import {NB_AUTH_OPTIONS} from '@nebular/auth';
 
 @Component({
   selector: 'ngx-approval-details',
@@ -12,6 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ApprovalDetailsComponent implements OnInit {
 
   process: StoreProcess;
+  alteredProcess: StoreProcess = new StoreProcess;
   // @Input() selectedProcessFromParent: Process;
   // @Input() selectedReviewsFromParent: [Review];
   selectedProcessId: string;
@@ -21,8 +24,16 @@ export class ApprovalDetailsComponent implements OnInit {
 
 
   processId: string;
+  submitted = false;
+  comment: string;
 
-  constructor(private gateway: GatewayProvider, private route: ActivatedRoute, private router: Router) {
+
+  constructor(private gateway: GatewayProvider,
+              private route: ActivatedRoute,
+              private router: Router) {
+
+    this.alteredProcess.processApproverComment = "";
+
   }
 
   ngOnInit() {
@@ -64,14 +75,16 @@ export class ApprovalDetailsComponent implements OnInit {
     this.gateway.getStoreProcessById(this.selectedProcessId)
       .then((process) => {
         this.process = process;
+        this.alteredProcess.processId = this.process.processId;
         // console.log(process);
       })
   }
 
-  postComment(comment: string) {
-    // add API calls for posting and approving/denying models
-    // console.log(comment);
-    this.gateway.postStoreProcessComment(this.selectedProcessId)
+  postComment() {
+    // add API calls for updating a comment of a process POST localhost:10000/api/store/process/{processId}/updateComment
+    console.log(this.alteredProcess.processApproverComment + "  " + this.alteredProcess.processId);
+
+    this.gateway.postStoreProcessComment(this.alteredProcess.processApproverComment, this.alteredProcess.processId.toString())
   }
 
   approveStoreProcess() {
