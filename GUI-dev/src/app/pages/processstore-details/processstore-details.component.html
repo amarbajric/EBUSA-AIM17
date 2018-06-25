@@ -6,20 +6,22 @@
         <div class="text-heading clearfix">
           <h5 class="float-left">{{ process.processName }}</h5>
           <div class="float-right">
-            created by {{ process.processCreator }}
+            created by <span class="bold">{{ process.processCreator }}</span>
           </div>
         </div>
         <hr>
         <div class="text-body">
-          <img src="../../@theme/images/defaultProcess.jpg" alt="Example Process Image">
-          <div class=""> {{ process.processDescription}} </div>
+          <img class="center imgsize" src="../../../assets/images/exampleProcess.PNG" alt="Example Process Image">
+          <br>
+          <div class="bold">Description:</div>
+          <div class="">{{ process.processDescription}} </div>
           <br>
           <div class="clearfix">
             <div class="price float-left">
               € {{process.processPrice | number: '1.2-2'}}
             </div>
             <div class="float-right">
-              <button ng-click="buyProcess()" class="btn btn-success">Buy</button>
+              <button *nbIsGranted="['view', 'org']" (click)="showBuyModal()" class="btn btn-success">Buy</button>
             </div>
           </div>
           <hr>
@@ -46,9 +48,9 @@
       </nb-card-body>
     </nb-card>
     <hr/>
-    <!--
+    <!--f
     <nb-card-header>Ratings</nb-card-header>
-    <div>Ratings:</div>
+    <br>
     <ngx-process-ratings [processId]="processId"></ngx-process-ratings>
     -->
   </div>

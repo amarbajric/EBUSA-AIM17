@@ -26,10 +26,18 @@ export class GatewayProvider {
       .toPromise()
   }
 
+  // gets a process by its ID
   getProcessById (processId: string): Promise<StoreProcess> {
-    return this.http.get<StoreProcess>(this.serverConfig.getProcessById + processId)
+    return this.http.get<StoreProcess>(this.serverConfig.getProcess + processId)
       .toPromise()
   }
+
+  /*
+  addProcessToCompany (processId: string): void {
+      this.http.post<String>(this.serverConfig.postCompanyProcess, processId)
+        .toPromise()
+  }
+  */
 
   getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
     let filterParams = new HttpParams();
