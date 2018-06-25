@@ -4,6 +4,9 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+##2018-06-25 ([#110](https://github.com/amarbajric/EBUSA-AIM17/pull/110))
+- Added logo and favicon to the platform
+
 ## 2018-06-23 ([#86](https://github.com/amarbajric/EBUSA-AIM17/pull/98))
 ## Added
 - Process Rating Component and Module
