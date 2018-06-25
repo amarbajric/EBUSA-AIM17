@@ -1,5 +1,5 @@
-FROM mysql:latest
-MAINTAINER Bajric (amar.bajric@edu.fh-joanneum.at)
+FROM mysql:5.7
+MAINTAINER Amar Bajric (amar.bajric@edu.fh-joanneum.at)
 ENV MYSQL_ROOT_PASSWORD="Pa$$w0rd"
 RUN apt-get update
 # check https://hub.docker.com/_/mysql/ for more info about this directory

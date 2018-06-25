@@ -80,7 +80,7 @@ elif [[ "$OS" == 'macOS' ]]; then
     echo ======================================
     echo Tab2 - ServiceDiscovery && echo ${info_log_cfg_service} && echo Tab4 - ProcessModelStorage \
     && echo Tab5 - ProcessEngine && echo Tab6 - Gateway && echo Tab7 - ExternalCommunicator && echo Tab8 - EventLogger \
-    && echo Tab9 - GUI && echo Tab10 - Modelling Platform
+    && echo Tab9 - ProcessStore && echo Tab10 - GUI && echo Tab11 - Modelling Platform
     echo ======================================
     osascript \
         -e "tell application \"Terminal\" to activate" \
