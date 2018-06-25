@@ -14,6 +14,7 @@ import {ReviewProcessesComponent} from "./components/reviewProcesses/reviewProce
 import {ModalComponent} from "./components/modal/modal.component";
 import {ValidatedProcessesComponent} from "./components/validatedProcesses/validatedProcesses.component";
 import {CreateOrgaModalComponent} from "./components/createOrgaModal/createOrgaModal.component";
+import {ToasterModule} from "angular2-toaster";
 
 
 
@@ -22,6 +23,7 @@ import {CreateOrgaModalComponent} from "./components/createOrgaModal/createOrgaM
   imports: [
     ThemeModule,
     FormsModule,
+    ToasterModule
   ],
   declarations: [
     DashboardComponent,

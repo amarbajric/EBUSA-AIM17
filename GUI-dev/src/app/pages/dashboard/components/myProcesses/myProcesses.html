@@ -1,5 +1,5 @@
 <div class="row">
-      <!--<h5 *ngIf="!myProcesses || myProcesses.length < 1">Sie haben derzeit keine Prozesse!</h5>-->
+      <h5 *ngIf="(!myProcesses || myProcesses.length < 1) && this.inOrganization === true">Sie haben derzeit keine Prozesse!</h5>
  <h5 *ngIf="this.inOrganization === false">Sie sind noch kein Mitglied einer Organisation.</h5>
   <button *ngIf="this.inOrganization === false" class="btn btn-primary btn-sm" (click)="openCreateOrganization()">neue Organisation erstellen</button>
 

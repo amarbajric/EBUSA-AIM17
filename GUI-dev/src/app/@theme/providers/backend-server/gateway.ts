@@ -42,8 +42,8 @@ export class GatewayProvider {
       .toPromise()
   }
 
-  createNewOrganisation(organization: Organization): void  {
-    this.http.post<Organization>(this.serverConfig.createOrganizaion, organization).toPromise();
+  createNewOrganisation(organization: Organization): Promise<Organization>  {
+    return this.http.post<Organization>(this.serverConfig.createOrganizaion, {"organizationName":organization.organizationName, "organizationDescription": organization.description}).toPromise();
   }
 
 

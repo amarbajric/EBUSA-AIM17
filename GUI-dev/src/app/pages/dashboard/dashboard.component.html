@@ -1,21 +1,17 @@
 <div class="row">
 <div class="col-md-12">
-
-
       <div class="tabs-table">
         <nb-card class="col-md-12">
-          <!--<div ng-switch-when="accessChecker.isGranted('validation')">
-            <nb-route-tabset *nbIsGranted="['validation']" [tabs]="tabs" fullWidth></nb-route-tabset>
-          <nb-route-tabset *nbIsGranted="['validation']" [tabs]="tabsApprover" fullWidth></nb-route-tabset>
--->
 
+          <div *ngIf="isUser; else org_emp">
             <nb-route-tabset [tabs]="tabsApprover" fullWidth></nb-route-tabset>
+          </div>
 
-
-         <!-- <nb-action *nbIsGranted="['validation']">
+          <ng-template #org_emp>
             <nb-route-tabset [tabs]="tabs" fullWidth></nb-route-tabset>
-          </nb-action>
--->
+          </ng-template>
+
+
         </nb-card>
       </div>
 

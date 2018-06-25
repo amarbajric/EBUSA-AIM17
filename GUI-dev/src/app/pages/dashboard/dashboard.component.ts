@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import {StoreProcess, User} from "../../../models/models";
 import {GatewayProvider} from "../../@theme/providers/backend-server/gateway";
 import {NbAccessChecker} from "@nebular/security";
+import {RoleProvider} from "../../role.provider";
+import {ToasterService} from "angular2-toaster";
 
 
 @Component({
   selector: 'ngx-dashboard',
   styleUrls: ['dashboard.component.scss'],
+  providers: [RoleProvider],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
@@ -15,6 +18,7 @@ export class DashboardComponent {
   bestRatedProcess: StoreProcess;
   tabName: any[];
   user: User;
+  isUser: boolean;
 
   tabsApprover: any[] = [
     {
@@ -38,23 +42,28 @@ export class DashboardComponent {
     },
   ];
 
-  constructor(private gateway: GatewayProvider, public accessChecker: NbAccessChecker){
+  constructor(private gateway: GatewayProvider, public accessChecker: NbAccessChecker, private roleProvider: RoleProvider){
 
 
-/*
-    this.gateway.getUser()
-      .then((user) => {
-        this.user = user;
-      })
 
-    accessChecker.isGranted('validation', 'USER').subscribe((result: boolean) => {console.log(result);
-      result == true ? this.tabName = this.tabsApprover : this.tabName = this.tabs;
-    })
-
-*/
    }
 
   ngOnInit() {
+    this.gateway.getUser()
+      .then((user) => {
+        this.user = user;
+        // this.roleProvider.getRole().subscribe(role => this.isUser = role === 'SYS_ADMIN' )
+        this.roleProvider.getRole().subscribe(role => {
+          if (role === 'SYS_ADMIN' || role === 'USER' || role === 'SYS_APPROVER')
+          {
+            this.isUser = true;
+          }
+        } )
+        console.log('allowed: '+ this.isUser);
+      })
+
+
+
     this.getFavoriteProcesses();
     this.getBestRatedProcesses();
   }

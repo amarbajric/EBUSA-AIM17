@@ -79,11 +79,11 @@ import {User} from '../models/models';
     NbSecurityModule.forRoot({
       accessControl: {
         USER: {
-          view: ['profile', 'processes', 'validation'],
+          view: ['profile', 'processes'],
         },
         ORG_EMP: {
-          // parent: 'USER',
-          view: ['profile', 'processes', 'org'],
+          parent: 'USER',
+          view: 'org',
         },
         ORG_CEO: {
           parent: 'ORG_EMP',
