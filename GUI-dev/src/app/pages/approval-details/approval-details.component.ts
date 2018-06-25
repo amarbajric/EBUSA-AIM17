@@ -31,9 +31,6 @@ export class ApprovalDetailsComponent implements OnInit {
   constructor(private gateway: GatewayProvider,
               private route: ActivatedRoute,
               private router: Router) {
-
-    this.alteredProcess.processApproverComment = "";
-
   }
 
   ngOnInit() {
@@ -76,6 +73,7 @@ export class ApprovalDetailsComponent implements OnInit {
       .then((process) => {
         this.process = process;
         this.alteredProcess.processId = this.process.processId;
+        this.alteredProcess.processApproverComment = this.process.processApproverComment;
         // console.log(process);
       })
   }
@@ -84,7 +82,7 @@ export class ApprovalDetailsComponent implements OnInit {
     // add API calls for updating a comment of a process POST localhost:10000/api/store/process/{processId}/updateComment
     console.log(this.alteredProcess.processApproverComment + "  " + this.alteredProcess.processId);
 
-    this.gateway.postStoreProcessComment(this.alteredProcess.processApproverComment, this.alteredProcess.processId.toString())
+    this.gateway.postStoreProcessComment(this.alteredProcess.processApproverComment, this.alteredProcess.processId.toString());
   }
 
   approveStoreProcess() {
