@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {StoreProcess} from "../../../../../models/models";
-import {GatewayProvider} from "../../../../@theme/providers/backend-server/gateway";
+import {StoreProcess} from '../../../../../models/models';
+import {GatewayProvider} from '../../../../@theme/providers/backend-server/gateway';
 
 @Component({
   selector: 'ngx-modal',
@@ -50,8 +50,7 @@ export class ModalComponent {
   }
 
 
-  getProcessDetails()
-  {
+  getProcessDetails() {
     this.gateway.getProcessById(this.modalProcessId)
       .then((process) => {
         this.selectedProcess = process;

@@ -9,13 +9,13 @@ import {ActiveProcessesComponent} from './dashboard/components/activeProcesses/a
 // import {EventLoggerComponent} from './admin/components/eventLogger/eventLogger.component';
 import { ProcessStoreSearchComponent } from './processstore-search/processstore-search.component';
 import {UserDetailsComponent} from './user-details/user-details.component';
-import {MyProcessesComponent} from "./dashboard/components/myProcesses/myProcesses.component";
+import {MyProcessesComponent} from './dashboard/components/myProcesses/myProcesses.component';
 
 import { ProcessStoreDetailsComponent } from './processstore-details/processstore-details.component';
 import { ReviewProcessesComponent } from './dashboard/components/reviewProcesses/reviewProcesses.component';
-import {ModalComponent} from "./dashboard/components/modal/modal.component";
-import {ValidatedProcessesComponent} from "./dashboard/components/validatedProcesses/validatedProcesses.component";
-import {CreateOrgaModalComponent} from "./dashboard/components/createOrgaModal/createOrgaModal.component";
+import {ModalComponent} from './dashboard/components/modal/modal.component';
+import {ValidatedProcessesComponent} from './dashboard/components/validatedProcesses/validatedProcesses.component';
+import {CreateOrgaModalComponent} from './dashboard/components/createOrgaModal/createOrgaModal.component';
 
 
 
@@ -42,13 +42,12 @@ const routes: Routes = [{
         {
           path: 'validated',
           component: ValidatedProcessesComponent,
-
         },
         {
         path: 'modalView',
         component: ModalComponent,
 
-      },{
+      }, {
           path: 'createOrgaModalView',
           component: CreateOrgaModalComponent,
 

@@ -1,10 +1,10 @@
 import { Component,  OnInit } from '@angular/core';
 import {ProcessesService} from '../../../../allProcesses.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {GatewayProvider} from "../../../../@theme/providers/backend-server/gateway";
-import { ModalComponent } from "../modal/modal.component";
-import {StoreProcess} from "../../../../../models/models";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {GatewayProvider} from '../../../../@theme/providers/backend-server/gateway';
+import { ModalComponent } from '../modal/modal.component';
+import {StoreProcess} from '../../../../../models/models';
 
 
 @Component({

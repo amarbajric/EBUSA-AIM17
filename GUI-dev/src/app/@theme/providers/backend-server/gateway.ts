@@ -33,27 +33,29 @@ export class GatewayProvider {
 
 
   getApprovedProcessesByUser(): Promise<StoreProcess[]> {
-    return this.http.get<StoreProcess[]>(this.serverConfig.getApprovedProcessesByUser, )
+    return this.http.get<StoreProcess[]>(this.serverConfig.getApprovedProcessesByUser)
       .toPromise()
   }
 
   getNotApprovedProcessesByUser(): Promise<StoreProcess[]> {
-    return this.http.get<StoreProcess[]>(this.serverConfig.getNotApprovedProcessesByUser, )
+    return this.http.get<StoreProcess[]>(this.serverConfig.getNotApprovedProcessesByUser)
       .toPromise()
   }
 
   createNewOrganisation(organization: Organization): Promise<Organization>  {
-    return this.http.post<Organization>(this.serverConfig.createOrganizaion, {"organizationName":organization.organizationName, "organizationDescription": organization.description}).toPromise();
+    return this.http.post<Organization>(this.serverConfig.createOrganizaion,
+      {'organizationName': organization.organizationName, 'organizationDescription': organization.description})
+      .toPromise();
   }
 
 
   getUserProcesses(): Promise<StoreProcess[]> {
-    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses, )
+    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses)
       .toPromise()
   }
 
   getProcessById(processId: number): Promise<StoreProcess> {
-    return this.http.get<StoreProcess>(this.serverConfig.getProcessById + '/' + processId, )
+    return this.http.get<StoreProcess>(this.serverConfig.getProcessById + '/' + processId)
       .toPromise()
   }
 

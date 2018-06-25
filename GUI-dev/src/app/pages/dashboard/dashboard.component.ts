@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import {StoreProcess, User} from "../../../models/models";
-import {GatewayProvider} from "../../@theme/providers/backend-server/gateway";
-import {NbAccessChecker} from "@nebular/security";
-import {RoleProvider} from "../../role.provider";
-import {ToasterService} from "angular2-toaster";
+import {StoreProcess, User} from '../../../models/models';
+import {GatewayProvider} from '../../@theme/providers/backend-server/gateway';
+import {NbAccessChecker} from '@nebular/security';
+import {RoleProvider} from '../../role.provider';
 
 
 @Component({
@@ -42,18 +41,18 @@ export class DashboardComponent {
     },
   ];
 
-  constructor(private gateway: GatewayProvider, public accessChecker: NbAccessChecker, private roleProvider: RoleProvider){
+  constructor(private gateway: GatewayProvider, public accessChecker: NbAccessChecker,
+              private roleProvider: RoleProvider) {
 
 
 
    }
 
-  ngOnInit() {
+  OnInit() {
     this.gateway.getUser()
       .then((user) => {
         this.user = user;
          this.roleProvider.getRole().subscribe(role => this.isUser = role === 'USER' )
-        console.log('allowed: '+ this.isUser);
       })
 
 

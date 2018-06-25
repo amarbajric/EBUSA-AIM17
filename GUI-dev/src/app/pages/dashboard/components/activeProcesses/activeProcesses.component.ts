@@ -21,7 +21,7 @@ export class ActiveProcessesComponent implements OnInit  {
 
   constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router) {
 
-    this.activeProcesses = [{"piId":1, "startTime": [8], "processName": "Günther", "startUserId": 12}];
+    // this.activeProcesses = [{"piId":1, "startTime": [8], "processName": "Günther", "startUserId": 12}];
   }
 
   ngOnInit() {

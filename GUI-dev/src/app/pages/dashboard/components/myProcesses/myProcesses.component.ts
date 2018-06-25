@@ -1,12 +1,12 @@
 import { Component,  OnInit } from '@angular/core';
 import {ProcessesService} from '../../../../allProcesses.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {GatewayProvider} from "../../../../@theme/providers/backend-server/gateway";
-import {User} from "../../../../../models/models";
-import {ModalComponent} from "../modal/modal.component";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {CreateOrgaModalComponent} from "../createOrgaModal/createOrgaModal.component";
-import {Toast, ToasterConfig, ToasterService} from "angular2-toaster";
+import {GatewayProvider} from '../../../../@theme/providers/backend-server/gateway';
+import {User} from '../../../../../models/models';
+import {ModalComponent} from '../modal/modal.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {CreateOrgaModalComponent} from '../createOrgaModal/createOrgaModal.component';
+import {Toast, ToasterConfig, ToasterService} from 'angular2-toaster';
 
 
 @Component({
@@ -23,7 +23,9 @@ export class MyProcessesComponent implements OnInit  {
   inOrganization: boolean = false;
   config: ToasterConfig;
 
-  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router, private gateway: GatewayProvider, private modalService: NgbModal, private toasterService: ToasterService) {
+  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router,
+              private gateway: GatewayProvider, private modalService: NgbModal,
+              private toasterService: ToasterService) {
 
     this.config = new ToasterConfig({
       positionClass: 'toast-top-right',
@@ -39,8 +41,7 @@ export class MyProcessesComponent implements OnInit  {
     this.gateway.getUser()
       .then((user) => {
         this.user = user;
-        if(user.organization !== null)
-        {
+        if(user.organization !== null) {
           this.inOrganization = true;
         }
       })
@@ -57,8 +58,8 @@ export class MyProcessesComponent implements OnInit  {
 
   }
 
-  showProcessDetails(processId: number, processName: string, processVersion: string, processPrice: number, processCreator: string, processDesc: string)
-  {
+  showProcessDetails(processId: number, processName: string, processVersion: string, processPrice: number,
+                     processCreator: string, processDesc: string) {
 
 
     const activeModal = this.modalService.open(ModalComponent, { size: 'lg', container: 'nb-layout' });
@@ -73,7 +74,8 @@ export class MyProcessesComponent implements OnInit  {
 
   openCreateOrganization()
   {
-    const createOrgaModal = this.modalService.open(CreateOrgaModalComponent, { size: 'lg', container: 'nb-layout' });
+    const createOrgaModal = this.modalService.open(CreateOrgaModalComponent,
+      { size: 'lg', container: 'nb-layout' });
     createOrgaModal.componentInstance.saved.subscribe(() => {this.createToast()});
 
   }
