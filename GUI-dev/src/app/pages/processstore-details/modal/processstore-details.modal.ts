@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {ProcessstoreDetailsModule} from "../processstore-details.module";
 
 @Component({
   selector: 'ngx-modal',
@@ -41,6 +40,6 @@ export class ProcessstoreDetailsModal {
         this.process = process;
       })
     */
-    console.log("pressed buy");
+    // console.log('pressed buy);
   }
 }

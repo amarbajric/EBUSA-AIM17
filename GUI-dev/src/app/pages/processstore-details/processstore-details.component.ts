@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {StoreProcess} from '../../../models/models';
 import {GatewayProvider} from '../../@theme/providers/backend-server/gateway';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {ProcessstoreDetailsModal} from "./modal/processstore-details.modal";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ProcessstoreDetailsModal} from './modal/processstore-details.modal';
 
 @Component({
   selector: 'ngx-processstore-details',
@@ -61,6 +61,6 @@ export class ProcessStoreDetailsComponent implements OnInit {
   // starting the process
   // TODO: implement start process
   startProcess(processId: string) {
-    console.log("process started")
+    // console.log('process started')
   }
 }

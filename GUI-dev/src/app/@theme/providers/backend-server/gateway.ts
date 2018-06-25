@@ -1,7 +1,7 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
-import {User, StoreProcess, StoreProcessRating, Process} from '../../../../models/models';
+import {User, StoreProcess, StoreProcessRating} from '../../../../models/models';
 
 
 @Injectable()
