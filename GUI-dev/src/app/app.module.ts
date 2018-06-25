@@ -27,7 +27,7 @@ import { ServerConfigProvider } from './@theme/providers/backend-server/serverco
 import {EventLoggerService} from './evntLogger.service';
 import {ProcessesService} from './allProcesses.service';
 import {User} from '../models/models';
-import {ApprovalAuthGuard} from "./approval-auth-guard.service";
+import {ApprovalAuthGuard} from './approval-auth-guard.service';
 
 @NgModule({
   declarations: [AppComponent],

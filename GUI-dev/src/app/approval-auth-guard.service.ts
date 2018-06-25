@@ -17,7 +17,7 @@ export class ApprovalAuthGuard implements CanActivate {
         tap(authenticated => {
 
           this.roleProvider.getRole().subscribe((role) => {
-            if (role == 'SYS_APPROVER') {
+            if (role === 'SYS_APPROVER') {
               // console.log('du bist approver');
             } else {
               // console.log('du hast keine Rechte dafür');
