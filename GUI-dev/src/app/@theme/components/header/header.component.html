@@ -3,7 +3,7 @@
      [class.right]="position === 'inverse'">
   <div class="logo-containter">
     <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
-    <div class="logo"><a href="#" (click)="goToHome()">Easy<span>Biz</span></a></div>
+    <div class="logo"><a href="#" (click)="goToHome()"><img src="../../../../assets/easybizlogo.png" alt="EasyBiz" class="logo"></a></div>
   </div>
 
 </div>
@@ -17,7 +17,7 @@
   <nb-action class="control-item" disabled icon="nb-notifications"></nb-action>
   <nb-action class="control-item" icon="nb-email"></nb-action>
   <nb-action class="control-item"><nb-search type="rotate-layout" (click)="startSearch()"></nb-search></nb-action>
-  <nb-action *nbIsGranted="['view', 'user']">
+  <nb-action *nbIsGranted="['view', 'profile']">
     <nb-user [nbContextMenu]="userMenu" [name]="user?.email"></nb-user>
   </nb-action>
 </nb-actions>

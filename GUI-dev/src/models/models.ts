@@ -26,6 +26,13 @@ export class StoreProcess {
   processAverageRating: number;
 }
 
+export class StoreProcessRating {
+  ratingId: number;
+  rating: number;
+  comment: string;
+  createdBy: string;
+  createdAt: Date;
+}
 
 
 export class Review {
@@ -52,11 +59,9 @@ export class User {
   createdAt: Date;
   organization?: Organization;
   roles: [Role];
-
   public getUid() {
     return this.uid;
-  }
-
+  };
 }
 
 export class Organization {
@@ -76,7 +81,6 @@ export class Rule {
   ruleId: number;
   name: string;
   systemId: string;
-
 }
 
 
