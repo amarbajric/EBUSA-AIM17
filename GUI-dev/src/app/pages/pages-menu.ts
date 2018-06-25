@@ -17,6 +17,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-checkmark',
     link: '/approval',
   },
+  {
+    title: 'ProcessModel Configure',
+    icon: 'nb-checkmark',
+    link: '/processmodel-configure',
+  },
+
+
   /*{
     title: 'FEATURES',
     group: true,

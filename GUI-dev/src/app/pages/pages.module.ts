@@ -11,6 +11,7 @@ import AdminModule from './admin/admin.module';
 import {UserDetailsModule} from './user-details/user-details.module';
 import { ProcessRatingModule } from './includes/process-ratings/process-ratings.module';
 import { ProcessstoreDetailsModule } from './processstore-details/processstore-details.module';
+import {ProcessModelConfigureModule} from './processmodel-configure/processmodel-configure.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -29,6 +30,7 @@ const PAGES_COMPONENTS = [
     ProcessStoreSearchModule,
     ProcessRatingModule,
     ProcessstoreDetailsModule,
+    ProcessModelConfigureModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,

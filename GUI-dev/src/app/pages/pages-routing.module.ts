@@ -10,6 +10,7 @@ import {ActiveProcessesComponent} from './dashboard/components/activeProcesses/a
 import { ProcessStoreSearchComponent } from './processstore-search/processstore-search.component';
 import {UserDetailsComponent} from './user-details/user-details.component';
 import { ProcessStoreDetailsComponent } from './processstore-details/processstore-details.component';
+import {ProcessModelConfigureComponent} from './processmodel-configure/processmodel-configure.component';
 
 
 const routes: Routes = [{
@@ -26,7 +27,11 @@ const routes: Routes = [{
       component: ActiveProcessesComponent,
 
     },
-
+    {
+      path: 'processmodel-configure',
+      component: ProcessModelConfigureComponent,
+      canActivate: [AuthGuard],
+    },
     {
       path: 'processstore-search',
       component: ProcessStoreSearchComponent,
