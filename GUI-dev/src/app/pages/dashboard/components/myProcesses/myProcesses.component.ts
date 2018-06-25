@@ -6,11 +6,13 @@ import {User} from "../../../../../models/models";
 import {ModalComponent} from "../modal/modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {CreateOrgaModalComponent} from "../createOrgaModal/createOrgaModal.component";
+import {Toast, ToasterConfig, ToasterService} from "angular2-toaster";
 
 
 @Component({
   selector: 'ngx-my-processes',
   styleUrls: ['myProcesses.component.scss'],
+  providers: [ToasterService],
   templateUrl:  './myProcesses.html',
 })
 export class MyProcessesComponent implements OnInit  {
@@ -19,10 +21,18 @@ export class MyProcessesComponent implements OnInit  {
   myProcesses;
   user: User;
   inOrganization: boolean = false;
+  config: ToasterConfig;
 
-  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router, private gateway: GatewayProvider, private modalService: NgbModal) {
+  constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router, private gateway: GatewayProvider, private modalService: NgbModal, private toasterService: ToasterService) {
 
-
+    this.config = new ToasterConfig({
+      positionClass: 'toast-top-right',
+      newestOnTop: true ,
+      tapToDismiss: true,
+      preventDuplicates: false,
+      animation: 'slidedown',
+      limit: 2,
+    });
   }
 
   ngOnInit() {
@@ -67,9 +77,19 @@ export class MyProcessesComponent implements OnInit  {
   openCreateOrganization()
   {
     const createOrgaModal = this.modalService.open(CreateOrgaModalComponent, { size: 'lg', container: 'nb-layout' });
+    createOrgaModal.componentInstance.saved.subscribe(() => {this.createToast()});
+
   }
 
-  /*showProcess(piId: number) {
-    this.router.navigate(['../mine', piId], { relativeTo: this.route });
-  }*/
+  public createToast()
+  {
+    const toast: Toast = {
+      type: 'success',
+      title: 'Success',
+      body: 'Die Organisation wurde erfolgreich gespeichert!',
+    };
+    this.toasterService.popAsync(toast)
+  }
+
+
 }

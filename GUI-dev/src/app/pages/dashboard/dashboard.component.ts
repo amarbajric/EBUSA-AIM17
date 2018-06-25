@@ -26,11 +26,11 @@ export class DashboardComponent {
       route: '/dashboard/myProcesses',
     },
     {
-      title: 'Prozesse in Validierung',
+      title: 'Prozesse in Genehmigung',
       route: '/dashboard/validation',
     },
     {
-      title: 'Validierte Prozesse',
+      title: 'Genehmigte Prozesse',
       route: '/dashboard/validated',
     },
   ];
@@ -52,13 +52,7 @@ export class DashboardComponent {
     this.gateway.getUser()
       .then((user) => {
         this.user = user;
-        // this.roleProvider.getRole().subscribe(role => this.isUser = role === 'SYS_ADMIN' )
-        this.roleProvider.getRole().subscribe(role => {
-          if (role === 'SYS_ADMIN' || role === 'USER' || role === 'SYS_APPROVER')
-          {
-            this.isUser = true;
-          }
-        } )
+         this.roleProvider.getRole().subscribe(role => this.isUser = role === 'USER' )
         console.log('allowed: '+ this.isUser);
       })
 

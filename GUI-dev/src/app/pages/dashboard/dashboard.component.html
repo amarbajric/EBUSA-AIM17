@@ -4,11 +4,11 @@
         <nb-card class="col-md-12">
 
           <div *ngIf="isUser; else org_emp">
-            <nb-route-tabset [tabs]="tabsApprover" fullWidth></nb-route-tabset>
+            <nb-route-tabset [tabs]="tabs" fullWidth></nb-route-tabset>
           </div>
 
           <ng-template #org_emp>
-            <nb-route-tabset [tabs]="tabs" fullWidth></nb-route-tabset>
+            <nb-route-tabset [tabs]="tabsApprover" fullWidth></nb-route-tabset>
           </ng-template>
 
 

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {Organization, StoreProcess} from "../../../../../models/models";
 import {GatewayProvider} from "../../../../@theme/providers/backend-server/gateway";
 import {Toast, ToasterService} from "angular2-toaster";
+import {MyProcessesComponent} from "../myProcesses/myProcesses.component";
 
 @Component({
   selector: 'ngx-create-orga-modal',
@@ -42,10 +43,11 @@ import {Toast, ToasterService} from "angular2-toaster";
 export class CreateOrgaModalComponent {
 
   organization: Organization = new Organization;
+  saved: EventEmitter<any> = new EventEmitter();
 
 
+  constructor(private activeModal: NgbActiveModal, private gateway: GatewayProvider) {
 
-  constructor(private activeModal: NgbActiveModal, private gateway: GatewayProvider, private toasterService: ToasterService) {
 
   }
 
@@ -55,20 +57,12 @@ export class CreateOrgaModalComponent {
 
   saveModal = () => this.gateway.createNewOrganisation(this.organization)
     .then(() => {
-      console.log("geil");
-
-      const toast: Toast = {
-        type: 'default',
-        title: 'Success',
-        body: 'Organisation wurde erstellt',
-      };
-      // this.toasterService.popAsync(toast)
+      this.saved.emit('openPopup');
       this.activeModal.close();
     })
     .catch(err =>
       console.log("sth. went wrong" + err.message)
     );
-
 
 
 
