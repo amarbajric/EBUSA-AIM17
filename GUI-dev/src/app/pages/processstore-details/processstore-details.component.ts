@@ -30,6 +30,7 @@ export class ProcessStoreDetailsComponent implements OnInit {
     });
 
     // get organization processes
+    // TODO: get all processes of current logged in user and check if viewed process is available; to show correct button buy or run
     /*
     this.gateway.getProcessesByOrgId(this.orgId)
       .then((processes) => {
@@ -58,6 +59,7 @@ export class ProcessStoreDetailsComponent implements OnInit {
   }
 
   // starting the process
+  // TODO: implement start process
   startProcess(processId: string) {
     console.log("process started")
   }

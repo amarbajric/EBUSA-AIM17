@@ -32,6 +32,7 @@ export class GatewayProvider {
       .toPromise()
   }
 
+  // TODO: implement adding process to company and getting processes of user/company
   /*
   addProcessToCompany (processId: string, orgId: string): void {
       this.http.post<String>(this.serverConfig.getProcess + processId + '/buy')

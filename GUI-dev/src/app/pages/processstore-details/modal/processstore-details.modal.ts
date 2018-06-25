@@ -32,6 +32,7 @@ export class ProcessstoreDetailsModal {
   }
 
   // buys the process / adds it to the organization
+  // TODO: implement buy process according to backend
   buyProcess() {
 
     /*
