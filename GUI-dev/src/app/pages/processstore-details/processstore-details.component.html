@@ -11,7 +11,7 @@
         </div>
         <hr>
         <div class="text-body">
-          <img class="center imgsize" src="../../../assets/images/exampleProcess.PNG" alt="Example Process Image">
+          <img class="center imgsize" src="../../../assets/images/exampleProcess.jpg" alt="Example Process Image">
           <br>
           <div class="bold">Description:</div>
           <div class="">{{ process.processDescription}} </div>
@@ -21,7 +21,8 @@
               € {{process.processPrice | number: '1.2-2'}}
             </div>
             <div class="float-right">
-              <button *nbIsGranted="['view', 'org']" (click)="showBuyModal()" class="btn btn-success">Buy</button>
+              <div *ngIf="!hasProcess"><button *nbIsGranted="['view', 'org']" (click)="showBuyModal()" class="btn btn-success">Buy</button></div>
+              <div *ngIf="hasProcess"><button *nbIsGranted="['view', 'org']" (click)="startProcess()" class="btn btn-warning">Run</button></div>
             </div>
           </div>
           <hr>
@@ -29,9 +30,6 @@
             <dl>
               <dt>version:</dt>
               <dd>{{ process.processVersion }}</dd>
-
-              <dt>process id: </dt>
-              <dd>{{ process.processId }}</dd>
 
               <dt>approved by:</dt>
               <dd>{{ process.processApprover }}</dd>

@@ -33,9 +33,16 @@ export class GatewayProvider {
   }
 
   /*
-  addProcessToCompany (processId: string): void {
-      this.http.post<String>(this.serverConfig.postCompanyProcess, processId)
+  addProcessToCompany (processId: string, orgId: string): void {
+      this.http.post<String>(this.serverConfig.getProcess + processId + '/buy')
         .toPromise()
+  }
+  */
+
+  /*
+  getProcessesByOrgId (orgId: string): Promise<> {
+    return this.http.get<>(this.serverConfig. + orgId)
+      .toPromise()
   }
   */
 

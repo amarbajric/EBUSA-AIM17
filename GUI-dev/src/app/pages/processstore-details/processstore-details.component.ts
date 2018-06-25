@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {StoreProcess} from '../../../models/models';
 import {GatewayProvider} from '../../@theme/providers/backend-server/gateway';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ProcessstoreDetailsModal} from "./modal/processstore-details.modal";
 
 @Component({
   selector: 'ngx-processstore-details',
@@ -13,6 +14,9 @@ export class ProcessStoreDetailsComponent implements OnInit {
 
   processId: string;
   process: StoreProcess = new StoreProcess;
+  hasProcess = false;
+  orgId: string;
+  processes;
 
   constructor(private route: ActivatedRoute,
               private gateway: GatewayProvider,
@@ -25,6 +29,14 @@ export class ProcessStoreDetailsComponent implements OnInit {
       this.processId = params['processId'];
     });
 
+    // get organization processes
+    /*
+    this.gateway.getProcessesByOrgId(this.orgId)
+      .then((processes) => {
+        this.processes = processes;
+      })
+    */
+
     // get the process details with the ID
     this.gateway.getProcessById(this.processId)
       .then((process) => {
@@ -32,27 +44,21 @@ export class ProcessStoreDetailsComponent implements OnInit {
       })
   }
 
+  // activates a modal for approval of payment
+  // method for buy can be found in the modal
   showBuyModal() {
-    /*
-    const activeModal = this.modalService.open(ModalComponent, {
+    const activeModal = this.modalService.open(ProcessstoreDetailsModal, {
       size: 'sm',
       backdrop: 'static',
       container: 'nb-layout',
     });
 
-    activeModal.componentInstance.modalHeader = 'Warning!';
+    activeModal.componentInstance.modalHeader = 'Attention!';
     activeModal.componentInstance.modalContent = 'Do you really want to buy the process?';
-    */
   }
 
-  // buys the process / adds it to the organization
-  buyProcess() {
-    /*
-    this.gateway.addProcessToCompany(this.processId)
-      .then((process) => {
-        this.process = process;
-      })
-    */
-    console.log("pressed buy");
+  // starting the process
+  startProcess(processId: string) {
+    console.log("process started")
   }
 }
