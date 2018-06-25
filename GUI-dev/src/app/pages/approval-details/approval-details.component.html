@@ -1,0 +1,77 @@
+<div>
+
+  <br>
+  <div><h2>Selected process details: </h2></div>
+  <nb-card>
+    <table>
+      <tr>
+        <th>Process Name:</th>
+        <th>Description:</th>
+        <th>Creator:</th>
+        <th>Created at:</th>
+        <th>Process ID:</th>
+        <th>Version:</th>
+        <th>Status:</th>
+      </tr>
+      <!--
+      <tr *ngFor="let process of processes">
+        <td>{{process.process_name}}</td>
+        <td>{{process.process_description}}</td>
+        <td>{{process.creator}}</td>
+        <td>{{process.created_at | date:'dd-MM-yyyy'}}</td>
+        <td>{{process.process_id}}</td>
+        <td>{{process.version}}</td>
+        <td>{{process.state}}</td>
+      -->
+
+      <tr>
+        <td>{{selectedProcessFromParent?.process_name}}</td>
+        <td>{{selectedProcessFromParent?.process_description}}</td>
+        <td>{{selectedProcessFromParent?.creator}}</td>
+        <td>{{selectedProcessFromParent?.created_at | date:'dd-MM-yyyy'}}</td>
+        <td>{{selectedProcessFromParent?.process_id}}</td>
+        <td>{{selectedProcessFromParent?.version}}</td>
+        <td>{{selectedProcessFromParent?.state}}</td>
+      </tr>
+    </table>
+  </nb-card>
+
+
+  <h2>Review comments: </h2>
+  <nb-card>
+    <table>
+      <tr>
+        <th>Comment:</th>
+        <th>User:</th>
+        <th>Created at:</th>
+        <th>Process ID:</th>
+      </tr>
+      <!--
+      <tr *ngFor="let review of reviews">
+        <td>{{review.comment}}</td>
+        <td>{{review.uploader}}</td>
+        <td>{{review.created_at | date :'short'}}</td>
+      </tr>
+      -->
+      <tr *ngFor="let selectedReviewFromParent of selectedReviewsFromParent">
+        <td>{{selectedReviewFromParent?.comment}}</td>
+        <td>{{selectedReviewFromParent?.uploader}}</td>
+        <td>{{selectedReviewFromParent?.created_at | date :'short'}}</td>
+        <td>{{selectedReviewFromParent?.process_id}}</td>
+      </tr>
+    </table>
+  </nb-card>
+
+
+  <div class="form-group">
+    <label for="comment"><h2>Comment:</h2></label>
+    <textarea class="form-control" rows="5" id="comment"></textarea>
+  </div>
+
+
+  <!--<button ng-click="changeIFrame()" class="btn btn-info" (click)="switchIFrameSource()">Change iFrame</button>-->
+  <button ng-click="postComment()" class="btn btn-info" (click)="postComment(comment)">Post comment</button>
+  <button ng-click="approveProcessModel()" class="btn btn-success">Approve this process model</button>
+  <button ng-click="denyProcessModel()" class="btn btn-danger">Deny this process model</button>
+
+</div>

@@ -24,6 +24,9 @@ import { AuthGuard } from './auth-guard.service';
 import { EbEmailPassAuthProvider } from './@theme/providers/auth/email-pass-auth.provider';
 import { AsyncEmailValidatorProvider } from './@theme/providers/async-email-validator/async-email-validator';
 import { ServerConfigProvider } from './@theme/providers/backend-server/serverconfig';
+import {EventLoggerService} from './evntLogger.service';
+import {ProcessesService} from './allProcesses.service';
+import {User} from '../models/models';
 
 @NgModule({
   declarations: [AppComponent],
@@ -75,21 +78,26 @@ import { ServerConfigProvider } from './@theme/providers/backend-server/serverco
 
     NbSecurityModule.forRoot({
       accessControl: {
-        guest: {
-          view: ['news', 'comments'],
+        USER: {
+          view: ['profile', 'processes'],
         },
-        user: {
-          parent: 'guest',
-          view: 'user',
-          create: 'comments',
+        ORG_EMP: {
+          parent: 'USER',
+          view: 'org',
         },
-        moderator: {
-          parent: 'user',
-          create: 'news',
-          remove: '*',
+        ORG_CEO: {
+          parent: 'ORG_EMP',
+          view: 'ceo_org',
         },
-        Employee: {
-          parent: 'moderator',
+        SYS_ADMIN: {
+          parent: 'USER',
+          view: '*',
+          create: '*',
+          delete: '*',
+        },
+        SYS_APPROVER: {
+          parent: 'USER',
+          view: ['new_processes', 'approvals'],
         },
       },
     }),
@@ -100,9 +108,12 @@ import { ServerConfigProvider } from './@theme/providers/backend-server/serverco
     AsyncEmailValidatorProvider,
     ServerConfigProvider,
     AuthGuard,
+    EventLoggerService,
+    ProcessesService,
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
     { provide: NbRoleProvider, useClass: RoleProvider },
+    { provide: User, useClass: User},
   ],
 })
 export class AppModule {

@@ -57,6 +57,8 @@ if [[ "$OS" == 'linux' ]]; then
     x-terminal-emulator -e bash start_gui.sh
     echo - ModellingPlatform
     x-terminal-emulator -e bash start_mpf.sh
+    echo - ModellingPlatform
+    x-terminal-emulator -e bash start_process_store.sh
     echo ======================================
     echo booting services done.
 
@@ -109,6 +111,9 @@ elif [[ "$OS" == 'macOS' ]]; then
         -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
         -e "${injectCmd_delay}" \
         -e "tell application \"Terminal\" to do script \"./start_event_logger.sh\" in selected tab of the front window" \
+        -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
+        -e "${injectCmd_delay}" \
+        -e "tell application \"Terminal\" to do script \"./start_process_store.sh\" in selected tab of the front window" \
         -e "tell application \"System Events\" to keystroke \"t\" using {command down}" \
         -e "${injectCmd_delay}" \
         -e "tell application \"Terminal\" to do script \"./start_gui.sh\" in selected tab of the front window" \
