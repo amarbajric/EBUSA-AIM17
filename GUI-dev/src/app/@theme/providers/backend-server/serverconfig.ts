@@ -8,7 +8,7 @@ export class ServerConfigProvider {
   private _checkIfMailTaken = `${this._host}user/register/checkIfMailTaken/`;
   private _getUser = `${this._host}/api/me/`;
   private _getStoreProcesses = `${this._host}api/store/processes`;
-  private _getOrPostStoreProcessRatings = `${this._host}api/store/processRatings`;
+  private _getOrPostStoreProcessRatings = `${this._host}api/store/processRating`;
 
   public get checkIfMailTaken(): string {return this._checkIfMailTaken};
   public get getUser(): string {return this._getUser};

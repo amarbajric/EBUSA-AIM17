@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
-import {StoreProcess} from '../../../models/models';
+import {StoreProcess, StoreProcessRating} from '../../../models/models';
 import {Router} from '@angular/router';
 import {NbAuthJWTToken, NbAuthService} from '@nebular/auth';
 import {AppComponent} from '../../app.component';
@@ -12,10 +12,14 @@ import {AppComponent} from '../../app.component';
 })
 export class HomeComponent implements OnInit {
 
-  public processes;
+  public processes: StoreProcess[] = [];
   public processesByDate;
+  public processesWithRating: {[rating: number]: StoreProcess; } = {};
+  public processesByRating: StoreProcess[] = [];
+  public ratings: string[] = [];
   private filterType = 'none';
   private filterInput;
+  public complete: boolean = false;
 
   user = {};
   authenticated = false;
@@ -39,22 +43,63 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
     this.app.setTitle('Welcome');
-
-    this.getProcesses().then((processArray) => {
-      this.processes = processArray;
-      this.sortProcessesByDate(processArray);
-    })
+    this.getProcesses()
+      .then((processArray) => {
+        this.processes = processArray;
+        this.sortProcessesByDate(processArray);
+        this.sortProcessesByRating(processArray);
+      })
   }
 
   getProcesses(): Promise<Array<StoreProcess>> {
-    return this.gateway.getStoreProcesses(this.filterType, this.filterInput)
-      .then((processes) => processes);
+    return this.gateway.getStoreProcesses()
+      .then((processes) => {
+        return processes
+      });
   }
 
-  sortProcessesByDate(processeArray) {
-    this.processesByDate = processeArray.sort((a, b) => {
+  average(ratings): number {
+    let sum = 0;
+    ratings.forEach((r) => {
+      sum += r.rating ;
+    });
+    return parseFloat( (sum / ratings.length + 0.000001).toFixed(2) );
+  }
+
+  getAverageRatings(process): Promise<number> {
+    return this.gateway.getStoreProcessRatings(process)
+        .then((ratings) => {
+          return this.average(ratings)
+        });
+  }
+
+  sortProcessesByDate(processArray) {
+    this.processesByDate = processArray.sort((a, b) => {
       return b.processApprovedDate - a.processApprovedDate;
     }).slice(0, this.limit);
+  }
+
+  sortProcessesByRating(processArray) {
+    for (const process of processArray) {
+      if (process) {
+        this.getAverageRatings(process.processId).then((average) => {
+          this.processesWithRating[average] = process;
+        }).then(
+          () => {this.complete = Object.keys(this.processesWithRating).length === this.processes.length})
+          .then(() => {
+            if (this.complete){
+              Object.entries(this.processesWithRating).forEach(
+                ([key, value]) => {
+                  this.processesByRating.push(value);
+                  this.ratings.push(key);
+                }
+              );
+              this.processesByRating = this.processesByRating.slice(0, this.limit)
+            }
+          })
+
+        }
+    }
   }
 
   showDetails(processId) {

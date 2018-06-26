@@ -32,14 +32,14 @@ export class GatewayProvider {
   }
 
   getStoreProcessRatings(processId: string): Promise<StoreProcessRating[]> {
-    const params = new HttpParams();
-    params.append('processId', processId)
-    return this.http.get<StoreProcessRating[]>(this.serverConfig.getStoreProcessRatings, { params: params })
+    const url = this.serverConfig.getStoreProcessRatings + '/' + processId;
+    return this.http.get<StoreProcessRating[]>(url)
       .toPromise()
   }
 
   postStoreProcessRatings(processId: string, rating: StoreProcessRating): void {
-    const url = this.serverConfig.postStoreProcessRating + '/' + processId
-    this.http.post<StoreProcessRating>(url, rating).toPromise()
+    const url = this.serverConfig.postStoreProcessRating + '/' + processId;
+    this.http.post<StoreProcessRating>(url, rating)
+      .toPromise()
   }
 }
