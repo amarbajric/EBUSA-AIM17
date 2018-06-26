@@ -21,8 +21,11 @@ public class ProcessStoreBuilder implements Builder<ProcessStoreObject> {
     private String processApproverComment;
     private boolean isApproved = false;
     private Date processApprovedDate;
+    private byte[] processFile;
 
-    public ProcessStoreBuilder(String processName, String processDescription, String processCreator, Date processCreatedAt, Long processVersion, Double processPrice, String processApprover, String processApproverComment, boolean isApproved, Date processApprovedDate) {
+    public ProcessStoreBuilder(String processName, String processDescription, String processCreator, Date processCreatedAt,
+                               Long processVersion, Double processPrice, String processApprover, String processApproverComment,
+                               boolean isApproved, Date processApprovedDate, byte[] processFile) {
         checkArgument(StringUtils.isNotBlank(processName));
         checkArgument(StringUtils.isNotBlank(processDescription));
         checkArgument(StringUtils.isNotBlank(processCreator));
@@ -30,6 +33,7 @@ public class ProcessStoreBuilder implements Builder<ProcessStoreObject> {
         checkNotNull(processVersion);
         checkNotNull(processPrice);
         checkNotNull(isApproved);
+        checkNotNull(processFile);
         this.processName = processName;
         this.processDescription = processDescription;
         this.processCreator = processCreator;
@@ -40,6 +44,7 @@ public class ProcessStoreBuilder implements Builder<ProcessStoreObject> {
         this.processApproverComment = processApproverComment;
         this.isApproved = isApproved;
         this.processApprovedDate = processApprovedDate;
+        this.processFile = processFile;
     }
 
     @Override
@@ -51,8 +56,9 @@ public class ProcessStoreBuilder implements Builder<ProcessStoreObject> {
         checkNotNull(processVersion);
         checkNotNull(processPrice);
         checkNotNull(isApproved);
+        checkNotNull(processFile);
 
         return new ProcessStoreObjectImpl(processName, processDescription, processCreator, processCreatedAt,
-                processVersion, processPrice, processApprover, processApproverComment, isApproved, processApprovedDate);
+                processVersion, processPrice, processApprover, processApproverComment, isApproved, processApprovedDate, processFile);
     }
 }

@@ -9,10 +9,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -87,6 +94,19 @@ public class ProcessStoreController {
     public @ResponseBody Callable<ProcessStoreDTO> updateApproval(
             @RequestBody final String comment, @PathVariable("processId") final Long processId) {
         return() -> processStoreService.updateApprovedComment(comment ,processId).get();
+    }
+
+    @RequestMapping(value = "process/{processId}/uploadProcessFile", method = RequestMethod.POST)
+    public void handleProcessFileUpload(@RequestBody File processFile, @PathVariable("processId") final Long processId) throws IOException {
+        byte [] byteArray = Files.readAllBytes(processFile.toPath());
+        //delete file to not raise error if another version is uploaded
+        processFile.delete();
+        processStoreService.saveProcessFile(byteArray, processId);
+    }
+
+    @RequestMapping(value = "process/{processId}/getProcessFile", method = RequestMethod.GET)
+    public @ResponseBody Callable<Resource> handleProcessFileDownload(@PathVariable("processId") final Long processId) {
+        return() -> processStoreService.getProcessFile(processId).get();
     }
 
     @RequestMapping(value = "process/{processId}/buy", method = RequestMethod.POST)

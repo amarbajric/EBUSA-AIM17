@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.net.URISyntaxException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
@@ -144,5 +148,17 @@ public class ProcessStoreCallerImpl implements Caller {
 
         return createRequest(uri, HttpMethod.GET, null, ProcessStoreDTO[].class, header);
 
+    }
+
+    @Async
+    public void saveProcessFile(File processFile, Long processId) throws URISyntaxException {
+        final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/process/" + processId + "/uploadProcessFile");
+        createRequest(uri, HttpMethod.POST, processFile, null, null);
+    }
+
+    @Async
+    public Future<ResponseEntity<Resource>> getProcessFile(Long processId) throws URISyntaxException {
+        final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/process/" + processId + "/getProcessFile");
+        return createRequest(uri, HttpMethod.GET, null, Resource.class, null);
     }
 }

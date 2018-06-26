@@ -2,9 +2,12 @@ package at.fhjoanneum.ippr.processstore.persistence.entities;
 
 
 import at.fhjoanneum.ippr.processstore.persistence.objects.ProcessStoreObject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
@@ -32,11 +35,11 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
     private Date processCreatedAt;
 
     @Column
-    @NotBlank
+    @NotNull
     private Long processVersion;
 
     @Column
-    @NotBlank
+    @NotNull
     private Double processPrice;
 
     @Column
@@ -51,10 +54,18 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
     @Column
     private Date processApprovedDate;
 
+    @JsonIgnore
+    @Type(type = "binary")
+    @Lob
+    @Column(name = "processFile", columnDefinition = "LONGBLOB")
+    private byte[] processFile;
+
 
     public ProcessStoreObjectImpl() {}
 
-    public ProcessStoreObjectImpl(String processName, String processDescription, String processCreator, Date processCreatedAt, Long processVersion, Double processPrice, String processApprover, String processApproverComment, boolean isApproved, Date processApprovedDate) {
+    public ProcessStoreObjectImpl(String processName, String processDescription, String processCreator, Date processCreatedAt,
+                                  Long processVersion, Double processPrice, String processApprover, String processApproverComment,
+                                  boolean isApproved, Date processApprovedDate, byte[] processFile) {
         this.processName = processName;
         this.processDescription = processDescription;
         this.processCreator = processCreator;
@@ -65,6 +76,7 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
         this.processApproverComment = processApproverComment;
         this.isApproved = isApproved;
         this.processApprovedDate = processApprovedDate;
+        this.processFile = processFile;
     }
 
     @Override
@@ -153,4 +165,8 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
     public void setProcessApprovedDate(Date processApprovedDate) {
         this.processApprovedDate = processApprovedDate;
     }
+
+    public byte[] getProcessFile() { return processFile; }
+
+    public void setProcessFile(byte[] processFile) { this.processFile = processFile; }
 }
