@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
-import {StoreProcess, StoreProcessRating} from '../../../models/models';
+import {StoreProcess} from '../../../models/models';
 import {Router} from '@angular/router';
 import {NbAuthJWTToken, NbAuthService} from '@nebular/auth';
 import {AppComponent} from '../../app.component';
@@ -17,8 +17,6 @@ export class HomeComponent implements OnInit {
   public processesWithRating: {[process: number]: number; } = {};
   public processesByRating: StoreProcess[] = [];
   public ratings: string[] = [];
-  private filterType = 'none';
-  private filterInput;
   public complete: boolean = false;
 
   user = {};
@@ -92,9 +90,9 @@ export class HomeComponent implements OnInit {
             if (this.complete) {
               Object.entries(this.processesWithRating).forEach(
                 ([key, value]) => {
-                  this.processesByRating.push(this.processes.find((process) => process.processId === parseInt(key, 10)));
+                  this.processesByRating.push(this.processes.find((p) => p.processId === parseInt(key, 10)));
                   this.ratings.unshift(value);
-                }
+                },
               );
               this.processesByRating = this.processesByRating.slice(0, this.limit).reverse()
             }
