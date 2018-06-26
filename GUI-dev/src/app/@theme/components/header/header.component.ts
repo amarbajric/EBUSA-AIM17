@@ -4,7 +4,6 @@ import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
-import { NbAccessChecker } from '@nebular/security';
 
 @Component({
   selector: 'ngx-header',
@@ -31,7 +30,6 @@ export class HeaderComponent implements OnInit {
               private menuService: NbMenuService,
               private analyticsService: AnalyticsService,
               private authService: NbAuthService,
-              public accessChecker: NbAccessChecker,
               ) {
 
     this.authService.onTokenChange()

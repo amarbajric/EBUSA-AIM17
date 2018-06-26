@@ -3,6 +3,7 @@ import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
 import {StoreProcess} from '../../../models/models';
 import {Router} from '@angular/router';
 import {NbAuthJWTToken, NbAuthService} from '@nebular/auth';
+import {AppComponent} from '../../app.component';
 
 @Component({
   selector: 'ngx-home',
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
   authenticated = false;
   limit = 5;
 
-  constructor(private gateway: GatewayProvider, private router: Router, private authService: NbAuthService) {
+  constructor(private gateway: GatewayProvider, private router: Router, private authService: NbAuthService, private app: AppComponent) {
 
     this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
@@ -36,6 +37,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.app.setTitle('Welcome');
+
     this.getProcesses().then((processArray) => {
       this.processes = processArray;
       this.sortProcessesByDate(processArray);
