@@ -2,16 +2,21 @@ package at.fhjoanneum.ippr.processstore.services;
 
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessStoreDTO;
 import at.fhjoanneum.ippr.processstore.persistence.entities.ProcessStoreObjectImpl;
+import at.fhjoanneum.ippr.processstore.persistence.objects.ProcessStoreObject;
 import at.fhjoanneum.ippr.processstore.repositories.ProcessStore;
 import com.google.common.collect.Lists;
+import org.apache.jena.base.Sys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -139,5 +144,18 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
             processes.add(dto);
         }
         return processes;
+    }
+
+    @Override
+    public void saveProcessFile(final byte[] processFile, final Long processId) {
+        ProcessStoreObjectImpl process = processStore.findProcessById(processId);
+
+        if(process != null) {
+            process.setProcessFile(processFile);
+            //Increment version
+            process.setProcessVersion(process.getProcessVersion() + 1);
+            processStore.save(process);
+        }
+
     }
 }

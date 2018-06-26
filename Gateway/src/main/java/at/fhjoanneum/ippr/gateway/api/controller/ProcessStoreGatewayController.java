@@ -9,8 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URISyntaxException;
 import java.util.concurrent.Callable;
 
@@ -122,6 +126,38 @@ public class ProcessStoreGatewayController {
             }
         };
         runnable.run();
+    }
+
+    @RequestMapping(value = "api/store/process/{processId}/uploadProcessFile", method = RequestMethod.POST)
+    public void saveProcessFile(@RequestParam("file") MultipartFile processFile, @PathVariable(name = "processId") final Long processId)
+            throws URISyntaxException {
+
+            if (!processFile.isEmpty()) {
+                try {
+                    byte[] bytes = processFile.getBytes();
+
+                    // Creating the directory to store file
+                    String rootPath = System.getProperty("catalina.home");
+                    File dir = new File(rootPath + File.separator + "tmpFiles");
+                    if (!dir.exists()) dir.mkdirs();
+
+                    //Check if file already exists
+                    File checkFileExistence = new File(dir.getAbsolutePath() + File.separator + ("processFileOfProcessId" + processId));
+                    if(checkFileExistence.exists()) checkFileExistence.delete();
+
+                    // Create the file on server
+                    File serverFile = new File(dir.getAbsolutePath()
+                            + File.separator + ("processFileOfProcessId" + processId));
+
+                    BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+                    stream.write(bytes);
+                    stream.close();
+
+                    processStoreCaller.saveProcessFile(serverFile, processId);
+                } catch (Exception e) {
+                    LOG.error("Failed to upload " + "processFileOfProcessId" + processId + " => " + e.getMessage());
+                }
+            }
     }
 
     /*@RequestMapping(value ="api/store/process/upload", method = RequestMethod.POST)

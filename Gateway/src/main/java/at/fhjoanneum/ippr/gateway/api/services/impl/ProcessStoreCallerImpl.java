@@ -19,7 +19,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.net.URISyntaxException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
@@ -126,5 +128,11 @@ public class ProcessStoreCallerImpl implements Caller {
 
         return createRequest(uri, HttpMethod.GET, null, ProcessStoreDTO[].class, header);
 
+    }
+
+    @Async
+    public void saveProcessFile(File processFile, Long processId) throws URISyntaxException {
+        final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/process/" + processId + "/uploadProcessFile");
+        createRequest(uri, HttpMethod.POST, processFile, null, null);
     }
 }
