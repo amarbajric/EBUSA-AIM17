@@ -3,8 +3,14 @@ package at.fhjoanneum.ippr.gateway.api.services.impl;
 import at.fhjoanneum.ippr.gateway.api.repositories.OrganizationRepository;
 import at.fhjoanneum.ippr.gateway.api.services.OrganizationService;
 import at.fhjoanneum.ippr.gateway.security.persistence.entities.OrganizationBuilder;
+import at.fhjoanneum.ippr.gateway.security.persistence.entities.OrganizationImpl;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
+import at.fhjoanneum.ippr.gateway.security.persistence.objects.Role;
+import at.fhjoanneum.ippr.gateway.security.persistence.objects.User;
 import at.fhjoanneum.ippr.gateway.security.registration.RegistrationServiceDatabaseImpl;
+import at.fhjoanneum.ippr.gateway.security.repositories.RBACRepository;
+import at.fhjoanneum.ippr.gateway.security.services.RBACService;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +20,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
@@ -22,6 +30,12 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
     private OrganizationRepository organizationRepository;
+
+    @Autowired
+    private RBACService rbacService;
+
+    @Autowired
+    private RBACRepository rbacRepository;
 
 
     @Override
@@ -35,9 +49,23 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public Optional<Organization> saveOrganization(String orgName, String orgDescription) {
+    public Optional<Organization> saveOrganization(Long userId, String orgName, String orgDescription)
+            throws ExecutionException, InterruptedException {
         if (StringUtils.isEmpty(orgName) || StringUtils.isEmpty(orgDescription)) {
             LOG.info("Could not save new organization. One or more properties missing.");
+            return Optional.empty();
+        }
+
+        User user = rbacService.getUserByUserId(userId);
+        Boolean isPartOfOrg = user.getRoles().stream().anyMatch(role -> role.getName().equals("ORG_CEO") || role.getName().equals("ORG_EMP"));
+        Optional<Role> ceoRole = rbacService.getRoleByRoleName("ORG_CEO").get();
+
+        if (!isPartOfOrg && ceoRole.isPresent()) {
+            List<Role> newUserRoles = Lists.newArrayList();
+            newUserRoles.addAll(user.getRoles());
+            newUserRoles.add(ceoRole.get());
+            user.setRoles(newUserRoles);
+        } else {
             return Optional.empty();
         }
 
@@ -48,7 +76,12 @@ public class OrganizationServiceImpl implements OrganizationService {
                 .build();
 
         organizationRepository.saveOrganization(newOrg);
-        return organizationRepository.getOrganizationByOrganizationName(orgName);
+        Optional<Organization> orgOpt = organizationRepository.getOrganizationByOrganizationName(orgName);
+
+        user.setOrganization((OrganizationImpl) orgOpt.get());
+        rbacRepository.saveUser(user);
+
+        return orgOpt;
     }
 
     @Override

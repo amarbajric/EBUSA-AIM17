@@ -10,7 +10,7 @@
           <div>{{rating.createdBy}} | {{rating.createdAt | date:'yyyy-MM-dd'}}</div>
         </nb-card-header>
         <nb-card-body>
-          <div>{{rating.comment}}</div>
+          <div>{{rating.ratingComment}}</div>
         </nb-card-body>
       </nb-card>
     </div>
@@ -26,9 +26,9 @@
         </nb-card-header>
         <nb-card-body>
           <div class="input-group">
-            <textarea [(ngModel)]="newRating.comment" rows="5" placeholder="Your comment .." class="form-control"></textarea>
+            <textarea [(ngModel)]="newRating.ratingComment" rows="5" placeholder="Your comment .." class="form-control"></textarea>
           </div>
-          <button (click)="submitProcessRating(processId)" class="btn btn-success" type="submit">Send</button>
+          <button (click)="submitProcessRating(processId)" [disabled]="!(newRating.ratingComment)" class="btn btn-success" type="submit">Send</button>
         </nb-card-body>
       </nb-card>
     </div>

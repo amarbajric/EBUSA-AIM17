@@ -18,6 +18,8 @@ public interface ProcessStoreService {
 
     Future<ProcessStoreDTO> changeApprovedState(boolean isApproved, Long processId);
 
+    Future<ProcessStoreDTO> updateApprovedComment(String approverComment, Long processId);
+
     Future<List<ProcessStoreDTO>> findAllProcessesByUserId(String userId);
 
     Future<List<ProcessStoreDTO>> findAllProcessesByOrganisationId(String organisationId);
