@@ -23,17 +23,23 @@ public interface ProcessStore extends CrudRepository<ProcessStoreObjectImpl, Lon
     public List<ProcessStoreObjectImpl> findAllProcessesByUserId(@Param("user_id") String processCreator);
 
     // No idea atm how to handle this case
-    @Query(value="SELECT * FROM processstore ps WHERE ps.process_creator = :user_id", nativeQuery = true)
-    public ProcessStoreObjectImpl findAllProcessesByOrganisationId(@Param("user_id") String processCreator);
+    //@Query(value="SELECT * FROM processstore ps WHERE ps.process_creator = :user_id", nativeQuery = true)
+    //public ProcessStoreObjectImpl findAllProcessesByOrganisationId(@Param("user_id") String processCreator);
 
-    @Query(value="SELECT * FROM processstore ps WHERE ps.is_approved = :is_approved", nativeQuery = true)
+    @Query(value="SELECT * FROM processstore ps WHERE ps.process_approved = :is_approved", nativeQuery = true)
     public List<ProcessStoreObjectImpl> findAllProcesses(@Param("is_approved") boolean isApproved);
 
     @Modifying
-    @Query(value="UPDATE processstore ps SET ps.is_approved = ?1 WHERE ps.process_id = ?2", nativeQuery = true)
+    @Query(value="UPDATE processstore ps SET ps.process_approved = ?1 WHERE ps.process_id = ?2", nativeQuery = true)
     public int changeApprovedState(boolean isApproved, Long processId);
 
     @Modifying
     @Query(value="UPDATE processstore ps SET ps.process_approver_comment = ?1 WHERE ps.process_id = ?2", nativeQuery = true)
     public int updateApprovedComment(String approverComment, Long processId);
+
+    @Query(value ="SELECT ps.* FROM ippr_store.processstore ps " +
+            "INNER JOIN ippr_store.processorgamapping pom "+
+            "ON ps.process_id = pom.process_id "+
+            "WHERE pom.orga_id = ?1", nativeQuery = true)
+    public List<ProcessStoreObjectImpl> findAllProcessesByOrgaId(String orgaId);
 }

@@ -49,7 +49,11 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compile 'org.hibernate:hibernate-core:5.2.4.Final'
 	compile group: 'javax.validation', name: 'validation-api', version: '1.1.0.Final'
-	
+
+	//Upload file for processes
+	compile group: 'commons-io', name: 'commons-io', version: '2.4'
+	compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.1'
+
 	// database
 	runtime 'mysql:mysql-connector-java'
 	testRuntime 'com.h2database:h2'
