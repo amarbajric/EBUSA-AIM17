@@ -60,7 +60,7 @@ export class GatewayProvider {
       .toPromise()
   }
 
-
+/*
   getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
     let filterParams = new HttpParams();
     if (filterType && filterType !== 'none' && filterInput) {
@@ -71,6 +71,14 @@ export class GatewayProvider {
       .toPromise()
 
   }
+  */
+
+  getStoreProcesses(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses)
+      .toPromise()
+
+  }
+
 
   getStoreProcessRatings(processId: string): Promise<StoreProcessRating[]> {
     const params = new HttpParams();

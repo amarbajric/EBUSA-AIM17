@@ -37,17 +37,8 @@ export class MyProcessesComponent implements OnInit  {
       limit: 2,
     });
 
-   /* this.navigationSubscription = this.router.events.subscribe((e: any) => {
-      // If it is a NavigationEnd event re-initalise the component
-      if (e instanceof NavigationEnd) {
-        this.initialiseComponents();
-      }
-    });*/
   }
 
-  initialiseComponents() {
-    // Set default values and re-fetch any data you need.
-  }
 
   ngOnInit() {
     this.gateway.getUser()
@@ -89,9 +80,9 @@ export class MyProcessesComponent implements OnInit  {
       { size: 'lg', container: 'nb-layout' });
     createOrgaModal.componentInstance.saved.subscribe(() => {
       this.createToast();
-      /*if (this.navigationSubscription) {
+      if (this.navigationSubscription) {
         this.navigationSubscription.unsubscribe();
-      }*/
+      }
     })
   }
 
