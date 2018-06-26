@@ -34,8 +34,8 @@ export class GatewayProvider {
 
   // adds a process to an organization
   addProcessToOrganization (processId: string, orgId: string): Promise<StoreProcess> {
-      return this.http.post<StoreProcess>(this.serverConfig.getProcess + processId + '/buy', orgId)
-        .toPromise()
+    return this.http.post<StoreProcess>(this.serverConfig.getProcess + processId + '/buy', orgId)
+      .toPromise()
   }
 
   // get all processes of an organization
@@ -44,25 +44,20 @@ export class GatewayProvider {
       .toPromise()
   }
 
-  getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
-    let filterParams = new HttpParams();
-    if (filterType && filterType !== 'none' && filterInput) {
-      filterParams = filterParams.append('filterType', filterType);
-      filterParams = filterParams.append('filterInput', filterInput);
-    }
-    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses, { params: filterParams })
+  getStoreProcesses(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses)
       .toPromise()
   }
 
   getStoreProcessRatings(processId: string): Promise<StoreProcessRating[]> {
     const params = new HttpParams();
-    params.append('processId', processId);
+    params.append('processId', processId)
     return this.http.get<StoreProcessRating[]>(this.serverConfig.getStoreProcessRatings, { params: params })
       .toPromise()
   }
 
   postStoreProcessRatings(processId: string, rating: StoreProcessRating): void {
-    const url = this.serverConfig.postStoreProcessRating + '/' + processId;
+    const url = this.serverConfig.postStoreProcessRating + '/' + processId
     this.http.post<StoreProcessRating>(url, rating).toPromise()
   }
 }
