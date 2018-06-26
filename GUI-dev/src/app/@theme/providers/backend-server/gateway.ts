@@ -65,7 +65,7 @@ export class GatewayProvider {
   }
 
   postStoreProcessComment(comment: string, processId: string): void {
-    const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/updateComment';
+    const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/updateApprovalComment';
     this.http.post<StoreProcess>(url, processId).toPromise()
   }
 
