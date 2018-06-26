@@ -1,7 +1,7 @@
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
-import {User, StoreProcess, StoreProcessRating} from '../../../../models/models';
+import {User, StoreProcess, StoreProcessRating, Organization} from '../../../../models/models';
 
 
 @Injectable()
@@ -40,11 +40,28 @@ export class GatewayProvider {
     return this.http.post<any>(this.serverConfig.uploadOWL + processId + '/uploadProcessFile', formData, {'headers': headers}).toPromise()
   }
 
+  getApprovedProcessesByUser(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getApprovedProcessesByUser)
+      .toPromise()
+  }
+
+  getNotApprovedProcessesByUser(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getNotApprovedProcessesByUser)
+      .toPromise()
+  }
+
+  createNewOrganisation(organization: Organization): Promise<Organization>  {
+    return this.http.post<Organization>(this.serverConfig.createOrganizaion,
+      {'organizationName': organization.organizationName, 'organizationDescription': organization.description})
+      .toPromise();
+  }
 
   getStoreProcesses(): Promise<StoreProcess[]> {
     return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses)
       .toPromise()
+
   }
+
 
   getStoreProcessRatings(processId: string): Promise<StoreProcessRating[]> {
     const params = new HttpParams();
@@ -57,4 +74,31 @@ export class GatewayProvider {
     const url = this.serverConfig.postStoreProcessRating + '/' + processId
     this.http.post<StoreProcessRating>(url, rating).toPromise()
   }
+
+  getUnapprovedStoreProcesses(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getUnapprovedStoreProcesses)
+      .toPromise()
+  }
+
+  postStoreProcessApproved(processId: string): void {
+    const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/approve';
+    this.http.post<StoreProcess>(url, processId).toPromise()
+  }
+
+  postStoreProcessUnapproved(processId: string): void {
+    const url = this.serverConfig.postStoreProcessUnapproved + '/' + processId + '/unapprove';
+    this.http.post<StoreProcess>(url, processId).toPromise()
+  }
+
+  getStoreProcessById(processId: string): Promise<StoreProcess> {
+    const url = this.serverConfig.getStoreProcessById + '/' + processId;
+    return this.http.get<StoreProcess>(url)
+      .toPromise()
+  }
+
+  postStoreProcessComment(comment: string, processId: string): void {
+    const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/updateApprovalComment';
+    this.http.post<StoreProcess>(url, comment).toPromise()
+  }
+
 }

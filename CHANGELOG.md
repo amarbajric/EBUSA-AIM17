@@ -4,6 +4,24 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+##2018-06-26 ([#49](https://github.com/amarbajric/EBUSA-AIM17/pull/120))
+## Added
+- Process-Details
+    - Components are in ../pages/process-details
+    - Displays Process information with example picture
+    - Process can be bought
+        - Via BUY-button
+        - Only available for ORG members
+    - Implementation of buttons to configure or start process after payment
+        - Only available if process is bought
+        - Only available for ORG members
+        - Functionality of methods is not implemented
+    - Modal to approve payment
+- Gateway and Serverconfig
+    - Methods and routes to get / post data from / to backend
+    - Buy / add process to organization
+    - Get processes of organization
+    - Get process by id
 
 ##2018-06-26 ([#111](https://github.com/amarbajric/EBUSA-AIM17/issues/111))
 - Added
@@ -26,6 +44,21 @@ The format is partially based on [Keep a Changelog](http://keepachangelog.com/en
 
 ##2018-06-25 ([#110](https://github.com/amarbajric/EBUSA-AIM17/pull/110))
 - Added logo and favicon to the platform
+
+## 2018-06-25 ([#100](https://github.com/amarbajric/EBUSA-AIM17/pull/99))
+## Added
+- Approval Page Guard
+  - Only users with SYS_APPROVER role can access approval page
+  - other users are redirected to home when they try to access it
+- Gateway Methods
+  - getStoreProcessById
+  - postStoreProcessComment
+## Changed
+- Approval Details Page
+  - changed review comments
+  - two way binding for review comment
+  - redirection after approving/disapproving to approval page
+  - endpoint calls for processes, approve/unapprove, postComment
 
 ## 2018-06-23 ([#86](https://github.com/amarbajric/EBUSA-AIM17/pull/98))
 ## Added
