@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GatewayProvider} from '../../../../@theme/providers/backend-server/gateway';
 import { ModalComponent } from '../modal/modal.component';
-import {StoreProcess} from '../../../../../models/models';
+import {StoreProcess, User} from '../../../../../models/models';
 
 
 @Component({
@@ -16,6 +16,8 @@ export class ReviewProcessesComponent implements OnInit  {
 
   protected reviewProcesses: StoreProcess[];
   selectedProc: StoreProcess;
+  inOrganization: boolean = false;
+  user: User;
 
   constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router,
               private modalService: NgbModal, private gateway: GatewayProvider) {
@@ -27,13 +29,18 @@ export class ReviewProcessesComponent implements OnInit  {
 
 
   getProcesses() {
-    this.gateway.getNotApprovedProcessesByUser()
-      .then((processes) => {
-      this.reviewProcesses = processes;
-      /* tempProcesses = processes;
-      let tempProcesses2 = tempProcesses.filter(proc => {proc.approved === false});
-        console.log(tempProcesses2);
-        console.log(tempProcesses); */
+    this.inOrganization = false;
+    this.gateway.getUser()
+      .then((user) => {
+        this.user = user;
+        if (user.organization !== null) {
+          this.inOrganization = true;
+              this.gateway.getProcessesByOrgId('' + user.organization.oid)
+                .then((processes) => {
+                  // this.validationProcesses = processes.filter(proc => {proc.approved === true});
+                  this.reviewProcesses = processes.filter(proc => !proc.processApproved);
+                })
+        }
       })
   }
 

@@ -47,13 +47,10 @@ export class ValidatedProcessesComponent implements OnInit  {
           if (this.inOrganization === true) {
             this.orgaId = user.organization.oid;
             if (this.inOrganization === true) {
-              this.gateway.getOrgaProcesses(user.organization.oid)
+              this.gateway.getProcessesByOrgId('' + user.organization.oid)
                 .then((processes) => {
-                  processes.map(proc => {console.log('sd ' + proc.approved)})
                   // this.validationProcesses = processes.filter(proc => {proc.approved === true});
-                  this.validationProcesses = processes;
-                  this.validationProcesses.map(proc => {console.log('saf ' + proc.approved)})
-                  this.validationProcesses.map(proc => {console.log('sasdfaf ' + proc.processName)})
+                  this.validationProcesses = processes.filter(proc => proc.processApproved);
                 })
             }
           }

@@ -26,7 +26,6 @@ export class GatewayProvider {
       .toPromise()
   }
 
-<<<<<<< HEAD
 
   /* getUserProcesses(userId: number): Promise<StoreProcess[]> {
     return this.http.get<StoreProcess[]>(this.serverConfig.getUserProcesses + '/' + userId, )

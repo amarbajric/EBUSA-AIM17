@@ -47,7 +47,7 @@ export class ModalComponent {
 
 
   getProcessDetails() {
-    this.gateway.getProcessById(this.modalProcessId)
+    this.gateway.getProcessById(''+ this.modalProcessId)
       .then((process) => {
         this.selectedProcess = process;
 
