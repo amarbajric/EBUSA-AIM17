@@ -66,13 +66,6 @@ public class ProcessStoreController {
         return() -> processStoreService.findAllNotApprovedProcesses().get();
     }
 
-    /*@PostMapping(value = "process/upload")
-    @ResponseBody
-    public void uploadProcess(final HttpServletRequest request, String processName, String processDescription, String processCreator,
-                                                         Date processCreatedAt, Double processPrice) {
-        processStoreService.saveProcessStoreObject(processName, processDescription,processCreator,
-                processCreatedAt,processPrice);
-    }*/
 
     @RequestMapping(value = "process/{processId}", method = RequestMethod.GET)
     public @ResponseBody Callable<ProcessStoreDTO> getProcessById(
