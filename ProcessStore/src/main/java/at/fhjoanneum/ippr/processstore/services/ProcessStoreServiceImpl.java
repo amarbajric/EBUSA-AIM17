@@ -9,14 +9,18 @@ import org.apache.jena.base.Sys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -153,9 +157,22 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
         if(process != null) {
             process.setProcessFile(processFile);
             //Increment version
-            process.setProcessVersion(process.getProcessVersion() + 1);
+            Long incrementedVersion = process.getProcessVersion() + 1;
+            process.setProcessVersion(incrementedVersion);
             processStore.save(process);
         }
 
+    }
+
+    @Override
+    public Future<Resource> getProcessFile(final Long processId) {
+        ProcessStoreObjectImpl process = processStore.findProcessById(processId);
+
+        if (process != null) {
+            ByteArrayResource fileResource = new ByteArrayResource(process.getProcessFile());
+            return new AsyncResult<>(fileResource);
+        } else {
+            return null;
+        }
     }
 }

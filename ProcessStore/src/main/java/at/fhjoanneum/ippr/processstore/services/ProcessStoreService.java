@@ -1,7 +1,9 @@
 package at.fhjoanneum.ippr.processstore.services;
 
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessStoreDTO;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -29,5 +31,7 @@ public interface ProcessStoreService {
                                 Date processCreatedAt, Long processVersion, Double processPrice);
 
     void saveProcessFile(byte[] processFile, Long processId);
+
+    Future<Resource> getProcessFile(Long processId);
 
 }

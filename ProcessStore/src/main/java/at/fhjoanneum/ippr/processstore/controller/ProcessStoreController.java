@@ -5,6 +5,7 @@ import at.fhjoanneum.ippr.processstore.services.ProcessStoreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -96,7 +97,7 @@ public class ProcessStoreController {
     }
 
     @RequestMapping(value = "process/{processId}/getProcessFile", method = RequestMethod.GET)
-    public MultipartFile handleProcessFileDownload(@PathVariable("processId") final Long processId) {
-        return null;
+    public @ResponseBody Callable<Resource> handleProcessFileDownload(@PathVariable("processId") final Long processId) {
+        return() -> processStoreService.getProcessFile(processId).get();
     }
 }
