@@ -22,16 +22,15 @@ export class StoreProcess {
   processCreatedAt: Date;
   processVersion: number;
   processPrice: number;
-  // missing in current ProcessStoreDTO in backend:
   processAverageRating: number;
 }
 
 export class StoreProcessRating {
-  ratingId: number;
   rating: number;
-  comment: string;
+  ratingComment: string;
   createdBy: string;
   createdAt: Date;
+  processId: number;
 }
 
 
