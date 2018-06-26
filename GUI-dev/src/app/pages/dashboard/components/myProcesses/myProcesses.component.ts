@@ -21,6 +21,7 @@ export class MyProcessesComponent implements OnInit  {
   myProcesses;
   user: User;
   inOrganization: boolean = false;
+  orgaId: number;
   config: ToasterConfig;
   navigationSubscription;
 
@@ -46,6 +47,10 @@ export class MyProcessesComponent implements OnInit  {
         this.user = user;
         if (user.organization !== null) {
           this.inOrganization = true;
+          if (this.inOrganization === true) {
+            this.orgaId = user.organization.oid;
+            console.log('ud hier 0' + user.organization.oid)
+          }
         }
       })
 
@@ -54,10 +59,24 @@ export class MyProcessesComponent implements OnInit  {
 
 
   getProcesses() {
-    this.gateway.getUserProcesses()
-      .then((processes) => {
-        this.myProcesses = processes;
+    this.inOrganization = false;
+    this.gateway.getUser()
+      .then((user) => {
+        this.user = user;
+        if (user.organization !== null) {
+          this.inOrganization = true;
+          if (this.inOrganization === true) {
+            this.orgaId = user.organization.oid;
+            if(this.inOrganization === true) {
+              this.gateway.getOrgaProcesses(user.organization.oid)
+                .then((processes) => {
+                  this.myProcesses = processes;
+                })
+            }
+          }
+        }
       })
+
 
   }
 

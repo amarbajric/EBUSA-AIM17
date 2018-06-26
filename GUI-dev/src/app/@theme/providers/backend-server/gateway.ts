@@ -50,8 +50,8 @@ export class GatewayProvider {
   }
 
 
-  getUserProcesses(): Promise<StoreProcess[]> {
-    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses)
+  getOrgaProcesses(orgaId: number): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getOrgaProcesses + '/' + orgaId)
       .toPromise()
   }
 
