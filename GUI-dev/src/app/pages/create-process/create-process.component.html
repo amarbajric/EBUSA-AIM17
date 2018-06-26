@@ -23,7 +23,12 @@
                class="form-control" placeholder="Process price"
                autofocus>
       </div>
-
+        <div class="form-group">
+          <label for="input-processversion" class="sr-only">Process version</label>
+          <input name="processversion" [(ngModel)]="process.processName" id="input-processversion" #processprice="ngModel"
+                 class="form-control" placeholder="Process version"
+                 autofocus>
+        </div>
         <form #owlModelForm="ngForm" (ngSubmit)="uploadOWLModel(owlModelForm)">
           <label class="control-label">OWL-File: </label>
           <div class="row show-grid">
