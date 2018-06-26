@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {StoreProcess} from '../../../models/models';
 import {GatewayProvider} from '../../@theme/providers/backend-server/gateway';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-create-process',
@@ -33,7 +33,7 @@ export class CreateProcessComponent {
   createProcess(form): void {
 
     this.gateway.createProcess(this.process)
-      .then(data => {this.gateway.uploadOWLModel(data.processId, this.owlFile);})
+      .then(data => {this.gateway.uploadOWLModel(data.processId, this.owlFile); })
       .then(data => {this.router.navigateByUrl('/dashboard')});
 
 
