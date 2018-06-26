@@ -129,6 +129,13 @@ public class ProcessStoreCallerImpl implements Caller {
     }
 
     @Async
+    public void createProcess(ProcessStoreDTO process) throws URISyntaxException {
+        final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/process/create");
+        LOG.debug(process.getProcessName());
+        createRequest(uri, HttpMethod.POST, process, ProcessStoreDTO.class, null);
+    }
+
+    @Async
     public Future<ResponseEntity<ProcessStoreDTO[]>> findAllProcessesByOrgaId(final Long orgaId
     ) throws URISyntaxException {
 

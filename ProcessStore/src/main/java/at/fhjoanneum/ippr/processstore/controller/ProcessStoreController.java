@@ -4,6 +4,7 @@ import at.fhjoanneum.ippr.commons.dto.processstore.ProcessOrgaMappingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessStoreDTO;
 import at.fhjoanneum.ippr.processstore.services.ProcessOrgaMappingService;
 import at.fhjoanneum.ippr.processstore.services.ProcessStoreService;
+import org.apache.jena.atlas.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,13 +65,13 @@ public class ProcessStoreController {
         return() -> processStoreService.findAllNotApprovedProcesses().get();
     }
 
-    @PostMapping(value = "process/upload")
+    /*@PostMapping(value = "process/upload")
     @ResponseBody
     public void uploadProcess(final HttpServletRequest request, String processName, String processDescription, String processCreator,
-                                                         Date processCreatedAt, Long processVersion, Double processPrice) {
+                                                         Date processCreatedAt, Double processPrice) {
         processStoreService.saveProcessStoreObject(processName, processDescription,processCreator,
-                processCreatedAt,processVersion,processPrice);
-    }
+                processCreatedAt,processPrice);
+    }*/
 
     @RequestMapping(value = "process/{processId}", method = RequestMethod.GET)
     public @ResponseBody Callable<ProcessStoreDTO> getProcessById(
@@ -114,6 +115,18 @@ public class ProcessStoreController {
     ResponseEntity<ProcessStoreController.OrgaMappingResponse> saveRating(@RequestBody final ProcessOrgaMappingDTO mapping, @PathVariable("processId") final Integer processId) {
 
         processOrgaMappingService.saveMapping(mapping.getOrgaId(), mapping.getUserId(), String.valueOf(processId));
+
+        return new ResponseEntity<>(new OrgaMappingResponse("Ok"), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "process/create", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseEntity<ProcessStoreController.OrgaMappingResponse> saveProcess(@RequestBody final ProcessStoreDTO process) {
+        LOG.debug("*******************");
+        LOG.debug(process.getProcessName());
+
+        processStoreService.saveProcessStoreObject(process.getProcessName(),process.getProcessDescription(),process.getProcessCreator(),
+                process.getProcessCreatedAt(),process.getProcessPrice());
 
         return new ResponseEntity<>(new OrgaMappingResponse("Ok"), HttpStatus.OK);
     }
