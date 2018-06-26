@@ -116,28 +116,17 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
     }
 
     @Override
-    public void saveProcessStoreObject(String processName, String processDescription,
-                                                            String processCreator, Date processCreatedAt,
-                                                            Long processVersion, Double processPrice) {
+    public Future<ProcessStoreDTO> saveProcessStoreObject(String processName, String processDescription, String processCreator, Double processPrice) {
 
-        ProcessStoreObjectImpl processStoreObject = new ProcessStoreObjectImpl();
-        processStoreObject.setProcessName(processName);
-        processStoreObject.setProcessDescription(processDescription);
-        processStoreObject.setProcessCreator(processCreator);
-        processStoreObject.setProcessCreatedAt(processCreatedAt);
-        processStoreObject.setProcessVersion(processVersion);
-        processStoreObject.setProcessPrice(processPrice);
-        processStoreObject.setApproved(false);
-        processStoreObject.setProcessApprovedDate(null);
-        processStoreObject.setProcessApprover(null);
-        processStoreObject.setProcessApproverComment(null);
+        ProcessStoreObjectImpl processStoreObject = new ProcessStoreObjectImpl(processName, processDescription, processCreator, new Date(),
+                1L, processPrice, null, null, false,
+                null, null);
 
         processStore.save(processStoreObject);
+        return new AsyncResult<>(createProcessStoreDTO(processStore.findProcessByProcessNameAndProcessPrice(processStoreObject.getProcessName(), processStoreObject.getProcessPrice())));
     }
 
     private static ProcessStoreDTO createProcessStoreDTO(final ProcessStoreObjectImpl processStoreObject) {
-        LOG.debug("***************************");
-        LOG.debug(String.valueOf(processStoreObject.isApproved()));
         return new ProcessStoreDTO(processStoreObject.getStoreId(), processStoreObject.getProcessName(),
                 processStoreObject.getProcessDescription(), processStoreObject.getProcessCreator(),
                 processStoreObject.getProcessCreatedAt(), processStoreObject.getProcessVersion(),

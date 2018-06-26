@@ -1,5 +1,6 @@
 package at.fhjoanneum.ippr.gateway.api.controller;
 
+import at.fhjoanneum.ippr.commons.dto.processstore.ProcessAvgRatingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessOrgaMappingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessRatingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessStoreDTO;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,8 @@ import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
 @RequestMapping(produces = "application/json; charset=UTF-8")
@@ -117,6 +121,12 @@ public class ProcessStoreGatewayController {
         return() -> processStoreCaller.findRatingByProcessId(processId).get();
     }
 
+    @RequestMapping(value ="api/store/processRating/{processId}/getAverageAndCount", method = RequestMethod.GET)
+    public @ResponseBody Callable<ResponseEntity<ProcessAvgRatingDTO>> getAvgRatingAndCountOfProcess(
+            final HttpServletRequest request, @PathVariable(name = "processId") final Long processId) {
+        return() -> processStoreCaller.getAvgRatingAndCountOfProcess(processId).get();
+    }
+
 
     @RequestMapping(value ="api/store/processRating/{processId}/add", method = RequestMethod.POST)
     public void saveRating(@RequestBody ProcessRatingDTO rating, @PathVariable(name = "processId") final Long processId) {
@@ -178,27 +188,29 @@ public class ProcessStoreGatewayController {
         runnable.run();
     }
 
+    @RequestMapping(value ="api/store/process/create", method = RequestMethod.POST)
+    public @ResponseBody Callable<ResponseEntity<ProcessStoreDTO>> createProcess(@RequestHeader HttpHeaders headers, @RequestBody ProcessStoreDTO process) {
+        AtomicReference<ResponseEntity<ProcessStoreDTO>> createdProcess = new AtomicReference<>();
+        final Runnable runnable = () -> {
+            try {
+                createdProcess.set(processStoreCaller.createProcess(process, headers).get());
+            } catch (final URISyntaxException | InterruptedException | ExecutionException e) {
+                LOG.error(e.getMessage());
+            }
+        };
+        runnable.run();
+
+        return createdProcess::get;
+    }
+
     @RequestMapping(value ="api/store/processes/byOrga/{orgaId}", method = RequestMethod.GET)
     public @ResponseBody Callable<ResponseEntity<ProcessStoreDTO[]>> findProcessByUserId(
             //final HttpServletRequest request,
             @PathVariable(name = "orgaId") final Long orgaId) {
         return() -> {
-            //final HttpHeaderUser headerUser = new HttpHeaderUser(request);
             return processStoreCaller.findAllProcessesByOrgaId(orgaId).get();
         };
     }
-
-    /*@RequestMapping(value ="api/store/process/upload", method = RequestMethod.POST)
-    @ResponseBody
-    public void uploadProcess(
-            final HttpServletRequest request,
-            @RequestParam() processCreator
-            ){
-        return() -> {
-            final HttpHeaderUser headerUser = new HttpHeaderUser(request);
-            return processStoreCaller.uploadProcess().get();
-        };
-    }*/
 
 
 
