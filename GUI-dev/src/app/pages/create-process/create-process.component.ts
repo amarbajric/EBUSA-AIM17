@@ -10,6 +10,8 @@ export class CreateProcessComponent {
 
   process: StoreProcess = new StoreProcess();
   owlFile;
+  processModelOwl;
+  buildedBusinessObjects = {};
 
   constructor(private gateway: GatewayProvider) {
 
@@ -26,26 +28,42 @@ export class CreateProcessComponent {
   }
 
   uploadOWLModel(form): void {
-    const that = this;
+    console.log('hallo ich bin hier')
+    let that = this;
     const reader = new FileReader();
-    if (this.owlFile) {
-      reader.onload = function(e) {
+    console.log(that.owlFile);
+    if (that.owlFile) {
+      reader.onload = function (e) {
+
         const body = {owlContent: reader.result}
         that.gateway.uploadOWLModel(body)
-          .subscribe(
+          .then(
             data => {
-              that.processModel = JSON.parse(data['_body']);
-              that.processModel.boms.forEach(businessObject => {
+              that.processModelOwl = JSON.parse(data['_body']);
+              console.log(that.processModelOwl);
+              that.processModelOwl.boms.forEach(businessObject => {
                 that.buildedBusinessObjects[businessObject.id] = {};
-              });
-              that.initRules();
-            },
-            err => that.error = 'Die OWL Datei konnte nicht richtig interpretiert werden!',
-            () => {
-            },
-          );
+              })
+            })
+        .catch(err => console.log('Die OWL Datei konnte nicht richtig interpretiert werden!'));
+        reader.readAsText(that.owlFile);
       }
-      reader.readAsText(this.owlFile);
+      that.initRules();
     }
+  }
+
+  initRules(): void {
+    const that = this;
+    /*this.gateway.getRules()
+      .subscribe(
+        data => {
+          // console.log(data);
+          that.rules = JSON.parse(data['_body']);
+          that.currentSelectedBusinessObject = that.processModel.boms[0];
+          that.initFormBuilder(that.currentSelectedBusinessObject);
+        },
+        err => that.error = err,
+        () => {}, // console.log('Request Complete')
+      );*/
   }
 }

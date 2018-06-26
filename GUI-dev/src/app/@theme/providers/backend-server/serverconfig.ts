@@ -13,7 +13,7 @@ export class ServerConfigProvider {
 
 
   public get checkIfMailTaken(): string {return this._checkIfMailTaken};
-  public get getUser(): string {return this._getUser};
+public get getUser(): string {return this._getUser};
   public get getStoreProcesses(): string {return this._getStoreProcesses};
   public get getStoreProcessRatings(): string {return this._getOrPostStoreProcessRatings};
   public get postStoreProcessRating(): string {return this._getOrPostStoreProcessRatings};

@@ -26,8 +26,8 @@ export class GatewayProvider {
       .toPromise()
   }
 
-  uploadOWLModel(): Promise<any> {
-    return this.http.get<User>(this.serverConfig.uploadOWL).toPromise()
+  uploadOWLModel(body: any): Promise<any> {
+    return this.http.post<any>(this.serverConfig.uploadOWL, body).toPromise()
   }
 
   getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {

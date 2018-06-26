@@ -23,12 +23,20 @@
                class="form-control" placeholder="Process price"
                autofocus>
       </div>
+
         <form #owlModelForm="ngForm" (ngSubmit)="uploadOWLModel(owlModelForm)">
           <label class="control-label">OWL-File: </label>
-          <input type="file" name="fileUpload" id="fileUpload" class="form-control" accept=".owl," (change)="onFileChange($event)">
-          <br />
-          <button class="btn btn-primary" type="submit" [disabled]="!owlFile">Upload</button>
+          <div class="row show-grid">
+          <div class="col-md-10">
+            <input type="file" name="fileUpload" id="fileUpload" class="form-control" accept=".owl," (change)="onFileChange($event)">
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-primary" type="submit" [disabled]="!owlFile">Upload</button>
+          </div>
+          </div>
+          <br>
         </form>
+
       <button [disabled]="submitted || !form.valid " class="btn btn-block btn-hero-success"
               [class.btn-pulse]="submitted">
         Create new process
