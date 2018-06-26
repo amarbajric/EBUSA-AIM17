@@ -34,7 +34,7 @@ export class CreateProcessComponent {
     console.log(that.owlFile);
     if (that.owlFile) {
       reader.onload = function (e) {
-
+      console.log('reader result' + reader.result)
         const body = {owlContent: reader.result}
         that.gateway.uploadOWLModel(body)
           .then(
