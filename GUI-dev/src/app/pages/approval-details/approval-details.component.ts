@@ -71,7 +71,7 @@ export class ApprovalDetailsComponent implements OnInit {
         this.process = process;
         this.alteredProcess.processId = this.process.processId;
         this.alteredProcess.processApproverComment = this.process.processApproverComment;
-         console.log(process);
+        // console.log(process);
       })
   }
 
