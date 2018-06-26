@@ -91,9 +91,11 @@ export class ProcessStoreDetailsComponent implements OnInit {
       .then(() => {
         // console.log("added process to organization");
       })
+      /*
       .catch(err =>
-        // console.log("error: " + err);
+        console.log("error: " + err);
       );
+      */
   }
 
   // configuring the process
