@@ -26,11 +26,11 @@ public interface ProcessStore extends CrudRepository<ProcessStoreObjectImpl, Lon
     //@Query(value="SELECT * FROM processstore ps WHERE ps.process_creator = :user_id", nativeQuery = true)
     //public ProcessStoreObjectImpl findAllProcessesByOrganisationId(@Param("user_id") String processCreator);
 
-    @Query(value="SELECT * FROM processstore ps WHERE ps.is_approved = :is_approved", nativeQuery = true)
+    @Query(value="SELECT * FROM processstore ps WHERE ps.process_approved = :is_approved", nativeQuery = true)
     public List<ProcessStoreObjectImpl> findAllProcesses(@Param("is_approved") boolean isApproved);
 
     @Modifying
-    @Query(value="UPDATE processstore ps SET ps.is_approved = ?1 WHERE ps.process_id = ?2", nativeQuery = true)
+    @Query(value="UPDATE processstore ps SET ps.process_approved = ?1 WHERE ps.process_id = ?2", nativeQuery = true)
     public int changeApprovedState(boolean isApproved, Long processId);
 
     @Modifying

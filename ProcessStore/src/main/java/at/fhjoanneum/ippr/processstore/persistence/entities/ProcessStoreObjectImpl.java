@@ -49,7 +49,7 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
     private String processApproverComment;
 
     @Column
-    private Boolean isApproved;
+    private Boolean processApproved;
 
     @Column
     private Date processApprovedDate;
@@ -65,7 +65,7 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
 
     public ProcessStoreObjectImpl(String processName, String processDescription, String processCreator, Date processCreatedAt,
                                   Long processVersion, Double processPrice, String processApprover, String processApproverComment,
-                                  boolean isApproved, Date processApprovedDate, byte[] processFile) {
+                                  Boolean processApproved, Date processApprovedDate, byte[] processFile) {
         this.processName = processName;
         this.processDescription = processDescription;
         this.processCreator = processCreator;
@@ -74,7 +74,7 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
         this.processPrice = processPrice;
         this.processApprover = processApprover;
         this.processApproverComment = processApproverComment;
-        this.isApproved = isApproved;
+        this.processApproved = processApproved;
         this.processApprovedDate = processApprovedDate;
         this.processFile = processFile;
     }
@@ -151,11 +151,11 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
     }
 
     public Boolean isApproved() {
-        return isApproved;
+        return processApproved;
     }
 
     public void setApproved(Boolean approved) {
-        this.isApproved = approved;
+        this.processApproved = approved;
     }
 
     public Date getProcessApprovedDate() {
