@@ -19,10 +19,10 @@ public class ProcessStoreBuilder implements Builder<ProcessStoreObject> {
     private Double processPrice;
     private String processApprover;
     private String processApproverComment;
-    private boolean isApproved = false;
+    private Boolean isApproved;
     private Date processApprovedDate;
 
-    public ProcessStoreBuilder(String processName, String processDescription, String processCreator, Date processCreatedAt, Long processVersion, Double processPrice, String processApprover, String processApproverComment, boolean isApproved, Date processApprovedDate) {
+    public ProcessStoreBuilder(String processName, String processDescription, String processCreator, Date processCreatedAt, Long processVersion, Double processPrice, String processApprover, String processApproverComment, Boolean isApproved, Date processApprovedDate) {
         checkArgument(StringUtils.isNotBlank(processName));
         checkArgument(StringUtils.isNotBlank(processDescription));
         checkArgument(StringUtils.isNotBlank(processCreator));

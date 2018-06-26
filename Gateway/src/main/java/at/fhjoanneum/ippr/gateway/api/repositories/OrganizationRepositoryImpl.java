@@ -2,7 +2,6 @@ package at.fhjoanneum.ippr.gateway.api.repositories;
 
 import at.fhjoanneum.ippr.gateway.security.persistence.entities.OrganizationImpl;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
-import at.fhjoanneum.ippr.gateway.security.persistence.objects.User;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
