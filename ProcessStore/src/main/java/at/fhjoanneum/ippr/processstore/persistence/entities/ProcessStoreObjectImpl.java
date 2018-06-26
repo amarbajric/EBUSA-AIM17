@@ -46,7 +46,7 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
     private String processApproverComment;
 
     @Column
-    private boolean isApproved;
+    private Boolean isApproved;
 
     @Column
     private Date processApprovedDate;
