@@ -7,7 +7,6 @@ import {AuthGuard} from '../auth-guard.service';
 import {ApprovalComponent} from './approval/approval.component';
 
 import {ApprovalDetailsComponent} from './approval-details/approval-details.component';
-import {ActiveProcessesComponent} from './dashboard/components/activeProcesses/activeProcesses.component';
 
 // import {EventLoggerComponent} from './admin/components/eventLogger/eventLogger.component';
 import { ProcessStoreSearchComponent } from './processstore-search/processstore-search.component';

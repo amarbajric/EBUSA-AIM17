@@ -1,6 +1,6 @@
 import { Component,  OnInit } from '@angular/core';
 import {ProcessesService} from '../../../../allProcesses.service';
-import {Router, ActivatedRoute, NavigationEnd} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {GatewayProvider} from '../../../../@theme/providers/backend-server/gateway';
 import {User} from '../../../../../models/models';
 import {ModalComponent} from '../modal/modal.component';
@@ -49,7 +49,6 @@ export class MyProcessesComponent implements OnInit  {
           this.inOrganization = true;
           if (this.inOrganization === true) {
             this.orgaId = user.organization.oid;
-            console.log('ud hier 0' + user.organization.oid)
           }
         }
       })
@@ -68,7 +67,7 @@ export class MyProcessesComponent implements OnInit  {
           if (this.inOrganization === true) {
             this.orgaId = user.organization.oid;
             if(this.inOrganization === true) {
-              this.gateway.getProcessesByOrgId(''+user.organization.oid)
+              this.gateway.getProcessesByOrgId('' + user.organization.oid)
                 .then((processes) => {
                   this.myProcesses = processes;
                 })

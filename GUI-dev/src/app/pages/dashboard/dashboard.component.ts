@@ -55,7 +55,6 @@ export class DashboardComponent {
         this.user = user;
          this.roleProvider.getRole().subscribe(role => this.isUser = role === 'USER' )
       })
-    console.log('ononit')
 
   }
 
@@ -68,8 +67,7 @@ export class DashboardComponent {
       .then((user) => {
         this.user = user;
         if (user.organization !== null) {
-          console.log('aidsahjdfsdsfajh ' + user.organization)
-              this.gateway.getProcessesByOrgId(''+user.organization.oid)
+              this.gateway.getProcessesByOrgId('' + user.organization.oid)
                 .then((processes) => {
                   this.favoriteProcess = processes[0];
                   this.bestRatedProcess = processes[1];
