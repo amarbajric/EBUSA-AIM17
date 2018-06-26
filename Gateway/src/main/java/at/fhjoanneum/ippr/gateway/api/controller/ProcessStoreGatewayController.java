@@ -189,18 +189,22 @@ public class ProcessStoreGatewayController {
     }
 
     @RequestMapping(value ="api/store/process/create", method = RequestMethod.POST)
+
     public @ResponseBody Callable<ResponseEntity<ProcessStoreDTO>> createProcess(@RequestHeader HttpHeaders headers, @RequestBody ProcessStoreDTO process) {
         AtomicReference<ResponseEntity<ProcessStoreDTO>> createdProcess = new AtomicReference<>();
         final Runnable runnable = () -> {
             try {
                 createdProcess.set(processStoreCaller.createProcess(process, headers).get());
             } catch (final URISyntaxException | InterruptedException | ExecutionException e) {
+
                 LOG.error(e.getMessage());
             }
         };
         runnable.run();
 
+
         return createdProcess::get;
+
     }
 
     @RequestMapping(value ="api/store/processes/byOrga/{orgaId}", method = RequestMethod.GET)

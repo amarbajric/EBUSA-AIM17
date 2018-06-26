@@ -22,8 +22,10 @@ export class StoreProcess {
   processCreatedAt: Date;
   processVersion: number;
   processPrice: number;
+
   processApprovedDate: Date;
   processApprover: string;
+
   processAverageRating: number;
   processApproved: boolean;
   processApproverComment: string;

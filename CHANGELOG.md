@@ -341,3 +341,4 @@ the users `email` instead of `username` (needed for log-in with email instead of
 - modifed NativeQueries - changed table names, query params to lowercase
 ## Removed
 - Nothing was removed (demonstration purpose only)
+>>>>>>> dev

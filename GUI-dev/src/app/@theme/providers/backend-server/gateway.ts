@@ -1,7 +1,7 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
-import {User, StoreProcess, StoreProcessRating} from '../../../../models/models';
+import {User, StoreProcess, StoreProcessRating, Organization} from '../../../../models/models';
 
 
 @Injectable()
@@ -26,6 +26,44 @@ export class GatewayProvider {
       .toPromise()
   }
 
+
+  /* getUserProcesses(userId: number): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getUserProcesses + '/' + userId, )
+      .toPromise()
+  } */
+
+
+  getApprovedProcessesByUser(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getApprovedProcessesByUser)
+      .toPromise()
+  }
+
+  getNotApprovedProcessesByUser(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getNotApprovedProcessesByUser)
+      .toPromise()
+  }
+
+  createNewOrganisation(organization: Organization): Promise<Organization>  {
+    return this.http.post<Organization>(this.serverConfig.createOrganizaion,
+      {'organizationName': organization.organizationName, 'organizationDescription': organization.description})
+      .toPromise();
+  }
+
+
+/*
+  getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
+    let filterParams = new HttpParams();
+    if (filterType && filterType !== 'none' && filterInput) {
+      filterParams = filterParams.append('filterType', filterType);
+      filterParams = filterParams.append('filterInput', filterInput);
+    }
+    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses, { params: filterParams })
+      .toPromise()
+
+  }
+  */
+
+
   // gets a process by its Id
   getProcessById (processId: string): Promise<StoreProcess> {
     return this.http.get<StoreProcess>(this.serverConfig.getProcess + processId)
@@ -48,7 +86,9 @@ export class GatewayProvider {
   getStoreProcesses(): Promise<StoreProcess[]> {
     return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses)
       .toPromise()
+
   }
+
 
   getStoreProcessRatings(processId: string): Promise<StoreProcessRating[]> {
     const params = new HttpParams();

@@ -56,7 +56,9 @@ public class ProcessRatingController {
             numberOfRatings.set(numberOfRatings.intValue() + 1);
             averageRating.set(averageRating.doubleValue() + rating.getRating());
         });
+
         averageRating.set((averageRating.doubleValue()/numberOfRatings.doubleValue()));
+
 
         return() -> new ResponseEntity<>(new AvgRatingResponse(numberOfRatings.intValue(), averageRating.doubleValue()), HttpStatus.OK);
     }

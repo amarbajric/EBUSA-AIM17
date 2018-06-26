@@ -1,0 +1,29 @@
+<div class="row">
+  <toaster-container [toasterconfig]="config"></toaster-container>
+  <h5 *ngIf="(!myProcesses || myProcesses.length < 1) && this.inOrganization === true">You do not have any processes yet!</h5>
+ <h5 *ngIf="this.inOrganization === false">You are currently not a member of an organization.</h5>
+  <button *ngIf="this.inOrganization === false" class="btn btn-primary btn-sm" (click)="openCreateOrganization()">create new organization</button>
+
+      <table class="table table-striped" *ngIf="myProcesses && myProcesses.length > 0 && this.inOrganization === true ">
+         <thead>
+            <tr>
+               <th>#</th>
+               <th>process name</th>
+               <th>creation date</th>
+               <th>details</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr *ngFor="let process of myProcesses">
+               <td>{{ process.processId }}</td>
+               <td>{{ process.processName }}</td>
+               <td>{{ process.processCreatedAt | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+               <td>
+                 <button class="btn btn-primary btn-sm" (click)="showProcessDetails(process.processId, process.processName, process.processVersion, process.processPrice, process.processCreator, process.processDescription)">Show</button>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+  <br>
+
+ </div>

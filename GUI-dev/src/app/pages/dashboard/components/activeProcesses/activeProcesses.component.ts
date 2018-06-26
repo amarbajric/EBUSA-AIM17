@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ngx-active-processes',
-  styleUrls: [],
+  styleUrls: ['activeProcesses.component.scss'],
   templateUrl:  './activeProcesses.html',
 })
 export class ActiveProcessesComponent implements OnInit  {
@@ -20,6 +20,8 @@ export class ActiveProcessesComponent implements OnInit  {
   msg = undefined;
 
   constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router) {
+
+    // this.activeProcesses = [{"piId":1, "startTime": [8], "processName": "Günther", "startUserId": 12}];
   }
 
   ngOnInit() {
