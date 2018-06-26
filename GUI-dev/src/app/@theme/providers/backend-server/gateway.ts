@@ -2,7 +2,6 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
 import {User, StoreProcess, StoreProcessRating} from '../../../../models/models';
-import {RequestOptions} from "@angular/http";
 
 
 @Injectable()
@@ -38,8 +37,8 @@ export class GatewayProvider {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     const formData: FormData = new FormData();
-    formData.append("file", owlFile);
-    return this.http.post<any>(this.serverConfig.uploadOWL + processId + '/uploadProcessFile', formData, {"headers": headers}).toPromise()
+    formData.append('file', owlFile);
+    return this.http.post<any>(this.serverConfig.uploadOWL + processId + '/uploadProcessFile', formData, {'headers': headers}).toPromise()
   }
 
 

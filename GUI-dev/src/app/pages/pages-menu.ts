@@ -22,11 +22,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-paper-plane',
     link: '/createProcess',
   },
-  {
-    title: 'upload Process',
-    icon: 'nb-paper-plane',
-    link: '/importProcess',
-  },
   /*{
     title: 'FEATURES',
     group: true,
