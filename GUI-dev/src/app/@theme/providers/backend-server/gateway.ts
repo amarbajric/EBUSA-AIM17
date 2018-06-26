@@ -26,6 +26,7 @@ export class GatewayProvider {
       .toPromise()
   }
 
+
   createProcess(process: StoreProcess): Promise<StoreProcess> {
     return this.http.post<StoreProcess>(this.serverConfig.createProcess, {'processName': process.processName,
       'processDescription': process.processDescription, 'processVersion': process.processVersion,
@@ -36,13 +37,9 @@ export class GatewayProvider {
     return this.http.post<any>(this.serverConfig.uploadOWL + processId + '/uploadFileProcess', {"file": body}).toPromise()
   }
 
-  getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
-    let filterParams = new HttpParams();
-    if (filterType && filterType !== 'none' && filterInput) {
-      filterParams = filterParams.append('filterType', filterType);
-      filterParams = filterParams.append('filterInput', filterInput);
-    }
-    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses, { params: filterParams })
+
+  getStoreProcesses(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses)
       .toPromise()
   }
 

@@ -4,6 +4,19 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+##2018-06-26 ([#115](https://github.com/amarbajric/EBUSA-AIM17/pull/115))
+- Added
+  - Endpoint `/api/store/process/<processId>/uploadProcessFile` where a file can be uploaded to a
+   specific process in the proccess-store
+  - Endpoint `/api/store/process/<processId>/getProcessFile` where a process file can be downloaded
+  from the process-store
+
+##2018-06-25 ([#101](https://github.com/amarbajric/EBUSA-AIM17/pull/112))
+- Added
+  - Process Filter Pipe
+-Changed
+  - Process Store Search component uses a pipe for local filtering
+
 ##2018-06-25 ([#110](https://github.com/amarbajric/EBUSA-AIM17/pull/110))
 - Added logo and favicon to the platform
 
@@ -30,6 +43,27 @@ The format is partially based on [Keep a Changelog](http://keepachangelog.com/en
     - Documentation for use and further extension can be found on SharePoint
 ## Removed
 - User-Page (Profile) test data
+
+## 2018-06-11 ([#91](https://github.com/amarbajric/EBUSA-AIM17/pull/91))
+## Added
+- Menu
+  - Entry "Process Store"
+- Components/Modules
+  - ProcessStoreSearchComponent (search via frontend, filtering (price, rating createdBy) via backend)
+  - ProcessStoreSearchModule
+- Gateway (Angular)
+  - getStoreProcesses (with filtering)
+- Routings
+  - "processstore-search" -> "ProcessStoreSearchComponent"
+- Models (Angular)
+  - StoreProcess (based on ProcessStoreDTO)
+- Pipes
+  - SimpleSearchPipe
+- NPM Dependencies
+  - angular-star-rating
+    - css-star-rating
+- Static Assets
+  - "star-rating.icons.svg"
 
 ## 2018-06-11 ([#91](https://github.com/amarbajric/EBUSA-AIM17/pull/91))
 ## Added
