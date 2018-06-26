@@ -8,4 +8,6 @@ public interface ProcessStoreObject {
 
     void setProcessName(String processName);
 
+    Boolean isApproved();
+
 }
