@@ -1,5 +1,6 @@
 package at.fhjoanneum.ippr.gateway.api.controller;
 
+import at.fhjoanneum.ippr.commons.dto.processstore.ProcessAvgRatingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessOrgaMappingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessRatingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessStoreDTO;
@@ -115,6 +116,12 @@ public class ProcessStoreGatewayController {
             final HttpServletRequest request,
             @PathVariable(name = "processId") final Long processId) {
         return() -> processStoreCaller.findRatingByProcessId(processId).get();
+    }
+
+    @RequestMapping(value ="api/store/processRating/{processId}/getAverageAndCount", method = RequestMethod.GET)
+    public @ResponseBody Callable<ResponseEntity<ProcessAvgRatingDTO>> getAvgRatingAndCountOfProcess(
+            final HttpServletRequest request, @PathVariable(name = "processId") final Long processId) {
+        return() -> processStoreCaller.getAvgRatingAndCountOfProcess(processId).get();
     }
 
 

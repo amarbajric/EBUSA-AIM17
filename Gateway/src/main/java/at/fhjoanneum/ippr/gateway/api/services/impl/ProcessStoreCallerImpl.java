@@ -1,5 +1,6 @@
 package at.fhjoanneum.ippr.gateway.api.services.impl;
 
+import at.fhjoanneum.ippr.commons.dto.processstore.ProcessAvgRatingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessOrgaMappingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessRatingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessStoreDTO;
@@ -113,6 +114,12 @@ public class ProcessStoreCallerImpl implements Caller {
         final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/processRating/"+processId);
         return createRequest(uri, HttpMethod.GET, null, ProcessRatingDTO[].class, null);
 
+    }
+
+    @Async
+    public Future<ResponseEntity<ProcessAvgRatingDTO>> getAvgRatingAndCountOfProcess(final Long processId) throws URISyntaxException {
+        final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/processRating/"+processId+"/getAverageAndCount");
+        return createRequest(uri, HttpMethod.GET, null, ProcessAvgRatingDTO.class, null);
     }
 
     @Async
