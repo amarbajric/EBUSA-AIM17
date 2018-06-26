@@ -1,6 +1,6 @@
 import { Component,  OnInit } from '@angular/core';
 import {ProcessesService} from '../../../../allProcesses.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import {Router, ActivatedRoute, NavigationEnd} from '@angular/router';
 import {GatewayProvider} from '../../../../@theme/providers/backend-server/gateway';
 import {User} from '../../../../../models/models';
 import {ModalComponent} from '../modal/modal.component';
@@ -22,6 +22,7 @@ export class MyProcessesComponent implements OnInit  {
   user: User;
   inOrganization: boolean = false;
   config: ToasterConfig;
+  navigationSubscription;
 
   constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router,
               private gateway: GatewayProvider, private modalService: NgbModal,
@@ -35,6 +36,17 @@ export class MyProcessesComponent implements OnInit  {
       animation: 'slidedown',
       limit: 2,
     });
+
+   /* this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.initialiseComponents();
+      }
+    });*/
+  }
+
+  initialiseComponents() {
+    // Set default values and re-fetch any data you need.
   }
 
   ngOnInit() {
@@ -75,8 +87,12 @@ export class MyProcessesComponent implements OnInit  {
   openCreateOrganization() {
     const createOrgaModal = this.modalService.open(CreateOrgaModalComponent,
       { size: 'lg', container: 'nb-layout' });
-    createOrgaModal.componentInstance.saved.subscribe(() => {this.createToast()});
-
+    createOrgaModal.componentInstance.saved.subscribe(() => {
+      this.createToast();
+      /*if (this.navigationSubscription) {
+        this.navigationSubscription.unsubscribe();
+      }*/
+    })
   }
 
   public createToast() {
