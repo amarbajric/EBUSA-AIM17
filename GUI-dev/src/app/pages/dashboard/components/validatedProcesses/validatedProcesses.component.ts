@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GatewayProvider} from '../../../../@theme/providers/backend-server/gateway';
 import { ModalComponent } from '../modal/modal.component';
-import {StoreProcess} from '../../../../../models/models';
+import {StoreProcess, User} from '../../../../../models/models';
 
 
 @Component({
@@ -13,23 +13,47 @@ import {StoreProcess} from '../../../../../models/models';
   templateUrl:  './validatedProcesses.html',
 })
 export class ValidatedProcessesComponent implements OnInit  {
-
-  protected validationProcesses: StoreProcess[];
-  selectedProc: StoreProcess;
+  validationProcesses: StoreProcess[];
+  user: User;
+  inOrganization: boolean = false;
+  orgaId: number;
 
   constructor(protected service: ProcessesService, protected route: ActivatedRoute, protected router: Router,
               private modalService: NgbModal, private gateway: GatewayProvider) {
   }
 
   ngOnInit() {
+    this.gateway.getUser()
+      .then((user) => {
+        this.user = user;
+        if (user.organization !== null) {
+          this.inOrganization = true;
+          if (this.inOrganization === true) {
+            this.orgaId = user.organization.oid;
+          }
+        }
+      })
     this.getProcesses();
   }
 
 
   getProcesses() {
-    this.gateway.getApprovedProcessesByUser()
-      .then((processes) => {
-      this.validationProcesses = processes;
+    this.inOrganization = false;
+    this.gateway.getUser()
+      .then((user) => {
+        this.user = user;
+        if (user.organization !== null) {
+          this.inOrganization = true;
+          if (this.inOrganization === true) {
+            this.orgaId = user.organization.oid;
+            if (this.inOrganization === true) {
+              this.gateway.getOrgaProcesses(user.organization.oid)
+                .then((processes) => {
+                  this.validationProcesses = processes.filter(proc => {proc.approved === true});
+                })
+            }
+          }
+        }
       })
   }
 

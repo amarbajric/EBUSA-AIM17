@@ -19,6 +19,9 @@ public interface ProcessStore extends CrudRepository<ProcessStoreObjectImpl, Lon
     @Query(value="SELECT * FROM processstore ps WHERE ps.process_id = :process_id", nativeQuery = true)
     public ProcessStoreObjectImpl findProcessById(@Param("process_id") Long processId);
 
+    @Query(value = "SELECT * FROM processstore ps WHERE ps.process_name = :process_name AND ps.process_price = :price", nativeQuery = true)
+    public ProcessStoreObjectImpl findProcessByProcessNameAndProcessPrice(@Param("process_name") String processName, @Param("price") Double price);
+
     @Query(value="SELECT * FROM processstore ps WHERE ps.process_creator = :user_id", nativeQuery = true)
     public List<ProcessStoreObjectImpl> findAllProcessesByUserId(@Param("user_id") String processCreator);
 
