@@ -19,14 +19,16 @@ public class ProcessStoreDTO implements Serializable {
     private Double processPrice;
     private String processApprover;
     private String processApproverComment;
-    private Boolean isApproved;
+    private Boolean processApproved;
     private Date processApprovedDate;
 
     public ProcessStoreDTO() {}
 
     public ProcessStoreDTO(final Long processId, final String processName, final String processDescription, final String processCreator,
                            final Date processCreatedAt, final Long processVersion, final Double processPrice, final String processApprover,
-                           final String processApproverComment, final Boolean isApproved, final Date processApprovedDate) {
+
+                           final String processApproverComment, final Boolean processApproved, final Date processApprovedDate) {
+
         this.processId = processId;
         this.processName = processName;
         this.processDescription = processDescription;
@@ -36,7 +38,7 @@ public class ProcessStoreDTO implements Serializable {
         this.processPrice = processPrice;
         this.processApprover = processApprover;
         this.processApproverComment = processApproverComment;
-        this.isApproved = isApproved;
+        this.processApproved = processApproved;
         this.processApprovedDate = processApprovedDate;
     }
 
@@ -72,8 +74,8 @@ public class ProcessStoreDTO implements Serializable {
         return processApproverComment;
     }
 
-    public Boolean isApproved() {
-        return isApproved;
+    public Boolean getProcessApproved() {
+        return processApproved;
     }
 
     public Date getProcessApprovedDate() {
