@@ -1,4 +1,4 @@
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
 import {User, StoreProcess, StoreProcessRating} from '../../../../models/models';
@@ -37,7 +37,7 @@ export class GatewayProvider {
   }
 
   postStoreProcessRating(processId: number, rating: StoreProcessRating): void {
-    const url = this.serverConfig.postStoreProcessRating + '/' + processId +'/add'
+    const url = this.serverConfig.postStoreProcessRating + '/' + processId + '/add'
     this.http.post<StoreProcessRating>(url, rating).toPromise()
   }
 }
