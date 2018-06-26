@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -14,7 +14,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
       {{ modalContent }}
     </div>
     <div class="modal-footer">
-      <button class="btn btn-md btn-primary" (click)="buyProcess(); closeModal()">Yes</button>
+      <button class="btn btn-md btn-primary" (click)="callComponentFunction(); closeModal()">Yes</button>
       <button class="btn btn-md btn-primary" (click)="closeModal()">No</button>
     </div>
   `,
@@ -23,23 +23,16 @@ export class ProcessstoreDetailsModalComponent {
 
   modalHeader: string;
   modalContent: string;
+  buy: EventEmitter<any> = new EventEmitter();
 
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor(private activeModal: NgbActiveModal,
+              ) { }
 
   closeModal() {
     this.activeModal.close();
   }
 
-  // buys the process / adds it to the organization
-  // TODO: implement buy process according to backend
-  buyProcess() {
-
-    /*
-    this.gateway.addProcessToCompany(this.processId)
-      .then((process) => {
-        this.process = process;
-      })
-    */
-    // console.log("pressed buy");
+  callComponentFunction() {
+    this.buy.emit('callFunction');
   }
 }

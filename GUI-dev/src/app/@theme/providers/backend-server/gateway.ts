@@ -32,20 +32,17 @@ export class GatewayProvider {
       .toPromise()
   }
 
-  // TODO: implement adding process to company and getting processes of user/company
-  /*
-  addProcessToCompany (processId: string, orgId: string): void {
-      this.http.post<String>(this.serverConfig.getProcess + processId + '/buy')
+  // adds a process to an organization
+  addProcessToOrganization (processId: string, orgId: string): Promise<StoreProcess> {
+      return this.http.post<StoreProcess>(this.serverConfig.getProcess + processId + '/buy', orgId)
         .toPromise()
   }
-  */
 
-  /*
-  getProcessesByOrgId (orgId: string): Promise<> {
-    return this.http.get<>(this.serverConfig. + orgId)
+  // get all processes of an organization
+  getProcessesByOrgId (orgId: string): Promise<string[]> {
+    return this.http.get<string[]>(this.serverConfig.getOrgProcesses + orgId)
       .toPromise()
   }
-  */
 
   getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
     let filterParams = new HttpParams();
