@@ -18,6 +18,7 @@ export class DashboardComponent {
   tabName: any[];
   user: User;
   isUser: boolean;
+  inOrganization: boolean;
 
   tabsApprover: any[] = [
     {
@@ -44,7 +45,7 @@ export class DashboardComponent {
   constructor(private gateway: GatewayProvider, public accessChecker: NbAccessChecker,
               private roleProvider: RoleProvider) {
 
-
+    this.getFavoriteProcesses();
 
    }
 
@@ -54,28 +55,26 @@ export class DashboardComponent {
         this.user = user;
          this.roleProvider.getRole().subscribe(role => this.isUser = role === 'USER' )
       })
+    console.log('ononit')
 
-
-
-    this.getFavoriteProcesses();
-    this.getBestRatedProcesses();
   }
 
 
 
 
   getFavoriteProcesses() {
-    this.gateway.getApprovedProcessesByUser()
-      .then((processes) => {
-        this.favoriteProcess = processes[0];
-
-      })
-  }
-
-  getBestRatedProcesses() {
-    this.gateway.getApprovedProcessesByUser()
-      .then((processes) => {
-        this.bestRatedProcess = processes[1];
+    this.inOrganization = false;
+    this.gateway.getUser()
+      .then((user) => {
+        this.user = user;
+        if (user.organization !== null) {
+          console.log('aidsahjdfsdsfajh ' + user.organization)
+              this.gateway.getOrgaProcesses(user.organization.oid)
+                .then((processes) => {
+                  this.favoriteProcess = processes[0];
+                  this.bestRatedProcess = processes[1];
+                })
+        }
       })
   }
 
