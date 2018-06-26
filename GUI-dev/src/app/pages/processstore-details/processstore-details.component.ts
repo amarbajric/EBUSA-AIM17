@@ -56,7 +56,7 @@ export class ProcessStoreDetailsComponent implements OnInit {
     this.confProcesses = this.processService.getProcessModels();
 
     // TODO: Überprüfen ob entsprechende ProcesssID vorhanden
-    if(this.processesOfOrg.filter((pid) => pid == this.processId).length == 1) {
+    if (this.processesOfOrg.filter((pid) => pid === this.processId).length === 1) {
       this.hasProcess = true;
       this.isConfigured = true;
 
@@ -89,10 +89,10 @@ export class ProcessStoreDetailsComponent implements OnInit {
 
     this.gateway.addProcessToOrganization(this.processId, this.orgId)
       .then(() => {
-        console.log("added process to organization");
+        // console.log("added process to organization");
       })
       .catch(err =>
-        console.log("error: " + err)
+        // console.log("error: " + err);
       );
   }
 
