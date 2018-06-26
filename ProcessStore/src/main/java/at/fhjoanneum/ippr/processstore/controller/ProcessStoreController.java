@@ -75,4 +75,10 @@ public class ProcessStoreController {
         return() -> processStoreService.changeApprovedState(false ,processId).get();
     }
 
+    @RequestMapping(value = "process/{processId}/updateApprovalComment", method = RequestMethod.POST)
+    public @ResponseBody Callable<ProcessStoreDTO> updateApproval(
+            @RequestBody final String comment, @PathVariable("processId") final Long processId) {
+        return() -> processStoreService.updateApprovedComment(comment ,processId).get();
+    }
+
 }
