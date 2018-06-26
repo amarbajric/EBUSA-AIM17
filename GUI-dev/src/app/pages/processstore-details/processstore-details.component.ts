@@ -14,7 +14,8 @@ export class ProcessStoreDetailsComponent implements OnInit {
 
   processId: string;
   process: StoreProcess = new StoreProcess;
-  hasProcess = false;
+  hasProcess = true;
+  isConfigured = true;
   orgId: string;
   processes;
 
@@ -56,6 +57,12 @@ export class ProcessStoreDetailsComponent implements OnInit {
 
     activeModal.componentInstance.modalHeader = 'Attention!';
     activeModal.componentInstance.modalContent = 'Do you really want to buy the process?';
+  }
+
+  // configuring the process
+  // TODO: implement configure process
+  configureProcess() {
+    // console.log("configure process");
   }
 
   // starting the process
