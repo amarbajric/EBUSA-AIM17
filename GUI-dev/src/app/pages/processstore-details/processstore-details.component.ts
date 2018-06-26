@@ -4,7 +4,6 @@ import {StoreProcess} from '../../../models/models';
 import {GatewayProvider} from '../../@theme/providers/backend-server/gateway';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProcessstoreDetailsModalComponent} from './modal/processstore-details.modal';
-import {ProcessesService} from '../../allProcesses.service';
 
 @Component({
   selector: 'ngx-processstore-details',
@@ -13,18 +12,17 @@ import {ProcessesService} from '../../allProcesses.service';
 })
 export class ProcessStoreDetailsComponent implements OnInit {
 
-  orgId: string;
-  processId: string;
+  uid;
+  orgId;
+  processId;
   process: StoreProcess = new StoreProcess;
-  processesOfOrg: string[] = ['1', '2'];
-  confProcesses;
+  processesOfOrg: StoreProcess[];
   hasProcess = false;
   isConfigured = false;
 
   constructor(private route: ActivatedRoute,
               private gateway: GatewayProvider,
-              private modalService: NgbModal,
-              private processService: ProcessesService) {
+              private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -33,40 +31,31 @@ export class ProcessStoreDetailsComponent implements OnInit {
       this.processId = params['processId'];
     });
 
-    // the the oid of the current user
-    this.gateway.getUser()
-      .then((user) => {
-        this.orgId = user.organization.oid.toString();
-      });
-
-    // get organization processes
-    /*
-    this.gateway.getProgcessesByOrgId(this.orgId)
-      .then((processes) => {
-        this.processesOfOr = processes;
-      });
-    */
-
-    // get the process details with the ID
+    // get the process details with the Id
     this.gateway.getProcessById(this.processId)
       .then((process) => {
         this.process = process;
       });
 
-    this.confProcesses = this.processService.getProcessModels();
-
-    // TODO: Überprüfen ob entsprechende ProcesssID vorhanden
-    if (this.processesOfOrg.filter((pid) => pid === this.processId).length === 1) {
-      this.hasProcess = true;
-      this.isConfigured = true;
-
-      // TODO: check if process is configured
-      /*
-      if(this.confProcesses) {
-        this.isConfigured = true;
-      }
-      */
-    }
+    // the the oid of the current user
+    this.gateway.getUser()
+      .then((user) => {
+        this.uid = user.uid;
+        this.orgId = user.organization.oid.toString();
+      })
+      .then(() => {
+        // get organization processes
+        this.gateway.getProcessesByOrgId(this.orgId)
+          .then((processes) => {
+            this.processesOfOrg = processes;
+          })
+          .then(() => {
+            if (this.processesOfOrg.filter((process) => process.processId == this.processId).length === 1) {
+              this.hasProcess = true;
+              this.isConfigured = true;
+            }
+          })
+      });
   }
 
   // activates a modal for approval of payment
@@ -85,17 +74,11 @@ export class ProcessStoreDetailsComponent implements OnInit {
 
   // buys the process / adds it to the organization
   buyProcess() {
-    // console.log("pressed buy");
-
-    this.gateway.addProcessToOrganization(this.processId, this.orgId)
+    this.gateway.addProcessToOrganization(this.processId, this.orgId, this.uid)
       .then(() => {
-        // console.log("added process to organization");
+        window.location.reload();
       })
-      /*
-      .catch(err =>
-        console.log("error: " + err);
-      );
-      */
+      .catch(err => console.warn(err))
   }
 
   // configuring the process

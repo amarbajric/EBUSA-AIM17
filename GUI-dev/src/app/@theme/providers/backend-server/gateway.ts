@@ -33,14 +33,15 @@ export class GatewayProvider {
   }
 
   // adds a process to an organization
-  addProcessToOrganization (processId: string, orgId: string): Promise<StoreProcess> {
-    return this.http.post<StoreProcess>(this.serverConfig.getProcess + processId + '/buy', orgId)
+  addProcessToOrganization (processId: string, orgId: string, uid:string): Promise<StoreProcess> {
+    return this.http.post<StoreProcess>(this.serverConfig.getProcess + processId + '/buy',
+                                        {'orgaId':orgId, 'userId':uid})
       .toPromise()
   }
 
   // get all processes of an organization
-  getProcessesByOrgId (orgId: string): Promise<string[]> {
-    return this.http.get<string[]>(this.serverConfig.getOrgProcesses + orgId)
+  getProcessesByOrgId (orgId: string): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getOrgProcesses + orgId)
       .toPromise()
   }
 
