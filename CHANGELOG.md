@@ -4,6 +4,13 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+
+##2018-06-26 ([#111](https://github.com/amarbajric/EBUSA-AIM17/issues/111))
+- Added
+  - create-process component
+  - new route in routing module
+  - entry on dashboard
+
 ##2018-06-26 ([#115](https://github.com/amarbajric/EBUSA-AIM17/pull/115))
 - Added
   - Endpoint `/api/store/process/<processId>/uploadProcessFile` where a file can be uploaded to a
