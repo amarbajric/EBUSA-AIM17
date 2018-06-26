@@ -1,5 +1,6 @@
 package at.fhjoanneum.ippr.gateway.api.controller;
 
+import at.fhjoanneum.ippr.commons.dto.processstore.ProcessOrgaMappingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessRatingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessStoreDTO;
 import at.fhjoanneum.ippr.gateway.api.controller.user.HttpHeaderUser;
@@ -122,6 +123,28 @@ public class ProcessStoreGatewayController {
             }
         };
         runnable.run();
+    }
+
+    @RequestMapping(value ="api/store/process/{processId}/buy", method = RequestMethod.POST)
+    public void saveRating(@RequestBody ProcessOrgaMappingDTO mapping, @PathVariable(name = "processId") final Long processId) {
+        final Runnable runnable = () -> {
+            try {
+                processStoreCaller.saveMapping(mapping, processId);
+            } catch (final URISyntaxException e) {
+                LOG.error(e.getMessage());
+            }
+        };
+        runnable.run();
+    }
+
+    @RequestMapping(value ="api/store/processes/byOrga/{orgaId}", method = RequestMethod.GET)
+    public @ResponseBody Callable<ResponseEntity<ProcessStoreDTO[]>> findProcessByUserId(
+            //final HttpServletRequest request,
+            @PathVariable(name = "orgaId") final Long orgaId) {
+        return() -> {
+            //final HttpHeaderUser headerUser = new HttpHeaderUser(request);
+            return processStoreCaller.findAllProcessesByOrgaId(orgaId).get();
+        };
     }
 
     /*@RequestMapping(value ="api/store/process/upload", method = RequestMethod.POST)

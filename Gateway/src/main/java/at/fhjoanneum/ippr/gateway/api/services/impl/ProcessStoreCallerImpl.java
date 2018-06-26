@@ -1,5 +1,6 @@
 package at.fhjoanneum.ippr.gateway.api.services.impl;
 
+import at.fhjoanneum.ippr.commons.dto.processstore.ProcessOrgaMappingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessRatingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessStoreDTO;
 import at.fhjoanneum.ippr.gateway.api.config.GatewayConfig;
@@ -114,6 +115,23 @@ public class ProcessStoreCallerImpl implements Caller {
     public void saveRating(ProcessRatingDTO rating, Long processId) throws URISyntaxException {
         final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/processRating/"+processId+"/add");
         createRequest(uri, HttpMethod.POST, rating, ProcessRatingDTO.class, null);
+    }
+
+    @Async
+    public void saveMapping(ProcessOrgaMappingDTO mapping, Long processId) throws URISyntaxException {
+        final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/process/"+processId+"/buy");
+
+        createRequest(uri, HttpMethod.POST, mapping, ProcessOrgaMappingDTO.class, null);
+    }
+
+    @Async
+    public Future<ResponseEntity<ProcessStoreDTO[]>> findAllProcessesByOrgaId(final Long orgaId
+    ) throws URISyntaxException {
+
+        final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/processes/byOrga/"+orgaId);
+        //final HttpHeaders header = headerUser.getHttpHeaders();
+        return createRequest(uri, HttpMethod.GET, null, ProcessStoreDTO[].class, null);
+
     }
 
     @Async

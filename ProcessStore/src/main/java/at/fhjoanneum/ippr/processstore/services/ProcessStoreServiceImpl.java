@@ -92,12 +92,18 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
 
         final List<ProcessStoreDTO> processes = createProcessStoreDTOList(results);
 
-        return new AsyncResult<List<ProcessStoreDTO>>(processes);
+        return new AsyncResult<>(processes);
     }
 
     @Override
-    public Future<List<ProcessStoreDTO>> findAllProcessesByOrganisationId(String organisationId) {
-        return null;
+    public Future<List<ProcessStoreDTO>> findAllProcessesByOrgaId(String orgaId) {
+
+        final List<ProcessStoreObjectImpl> results = processStore.findAllProcessesByOrgaId(orgaId);
+
+        final List<ProcessStoreDTO> processes = createProcessStoreDTOList(results);
+
+        return new AsyncResult<>(processes);
+
     }
 
     @Override

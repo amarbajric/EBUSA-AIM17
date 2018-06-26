@@ -22,7 +22,7 @@ public interface ProcessStoreService {
 
     Future<List<ProcessStoreDTO>> findAllProcessesByUserId(String userId);
 
-    Future<List<ProcessStoreDTO>> findAllProcessesByOrganisationId(String organisationId);
+    Future<List<ProcessStoreDTO>> findAllProcessesByOrgaId(String orgaId);
 
     void saveProcessStoreObject(String processName, String processDescription, String processCreator,
                                 Date processCreatedAt, Long processVersion, Double processPrice);
