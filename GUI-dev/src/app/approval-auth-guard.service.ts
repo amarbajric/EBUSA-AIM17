@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { NbAuthService } from '@nebular/auth';
 import { tap } from 'rxjs/operators/tap';
-import {RoleProvider} from './role.provider';
+import {GatewayProvider} from './@theme/providers/backend-server/gateway';
 
 @Injectable()
 export class ApprovalAuthGuard implements CanActivate {
 
-  constructor(private authService: NbAuthService, private router: Router, private roleProvider: RoleProvider) {
+  constructor(private authService: NbAuthService, private router: Router, private gateway: GatewayProvider) {
   }
 
   canActivate() {
@@ -16,11 +16,8 @@ export class ApprovalAuthGuard implements CanActivate {
       .pipe(
         tap(authenticated => {
 
-          this.roleProvider.getRole().subscribe((role) => {
-            if (role === 'SYS_APPROVER') {
-              // console.log('du bist approver');
-            } else {
-              // console.log('du hast keine Rechte dafür');
+          this.gateway.getUser().then((user) => {
+            if (user.roles.find(role => role.name === 'SYS_APPROVER') === undefined) {
               this.router.navigate(['home']);
             }
           });
