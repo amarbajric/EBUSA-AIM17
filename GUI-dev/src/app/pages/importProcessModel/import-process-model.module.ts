@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ThemeModule } from '../../@theme/theme.module';
-import {ImportProcessModelComponent} from "./importProcessModel.component";
+import {ImportProcessModelComponent} from './importProcessModel.component';
 
 @NgModule({
   imports: [

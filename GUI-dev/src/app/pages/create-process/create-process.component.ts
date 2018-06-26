@@ -13,7 +13,7 @@ export class CreateProcessComponent {
   owlFile: File;
   file: File;
 
-  constructor(private gateway: GatewayProvider, private modalService: NgbModal) {
+  constructor(private gateway: GatewayProvider) {
 
   }
 
@@ -27,13 +27,12 @@ export class CreateProcessComponent {
       this.owlFile = undefined;
       event.target.value = '';
     }
-    console.log(this.owlFile);
   }
 
 
   createProcess(form): void {
 
-        this.gateway.uploadOWLModel(777,this.owlFile);
+    this.gateway.uploadOWLModel(777, this.owlFile);
 
   }
 

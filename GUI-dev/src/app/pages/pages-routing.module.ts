@@ -10,7 +10,6 @@ import {ActiveProcessesComponent} from './dashboard/components/activeProcesses/a
 import { ProcessStoreSearchComponent } from './processstore-search/processstore-search.component';
 import {UserDetailsComponent} from './user-details/user-details.component';
 import { ProcessStoreDetailsComponent } from './processstore-details/processstore-details.component';
-import {ImportProcessModelComponent} from './importProcessModel/importProcessModel.component';
 import {CreateProcessComponent} from './create-process/create-process.component';
 
 
