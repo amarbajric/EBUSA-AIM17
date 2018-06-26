@@ -4,6 +4,13 @@ This file ONLY contains changes made by the AIM17 dev-team. This means, that thi
 of the forked repository.
 The format is partially based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+##2018-06-26 ([#115](https://github.com/amarbajric/EBUSA-AIM17/pull/115))
+- Added
+  - Endpoint `/api/store/process/<processId>/uploadProcessFile` where a file can be uploaded to a
+   specific process in the proccess-store
+  - Endpoint `/api/store/process/<processId>/getProcessFile` where a process file can be downloaded
+  from the process-store
+
 ##2018-06-25 ([#101](https://github.com/amarbajric/EBUSA-AIM17/pull/112))
 - Added
   - Process Filter Pipe

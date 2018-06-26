@@ -1,6 +1,9 @@
 package at.fhjoanneum.ippr.processstore.services;
 
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessStoreDTO;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -22,9 +25,13 @@ public interface ProcessStoreService {
 
     Future<List<ProcessStoreDTO>> findAllProcessesByUserId(String userId);
 
-    Future<List<ProcessStoreDTO>> findAllProcessesByOrganisationId(String organisationId);
+    Future<List<ProcessStoreDTO>> findAllProcessesByOrgaId(String orgaId);
 
     void saveProcessStoreObject(String processName, String processDescription, String processCreator,
                                 Date processCreatedAt, Long processVersion, Double processPrice);
+
+    void saveProcessFile(byte[] processFile, Long processId);
+
+    Future<Resource> getProcessFile(Long processId);
 
 }
