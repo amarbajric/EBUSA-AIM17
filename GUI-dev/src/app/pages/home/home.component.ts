@@ -14,10 +14,7 @@ export class HomeComponent implements OnInit {
 
   public processes: StoreProcess[] = [];
   public processesByDate;
-  public processesWithRating: {[process: number]: number; } = {};
-  public processesByRating: StoreProcess[] = [];
-  public ratings: string[] = [];
-  public complete: boolean = false;
+  public processesByRating;
 
   user = {};
   authenticated = false;
@@ -56,21 +53,6 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  average(ratings): number {
-    let sum = 0;
-    ratings.forEach((r) => {
-      sum += r.rating ;
-    });
-    return parseFloat( (sum / ratings.length + 0.000001).toFixed(2) );
-  }
-
-  getAverageRatings(process): Promise<number> {
-    return this.gateway.getStoreProcessRatings(process)
-        .then((ratings) => {
-          return this.average(ratings)
-        });
-  }
-
   sortProcessesByDate(processArray) {
     this.processesByDate = processArray.sort((a, b) => {
       return b.processApprovedDate - a.processApprovedDate;
@@ -78,28 +60,10 @@ export class HomeComponent implements OnInit {
   }
 
   sortProcessesByRating(processArray) {
-    for (const process of processArray) {
-      if (process) {
-        this.getAverageRatings(process.processId).then((average) => {
-          this.processesWithRating[process.processId] = average;
-        }).then(
-          () => {
-            this.complete = Object.keys(this.processesWithRating).length === this.processes.length
-          })
-          .then(() => {
-            if (this.complete) {
-              Object.entries(this.processesWithRating).forEach(
-                ([key, value]) => {
-                  this.processesByRating.push(this.processes.find((p) => p.processId === parseInt(key, 10)));
-                  this.ratings.unshift(value.toString());
-                },
-              );
-              this.processesByRating = this.processesByRating.slice(0, this.limit).reverse()
-            }
-          })
-
-        }
-    }
+    this.gateway.getAverageRating(1).then(
+      (a) => console.log(a)
+    )
+    //this.processesByRating = processArray
   }
 
   showDetails(processId) {

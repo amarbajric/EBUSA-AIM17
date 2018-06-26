@@ -42,4 +42,9 @@ export class GatewayProvider {
     this.http.post<StoreProcessRating>(url, rating)
       .toPromise()
   }
+
+  getAverageRating(processId: string): Promise<StoreProcessRating> {
+    const url = this.serverConfig.getStoreProcessRatingAverage + '/' + processId + '/getAverageAndCount';
+    return this.http.get<StoreProcessRating>(url).toPromise()
+  }
 }
