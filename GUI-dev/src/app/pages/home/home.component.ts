@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   public processes: StoreProcess[] = [];
   public processesByDate;
-  public processesWithRating: {[rating: number]: StoreProcess; } = {};
+  public processesWithRating: {[process: number]: number; } = {};
   public processesByRating: StoreProcess[] = [];
   public ratings: string[] = [];
   private filterType = 'none';
@@ -83,15 +83,17 @@ export class HomeComponent implements OnInit {
     for (const process of processArray) {
       if (process) {
         this.getAverageRatings(process.processId).then((average) => {
-          this.processesWithRating[average] = process;
+          this.processesWithRating[process.processId] = average;
         }).then(
-          () => {this.complete = Object.keys(this.processesWithRating).length === this.processes.length})
+          () => {
+            this.complete = Object.keys(this.processesWithRating).length === this.processes.length
+          })
           .then(() => {
-            if (this.complete){
+            if (this.complete) {
               Object.entries(this.processesWithRating).forEach(
                 ([key, value]) => {
-                  this.processesByRating.push(value);
-                  this.ratings.push(key);
+                  this.processesByRating.push(this.processes.find((process) => process.processId === parseInt(key, 10)));
+                  this.ratings.push(value);
                 }
               );
               this.processesByRating = this.processesByRating.slice(0, this.limit)
