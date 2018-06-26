@@ -45,8 +45,8 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
     @Column
     private String processApproverComment;
 
-    @Column(nullable = false)
-    private boolean isApproved;
+    @Column
+    private Boolean isApproved;
 
     @Column
     private Date processApprovedDate;
@@ -138,12 +138,12 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
         this.processApproverComment = processApproverComment;
     }
 
-    public boolean isApproved() {
+    public Boolean isApproved() {
         return isApproved;
     }
 
-    public void setApproved(boolean approved) {
-        isApproved = approved;
+    public void setApproved(Boolean approved) {
+        this.isApproved = approved;
     }
 
     public Date getProcessApprovedDate() {

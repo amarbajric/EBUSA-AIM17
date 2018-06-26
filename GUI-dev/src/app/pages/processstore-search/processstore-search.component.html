@@ -2,7 +2,7 @@
     <div class="col-md-2">
         <nb-card>
             <nb-card-body>
-                <div class="container-title">Filter By:</div>
+                <div class="container-title">Apply Filter:</div>
                 <div class="row">
                     <div [(ngModel)]="filterType" ngbRadioGroup class="btn-group-vertical btn-group-toggle btn-divided-group btn-outline-divided-group btn-group-full-width">
                         <label ngbButtonLabel class="btn btn-secondary">
@@ -15,14 +15,13 @@
                             <input ngbButton type="radio" value="createdBy"> Created By
                         </label>
                         <label ngbButtonLabel class="btn btn-secondary">
-                            <input ngbButton type="radio" value="none"> None
+                            <input ngbButton type="radio" value="none"> No Filter
                         </label>
                     </div>
                     <div>
-                        <input [(ngModel)]="filterInput" class="form-control" placeholder="Filter Input">
-                    </div>
-                    <div>
-                        <button (click)="getProcesses()" class="btn btn-outline-primary">Apply</button>
+                        <input [hidden]="filterType === 'none'"
+                               [type]="filterType === 'createdBy' ? 'text' : 'number'"
+                               [(ngModel)]="filterInput" class="form-control" placeholder="Filter Input">
                     </div>
                 </div>
             </nb-card-body>
@@ -38,7 +37,7 @@
                                     <span class="input-group-addon transparent">
                                         <i class="nb-search icon-vertical"></i>
                                     </span>
-                                    <input [(ngModel)]="processSearchString" id="processSearchString" class="form-control left-border-none" placeholder="Search for processes .."
+                                    <input [(ngModel)]="processSearchString" id="processSearchString" class="form-control left-border-none" placeholder="Search for processes by Name or Description.."
                                         type="text" name="processSearchString">
                                 </div>
                             </div>
@@ -48,7 +47,7 @@
             </div>
 
             <div class="row d-flex">
-                <nb-card *ngFor="let process of processes | simpleSearch:'processName,processDescription':processSearchString" class="col-md-6">
+                <nb-card *ngFor="let process of processes | simpleSearch:'processName,processDescription':processSearchString | processFilter:filterInput:filterType" class="col-md-6">
                     <nb-card-header>{{process.processName}}</nb-card-header>
                     <nb-card-body class="clearfix">
                         <div class="float-right">by {{process.processCreator}}</div>
