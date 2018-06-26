@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
               Object.entries(this.processesWithRating).forEach(
                 ([key, value]) => {
                   this.processesByRating.push(this.processes.find((p) => p.processId === parseInt(key, 10)));
-                  this.ratings.unshift(value);
+                  this.ratings.unshift(value.toString());
                 },
               );
               this.processesByRating = this.processesByRating.slice(0, this.limit).reverse()

@@ -37,7 +37,7 @@
     <nb-card>
       <nb-card-header>most popular processes</nb-card-header>
       <nb-card-body>
-        <button *ngFor="let process of processesByRating; let i=index" class="btn btn-outline-primary btn-block" type="button" (click)="showDetails(process.processId)">{{process.processName}} | {{ratings[i]}}</button>
+        <button *ngFor="let process of processesByRating; let i=index" class="btn btn-outline-primary btn-block" type="button" (click)="showDetails(process.processId)">{{process.processName}}</button>
       </nb-card-body>
     </nb-card>
   </div>
