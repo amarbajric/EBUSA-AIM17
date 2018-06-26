@@ -26,7 +26,7 @@ export class GatewayProvider {
       .toPromise()
   }
 
-  // gets a process by its ID
+  // gets a process by its Id
   getProcessById (processId: string): Promise<StoreProcess> {
     return this.http.get<StoreProcess>(this.serverConfig.getProcess + processId)
       .toPromise()
