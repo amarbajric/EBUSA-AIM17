@@ -1,6 +1,8 @@
 package at.fhjoanneum.ippr.gateway.api.services.impl;
 
+
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessAvgRatingDTO;
+
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessOrgaMappingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessRatingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessStoreDTO;
@@ -144,6 +146,7 @@ public class ProcessStoreCallerImpl implements Caller {
     }
 
     @Async
+
     public Future<ResponseEntity<ProcessStoreDTO[]>> findAllProcessesByOrgaId(final Long orgaId
     ) throws URISyntaxException {
 

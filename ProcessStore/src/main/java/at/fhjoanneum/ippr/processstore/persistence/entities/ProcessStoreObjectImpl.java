@@ -32,9 +32,11 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
     private Date processCreatedAt;
 
     @Column
+
     private Long processVersion;
 
     @Column
+
     private Double processPrice;
 
     @Column
@@ -60,7 +62,9 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
 
     public ProcessStoreObjectImpl(String processName, String processDescription, String processCreator, Date processCreatedAt,
                                   Long processVersion, Double processPrice, String processApprover, String processApproverComment,
+
                                   Boolean processApproved, Date processApprovedDate, byte[] processFile) {
+
         this.processName = processName;
         this.processDescription = processDescription;
         this.processCreator = processCreator;

@@ -1,4 +1,4 @@
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
 import {User, StoreProcess, StoreProcessRating, Organization} from '../../../../models/models';
@@ -27,11 +27,18 @@ export class GatewayProvider {
   }
 
 
-  /* getUserProcesses(userId: number): Promise<StoreProcess[]> {
-    return this.http.get<StoreProcess[]>(this.serverConfig.getUserProcesses + '/' + userId, )
-      .toPromise()
-  } */
+  createProcess(process: StoreProcess): Promise<StoreProcess> {
+    return this.http.post<StoreProcess>(this.serverConfig.createProcess, {'processName': process.processName,
+      'processDescription': process.processDescription, 'processPrice': process.processPrice}).toPromise()
+  }
 
+  uploadOWLModel(processId: number, owlFile: File): Promise<any> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    const formData: FormData = new FormData();
+    formData.append('file', owlFile);
+    return this.http.post<any>(this.serverConfig.uploadOWL + processId + '/uploadProcessFile', formData, {'headers': headers}).toPromise()
+  }
 
   getApprovedProcessesByUser(): Promise<StoreProcess[]> {
     return this.http.get<StoreProcess[]>(this.serverConfig.getApprovedProcessesByUser)
@@ -49,40 +56,6 @@ export class GatewayProvider {
       .toPromise();
   }
 
-
-/*
-  getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
-    let filterParams = new HttpParams();
-    if (filterType && filterType !== 'none' && filterInput) {
-      filterParams = filterParams.append('filterType', filterType);
-      filterParams = filterParams.append('filterInput', filterInput);
-    }
-    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses, { params: filterParams })
-      .toPromise()
-
-  }
-  */
-
-
-  // gets a process by its Id
-  getProcessById (processId: string): Promise<StoreProcess> {
-    return this.http.get<StoreProcess>(this.serverConfig.getProcess + processId)
-      .toPromise()
-  }
-
-  // adds a process to an organization
-  addProcessToOrganization (processId: string, orgId: string, uid: string): Promise<StoreProcess> {
-    return this.http.post<StoreProcess>(this.serverConfig.getProcess + processId + '/buy',
-                                        {'orgaId': orgId, 'userId': uid})
-      .toPromise()
-  }
-
-  // get all processes of an organization
-  getProcessesByOrgId (orgId: string): Promise<StoreProcess[]> {
-    return this.http.get<StoreProcess[]>(this.serverConfig.getOrgProcesses + orgId)
-      .toPromise()
-  }
-
   getStoreProcesses(): Promise<StoreProcess[]> {
     return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses)
       .toPromise()
@@ -98,7 +71,7 @@ export class GatewayProvider {
   }
 
   postStoreProcessRatings(processId: string, rating: StoreProcessRating): void {
-    const url = this.serverConfig.postStoreProcessRating + '/' + processId;
+    const url = this.serverConfig.postStoreProcessRating + '/' + processId
     this.http.post<StoreProcessRating>(url, rating).toPromise()
   }
 
@@ -126,6 +99,25 @@ export class GatewayProvider {
   postStoreProcessComment(comment: string, processId: string): void {
     const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/updateApprovalComment';
     this.http.post<StoreProcess>(url, comment).toPromise()
+  }
+
+  // gets a process by its Id
+  getProcessById (processId: string): Promise<StoreProcess> {
+    return this.http.get<StoreProcess>(this.serverConfig.getProcess + processId)
+      .toPromise()
+  }
+
+  // adds a process to an organization
+  addProcessToOrganization (processId: string, orgId: string, uid: string): Promise<StoreProcess> {
+    return this.http.post<StoreProcess>(this.serverConfig.getProcess + processId + '/buy',
+      {'orgaId': orgId, 'userId': uid})
+      .toPromise()
+  }
+
+  // get all processes of an organization
+  getProcessesByOrgId (orgId: string): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getOrgProcesses + orgId)
+      .toPromise()
   }
 
 }

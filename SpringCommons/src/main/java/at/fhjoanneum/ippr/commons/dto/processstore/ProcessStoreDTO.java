@@ -26,6 +26,7 @@ public class ProcessStoreDTO implements Serializable {
 
     public ProcessStoreDTO(final Long processId, final String processName, final String processDescription, final String processCreator,
                            final Date processCreatedAt, final Long processVersion, final Double processPrice, final String processApprover,
+
                            final String processApproverComment, final Boolean processApproved, final Date processApprovedDate) {
 
         this.processId = processId;

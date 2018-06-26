@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <nb-card>
+      <nb-card-header>Create a new process</nb-card-header>
+    <nb-card-body>
+      <form (ngSubmit)="createProcess()" #form="ngForm" >
+      <div class="form-group">
+        <label for="input-processname" class="sr-only">Process name</label>
+        <input name="processname" [(ngModel)]="process.processName" id="input-processname" #processname="ngModel"
+               class="form-control" placeholder="Process name"
+               autofocus
+               [required]="true">
+      </div>
+      <div class="form-group">
+        <label for="input-processdecription" class="sr-only">Process description</label>
+        <input name="processdescription" [(ngModel)]="process.processDescription" id="input-processdecription" #processdescription="ngModel"
+               class="form-control" placeholder="Process description"
+               autofocus
+               [required]="true">
+      </div>
+      <div class="form-group">
+        <label for="input-processprice" class="sr-only">Process price</label>
+        <input name="processprice" [(ngModel)]="process.processPrice" id="input-processprice" #processprice="ngModel"
+               class="form-control" placeholder="Process price" ng-pattern="integerval" type="number"
+               autofocus
+               [required]="true">
+      </div>
+        <form #owlModelForm="ngForm" enctype="multipart/form-data">
+          <label class="control-label">OWL-File: </label>
+            <input type="file" name="fileUpload" id="fileUpload" class="form-control" accept=".owl," (change)="onFileChange($event)">
+          <br>
+        </form>
+
+      <button [disabled]="(!owlFile || !form.valid)" class="btn btn-block btn-hero-success" >
+        Create new process
+      </button>
+      </form>
+    </nb-card-body>
+    </nb-card >
+
+  </div>
+</div>

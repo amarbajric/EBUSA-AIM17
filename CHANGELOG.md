@@ -23,6 +23,12 @@ The format is partially based on [Keep a Changelog](http://keepachangelog.com/en
     - Get processes of organization
     - Get process by id
 
+##2018-06-26 ([#111](https://github.com/amarbajric/EBUSA-AIM17/issues/111))
+- Added
+  - create-process component
+  - new route in routing module
+  - entry on dashboard
+
 ##2018-06-26 ([#115](https://github.com/amarbajric/EBUSA-AIM17/pull/115))
 - Added
   - Endpoint `/api/store/process/<processId>/uploadProcessFile` where a file can be uploaded to a
@@ -341,4 +347,3 @@ the users `email` instead of `username` (needed for log-in with email instead of
 - modifed NativeQueries - changed table names, query params to lowercase
 ## Removed
 - Nothing was removed (demonstration purpose only)
->>>>>>> dev

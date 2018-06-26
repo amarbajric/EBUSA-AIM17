@@ -6,7 +6,7 @@ import { AdminComponent } from './admin.component';
 import { routing } from './admin.routing';
 
 import { ActiveProcessesComponent } from './components/activeProcesses/activeProcesses.component';
-import { ImportProcessModelComponent } from './components/importProcessModel/importProcessModel.component';
+// import { ImportProcessModelComponent } from '../importProcessModel/importProcessModel.component';
 import { TerminatedProcessesComponent } from './components/terminatedProcesses/terminatedProcesses.component';
 import { ProcessModelsComponent } from './components/processModels/processModels.component';
 import { EventLoggerComponent } from './components/eventLogger/eventLogger.component';
@@ -29,7 +29,6 @@ import {ThemeModule} from '../../@theme/theme.module';
     ActiveProcessesComponent,
     TerminatedProcessesComponent,
     ProcessModelsComponent,
-    ImportProcessModelComponent,
     EventLoggerComponent,
     ManipulatePNMLComponent,
     GenerateOWLComponent,

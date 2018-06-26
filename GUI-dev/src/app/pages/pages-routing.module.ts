@@ -14,6 +14,7 @@ import {UserDetailsComponent} from './user-details/user-details.component';
 import {MyProcessesComponent} from './dashboard/components/myProcesses/myProcesses.component';
 
 import { ProcessStoreDetailsComponent } from './processstore-details/processstore-details.component';
+import {CreateProcessComponent} from './create-process/create-process.component';
 
 import { ReviewProcessesComponent } from './dashboard/components/reviewProcesses/reviewProcesses.component';
 import {ModalComponent} from './dashboard/components/modal/modal.component';
@@ -59,6 +60,11 @@ const routes: Routes = [{
         },
 
       ],
+    },
+    {
+      path: 'createProcess',
+      component: CreateProcessComponent,
+
     },
 
     {

@@ -10,8 +10,9 @@ export class ServerConfigProvider {
   private _getProcess = `${this._host}api/store/process/`;
   private _getOrgProcesses = `${this._host}api/store/processes/byOrga/`;
   private _getStoreProcesses = `${this._host}api/store/processes`;
-  // private _getStoreProcesses = `http://localhost:12000/processes`;
   private _getOrPostStoreProcessRatings = `${this._host}api/store/processRatings`;
+  private _uploadOWL = `${this._host}api/store/process/`;
+  private _createProcess = `${this._host}api/store/process/create`;
   private _getUserProcesses = `${this._host}api/store/processes/byUser`;
   private _getProcessById = `${this._host}api/store/process/{processId}`;
   private _getApprovedProcessesByUser = `${this._host}api/store/processes/approved`;
@@ -27,7 +28,6 @@ export class ServerConfigProvider {
   private _postStoreProcessComment = `${this._host}api/store/process`;
 
 
-
   public get checkIfMailTaken(): string {return this._checkIfMailTaken};
   public get getUser(): string {return this._getUser};
   public get getProcess(): string {return this._getProcess};
@@ -35,6 +35,8 @@ export class ServerConfigProvider {
   public get getStoreProcesses(): string {return this._getStoreProcesses};
   public get getStoreProcessRatings(): string {return this._getOrPostStoreProcessRatings};
   public get postStoreProcessRating(): string {return this._getOrPostStoreProcessRatings};
+  public get uploadOWL(): string {return this._uploadOWL};
+  public get createProcess(): string {return this._createProcess};
 
   public get getUserProcesses(): string {return this._getUserProcesses};
   public get getProcessById(): string {return this._getProcessById};
