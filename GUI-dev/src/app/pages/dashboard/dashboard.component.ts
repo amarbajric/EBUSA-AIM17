@@ -69,7 +69,7 @@ export class DashboardComponent {
         this.user = user;
         if (user.organization !== null) {
           console.log('aidsahjdfsdsfajh ' + user.organization)
-              this.gateway.getOrgaProcesses(user.organization.oid)
+              this.gateway.getProcessesByOrgId(''+user.organization.oid)
                 .then((processes) => {
                   this.favoriteProcess = processes[0];
                   this.bestRatedProcess = processes[1];

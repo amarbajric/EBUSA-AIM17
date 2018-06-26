@@ -1,34 +1,22 @@
 <div>
+
   <nb-card>
-    <nb-card-body>This is the approval page for EasyBiz model reviewer</nb-card-body>
+    <nb-card-body>This is the approval page for EasyBiz model reviewer. Just click on a specific process to get to its details page.</nb-card-body>
   </nb-card>
 
-  <h2>List of process models that need approval: </h2>
+  <h2>List of process models: </h2>
   <nb-card>
+
     <!--
-    <table>
-      <tr>
-        <th>Process Name:</th>
-        <th>Process Description:</th>
-        <th>Process Creator:</th>
-      </tr>
-      <tr *ngFor="let process of processes">
-        <td><a href="" (click)="selectProcess()>{{process.process_name}}</a></td>
-        <td>{{process.process_description}}</td>
-        <td>{{process.creator}}</td>
-      </tr>
-    </table>
-    -->
     <ul *ngFor="let process of processes" style="list-style:none; font-weight:bold">
-      <li>Process: <a href="javascript:;" (click)="loadDetails(process.process_id)">{{process.process_name}}</a></li>
-      <li><ul style="list-style:none"><li>{{process.process_description}}</li>
-        <li>{{process.creator}}</li></ul></li>
+      <li>Process: <a href="javascript:;" (click)="loadDetails(process.processId)">{{process.processName}}</a></li>
+      <li><ul style="list-style:none"><li>{{process.processDescription}}</li>
+        <li>{{process.processCreator}}</li></ul></li>
     </ul>
+    -->
+
+    <ng2-smart-table [settings]="settings" [source]="data" (userRowSelect)="onUserRowSelect($event)"></ng2-smart-table>
+
   </nb-card>
-
-  <div>
-    <ngx-approval-details [selectedProcessFromParent]="selectedProcess" [selectedReviewsFromParent]="selectedReviews"></ngx-approval-details>
-  </div>
-
 
 </div>

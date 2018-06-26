@@ -68,7 +68,7 @@ export class MyProcessesComponent implements OnInit  {
           if (this.inOrganization === true) {
             this.orgaId = user.organization.oid;
             if(this.inOrganization === true) {
-              this.gateway.getOrgaProcesses(user.organization.oid)
+              this.gateway.getProcessesByOrgId(''+user.organization.oid)
                 .then((processes) => {
                   this.myProcesses = processes;
                 })

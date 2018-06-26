@@ -26,6 +26,7 @@ export class GatewayProvider {
       .toPromise()
   }
 
+<<<<<<< HEAD
 
   /* getUserProcesses(userId: number): Promise<StoreProcess[]> {
     return this.http.get<StoreProcess[]>(this.serverConfig.getUserProcesses + '/' + userId, )
@@ -50,16 +51,6 @@ export class GatewayProvider {
   }
 
 
-  getOrgaProcesses(orgaId: number): Promise<StoreProcess[]> {
-    return this.http.get<StoreProcess[]>(this.serverConfig.getOrgaProcesses + '/' + orgaId)
-      .toPromise()
-  }
-
-  getProcessById(processId: number): Promise<StoreProcess> {
-    return this.http.get<StoreProcess>(this.serverConfig.getProcessById + '/' + processId)
-      .toPromise()
-  }
-
 /*
   getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
     let filterParams = new HttpParams();
@@ -72,6 +63,26 @@ export class GatewayProvider {
 
   }
   */
+
+
+  // gets a process by its Id
+  getProcessById (processId: string): Promise<StoreProcess> {
+    return this.http.get<StoreProcess>(this.serverConfig.getProcess + processId)
+      .toPromise()
+  }
+
+  // adds a process to an organization
+  addProcessToOrganization (processId: string, orgId: string, uid: string): Promise<StoreProcess> {
+    return this.http.post<StoreProcess>(this.serverConfig.getProcess + processId + '/buy',
+                                        {'orgaId': orgId, 'userId': uid})
+      .toPromise()
+  }
+
+  // get all processes of an organization
+  getProcessesByOrgId (orgId: string): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getOrgProcesses + orgId)
+      .toPromise()
+  }
 
   getStoreProcesses(): Promise<StoreProcess[]> {
     return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses)
@@ -88,7 +99,34 @@ export class GatewayProvider {
   }
 
   postStoreProcessRatings(processId: string, rating: StoreProcessRating): void {
-    const url = this.serverConfig.postStoreProcessRating + '/' + processId
+    const url = this.serverConfig.postStoreProcessRating + '/' + processId;
     this.http.post<StoreProcessRating>(url, rating).toPromise()
   }
+
+  getUnapprovedStoreProcesses(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getUnapprovedStoreProcesses)
+      .toPromise()
+  }
+
+  postStoreProcessApproved(processId: string): void {
+    const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/approve';
+    this.http.post<StoreProcess>(url, processId).toPromise()
+  }
+
+  postStoreProcessUnapproved(processId: string): void {
+    const url = this.serverConfig.postStoreProcessUnapproved + '/' + processId + '/unapprove';
+    this.http.post<StoreProcess>(url, processId).toPromise()
+  }
+
+  getStoreProcessById(processId: string): Promise<StoreProcess> {
+    const url = this.serverConfig.getStoreProcessById + '/' + processId;
+    return this.http.get<StoreProcess>(url)
+      .toPromise()
+  }
+
+  postStoreProcessComment(comment: string, processId: string): void {
+    const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/updateApprovalComment';
+    this.http.post<StoreProcess>(url, comment).toPromise()
+  }
+
 }

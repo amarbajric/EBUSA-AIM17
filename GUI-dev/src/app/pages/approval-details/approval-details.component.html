@@ -11,32 +11,23 @@
         <th>Created at:</th>
         <th>Process ID:</th>
         <th>Version:</th>
-        <th>Status:</th>
+        <th>Is Approved:</th>
       </tr>
-      <!--
-      <tr *ngFor="let process of processes">
-        <td>{{process.process_name}}</td>
-        <td>{{process.process_description}}</td>
-        <td>{{process.creator}}</td>
-        <td>{{process.created_at | date:'dd-MM-yyyy'}}</td>
-        <td>{{process.process_id}}</td>
-        <td>{{process.version}}</td>
-        <td>{{process.state}}</td>
-      -->
 
       <tr>
-        <td>{{selectedProcessFromParent?.process_name}}</td>
-        <td>{{selectedProcessFromParent?.process_description}}</td>
-        <td>{{selectedProcessFromParent?.creator}}</td>
-        <td>{{selectedProcessFromParent?.created_at | date:'dd-MM-yyyy'}}</td>
-        <td>{{selectedProcessFromParent?.process_id}}</td>
-        <td>{{selectedProcessFromParent?.version}}</td>
-        <td>{{selectedProcessFromParent?.state}}</td>
+        <td>{{process?.processName}}</td>
+        <td>{{process?.processDescription}}</td>
+        <td>{{process?.processCreator}}</td>
+        <td>{{process?.processCreatedAt | date:'dd-MM-yyyy'}}</td>
+        <td>{{process?.processId}}</td>
+        <td>{{process?.processVersion}}</td>
+        <td>{{process?.processApproved}}</td>
       </tr>
     </table>
   </nb-card>
 
 
+  <!--
   <h2>Review comments: </h2>
   <nb-card>
     <table>
@@ -46,32 +37,32 @@
         <th>Created at:</th>
         <th>Process ID:</th>
       </tr>
-      <!--
-      <tr *ngFor="let review of reviews">
-        <td>{{review.comment}}</td>
-        <td>{{review.uploader}}</td>
-        <td>{{review.created_at | date :'short'}}</td>
-      </tr>
-      -->
-      <tr *ngFor="let selectedReviewFromParent of selectedReviewsFromParent">
-        <td>{{selectedReviewFromParent?.comment}}</td>
-        <td>{{selectedReviewFromParent?.uploader}}</td>
-        <td>{{selectedReviewFromParent?.created_at | date :'short'}}</td>
-        <td>{{selectedReviewFromParent?.process_id}}</td>
+
+      <tr *ngFor="let review of processReviews">
+        <td>{{review?.comment}}</td>
+        <td>{{review?.uploader}}</td>
+        <td>{{review?.created_at | date :'short'}}</td>
+        <td>{{review?.process_id}}</td>
+        <td>{{review?.processApproverComment}}</td>
       </tr>
     </table>
   </nb-card>
+  -->
 
 
+  <form (ngSubmit)="postComment()" #form="ngForm">
   <div class="form-group">
-    <label for="comment"><h2>Comment:</h2></label>
-    <textarea class="form-control" rows="5" id="comment"></textarea>
+    <label for="input-comment"><h2>Reviewer Comment:</h2></label>
+    <input name="processApproverComment" [(ngModel)]="alteredProcess.processApproverComment" id="input-comment"
+           #processApproverComment="ngModel" class="form-control" placeholder="Comment here">
   </div>
+    <div class="btn-group btn-group-full-width col-md-12">
+    <button class="btn btn-info">Post comment</button>
+      <button (click)="approveStoreProcess()" class="btn btn-success">Approve this process model</button>
+      <button (click)="unapproveStoreProcess()" class="btn btn-danger">Deny this process model</button>
+      <button routerLink="/approval" class="btn btn-secondary">Cancel</button>
+    </div>
+  </form>
 
-
-  <!--<button ng-click="changeIFrame()" class="btn btn-info" (click)="switchIFrameSource()">Change iFrame</button>-->
-  <button ng-click="postComment()" class="btn btn-info" (click)="postComment(comment)">Post comment</button>
-  <button ng-click="approveProcessModel()" class="btn btn-success">Approve this process model</button>
-  <button ng-click="denyProcessModel()" class="btn btn-danger">Deny this process model</button>
 
 </div>
