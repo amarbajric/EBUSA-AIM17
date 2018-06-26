@@ -36,6 +36,11 @@ export class GatewayProvider {
       .toPromise()
   }
 
+  getAllStoreProcessRatings(): Promise<StoreProcessRating[]> {
+    return this.http.get<StoreProcessRating[]>(this.serverConfig.getStoreProcessRatings)
+      .toPromise()
+  }
+
   postStoreProcessRating(processId: number, rating: StoreProcessRating): void {
     const url = this.serverConfig.postStoreProcessRating + '/' + processId + '/add'
     this.http.post<StoreProcessRating>(url, rating).toPromise()
