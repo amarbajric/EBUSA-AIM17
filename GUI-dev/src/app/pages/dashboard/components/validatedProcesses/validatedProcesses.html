@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
       <h5 *ngIf="!validationProcesses || validationProcesses.length < 1">There are currently no approved processes!</h5>
-      <table class="table table-striped" *ngIf="validationProcesses && validationProcesses.length > 0">
+      <table class="table table-striped" *ngIf="validationProcesses && validationProcesses.length > 0 ">
          <thead>
             <tr>
                <th>#</th>
@@ -11,7 +11,7 @@
             </tr>
          </thead>
          <tbody>
-            <tr *ngFor="let process of validationProcesses">
+            <tr *ngFor="let process of validationProcesses" >
                <td>{{ process.processId }}</td>
                <td>{{ process.processName }}</td>
                <td>{{ process.processCreatedAt | date:'dd.MM.yyyy HH:mm:ss'}}</td>
