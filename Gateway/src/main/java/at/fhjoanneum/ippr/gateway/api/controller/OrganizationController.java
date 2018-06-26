@@ -1,5 +1,6 @@
 package at.fhjoanneum.ippr.gateway.api.controller;
 
+import at.fhjoanneum.ippr.gateway.api.controller.user.HttpHeaderUser;
 import at.fhjoanneum.ippr.gateway.api.services.OrganizationService;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(produces = "application/json; charset=UTF-8")
@@ -36,13 +38,18 @@ public class OrganizationController {
 
     @RequestMapping(value = "api/organization", method = RequestMethod.POST)
     public @ResponseBody
-    ResponseEntity<OrganizationResponse> saveOrganization(@RequestBody final SaveOrganization organization) {
+    ResponseEntity<OrganizationResponse> saveOrganization(HttpServletRequest req, @RequestBody final SaveOrganization organization)
+            throws ExecutionException, InterruptedException {
+
+        HttpHeaderUser headerUser = new HttpHeaderUser(req);
 
         final Optional<Organization> organizationOpt =
-                organizationService.saveOrganization(organization.organizationName, organization.organizationDescription);
+                organizationService.saveOrganization(Long.parseLong(headerUser.getUserId()), organization.organizationName,
+                        organization.organizationDescription);
 
         if (!organizationOpt.isPresent()) {
-            return new ResponseEntity<>(new OrganizationResponse("Could not save organization. One or more properties may be missing"),
+            return new ResponseEntity<>(new OrganizationResponse("Could not save organization. " +
+                    "Check if one or more properties may be missing or if user is already part of an organization."),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

@@ -36,4 +36,6 @@ public interface RBACRepository {
 
   List<Rule> getRules();
 
+  List<Role> getRoles();
+
 }

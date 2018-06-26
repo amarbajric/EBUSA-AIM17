@@ -98,6 +98,9 @@ public class RBACRepositoryImpl implements RBACRepository {
     return Lists.newArrayList(ruleRepository.findAll());
   }
 
+  @Override
+  public List<Role> getRoles() { return Lists.newArrayList(roleRepository.findAll()); }
+
 
   @Repository
   interface UserRepository extends PagingAndSortingRepository<UserImpl, Long> {

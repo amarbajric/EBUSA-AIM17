@@ -61,7 +61,7 @@ public class ProcessStoreController {
     public void uploadProcess(final HttpServletRequest request, String processName, String processDescription, String processCreator,
                                                          Date processCreatedAt, Long processVersion, Double processPrice) {
         processStoreService.saveProcessStoreObject(processName, processDescription,processCreator,
-                processCreatedAt,processVersion, processPrice);
+                processCreatedAt,processVersion,processPrice);
     }
 
     @RequestMapping(value = "process/{processId}", method = RequestMethod.GET)
