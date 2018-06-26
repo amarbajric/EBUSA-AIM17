@@ -23,7 +23,7 @@ export class ProcessFilterPipe implements PipeTransform {
     } else if (filterType === 'createdBy') {
       const key = 'processCreator';
       return (value || []).filter(
-        (item) => (item.hasOwnProperty(key) && item[key] === filterInput),
+        (item) => (item.hasOwnProperty(key) && item[key].includes(filterInput)),
       );
     }
 
