@@ -33,7 +33,7 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
 
         final List<ProcessStoreDTO> processes = createProcessStoreDTOList(results);
 
-        return new AsyncResult<List<ProcessStoreDTO>>(processes);
+        return new AsyncResult<>(processes);
     }
 
     @Override
@@ -72,7 +72,18 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
 
         final ProcessStoreDTO process = createProcessStoreDTO(result);
 
-        return new AsyncResult<ProcessStoreDTO>(process);
+        return new AsyncResult<>(process);
+    }
+
+    @Override
+    public Future<ProcessStoreDTO> updateApprovedComment(String approverComment, Long processId) {
+        processStore.updateApprovedComment(approverComment, processId);
+
+        final ProcessStoreObjectImpl result = processStore.findProcessById(processId);
+
+        final ProcessStoreDTO process = createProcessStoreDTO(result);
+
+        return new AsyncResult<>(process);
     }
 
     @Override
@@ -110,6 +121,8 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
     }
 
     private static ProcessStoreDTO createProcessStoreDTO(final ProcessStoreObjectImpl processStoreObject) {
+        LOG.debug("***************************");
+        LOG.debug(String.valueOf(processStoreObject.isApproved()));
         return new ProcessStoreDTO(processStoreObject.getStoreId(), processStoreObject.getProcessName(),
                 processStoreObject.getProcessDescription(), processStoreObject.getProcessCreator(),
                 processStoreObject.getProcessCreatedAt(), processStoreObject.getProcessVersion(),

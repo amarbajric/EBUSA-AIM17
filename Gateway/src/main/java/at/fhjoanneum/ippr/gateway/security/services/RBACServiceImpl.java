@@ -2,12 +2,16 @@ package at.fhjoanneum.ippr.gateway.security.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 import at.fhjoanneum.ippr.gateway.api.repositories.OrganizationRepository;
 import at.fhjoanneum.ippr.gateway.security.persistence.entities.OrganizationImpl;
 import at.fhjoanneum.ippr.gateway.security.persistence.objects.Organization;
+import at.fhjoanneum.ippr.gateway.security.persistence.objects.Role;
+import com.google.common.collect.Lists;
+import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
@@ -24,7 +28,7 @@ import at.fhjoanneum.ippr.gateway.security.repositories.RBACRepository;
 public class RBACServiceImpl implements RBACService {
 
   @Autowired
-  private RBACRepository rbacRepository;
+  private RBACRepository rbacRepository; 
 
   @Autowired
   private OrganizationRepository organizationRepository;
@@ -53,8 +57,17 @@ public class RBACServiceImpl implements RBACService {
   }
 
   @Override
+  public Future<List<Role>> getRoles() { return new AsyncResult<List<Role>>(rbacRepository.getRoles()); }
+
+  @Override
+  public Future<Optional<Role>> getRoleByRoleName(String roleName) {
+    return new AsyncResult<Optional<Role>>(rbacRepository.getRoleByRoleName(roleName));
+  }
+
+  @Override
   public Optional<User> updateUser(final Long userId, final String username, final String firstName,
-                                   final String lastName, final String email, final String password, final Long o_id) {
+                                   final String lastName, final String email, final String password, final Long o_id)
+          throws ExecutionException, InterruptedException {
 
     Optional<User> userToUpdate = rbacRepository.getUserByUserId(userId);
     Optional<Organization> orgToUpdate = null;
@@ -71,7 +84,14 @@ public class RBACServiceImpl implements RBACService {
     if (lastName != null) userToUpdate.get().setLastname(lastName);
     if (email != null) userToUpdate.get().setEmail(email);
     if (password != null) userToUpdate.get().setPassword(password);
-    if (orgToUpdate != null && orgToUpdate.isPresent()) userToUpdate.get().setOrganization((OrganizationImpl) orgToUpdate.get());
+    if (orgToUpdate != null && orgToUpdate.isPresent() && userToUpdate.get().getOrganization() == null) {
+      userToUpdate.get().setOrganization((OrganizationImpl) orgToUpdate.get());
+      Optional<Role> empRole = this.getRoleByRoleName("ORG_EMP").get();
+      List<Role> newUserRoles = Lists.newArrayList();
+      newUserRoles.addAll(userToUpdate.get().getRoles());
+      newUserRoles.add(empRole.get());
+      userToUpdate.get().setRoles(newUserRoles);
+    }
 
     rbacRepository.saveUser(userToUpdate.get());
     return rbacRepository.getUserByUserId(userId);

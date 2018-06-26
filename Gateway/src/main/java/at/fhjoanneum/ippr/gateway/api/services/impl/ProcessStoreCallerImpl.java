@@ -1,5 +1,6 @@
 package at.fhjoanneum.ippr.gateway.api.services.impl;
 
+import at.fhjoanneum.ippr.commons.dto.processstore.ProcessRatingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessStoreDTO;
 import at.fhjoanneum.ippr.gateway.api.config.GatewayConfig;
 import at.fhjoanneum.ippr.gateway.api.controller.user.HttpHeaderUser;
@@ -83,6 +84,12 @@ public class ProcessStoreCallerImpl implements Caller {
     }
 
     @Async
+    public void updateApprovalComment(String comment, Long processId) throws URISyntaxException {
+        final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/process/"+processId+"/updateApprovalComment");
+        createRequest(uri, HttpMethod.POST, comment, ProcessStoreDTO.class, null);
+    }
+
+    @Async
     public Future<ResponseEntity<ProcessStoreDTO[]>> findAllProcessesByUserId(
             final HttpHeaderUser headerUser, final Long userId
             ) throws URISyntaxException {
@@ -91,6 +98,22 @@ public class ProcessStoreCallerImpl implements Caller {
         final HttpHeaders header = headerUser.getHttpHeaders();
         return createRequest(uri, HttpMethod.GET, null, ProcessStoreDTO[].class, header);
 
+    }
+
+    @Async
+    public Future<ResponseEntity<ProcessRatingDTO[]>> findRatingByProcessId(
+            final Long processId
+    ) throws URISyntaxException {
+
+        final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/processRating/"+processId);
+        return createRequest(uri, HttpMethod.GET, null, ProcessRatingDTO[].class, null);
+
+    }
+
+    @Async
+    public void saveRating(ProcessRatingDTO rating, Long processId) throws URISyntaxException {
+        final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/processRating/"+processId+"/add");
+        createRequest(uri, HttpMethod.POST, rating, ProcessRatingDTO.class, null);
     }
 
     @Async
