@@ -4,6 +4,7 @@ import {Review} from '../../../models/models';
 import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
 import {ActivatedRoute, Router} from '@angular/router';
 
+
 @Component({
   selector: 'ngx-approval-details',
   templateUrl: './approval-details.component.html',
@@ -13,8 +14,6 @@ export class ApprovalDetailsComponent implements OnInit {
 
   process: StoreProcess;
   alteredProcess: StoreProcess = new StoreProcess;
-  // @Input() selectedProcessFromParent: Process;
-  // @Input() selectedReviewsFromParent: [Review];
   selectedProcessId: string;
   public processes;
   public processReviews: Review[] = [];
@@ -72,7 +71,7 @@ export class ApprovalDetailsComponent implements OnInit {
         this.process = process;
         this.alteredProcess.processId = this.process.processId;
         this.alteredProcess.processApproverComment = this.process.processApproverComment;
-        // console.log(process);
+         console.log(process);
       })
   }
 
@@ -81,6 +80,7 @@ export class ApprovalDetailsComponent implements OnInit {
     // console.log(this.alteredProcess.processApproverComment + "  " + this.alteredProcess.processId);
 
     this.gateway.postStoreProcessComment(this.alteredProcess.processApproverComment, this.alteredProcess.processId.toString());
+    this.router.navigate(['/approval']);
   }
 
   approveStoreProcess() {
@@ -94,5 +94,6 @@ export class ApprovalDetailsComponent implements OnInit {
     this.gateway.postStoreProcessUnapproved(this.selectedProcessId);
     this.router.navigate(['/approval']);
   }
+
 
 }

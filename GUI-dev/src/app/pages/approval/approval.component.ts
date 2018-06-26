@@ -36,7 +36,7 @@ export class ApprovalComponent implements OnInit {
         title: 'Creator',
       },
       approved: {
-        title: 'Status',
+        title: 'Approval Status',
       },
     },
     actions: false,
