@@ -29,8 +29,7 @@ export class GatewayProvider {
 
   createProcess(process: StoreProcess): Promise<StoreProcess> {
     return this.http.post<StoreProcess>(this.serverConfig.createProcess, {'processName': process.processName,
-      'processDescription': process.processDescription, 'processVersion': process.processVersion,
-    'processPrice': process.processPrice}).toPromise()
+      'processDescription': process.processDescription, 'processPrice': process.processPrice}).toPromise()
   }
 
   uploadOWLModel(processId: number, owlFile: File): Promise<any> {
