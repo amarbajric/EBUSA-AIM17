@@ -1,9 +1,7 @@
 package at.fhjoanneum.ippr.gateway.api.controller;
 
-<<<<<<< HEAD
-=======
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessAvgRatingDTO;
->>>>>>> dev
+
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessOrgaMappingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessRatingDTO;
 import at.fhjoanneum.ippr.commons.dto.processstore.ProcessStoreDTO;
@@ -13,10 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-<<<<<<< HEAD
-=======
 import org.springframework.http.HttpHeaders;
->>>>>>> dev
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -125,15 +121,14 @@ public class ProcessStoreGatewayController {
             final HttpServletRequest request,
             @PathVariable(name = "processId") final Long processId) {
         return() -> processStoreCaller.findRatingByProcessId(processId).get();
-<<<<<<< HEAD
-=======
+
     }
 
     @RequestMapping(value ="api/store/processRating/{processId}/getAverageAndCount", method = RequestMethod.GET)
     public @ResponseBody Callable<ResponseEntity<ProcessAvgRatingDTO>> getAvgRatingAndCountOfProcess(
             final HttpServletRequest request, @PathVariable(name = "processId") final Long processId) {
         return() -> processStoreCaller.getAvgRatingAndCountOfProcess(processId).get();
->>>>>>> dev
+
     }
 
 
@@ -238,7 +233,7 @@ public class ProcessStoreGatewayController {
 
     }*/
 
-    }
+
 
 
 

@@ -33,8 +33,4 @@ public interface ProcessStoreService {
 
     Future<Resource> getProcessFile(Long processId);
 
-    void saveProcessFile(byte[] processFile, Long processId);
-
-    Future<Resource> getProcessFile(Long processId);
-
 }

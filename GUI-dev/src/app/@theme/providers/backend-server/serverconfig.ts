@@ -10,7 +10,7 @@ export class ServerConfigProvider {
   private _getStoreProcesses = `${this._host}api/store/processes`;
   private _getOrPostStoreProcessRatings = `${this._host}api/store/processRatings`;
   private _uploadOWL = `${this._host}api/store/process/`;
-  private _createProcess = `${this._host}api/store/process/upload`;
+  private _createProcess = `${this._host}api/store/process/create`;
 
 
   public get checkIfMailTaken(): string {return this._checkIfMailTaken};
