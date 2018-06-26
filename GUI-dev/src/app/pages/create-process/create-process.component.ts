@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {StoreProcess} from "../../../models/models";
 import {GatewayProvider} from "../../@theme/providers/backend-server/gateway";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'ngx-create-process',
@@ -13,9 +14,11 @@ export class CreateProcessComponent {
   processModelOwl;
   buildedBusinessObjects = {};
 
-  constructor(private gateway: GatewayProvider) {
+  constructor(private gateway: GatewayProvider, private modalService: NgbModal) {
 
   }
+
+
 
   onFileChange(event) {
     // const that = this;
@@ -27,43 +30,24 @@ export class CreateProcessComponent {
     }
   }
 
-  uploadOWLModel(form): void {
+  createProcess(form): void {
     console.log('hallo ich bin hier')
-    let that = this;
-    const reader = new FileReader();
-    console.log(that.owlFile);
-    if (that.owlFile) {
-      reader.onload = function (e) {
-      console.log('reader result' + reader.result)
-        const body = {owlContent: reader.result}
-        that.gateway.uploadOWLModel(body)
+    console.log ('owl' + this.owlFile)
+    this.gateway.createProcess(this.process).then(() =>
+    {
+      console.log('now uplaod OWL')
+      this.gateway.uploadOWLModel(this.process.processId, this.owlFile).then(() => console.log('success'))
+        .catch(() => console.log('no success'));
+    })
+      .catch(() => console.log('no success'))
+  }
+       /* this.gateway.uploadOWLModel(1, this.owlFile)
           .then(
             data => {
-              that.processModelOwl = JSON.parse(data['_body']);
-              console.log(that.processModelOwl);
-              that.processModelOwl.boms.forEach(businessObject => {
-                that.buildedBusinessObjects[businessObject.id] = {};
+              console.log('uploaded OWL');
               })
-            })
-        .catch(err => console.log('Die OWL Datei konnte nicht richtig interpretiert werden!'));
-        reader.readAsText(that.owlFile);
-      }
-      that.initRules();
-    }
-  }
-
-  initRules(): void {
-    const that = this;
-    /*this.gateway.getRules()
-      .subscribe(
-        data => {
-          // console.log(data);
-          that.rules = JSON.parse(data['_body']);
-          that.currentSelectedBusinessObject = that.processModel.boms[0];
-          that.initFormBuilder(that.currentSelectedBusinessObject);
-        },
-        err => that.error = err,
-        () => {}, // console.log('Request Complete')
-      );*/
-  }
+          .catch(err => console.log('Die OWL Datei konnte nicht richtig interpretiert werden!'));
+        // reader.readAsText(that.owlFile);
+      }*/
+    //}
 }

@@ -9,41 +9,37 @@
         <label for="input-processname" class="sr-only">Process name</label>
         <input name="processname" [(ngModel)]="process.processName" id="input-processname" #processname="ngModel"
                class="form-control" placeholder="Process name"
-               autofocus>
+               autofocus
+               [required]="true">
       </div>
       <div class="form-group">
         <label for="input-processdecription" class="sr-only">Process description</label>
-        <input name="processdescription" [(ngModel)]="process.processName" id="input-processdecription" #processdescription="ngModel"
+        <input name="processdescription" [(ngModel)]="process.processDescription" id="input-processdecription" #processdescription="ngModel"
                class="form-control" placeholder="Process description"
-               autofocus>
+               autofocus
+               [required]="true">
       </div>
       <div class="form-group">
         <label for="input-processprice" class="sr-only">Process price</label>
-        <input name="processprice" [(ngModel)]="process.processName" id="input-processprice" #processprice="ngModel"
+        <input name="processprice" [(ngModel)]="process.processPrice" id="input-processprice" #processprice="ngModel"
                class="form-control" placeholder="Process price"
-               autofocus>
+               autofocus
+               [required]="true">
       </div>
         <div class="form-group">
           <label for="input-processversion" class="sr-only">Process version</label>
-          <input name="processversion" [(ngModel)]="process.processName" id="input-processversion" #processprice="ngModel"
+          <input name="processversion" [(ngModel)]="process.processVersion" id="input-processversion" #processversion="ngModel"
                  class="form-control" placeholder="Process version"
-                 autofocus>
+                 autofocus
+                 [required]="true">
         </div>
-        <form #owlModelForm="ngForm" (ngSubmit)="uploadOWLModel(owlModelForm)">
+        <form #owlModelForm="ngForm">
           <label class="control-label">OWL-File: </label>
-          <div class="row show-grid">
-          <div class="col-md-10">
             <input type="file" name="fileUpload" id="fileUpload" class="form-control" accept=".owl," (change)="onFileChange($event)">
-          </div>
-          <div class="col-md-2">
-            <button class="btn btn-primary" type="submit" [disabled]="!owlFile">Upload</button>
-          </div>
-          </div>
           <br>
         </form>
 
-      <button [disabled]="submitted || !form.valid " class="btn btn-block btn-hero-success"
-              [class.btn-pulse]="submitted">
+      <button [disabled]="(!owlFile || !form.valid)" class="btn btn-block btn-hero-success">
         Create new process
       </button>
       </form>
