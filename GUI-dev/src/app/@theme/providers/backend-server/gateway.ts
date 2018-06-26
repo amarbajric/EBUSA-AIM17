@@ -26,6 +26,7 @@ export class GatewayProvider {
       .toPromise()
   }
 
+
   /* getUserProcesses(userId: number): Promise<StoreProcess[]> {
     return this.http.get<StoreProcess[]>(this.serverConfig.getUserProcesses + '/' + userId, )
       .toPromise()
@@ -68,6 +69,7 @@ export class GatewayProvider {
     }
     return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses, { params: filterParams })
       .toPromise()
+
   }
 
   getStoreProcessRatings(processId: string): Promise<StoreProcessRating[]> {

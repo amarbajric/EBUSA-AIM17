@@ -36,7 +36,6 @@ export class StoreProcessRating {
 }
 
 
-
 export class Review {
   // define props...
   review_id?: number;
