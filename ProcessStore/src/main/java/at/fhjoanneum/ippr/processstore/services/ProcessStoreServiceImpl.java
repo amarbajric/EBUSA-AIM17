@@ -116,21 +116,13 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
     }
 
     @Override
-    public void saveProcessStoreObject(String processName, String processDescription,
-                                                            String processCreator, Date processCreatedAt,
-                                                            Long processVersion, Double processPrice) {
+    public void saveProcessStoreObject(String processName, String processDescription, String processCreator,
+                                       Date processCreatedAt, Double processPrice) {
 
-        ProcessStoreObjectImpl processStoreObject = new ProcessStoreObjectImpl();
-        processStoreObject.setProcessName(processName);
-        processStoreObject.setProcessDescription(processDescription);
-        processStoreObject.setProcessCreator(processCreator);
-        processStoreObject.setProcessCreatedAt(processCreatedAt);
-        processStoreObject.setProcessVersion(processVersion);
-        processStoreObject.setProcessPrice(processPrice);
-        processStoreObject.setApproved(false);
-        processStoreObject.setProcessApprovedDate(null);
-        processStoreObject.setProcessApprover(null);
-        processStoreObject.setProcessApproverComment(null);
+
+        ProcessStoreObjectImpl processStoreObject = new ProcessStoreObjectImpl(processName, processDescription, processCreator, processCreatedAt,
+                1L, processPrice, null, null, false, null, null);
+
 
         processStore.save(processStoreObject);
     }

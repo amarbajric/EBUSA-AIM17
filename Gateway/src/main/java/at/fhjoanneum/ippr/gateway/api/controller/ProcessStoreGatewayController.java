@@ -185,6 +185,18 @@ public class ProcessStoreGatewayController {
         runnable.run();
     }
 
+    @RequestMapping(value ="api/store/process/create", method = RequestMethod.POST)
+    public void createProcess(@RequestBody ProcessStoreDTO process) {
+        final Runnable runnable = () -> {
+            try {
+                processStoreCaller.createProcess(process);
+            } catch (final URISyntaxException e) {
+                LOG.error(e.getMessage());
+            }
+        };
+        runnable.run();
+    }
+
     @RequestMapping(value ="api/store/processes/byOrga/{orgaId}", method = RequestMethod.GET)
     public @ResponseBody Callable<ResponseEntity<ProcessStoreDTO[]>> findProcessByUserId(
             //final HttpServletRequest request,

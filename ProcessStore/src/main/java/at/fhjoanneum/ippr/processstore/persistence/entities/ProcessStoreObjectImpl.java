@@ -20,26 +20,21 @@ public class ProcessStoreObjectImpl implements ProcessStoreObject {
     private Long processId;
 
     @Column
-    @NotBlank
     private String processName;
 
     @Column
-    @NotBlank
     private String processDescription;
 
     @Column
-    @NotBlank
     private String processCreator;
 
     @Column
     private Date processCreatedAt;
 
     @Column
-    @NotNull
     private Long processVersion;
 
     @Column
-    @NotNull
     private Double processPrice;
 
     @Column
