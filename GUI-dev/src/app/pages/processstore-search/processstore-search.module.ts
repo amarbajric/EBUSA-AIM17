@@ -5,6 +5,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { ProcessStoreSearchComponent } from './processstore-search.component';
 import { SimpleSearchPipe } from '../../simple-search.pipe';
 import { StarRatingModule } from 'angular-star-rating';
+import { ProcessFilterPipe } from '../../process-filter.pipe';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { StarRatingModule } from 'angular-star-rating';
   declarations: [
     ProcessStoreSearchComponent,
     SimpleSearchPipe,
+    ProcessFilterPipe,
   ],
 })
 export class ProcessStoreSearchModule { }
