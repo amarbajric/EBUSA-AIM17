@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {StoreProcess} from '../../../models/models';
 import {GatewayProvider} from '../../@theme/providers/backend-server/gateway';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ngx-create-process',
