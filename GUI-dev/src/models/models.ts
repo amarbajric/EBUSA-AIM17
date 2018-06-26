@@ -24,7 +24,7 @@ export class StoreProcess {
   processPrice: number;
   // avg rating missing in current ProcessStoreDTO in backend:
   processAverageRating: number;
-  approved: boolean;
+  processApproved: boolean;
   processApproverComment: string;
 }
 

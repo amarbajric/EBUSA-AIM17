@@ -11,7 +11,7 @@
         <th>Created at:</th>
         <th>Process ID:</th>
         <th>Version:</th>
-        <th>Approval Status:</th>
+        <th>Is Approved:</th>
       </tr>
 
       <tr>
@@ -21,7 +21,7 @@
         <td>{{process?.processCreatedAt | date:'dd-MM-yyyy'}}</td>
         <td>{{process?.processId}}</td>
         <td>{{process?.processVersion}}</td>
-        <td>{{process?.approved}}</td>
+        <td>{{process?.processApproved}}</td>
       </tr>
     </table>
   </nb-card>

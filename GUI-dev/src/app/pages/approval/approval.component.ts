@@ -35,8 +35,8 @@ export class ApprovalComponent implements OnInit {
       processCreator: {
         title: 'Creator',
       },
-      approved: {
-        title: 'Approval Status',
+      processApproved: {
+        title: 'Is Approved',
       },
     },
     actions: false,
@@ -52,13 +52,15 @@ export class ApprovalComponent implements OnInit {
   ngOnInit() {
     this.getUnapprovedProcesses();
     this.getAllProcesses();
+    // this.getUnapprovedProcesses();
   }
-
 
   getUnapprovedProcesses() {
       this.gateway.getUnapprovedStoreProcesses()
         .then((processes) => {
-          // this.processes = processes;
+        // this.processes = processes;
+        // this.data = processes;
+        // console.log(this.data);
         })
   }
 
