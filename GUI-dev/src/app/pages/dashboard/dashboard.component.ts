@@ -21,22 +21,22 @@ export class DashboardComponent {
 
   tabsApprover: any[] = [
     {
-      title: 'Meine Prozesse',
+      title: 'My Processes',
       route: '/dashboard/myProcesses',
     },
     {
-      title: 'Prozesse in Genehmigung',
+      title: 'Porcesses in Approval',
       route: '/dashboard/validation',
     },
     {
-      title: 'Genehmigte Prozesse',
+      title: 'Approved Processes',
       route: '/dashboard/validated',
     },
   ];
 
   tabs: any[] = [
     {
-      title: 'Meine Prozesse',
+      title: 'My Processes',
       route: '/dashboard/myProcesses',
     },
   ];

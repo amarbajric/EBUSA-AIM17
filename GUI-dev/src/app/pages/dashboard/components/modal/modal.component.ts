@@ -13,13 +13,13 @@ import {GatewayProvider} from '../../../../@theme/providers/backend-server/gatew
       </button>
     </div>
     <div class="modal-body">
-      <b>Beschreibung:</b>{{modalProcessDesc}}
+      <b>Description:</b>{{modalProcessDesc}}
       <br>
       <b>Version:</b> {{modalProcessVersion}}
       <br>
-      <b>Ersteller:</b> {{modalProcessCreator}}
+      <b>Creator:</b> {{modalProcessCreator}}
       <br>
-      <b>Preis:</b> {{modalProcessPrice}}
+      <b>Price:</b> {{modalProcessPrice}}
     </div>
     <div class="modal-footer">
       <button class="btn btn-md btn-primary" (click)="closeModal()">OK</button>
@@ -36,10 +36,6 @@ export class ModalComponent {
   modalProcessCreator: string;
   modalProcessPrice: number;
   modalProcessName: string;
-
-  modalContent = `Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-    nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
-    nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.`;
 
   constructor(private activeModal: NgbActiveModal, private gateway: GatewayProvider) {
 

@@ -11,7 +11,7 @@ import {ToasterService} from 'angular2-toaster';
   template: `
     <div class="modal-header">
       <!-- <toaster-container></toaster-container> -->
-      <span>Neue Organisation erstellen</span>
+      <span>Create new organization</span>
       <button class="close" aria-label="Close" (click)="closeModal()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -19,24 +19,24 @@ import {ToasterService} from 'angular2-toaster';
     <div  class="flex-column text-body">
       <div class="form-group">
         <br>
-        <h6>Organisationsname</h6>
+        <h6>organization name</h6>
         <input name="organizationName" [(ngModel)]="organization.organizationName" id="input-organizationName"
                #organizationName="ngModel"
-               class="form-control" placeholder="Organisationsname"
+               class="form-control" placeholder="organization name"
                >
       </div>
       <div class="form-group">
         <br>
-        <h6>Beschreibung</h6>
+        <h6>organization description</h6>
         <input name="organizationDescription" [(ngModel)]="organization.description" id="input-organizationDescription"
                #organizationDescription="ngModel"
-               class="form-control" placeholder="Beschreibung der Organisation"
+               class="form-control" placeholder="description of the organization"
         >
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-md btn-primary" (click)="closeModal()">Abbrechen</button>
-      <button class="btn btn-md btn-primary" (click)="saveModal()">Speichern</button>
+      <button class="btn btn-md btn-primary" (click)="closeModal()">Cancel</button>
+      <button class="btn btn-md btn-primary" (click)="saveModal()">Save</button>
     </div>
   `,
 })
