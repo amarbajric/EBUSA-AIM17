@@ -1,0 +1,24 @@
+<div class="row">
+      <h5 *ngIf="!reviewProcesses || reviewProcesses.length < 1">There are currently no processes in approval!</h5>
+      <table class="table table-striped" *ngIf="reviewProcesses && reviewProcesses.length > 0">
+         <thead>
+            <tr>
+               <th>#</th>
+               <th>process name</th>
+               <th>creation date</th>
+               <th>details</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr *ngFor="let process of reviewProcesses">
+               <td>{{ process.processId }}</td>
+               <td>{{ process.processName }}</td>
+               <td>{{ process.processCreatedAt | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+               <!--<td>{{process.organization}}></td>-->
+               <td>
+                 <button class="btn btn-primary btn-sm" (click)="showProcessDetails(process.processId, process.processName, process.processVersion, process.processPrice, process.processCreator, process.processDescription)">Show</button>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+</div>
