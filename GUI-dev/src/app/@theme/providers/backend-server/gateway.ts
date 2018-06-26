@@ -1,7 +1,8 @@
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
 import {User, StoreProcess, StoreProcessRating} from '../../../../models/models';
+import {RequestOptions} from "@angular/http";
 
 
 @Injectable()
@@ -33,8 +34,12 @@ export class GatewayProvider {
     'processPrice': process.processPrice}).toPromise()
   }
 
-  uploadOWLModel(processId: number, body: any): Promise<any> {
-    return this.http.post<any>(this.serverConfig.uploadOWL + processId + '/uploadFileProcess', {"file": body}).toPromise()
+  uploadOWLModel(processId: number, owlFile: File): Promise<any> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    const formData: FormData = new FormData();
+    formData.append("file", owlFile);
+    return this.http.post<any>(this.serverConfig.uploadOWL + processId + '/uploadProcessFile', formData, {"headers": headers}).toPromise()
   }
 
 

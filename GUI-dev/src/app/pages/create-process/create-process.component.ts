@@ -10,9 +10,10 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 export class CreateProcessComponent {
 
   process: StoreProcess = new StoreProcess();
-  owlFile;
+  owlFile: File;
   processModelOwl;
   buildedBusinessObjects = {};
+  file: File;
 
   constructor(private gateway: GatewayProvider, private modalService: NgbModal) {
 
@@ -28,19 +29,34 @@ export class CreateProcessComponent {
       this.owlFile = undefined;
       event.target.value = '';
     }
+    console.log(this.owlFile);
   }
 
+
   createProcess(form): void {
-    console.log('hallo ich bin hier')
-    console.log ('owl' + this.owlFile)
-    this.gateway.createProcess(this.process).then(() =>
+
+        this.gateway.uploadOWLModel(777,this.owlFile)
+          .then(()=> console.log('yes')
+          ).catch(err => console.log('noch immer net ' + err.toString()));
+
+
+  }
+
+
+/*
+  createProcess(form): void {
+
+
+    this.gateway.uploadOWLModel(777, this.owlFile).then(() => console.log('success'))
+      .catch(() => console.log('no success'));}
+    /*this.gateway.createProcess(this.process).then(() =>
     {
       console.log('now uplaod OWL')
       this.gateway.uploadOWLModel(this.process.processId, this.owlFile).then(() => console.log('success'))
         .catch(() => console.log('no success'));
     })
       .catch(() => console.log('no success'))
-  }
+  }*/
        /* this.gateway.uploadOWLModel(1, this.owlFile)
           .then(
             data => {
@@ -49,5 +65,5 @@ export class CreateProcessComponent {
           .catch(err => console.log('Die OWL Datei konnte nicht richtig interpretiert werden!'));
         // reader.readAsText(that.owlFile);
       }*/
-    //}
+    //}*/
 }

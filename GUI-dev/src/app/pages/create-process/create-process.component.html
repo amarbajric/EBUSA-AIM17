@@ -4,7 +4,7 @@
     <nb-card>
       <nb-card-header>Create a new process</nb-card-header>
     <nb-card-body>
-      <form (ngSubmit)="createProcess()" #form="ngForm">
+      <form (ngSubmit)="createProcess()" #form="ngForm" >
       <div class="form-group">
         <label for="input-processname" class="sr-only">Process name</label>
         <input name="processname" [(ngModel)]="process.processName" id="input-processname" #processname="ngModel"
@@ -33,7 +33,7 @@
                  autofocus
                  [required]="true">
         </div>
-        <form #owlModelForm="ngForm">
+        <form #owlModelForm="ngForm" enctype="multipart/form-data">
           <label class="control-label">OWL-File: </label>
             <input type="file" name="fileUpload" id="fileUpload" class="form-control" accept=".owl," (change)="onFileChange($event)">
           <br>
