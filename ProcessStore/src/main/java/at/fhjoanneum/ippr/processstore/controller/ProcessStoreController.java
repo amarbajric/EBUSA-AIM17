@@ -8,6 +8,7 @@ import org.apache.jena.atlas.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.core.io.Resource;
@@ -120,15 +121,11 @@ public class ProcessStoreController {
     }
 
     @RequestMapping(value = "process/create", method = RequestMethod.POST)
-    public @ResponseBody
-    ResponseEntity<ProcessStoreController.OrgaMappingResponse> saveProcess(@RequestBody final ProcessStoreDTO process) {
-        LOG.debug("*******************");
-        LOG.debug(process.getProcessName());
+    public @ResponseBody Callable<ProcessStoreDTO> saveProcess(@RequestHeader HttpHeaders headers, @RequestBody final ProcessStoreDTO process) {
 
-        processStoreService.saveProcessStoreObject(process.getProcessName(),process.getProcessDescription(),process.getProcessCreator(),
-                process.getProcessCreatedAt(),process.getProcessPrice());
+        return() -> processStoreService.saveProcessStoreObject(process.getProcessName(),process.getProcessDescription(),
+                process.getProcessCreator(),process.getProcessPrice()).get();
 
-        return new ResponseEntity<>(new OrgaMappingResponse("Ok"), HttpStatus.OK);
     }
 
     private static class OrgaMappingResponse implements Serializable {

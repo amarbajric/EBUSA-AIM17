@@ -136,10 +136,9 @@ public class ProcessStoreCallerImpl implements Caller {
     }
 
     @Async
-    public void createProcess(ProcessStoreDTO process) throws URISyntaxException {
+    public Future<ResponseEntity<ProcessStoreDTO>> createProcess(ProcessStoreDTO process, HttpHeaders headers) throws URISyntaxException {
         final URIBuilder uri = new URIBuilder(gatewayConfig.getProcessStoreAddress()).setPath("/process/create");
-        LOG.debug(process.getProcessName());
-        createRequest(uri, HttpMethod.POST, process, ProcessStoreDTO.class, null);
+        return createRequest(uri, HttpMethod.POST, process, ProcessStoreDTO.class, headers);
     }
 
     @Async
