@@ -26,13 +26,8 @@ export class GatewayProvider {
       .toPromise()
   }
 
-  getStoreProcesses(filterType: string, filterInput: string): Promise<StoreProcess[]> {
-    let filterParams = new HttpParams();
-    if (filterType && filterType !== 'none' && filterInput) {
-      filterParams = filterParams.append('filterType', filterType);
-      filterParams = filterParams.append('filterInput', filterInput);
-    }
-    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses, { params: filterParams })
+  getStoreProcesses(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses)
       .toPromise()
   }
 
