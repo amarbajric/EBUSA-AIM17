@@ -33,9 +33,9 @@ export class GatewayProvider {
   }
 
   // adds a process to an organization
-  addProcessToOrganization (processId: string, orgId: string, uid:string): Promise<StoreProcess> {
+  addProcessToOrganization (processId: string, orgId: string, uid: string): Promise<StoreProcess> {
     return this.http.post<StoreProcess>(this.serverConfig.getProcess + processId + '/buy',
-                                        {'orgaId':orgId, 'userId':uid})
+                                        {'orgaId': orgId, 'userId': uid})
       .toPromise()
   }
 
