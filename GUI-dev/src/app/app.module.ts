@@ -27,6 +27,7 @@ import { ServerConfigProvider } from './@theme/providers/backend-server/serverco
 import {EventLoggerService} from './evntLogger.service';
 import {ProcessesService} from './allProcesses.service';
 import {User} from '../models/models';
+import {ApprovalAuthGuard} from './approval-auth-guard.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -108,8 +109,10 @@ import {User} from '../models/models';
     AsyncEmailValidatorProvider,
     ServerConfigProvider,
     AuthGuard,
+    ApprovalAuthGuard,
     EventLoggerService,
     ProcessesService,
+    RoleProvider,
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
     { provide: NbRoleProvider, useClass: RoleProvider },

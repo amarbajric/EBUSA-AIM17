@@ -5,11 +5,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import {AuthGuard} from '../auth-guard.service';
 import {ApprovalComponent} from './approval/approval.component';
+import {ApprovalDetailsComponent} from './approval-details/approval-details.component';
 import {ActiveProcessesComponent} from './dashboard/components/activeProcesses/activeProcesses.component';
 // import {EventLoggerComponent} from './admin/components/eventLogger/eventLogger.component';
 import { ProcessStoreSearchComponent } from './processstore-search/processstore-search.component';
 import {UserDetailsComponent} from './user-details/user-details.component';
 import { ProcessStoreDetailsComponent } from './processstore-details/processstore-details.component';
+import {ApprovalAuthGuard} from '../approval-auth-guard.service';
 
 
 const routes: Routes = [{
@@ -44,6 +46,11 @@ const routes: Routes = [{
     {
       path: 'approval',
       component: ApprovalComponent,
+      canActivate: [ApprovalAuthGuard],
+    },
+    {
+      path: 'approval-details/:processId',
+      component: ApprovalDetailsComponent,
       canActivate: [AuthGuard],
     },
     {

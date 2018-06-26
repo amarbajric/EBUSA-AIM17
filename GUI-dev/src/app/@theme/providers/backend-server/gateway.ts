@@ -1,7 +1,7 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
-import {User, StoreProcess, StoreProcessRating} from '../../../../models/models';
+import {User, StoreProcess, StoreProcessRating, AverageRating} from '../../../../models/models';
 
 
 @Injectable()
@@ -26,25 +26,71 @@ export class GatewayProvider {
       .toPromise()
   }
 
+  // gets a process by its Id
+  getProcessById (processId: string): Promise<StoreProcess> {
+    return this.http.get<StoreProcess>(this.serverConfig.getProcess + processId)
+      .toPromise()
+  }
+
+  // adds a process to an organization
+  addProcessToOrganization (processId: string, orgId: string, uid: string): Promise<StoreProcess> {
+    return this.http.post<StoreProcess>(this.serverConfig.getProcess + processId + '/buy',
+                                        {'orgaId': orgId, 'userId': uid})
+      .toPromise()
+  }
+
+  // get all processes of an organization
+  getProcessesByOrgId (orgId: string): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getOrgProcesses + orgId)
+      .toPromise()
+  }
+
   getStoreProcesses(): Promise<StoreProcess[]> {
     return this.http.get<StoreProcess[]>(this.serverConfig.getStoreProcesses)
       .toPromise()
   }
 
   getStoreProcessRatings(processId: string): Promise<StoreProcessRating[]> {
-    const url = this.serverConfig.getStoreProcessRatings + '/' + processId;
-    return this.http.get<StoreProcessRating[]>(url)
+    const params = new HttpParams();
+    params.append('processId', processId)
+    return this.http.get<StoreProcessRating[]>(this.serverConfig.getStoreProcessRatings, { params: params })
       .toPromise()
   }
 
   postStoreProcessRatings(processId: string, rating: StoreProcessRating): void {
     const url = this.serverConfig.postStoreProcessRating + '/' + processId;
-    this.http.post<StoreProcessRating>(url, rating)
+    this.http.post<StoreProcessRating>(url, rating).toPromise()
+  }
+
+  getUnapprovedStoreProcesses(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getUnapprovedStoreProcesses)
       .toPromise()
   }
 
-  getAverageRating(processId: string): Promise<StoreProcessRating> {
-    const url = this.serverConfig.getStoreProcessRatingAverage + '/' + processId + '/getAverageAndCount';
-    return this.http.get<StoreProcessRating>(url).toPromise()
+  postStoreProcessApproved(processId: string): void {
+    const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/approve';
+    this.http.post<StoreProcess>(url, processId).toPromise()
   }
+
+  postStoreProcessUnapproved(processId: string): void {
+    const url = this.serverConfig.postStoreProcessUnapproved + '/' + processId + '/unapprove';
+    this.http.post<StoreProcess>(url, processId).toPromise()
+  }
+
+  getStoreProcessById(processId: string): Promise<StoreProcess> {
+    const url = this.serverConfig.getStoreProcessById + '/' + processId;
+    return this.http.get<StoreProcess>(url)
+      .toPromise()
+  }
+
+  postStoreProcessComment(comment: string, processId: string): void {
+    const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/updateApprovalComment';
+    this.http.post<StoreProcess>(url, comment).toPromise()
+  }
+
+  getAverageRating(processId: string): Promise<AverageRating> {
+    const url = this.serverConfig.getAverageRating + '/' + processId + '/getAverageAndCount';
+    return this.http.get<AverageRating>(url).toPromise()
+  }
+
 }

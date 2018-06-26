@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
   }
 
   sortProcessesByRating(processArray) {
-    this.gateway.getAverageRating(1).then(
+    this.gateway.getAverageRating('1').then(
       (a) => console.log(a)
     )
     //this.processesByRating = processArray

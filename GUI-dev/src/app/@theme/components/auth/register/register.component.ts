@@ -61,12 +61,12 @@ export class EbRegisterComponent {
     this.submitted = true;
 
     this.service.register(this.provider, this.user).subscribe((result: NbAuthResult) => {
-      this.submitted = false;
-      if (result.isSuccess()) {
-        this.messages = result.getMessages();
-      } else {
-        this.errors = result.getErrors();
-      }
+        this.submitted = false;
+        if (result.isSuccess()) {
+          this.messages = result.getMessages();
+        } else {
+          this.errors = result.getErrors();
+        }
 
       const redirect = result.getRedirect();
       if (redirect) {

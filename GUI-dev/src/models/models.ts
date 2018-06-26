@@ -22,9 +22,11 @@ export class StoreProcess {
   processCreatedAt: Date;
   processVersion: number;
   processPrice: number;
-  // missing in current ProcessStoreDTO in backend:
-  processAverageRating: number;
   processApprovedDate: Date;
+  processApprover: string;
+  processAverageRating: number;
+  processApproved: boolean;
+  processApproverComment: string;
 }
 
 export class StoreProcessRating {
@@ -35,6 +37,10 @@ export class StoreProcessRating {
   createdAt: Date;
 }
 
+export class AverageRating {
+  numberOfRatings: number;
+  averageRating: number;
+}
 
 export class Review {
   // define props...
