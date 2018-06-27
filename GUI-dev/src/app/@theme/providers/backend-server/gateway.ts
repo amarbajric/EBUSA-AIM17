@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
 import {User, StoreProcess, StoreProcessRating, Organization} from '../../../../models/models';
@@ -63,15 +63,13 @@ export class GatewayProvider {
   }
 
 
-  getStoreProcessRatings(processId: string): Promise<StoreProcessRating[]> {
-    const params = new HttpParams();
-    params.append('processId', processId)
-    return this.http.get<StoreProcessRating[]>(this.serverConfig.getStoreProcessRatings, { params: params })
+  getStoreProcessRatings(processId: number): Promise<StoreProcessRating[]> {
+    return this.http.get<StoreProcessRating[]>(this.serverConfig.getStoreProcessRatings + '/' + processId)
       .toPromise()
   }
 
-  postStoreProcessRatings(processId: string, rating: StoreProcessRating): void {
-    const url = this.serverConfig.postStoreProcessRating + '/' + processId
+  postStoreProcessRatings(processId: number, rating: StoreProcessRating): void {
+    const url = this.serverConfig.postStoreProcessRating + '/' + processId + '/add';
     this.http.post<StoreProcessRating>(url, rating).toPromise()
   }
 

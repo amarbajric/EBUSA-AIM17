@@ -10,7 +10,7 @@ export class ServerConfigProvider {
   private _getProcess = `${this._host}api/store/process/`;
   private _getOrgProcesses = `${this._host}api/store/processes/byOrga/`;
   private _getStoreProcesses = `${this._host}api/store/processes`;
-  private _getOrPostStoreProcessRatings = `${this._host}api/store/processRatings`;
+  private _getOrPostStoreProcessRatings = `${this._host}api/store/processRating`;
   private _uploadOWL = `${this._host}api/store/process/`;
   private _createProcess = `${this._host}api/store/process/create`;
   private _getUserProcesses = `${this._host}api/store/processes/byUser`;

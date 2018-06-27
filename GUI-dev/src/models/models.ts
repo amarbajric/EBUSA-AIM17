@@ -22,22 +22,21 @@ export class StoreProcess {
   processCreatedAt: Date;
   processVersion: number;
   processPrice: number;
-
   processApprovedDate: Date;
   processApprover: string;
-
   processAverageRating: number;
   processApproved: boolean;
   processApproverComment: string;
 }
 
 export class StoreProcessRating {
-  ratingId: number;
   rating: number;
-  comment: string;
+  ratingComment: string;
   createdBy: string;
   createdAt: Date;
+  processId: number;
 }
+
 
 
 export class Review {
