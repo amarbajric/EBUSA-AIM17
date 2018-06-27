@@ -1,11 +1,48 @@
 <div class="row">
-  <nb-card>
-  <nb-card-body>This is the dashboard</nb-card-body>
+<div class="col-md-12">
+      <div class="tabs-table">
+        <nb-card class="col-md-12">
+
+          <div *ngIf="isUser; else org_emp">
+            <nb-route-tabset [tabs]="tabs" fullWidth></nb-route-tabset>
+          </div>
+
+          <ng-template #org_emp>
+            <nb-route-tabset [tabs]="tabsApprover" fullWidth></nb-route-tabset>
+          </ng-template>
+
+
+        </nb-card>
+      </div>
+
+  <nb-card class="col-md-12" accent="primary">
+    <nb-badge text="new" status="success" position="top right"></nb-badge>
+      <nb-card-header>News</nb-card-header>
+      <nb-card-body>
+        <table class="col-md-12" >
+          <tr>
+            <td colspan="3"><h5>Most frequently purchased</h5></td>
+            <td colspan="3"><h5>Best ratings</h5></td>
+          </tr>
+          <tr>
+            <td width="7rem">
+              <i class='nb-heart' style='font-size:72px;'></i>
+            </td>
+            <td>
+              <a [routerLink]="['/processstore-details/'+favoriteProcess.processId]">{{favoriteProcess.processName}}</a>
+            </td>
+            <td></td>
+            <td width="7rem">
+              <i class='nb-arrow-dropup' style='font-size:72px;color:#42db7d' ></i>
+            </td>
+            <td align="left">
+              <a [routerLink]="['/processstore-details/'+bestRatedProcess.processId]">{{bestRatedProcess.processName}}</a>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </nb-card-body>
   </nb-card>
-  <!--<nb-card size="medium">
-    <nb-card-body>
-        <nb-route-tabset  [tabs]="tabs">
-        </nb-route-tabset>
-    </nb-card-body>
-  </nb-card>-->
+
+</div>
 </div>

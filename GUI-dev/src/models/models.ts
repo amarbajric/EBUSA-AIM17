@@ -30,17 +30,18 @@ export class StoreProcess {
 }
 
 export class StoreProcessRating {
-  ratingId: number;
   rating: number;
-  comment: string;
+  ratingComment: string;
   createdBy: string;
   createdAt: Date;
+  processId: number;
 }
 
 export class AverageRating {
   numberOfRatings: number;
   averageRating: number;
 }
+
 
 export class Review {
   // define props...

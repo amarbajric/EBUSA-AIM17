@@ -25,7 +25,9 @@ public class ProcessStoreBuilder implements Builder<ProcessStoreObject> {
 
     public ProcessStoreBuilder(String processName, String processDescription, String processCreator, Date processCreatedAt,
                                Long processVersion, Double processPrice, String processApprover, String processApproverComment,
+
                                Boolean processApproved, Date processApprovedDate, byte[] processFile) {
+
         checkArgument(StringUtils.isNotBlank(processName));
         checkArgument(StringUtils.isNotBlank(processDescription));
         checkArgument(StringUtils.isNotBlank(processCreator));
@@ -55,10 +57,12 @@ public class ProcessStoreBuilder implements Builder<ProcessStoreObject> {
         checkNotNull(processCreatedAt);
         checkNotNull(processVersion);
         checkNotNull(processPrice);
+
         checkNotNull(processApproved);
         checkNotNull(processFile);
 
         return new ProcessStoreObjectImpl(processName, processDescription, processCreator, processCreatedAt,
                 processVersion, processPrice, processApprover, processApproverComment, processApproved, processApprovedDate, processFile);
+
     }
 }
