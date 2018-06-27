@@ -64,7 +64,7 @@ const routes: Routes = [{
     {
       path: 'createProcess',
       component: CreateProcessComponent,
-      canActivate: [AuthGuard]
+      canActivate: [AuthGuard],
 
     },
 

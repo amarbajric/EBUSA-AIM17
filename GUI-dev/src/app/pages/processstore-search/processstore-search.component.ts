@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
-import {AverageRating, StoreProcess} from '../../../models/models';
+import {StoreProcess} from '../../../models/models';
 
 @Component({
   selector: 'ngx-process-store-search',
