@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
       (average) => {
         this.ratings.push(average);
         processes.push(process);
-      }
+      },
       ))).then(
       () => {
       const combination = this.ratings.map((rating, i) => {
@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
           this.processesByRating.push(element[1]);
         }
 
-        this.processesByRating = this.processesByRating.slice(0,this.limit);
+        this.processesByRating = this.processesByRating.slice(0, this.limit);
         this.ratings.sort((a, b) => a.averageRating - b.averageRating)
       })
   }
