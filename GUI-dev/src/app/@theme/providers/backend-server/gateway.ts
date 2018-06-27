@@ -76,6 +76,11 @@ export class GatewayProvider {
       .toPromise()
   }
 
+  getApprovedStoreProcesses(): Promise<StoreProcess[]> {
+    return this.http.get<StoreProcess[]>(this.serverConfig.getApprovedProcesses)
+      .toPromise()
+  }
+
   postStoreProcessApproved(processId: string): void {
     const url = this.serverConfig.postStoreProcessApproved + '/' + processId + '/approve';
     this.http.post<StoreProcess>(url, processId).toPromise()
@@ -116,7 +121,7 @@ export class GatewayProvider {
       .toPromise()
   }
 
-  getAverageRating(processId: string): Promise<AverageRating> {
+  getAverageRating(processId: number): Promise<AverageRating> {
     const url = this.serverConfig.getAverageRating + '/' + processId + '/getAverageAndCount';
     return this.http.get<AverageRating>(url).toPromise()
   }

@@ -8,18 +8,13 @@
   </div>
 </div>
 <div class="row" *ngIf="!authenticated">
-  <div class="col-12 col-md-8"></div>
+  <div class="col-12">
     <nb-card>
-      <nb-card-body>
-        This WebPortal allows you to create, share and utilize Business Processes. Have fun!
+      <nb-card-body style="padding-top: 5%">
+        <img src="../../../../assets/easybizlogo.png" width="100%" height="100%">
       </nb-card-body>
-    </nb-card>
-  <div class="col-6 col-md-4">
-    <nb-card>
-      <nb-card-body class="lore">
-        <button class="btn btn-outline-primary btn-block" routerLink="/auth/login">Sign In</button>
-        <div class="or">- or -</div>
-        <button class="btn btn-outline-primary btn-block" routerLink="/auth/register">Sign Up</button>
+      <nb-card-body style="text-align: center; padding-top: 5%; padding-bottom: 5%">
+        <h3>This WebPortal allows you to create, share and utilize Business Processes. Have fun!</h3>
       </nb-card-body>
     </nb-card>
   </div>

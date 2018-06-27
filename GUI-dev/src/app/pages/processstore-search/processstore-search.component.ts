@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
+import {AverageRating, StoreProcess} from '../../../models/models';
 
 @Component({
   selector: 'ngx-process-store-search',
@@ -8,7 +9,7 @@ import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
 })
 export class ProcessStoreSearchComponent implements OnInit {
 
-  public processes;
+  public processes: Array<StoreProcess>;
   private mockEnabled;
   // tslint:disable-next-line
   private filterType = 'none'; // is used in html
@@ -24,14 +25,23 @@ export class ProcessStoreSearchComponent implements OnInit {
 
   getProcesses() {
     if (!this.mockEnabled) {
-      this.gateway.getStoreProcesses()
+      this.gateway.getApprovedStoreProcesses()
       .then((processes) => {
         this.processes = processes;
       })
+      .then(() => this.setRatings())
     } else {
       console.warn('ProcessStoreSearchComponent: using mocked test data, filtering NOT supported')
     }
 
+  }
+
+
+  setRatings() {
+    this.processes.map(process => {
+      this.gateway.getAverageRating(process.processId).then(avgRating =>
+        process.processAverageRating = avgRating.averageRating)
+    })
   }
 
 }
