@@ -21,10 +21,10 @@
               € {{process.processPrice | number: '1.2-2'}}
             </div>
             <div class="float-right">
-              <div *ngIf="!hasProcess"><button *nbIsGranted="['view', 'org']" (click)="showBuyModal()" class="btn btn-success">Buy</button></div>
+              <div *ngIf="!hasProcess"><button (click)="showBuyModal()" class="btn btn-success">Buy</button></div>
               <div class="btn-group">
                 <div class="btn-padding" *ngIf="hasProcess && isConfigured"><button *nbIsGranted="['view', 'org']" (click)="startProcess()" class="btn btn-success">Run</button></div>
-                <div *ngIf="hasProcess"><button *nbIsGranted="['view', 'org']" (click)="configureProcess()" class="btn btn-warning">Configure</button></div>
+                <div *ngIf="hasProcess"><button (click)="configureProcess()" class="btn btn-warning">Configure</button></div>
               </div>
             </div>
           </div>
