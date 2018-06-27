@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {StoreProcess} from '../../../models/models';
 import {GatewayProvider} from '../../@theme/providers/backend-server/gateway';
 import {Router} from '@angular/router';
@@ -7,9 +7,10 @@ import {Router} from '@angular/router';
   selector: 'ngx-create-process',
   templateUrl: './create-process.component.html',
 })
-export class CreateProcessComponent {
+export class CreateProcessComponent implements OnInit {
 
   process: StoreProcess = new StoreProcess();
+  creator: string;
   owlFile: File;
   file: File;
 
@@ -17,6 +18,9 @@ export class CreateProcessComponent {
 
   }
 
+  ngOnInit() {
+    this.gateway.getUser().then(user => this.creator = user.username);
+  }
 
 
   onFileChange(event) {
@@ -31,14 +35,9 @@ export class CreateProcessComponent {
 
 
   createProcess(form): void {
-
+    this.process.processCreator = this.creator;
     this.gateway.createProcess(this.process)
       .then(data => {this.gateway.uploadOWLModel(data.processId, this.owlFile); })
       .then(data => {this.router.navigateByUrl('/dashboard')});
-
-
   }
-
-
-
 }

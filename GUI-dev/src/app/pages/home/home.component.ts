@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   public processes: StoreProcess[] = [];
   public processesByDate: StoreProcess[] = [];
-  public processesByRating: StoreProcess[] = [];
+  public processesByRating = [];
   public ratings: AverageRating[] = [];
 
   user = {};
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
         });
         for (const element of combination) {
           // shows as an error but works ...
-          this.processesByRating.push(element[1]);
+          this.processesByRating.push(element[1] as StoreProcess);
         }
 
         this.processesByRating = this.processesByRating.slice(0, this.limit);
