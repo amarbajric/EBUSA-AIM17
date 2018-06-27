@@ -81,8 +81,9 @@ export class HomeComponent implements OnInit {
           }
         });
         for (const element of combination) {
-          // shows as an error but works ...
-          this.processesByRating.push(element[1]);
+
+          this.processesByRating.push(element[1] as StoreProcess);
+
         }
 
         this.processesByRating = this.processesByRating.slice(0, this.limit);
