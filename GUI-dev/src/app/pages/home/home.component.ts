@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { GatewayProvider } from '../../@theme/providers/backend-server/gateway';
-import {StoreProcess} from '../../../models/models';
+import {AverageRating, StoreProcess} from '../../../models/models';
 import {Router} from '@angular/router';
 import {NbAuthJWTToken, NbAuthService} from '@nebular/auth';
 import {AppComponent} from '../../app.component';
@@ -13,8 +13,9 @@ import {AppComponent} from '../../app.component';
 export class HomeComponent implements OnInit {
 
   public processes: StoreProcess[] = [];
-  public processesByDate;
-  public processesByRating;
+  public processesByDate: StoreProcess[] = [];
+  public processesByRating: StoreProcess[] = [];
+  public ratings: AverageRating[] = [];
 
   user = {};
   authenticated = false;
@@ -60,10 +61,33 @@ export class HomeComponent implements OnInit {
   }
 
   sortProcessesByRating(processArray) {
-    this.gateway.getAverageRating('1').then(
-      (a) => console.log(a)
-    )
-    //this.processesByRating = processArray
+    const processes: StoreProcess[] = [];
+    Promise.all(processArray.map(
+      (process) => this.gateway.getAverageRating(process.processId).then(
+      (average) => {
+        this.ratings.push(average);
+        processes.push(process);
+      }
+      ))).then(
+      () => {
+      const combination = this.ratings.map((rating, i) => {
+        return [rating.averageRating, processes[i]]
+      });
+        combination.sort((a, b) => {
+          if (a[0] === b[0]) {
+            return 0;
+          } else {
+            return (a[0] < b[0] ? -1 : 1)
+          }
+        });
+        for (const element of combination) {
+          // shows as an error but works ...
+          this.processesByRating.push(element[1]);
+        }
+
+        this.processesByRating = this.processesByRating.slice(0,this.limit);
+        this.ratings.sort((a, b) => a.averageRating - b.averageRating)
+      })
   }
 
   showDetails(processId) {
