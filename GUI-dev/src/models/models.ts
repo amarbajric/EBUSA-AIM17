@@ -37,6 +37,10 @@ export class StoreProcessRating {
   processId: number;
 }
 
+export class AverageRating {
+  numberOfRatings: number;
+  averageRating: number;
+}
 
 
 export class Review {

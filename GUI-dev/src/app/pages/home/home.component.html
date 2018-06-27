@@ -1,5 +1,59 @@
 <div class="row">
-  <nb-card>
-    <nb-card-body>This is the homepage that everyone can see regardless of authentication</nb-card-body>
-  </nb-card>
+  <div class="col-12">
+    <nb-card>
+      <nb-card-body>
+        <h1>Welcome {{user?.sub}}<span *ngIf="!authenticated">Guest</span>!</h1>
+    </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row" *ngIf="!authenticated">
+  <div class="col-12 col-md-8"></div>
+    <nb-card>
+      <nb-card-body>
+        This WebPortal allows you to create, share and utilize Business Processes. Have fun!
+      </nb-card-body>
+    </nb-card>
+  <div class="col-6 col-md-4">
+    <nb-card>
+      <nb-card-body class="lore">
+        <button class="btn btn-outline-primary btn-block" routerLink="/auth/login">Sign In</button>
+        <div class="or">- or -</div>
+        <button class="btn btn-outline-primary btn-block" routerLink="/auth/register">Sign Up</button>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row" *nbIsGranted="['view', 'home']">
+  <div class="col-6">
+    <nb-card>
+      <nb-card-header>latest processes</nb-card-header>
+      <nb-card-body>
+        <button *ngFor="let process of processesByDate" class="btn btn-outline-primary btn-block" type="button" (click)="showDetails(process.processId)">{{process.processName}}</button>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-6">
+    <nb-card>
+      <nb-card-header>most popular processes</nb-card-header>
+      <nb-card-body>
+        <button *ngFor="let process of processesByRating; let i=index" class="btn btn-outline-primary btn-block" type="button" (click)="showDetails(process.processId)">{{process.processName}} | ({{ratings[i].averageRating.toFixed(2)}})</button>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-12">
+    <nb-card>
+      <nb-card-body>
+
+
+        <div class="btn-group btn-group-toggle btn-divided-group btn-outline-divided-group btn-group-full-width col-md-12">
+          <button class="btn btn-outline-primary" routerLink="/dashboard">Dashboard</button>
+          <button class="btn btn-outline-primary" routerLink="/processstore-search">Process Store</button>
+          <button class="btn btn-outline-primary" onclick="window.location.port=3000">Process Designer</button>
+        </div>
+
+
+      </nb-card-body>
+    </nb-card>
+  </div>
 </div>

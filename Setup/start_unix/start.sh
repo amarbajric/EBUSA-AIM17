@@ -69,7 +69,7 @@ if [[ "$OS" == 'linux' ]]; then
 elif [[ "$OS" == 'macOS' ]]; then
     info_log_cfg_service="Tab3 - ConfigurationService"
     injectCmd_new_tab="tell application \"System Events\" to keystroke \"t\" using {command down}"
-    injectCmd_delay="delay 0.12"
+    injectCmd_delay="delay 2"
     injectCmd_start_config_service="tell application \"Terminal\" to do script \"./start_configuration_service.sh\" in selected tab of the front window"
     if [[ "$devMode" == 'true' ]]; then
         info_log_cfg_service="Tab3 - EMPTY (ConfigurationService disabled in dev mode)"
