@@ -80,7 +80,7 @@ import {ApprovalAuthGuard} from './approval-auth-guard.service';
     NbSecurityModule.forRoot({
       accessControl: {
         USER: {
-          view: ['profile', 'processes'],
+          view: ['profile', 'processes', 'home'],
         },
         ORG_EMP: {
           parent: 'USER',

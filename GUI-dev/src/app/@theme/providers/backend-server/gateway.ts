@@ -1,8 +1,7 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServerConfigProvider} from './serverconfig';
-import {User, StoreProcess, StoreProcessRating, Organization} from '../../../../models/models';
-
+import {User, StoreProcess, StoreProcessRating, Organization, AverageRating} from '../../../../models/models';
 
 @Injectable()
 export class GatewayProvider {
@@ -116,6 +115,11 @@ export class GatewayProvider {
   getProcessesByOrgId (orgId: string): Promise<StoreProcess[]> {
     return this.http.get<StoreProcess[]>(this.serverConfig.getOrgProcesses + orgId)
       .toPromise()
+  }
+
+  getAverageRating(processId: string): Promise<AverageRating> {
+    const url = this.serverConfig.getAverageRating + '/' + processId + '/getAverageAndCount';
+    return this.http.get<AverageRating>(url).toPromise()
   }
 
 }

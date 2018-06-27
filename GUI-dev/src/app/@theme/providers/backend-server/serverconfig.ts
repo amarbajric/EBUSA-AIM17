@@ -26,6 +26,7 @@ export class ServerConfigProvider {
   private _postStoreProcessUnapproved = `${this._host}api/store/process`;
   private _getStoreProcessById = `${this._host}api/store/process`;
   private _postStoreProcessComment = `${this._host}api/store/process`;
+  private _getAverageRating = `${this._host}api/store/processRating`;
 
 
   public get checkIfMailTaken(): string {return this._checkIfMailTaken};
@@ -49,6 +50,7 @@ export class ServerConfigProvider {
   public get postStoreProcessApproved(): string {return this._postStoreProcessApproved};
   public get postStoreProcessUnapproved(): string {return this._postStoreProcessUnapproved};
   public get getStoreProcessById(): string {return this._getStoreProcessById};
-  public get postStoreProcessComment(): string {return this._postStoreProcessComment};
+  public get postStoreProcessComment(): string {return this._postStoreProcessComment}
+  public get getAverageRating(): string {return this._getAverageRating};
 
 }

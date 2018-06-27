@@ -50,9 +50,9 @@ export class ProcessStoreDetailsComponent implements OnInit {
             this.processesOfOrg = processes;
           })
           .then(() => {
-            if (this.processesOfOrg.filter((process) => process.processId === this.processId).length === 1) {
+            if (this.processesOfOrg.filter(process => process.processId === Number(this.processId)).length !== 0) {
               this.hasProcess = true;
-              this.isConfigured = true;
+              this.isConfigured = false;
             }
           })
       });
@@ -76,7 +76,8 @@ export class ProcessStoreDetailsComponent implements OnInit {
   buyProcess() {
     this.gateway.addProcessToOrganization(this.processId, this.orgId, this.uid)
       .then(() => {
-        window.location.reload();
+        // window.location.reload();
+        this.hasProcess = true;
       })
       .catch(err => console.warn(err))
   }

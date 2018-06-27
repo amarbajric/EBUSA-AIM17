@@ -26,7 +26,7 @@ export class DashboardComponent {
       route: '/dashboard/myProcesses',
     },
     {
-      title: 'Porcesses in Approval',
+      title: 'Processes in Approval',
       route: '/dashboard/validation',
     },
     {
